@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -9,6 +10,7 @@ public class SpawnGridSystem : MonoBehaviour
 {
     [SerializeField] private GameObject prefabToSpawn;
     private ARRaycastManager raycastManager;
+    private bool spawning;
     
     // Start is called before the first frame update
     void Start()
@@ -17,11 +19,19 @@ public class SpawnGridSystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void SpawnPrefab()
     {
-        if (Input.touchCount == 0) return;
-        
-        var touchPosition = Input.GetTouch(0).position;
+        if (spawning) return;
+        spawning = true;
+        Vector2 touchPosition;
+        try
+        {
+            touchPosition = Input.GetTouch(0).position;
+        }
+        catch (Exception e)
+        {
+            touchPosition = Input.mousePosition;
+        }
         var ray = Camera.main!.ScreenPointToRay(touchPosition);
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
         raycastManager.Raycast(ray, hits, TrackableType.Planes);
@@ -29,6 +39,6 @@ public class SpawnGridSystem : MonoBehaviour
         if (hits.Count == 0) return;
 
         Instantiate(prefabToSpawn, hits[0].pose.position, quaternion.identity);
-        this.enabled = false;
+        gameObject.SetActive(false);
     }
 }

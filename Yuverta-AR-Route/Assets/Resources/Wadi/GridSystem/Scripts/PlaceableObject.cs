@@ -2,23 +2,46 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class PlaceableObject : MonoBehaviour
 {
+    public Canvas canvas;
+    public Button confirmPlacement;
+    private Image confirmImage;
+    public Button removeObject;
+    private ObjectDrag script;
+    
     public bool Placed { get; private set; }
     public Vector3Int Size { get; private set; }
     private Vector3[] Vertices;
     public Material material;
     public int index;
+    public bool canBePlaced;
     
     private void Start()
     {
-        index = gameObject.GetHashCode();
+        script = gameObject.GetComponent<ObjectDrag>();
         material = gameObject.GetComponent<MeshRenderer>().material;
+        confirmImage = confirmPlacement.GetComponent<Image>();
         GetColliderVertexPositionsLocal();
         CalculateSizeInCells();
     }
-    
+
+    private void FixedUpdate()
+    {
+        //buttonMaterial.color = Color.white;
+        if (!canBePlaced)
+        {
+            confirmImage.color = Color.gray;
+            confirmPlacement.interactable = false;
+            return;
+        }
+        confirmImage.color = Color.white;
+        confirmPlacement.interactable = true;
+    }
+
     private void GetColliderVertexPositionsLocal()
     {
         var b = gameObject.GetComponent<BoxCollider>();
@@ -62,11 +85,18 @@ public class PlaceableObject : MonoBehaviour
         Vertices = vertices;
     }
 
+    public void OnClickConfirm()
+    {
+        BuidlingSystem.current.PlaceBlock();
+    }
+
+    public void OnClickRemove()
+    {
+        BuidlingSystem.current.RemoveBlock();
+    }
+
     public virtual void Place()
     {
-        /*var drag = gameObject.GetComponent<ObjectDrag>();
-        Destroy(drag);*/
-
         if (!BuidlingSystem.current.placedObjects.Contains(this.gameObject)) BuidlingSystem.current.placedObjects.Add(this.gameObject);
 
         var color = material.color;

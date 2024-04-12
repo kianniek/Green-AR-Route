@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class UIScript : MonoBehaviour
 {
-    [SerializeField] private GameObject ObjectSelectedButtons;
+    public GameObject ObjectSelectedButtons;
 
     private void Start()
     {
