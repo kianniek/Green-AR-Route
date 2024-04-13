@@ -9,6 +9,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
     /// </summary>
     public class ObjectSpawner : MonoBehaviour
     {
+        #region Variables
         [SerializeField]
         [Tooltip("The camera that objects will face when spawned. If not set, defaults to the main camera.")]
         Camera m_CameraToFace;
@@ -151,7 +152,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// </summary>
         /// <seealso cref="TrySpawnObject"/>
         public event Action<GameObject> objectSpawned;
-
+        #endregion
         /// <summary>
         /// See <see cref="MonoBehaviour"/>.
         /// </summary>
@@ -209,7 +210,12 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             if (m_SpawnAsChildren)
                 newObject.transform.parent = transform;
 
+            // Set the initial position and add the GridSnapper component
             newObject.transform.position = spawnPoint;
+
+            GridSnapper gridSnapper = newObject.AddComponent<GridSnapper>();
+            gridSnapper.ObjectSmoothing(true);
+
             EnsureFacingCamera();
                 
             var facePosition = m_CameraToFace.transform.position;
