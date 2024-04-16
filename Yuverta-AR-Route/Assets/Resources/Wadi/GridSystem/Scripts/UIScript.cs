@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class UIScript : MonoBehaviour
 {
+    public GameObject AddBlockButton;
     public GameObject ObjectSelectedButtons;
 
     private void Start()
@@ -14,32 +15,32 @@ public class UIScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ObjectSelectedButtons.SetActive(BuidlingSystem.current.objectToPlace != null);
+        ObjectSelectedButtons.SetActive(BuildingSystem.current.objectToPlace != null);
     }
 
     public void PlaceBlock()
     {
-        BuidlingSystem.current.PlaceBlock();
+        BuildingSystem.current.PlaceBlock();
     }
 
     public void RemoveBlock()
     {
-        BuidlingSystem.current.RemoveBlock();
+        BuildingSystem.current.RemoveBlock();
     }
 
     public void SpawnBlock()
     {
-        BuidlingSystem.current.SpawnBlock();
+        BuildingSystem.current.SpawnBlock();
     }
 
     public void MoveUp()
     {
-        BuidlingSystem.current.MoveUp();
+        BuildingSystem.current.MoveUp();
     }
 
     public void MoveDown()
     {
-        BuidlingSystem.current.MoveDown();
+        BuildingSystem.current.MoveDown();
     }
 
     public void ResetWorld()

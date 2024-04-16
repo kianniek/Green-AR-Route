@@ -18,7 +18,13 @@ public class SpawnGridSystem : MonoBehaviour
         raycastManager = FindObjectOfType<ARRaycastManager>();
     }
 
-    // Update is called once per frame
+    /*private void Update()
+    {
+        if (Input.touchCount < 0 && !Input.GetMouseButtonDown(0)) return;
+        
+        SpawnPrefab();
+    }*/
+
     public void SpawnPrefab()
     {
         if (spawning) return;

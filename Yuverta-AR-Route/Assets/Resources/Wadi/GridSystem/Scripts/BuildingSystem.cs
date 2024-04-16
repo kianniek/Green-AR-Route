@@ -1,16 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using TouchPhase = UnityEngine.TouchPhase;
 
-public class BuidlingSystem : MonoBehaviour
+public class BuildingSystem : MonoBehaviour
 {
-    public static BuidlingSystem current;
+    public static BuildingSystem current;
 
     public GridLayout gridLayout;
     private Grid grid;
@@ -18,7 +20,9 @@ public class BuidlingSystem : MonoBehaviour
     [SerializeField] private List<Tilemap> tileMaps;
     [SerializeField] private List<MeshCollider> groundLayers;
     [SerializeField] private TileBase placeAbleTile;
+    
     [SerializeField] private ScrollArea scrollArea;
+    public int selectedPrefabIndex;
 
     [SerializeField] private List<Material> layerMaterials;
     [SerializeField] private float loweredAlphaLayer;
@@ -46,6 +50,11 @@ public class BuidlingSystem : MonoBehaviour
 
     [SerializeField] private float minSwipeDistanceUI;
 
+    [SerializeField] private GameObject blockParent;
+    
+    //Temp code because buttons will be removed later
+    [SerializeField] private UIScript uiScript;
+
     #region UnityMethods
 
     private void Awake()
@@ -61,6 +70,7 @@ public class BuidlingSystem : MonoBehaviour
             groundLayers[i].enabled = false;
         }
         layerDistance = groundLayers[1].transform.position.y - groundLayers[0].transform.position.y;
+        selectedPrefabIndex = -1;
     }
 
     private void Update()
@@ -70,11 +80,7 @@ public class BuidlingSystem : MonoBehaviour
         //Debug
         if (Input.GetKeyDown(KeyCode.A))
         {
-            SpawnBlock(0);
-        }
-        else if (Input.GetKeyDown(KeyCode.B))
-        {
-            SpawnBlock(1);
+            SpawnBlock();
         }
         
         if (!objectToPlace) return;
@@ -107,7 +113,12 @@ public class BuidlingSystem : MonoBehaviour
 
     public void SelectObject()
     {
-        if (UIHit() || cubes.Count == 0 || dragging && currentDrag != null) return;
+        if (UIHit() || dragging && currentDrag != null) return;
+        if (cubes.Count == 0)
+        {
+            SpawnBlockOnTouch();
+            return;
+        }
         
         var ray = TouchToRay();
 
@@ -121,7 +132,7 @@ public class BuidlingSystem : MonoBehaviour
 
         if (collider == null) 
         { 
-            NullifyBlock(); 
+            NullifyBlock();
             return;
         }
 
@@ -129,6 +140,12 @@ public class BuidlingSystem : MonoBehaviour
         {
             if (!collider.CompareTag("UI") || !collider.TryGetComponent<Button>(out var button))
             {
+                if (collider.CompareTag("Ground") || collider.CompareTag("ARGround"))
+                {
+                    SpawnBlockOnTouch();
+                    return;
+                }
+                
                 NullifyBlock();
                 return;
             }
@@ -156,7 +173,7 @@ public class BuidlingSystem : MonoBehaviour
 
     public void DragObject()
     {
-        if (cubes.Count <= 0 || UIHit() || draggingUI || Input.touchCount <= 0) return;
+        if (cubes.Count <= 0 || UIHit() || draggingUI /*|| Input.touchCount <= 0*/) return;
         if (currentDrag != null && dragging)
         {
             objectToPlace.canBePlaced = CanBePlaced(objectToPlace, MainTileMap);
@@ -182,22 +199,35 @@ public class BuidlingSystem : MonoBehaviour
 
     private IEnumerator CheckUIDrag()
     {
+        Debug.Log("UIDrag");
         draggingUI = true;
+        Debug.Log("Started");
         Vector2 startPosition = new Vector2();
         if (Input.GetTouch(0).phase == TouchPhase.Began) startPosition = Input.GetTouch(0).position;
         while (Input.GetTouch(0).phase == TouchPhase.Moved)
         {
             yield return new WaitForFixedUpdate();
         }
+        
+        Debug.Log("Passed while");
 
         Vector2 endPosition = new Vector2();
         if (Input.GetTouch(0).phase == TouchPhase.Ended) endPosition = Input.GetTouch(0).position;
 
         var distance = (endPosition - startPosition).magnitude;
 
-        if (distance !> minSwipeDistanceUI) yield return null;
+        if (distance ! > minSwipeDistanceUI)
+        {
+            Debug.Log("Distance too small");
+            yield return null;
+        }
+
         if (endPosition.x > scrollArea.gameObject.transform.position.x +
-            scrollArea.gameObject.GetComponent<BoxCollider>().size.x) yield return null;
+            scrollArea.gameObject.GetComponent<BoxCollider>().size.x)
+        {
+            Debug.Log("Touched scrollUI");
+            yield return null;
+        }
 
         switch (distance)
         {
@@ -218,20 +248,28 @@ public class BuidlingSystem : MonoBehaviour
             objectToPlace.canvas.enabled = false;
             var start = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
             TakeArea(start, objectToPlace.Size);
+            scrollArea.TurnOffUI(objectToPlace);
         }
         else StartCoroutine(CannotBePlaced());
     }
 
+    private void SpawnBlockOnTouch()
+    {
+        if (selectedPrefabIndex < 0) return;
+        InitializeWithObject(prefab[selectedPrefabIndex], TouchToRay().point);
+    }
+
     public void RemoveBlock()
     {
+        scrollArea.TurnOnUI(objectToPlace);
+        cubes.Remove(objectToPlace.gameObject);
         Destroy(objectToPlace.gameObject);
     }
 
-    public void SpawnBlock(int i = 0)
+    public void SpawnBlock()
     {
-        //Temp if
-        //if(cubes.Count > placedObjects.Count) return;
-        InitializeWithObject(prefab[i]);
+        if (selectedPrefabIndex < 0) return;
+        InitializeWithObject(prefab[selectedPrefabIndex], Vector3.zero);
     }
 
     public void MoveUp()
@@ -264,6 +302,19 @@ public class BuidlingSystem : MonoBehaviour
         MainTileMap = tileMaps[layerIndex];
         groundLayers[layerIndex].enabled = true;
         currentDrag.UpdateLayer(0, layerMaterials[0]);
+    }
+
+    public void ChangeSelectedBlock(int index)
+    {
+        if (index < 0)
+        {
+            selectedPrefabIndex = index;
+            uiScript.AddBlockButton.SetActive(false);
+        }
+
+        if (!uiScript.AddBlockButton.activeSelf) uiScript.AddBlockButton.SetActive(true);
+        
+        selectedPrefabIndex = index;
     }
 
     //Not used (but could?)
@@ -302,6 +353,8 @@ public class BuidlingSystem : MonoBehaviour
 
     private void SwapLayer(int newTileMap)
     {
+        Debug.Log("Swaplayerssssss");
+        
         var currentAlpha = layerMaterials[newTileMap].color.a;
         while (currentAlpha !>= 1)
         {
@@ -427,13 +480,15 @@ public class BuidlingSystem : MonoBehaviour
 
     #region Building Placement
 
-    public void InitializeWithObject(GameObject prefab)
+    private void InitializeWithObject(GameObject prefab, Vector3 spawnPosition)
     {
-        var position = SnapCoordinateToGrid(Vector3.zero);
-
         NullifyBlock();
         
-        var obj = Instantiate(prefab, position, Quaternion.identity);
+        var newPos = spawnPosition;
+        newPos.y = MainTileMap.transform.position.y;
+        spawnPosition = newPos;
+        
+        var obj = Instantiate(prefab, spawnPosition, Quaternion.identity, blockParent.transform);
         objectToPlace = obj.GetComponent<PlaceableObject>();
         cubes.Add(prefab);
         currentIndex = objectToPlace.index = cubes.Count - 1;
@@ -441,6 +496,8 @@ public class BuidlingSystem : MonoBehaviour
         currentDrag.selected = true;
         currentDrag.UpdateLayer(0, layerMaterials[0]);
         obj.name = obj.name + cubes.Count;
+        scrollArea.TurnOffUI(objectToPlace);
+        scrollArea.NoBlockSelected();
     }
 
     private bool CanBePlaced(PlaceableObject placeableObject, Tilemap tilemap)
