@@ -31,45 +31,45 @@ public class ObjectDrag : MonoBehaviour
     //Debug
     public void OnMouseDown()
     {
-        BuidlingSystem.current.objectToPlace = script;
-        offset = transform.position - BuidlingSystem.GetMouseWorldPosition();
+        BuildingSystem.current.objectToPlace = script;
+        offset = transform.position - BuildingSystem.GetMouseWorldPosition();
     }
 
     //Debug
     public void OnMouseDrag()
     {
-        var pos = BuidlingSystem.GetMouseWorldPosition() + offset;
-        transform.position = BuidlingSystem.current.SnapCoordinateToGrid(pos, gameObject);
+        var pos = BuildingSystem.GetMouseWorldPosition() + offset;
+        transform.position = BuildingSystem.current.SnapCoordinateToGrid(pos, gameObject);
     }
     
     public void OnTouch()
     {
-        BuidlingSystem.current.objectToPlace = script;
+        BuildingSystem.current.objectToPlace = script;
         script.canvas.gameObject.SetActive(true);
-        offset = transform.position - BuidlingSystem.current.GetTouchWorldPosition();
+        offset = transform.position - BuildingSystem.current.GetTouchWorldPosition();
         dragTime = 0;
     }
 
     public void OnTouchDrag()
     {
         Debug.Log("MFER");
-        var pos = BuidlingSystem.current.GetTouchWorldPosition() + offset;
-        transform.position = BuidlingSystem.current.SnapCoordinateToGrid(pos, gameObject);
-        if (selected) BuidlingSystem.current.dragging = true;
+        var pos = BuildingSystem.current.GetTouchWorldPosition() + offset;
+        transform.position = BuildingSystem.current.SnapCoordinateToGrid(pos, gameObject);
+        if (selected) BuildingSystem.current.dragging = true;
         dragTime = 0;
     }
 
     public void UnSelect()
     {
         selected = false;
-        BuidlingSystem.current.dragging = false;
+        BuildingSystem.current.dragging = false;
     }
 
     private void FixedUpdate()
     {
         if (!selected) return;
         dragTime += Time.deltaTime;
-        BuidlingSystem.current.dragging = dragTime < maxDragTime;
+        BuildingSystem.current.dragging = dragTime < maxDragTime;
         script.canvas.gameObject.transform.LookAt(Camera.main!.transform);
     }
 

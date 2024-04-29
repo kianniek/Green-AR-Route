@@ -18,6 +18,7 @@ public class PlaceableObject : MonoBehaviour
     private Vector3[] Vertices;
     public Material material;
     public int index;
+    public int uiIndex;
     public bool canBePlaced;
     
     private void Start()
@@ -59,7 +60,7 @@ public class PlaceableObject : MonoBehaviour
         for (var i = 0; i < vertices.Length; i++)
         {
             var worldPos = transform.TransformPoint(Vertices[i]);
-            vertices[i] = BuidlingSystem.current.gridLayout.WorldToCell(worldPos);
+            vertices[i] = BuildingSystem.current.gridLayout.WorldToCell(worldPos);
         }
 
         Size = new Vector3Int(Math.Abs((vertices[0] - vertices[1]).x), Math.Abs((vertices[0] - vertices[3]).x));
@@ -87,17 +88,17 @@ public class PlaceableObject : MonoBehaviour
 
     public void OnClickConfirm()
     {
-        BuidlingSystem.current.PlaceBlock();
+        BuildingSystem.current.PlaceBlock();
     }
 
     public void OnClickRemove()
     {
-        BuidlingSystem.current.RemoveBlock();
+        BuildingSystem.current.RemoveBlock();
     }
 
     public virtual void Place()
     {
-        if (!BuidlingSystem.current.placedObjects.Contains(this.gameObject)) BuidlingSystem.current.placedObjects.Add(this.gameObject);
+        if (!BuildingSystem.current.placedObjects.Contains(this.gameObject)) BuildingSystem.current.placedObjects.Add(this.gameObject);
 
         var color = material.color;
         color.a = 0.5f;
