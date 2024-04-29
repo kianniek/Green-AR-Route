@@ -213,9 +213,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             // Set the initial position and add the GridSnapper component
             newObject.transform.position = spawnPoint;
 
-            GridSnapper gridSnapper = newObject.AddComponent<GridSnapper>();
-            gridSnapper.ObjectSmoothing(true);
-
             EnsureFacingCamera();
                 
             var facePosition = m_CameraToFace.transform.position;

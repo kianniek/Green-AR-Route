@@ -12,11 +12,8 @@ public class GridManager : MonoBehaviour
         set => gridSize = value;
     }
 
-    // Dictionary to hold the status of grid positions
-    private Dictionary<Vector3, bool> occupiedPositions = new Dictionary<Vector3, bool>();
-
-    //display the occupied positions in the editor
-
+    public List<GameObject> gridPoints = new();
+    private Dictionary<bool, GameObject> occupiedPositions = new Dictionary<bool, GameObject>();
 
     void Awake()
     {
@@ -31,31 +28,27 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    // Function to check if a grid position is occupied
-    public bool IsPositionOccupied(Vector3 position)
+    private void Start()
     {
-        return occupiedPositions.TryGetValue(position, out bool isOccupied) && isOccupied;
+        
     }
-
-    // Function to mark a grid position as occupied
-    public void SetPositionOccupied(Vector3 position, bool occupied)
+    public void SnapToGrid(GameObject objToSnap)
     {
-        occupiedPositions[position] = occupied;
-    }
+        float minDistance = Mathf.Infinity;
+        GameObject closestGridPoint = null;
 
-    public void RemovePositionOccupied(Vector3 position)
-    {
-        if (occupiedPositions.ContainsKey(position))
+        foreach (var gridPoint in gridPoints)
         {
-            occupiedPositions.Remove(position);
+            float distance = Vector3.Distance(objToSnap.transform.position, gridPoint.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestGridPoint = gridPoint;
+            }
         }
+
+        objToSnap.transform.position = closestGridPoint.transform.position;
+        occupiedPositions.Add(true, closestGridPoint);
     }
 
-    public Dictionary<Vector3, bool> OccupiedPositions
-    {
-        get
-        {
-            return occupiedPositions;
-        }
-    }
 }
