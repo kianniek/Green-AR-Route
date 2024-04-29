@@ -23,9 +23,8 @@ public class BuildingSystem : MonoBehaviour
     
     [SerializeField] private ScrollArea scrollArea;
     public int selectedPrefabIndex;
-
-    [SerializeField] private List<Material> layerMaterials;
-    [SerializeField] private float loweredAlphaLayer;
+    [SerializeField] private List<Material> groundMaterials;
+    [SerializeField] public float loweredAlphaLayer;
     [SerializeField] private float alphaStepValue;
 
     public GameObject[] prefab;
@@ -51,9 +50,8 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private float minSwipeDistanceUI;
 
     [SerializeField] private GameObject blockParent;
-    
-    //Temp code because buttons will be removed later
-    [SerializeField] private UIScript uiScript;
+
+    private Dictionary<GameObject, int> layerSave;
 
     #region UnityMethods
 
@@ -71,6 +69,15 @@ public class BuildingSystem : MonoBehaviour
         }
         layerDistance = groundLayers[1].transform.position.y - groundLayers[0].transform.position.y;
         selectedPrefabIndex = -1;
+        layerSave = new Dictionary<GameObject, int>();
+        
+        foreach (var material in groundMaterials)
+        {
+            if (material == groundMaterials[0]) continue;
+            var color = material.color;
+            color.a = 0;
+            material.color = color;
+        }
     }
 
     private void Update()
@@ -120,8 +127,16 @@ public class BuildingSystem : MonoBehaviour
             return;
         }
         
-        var ray = TouchToRay();
+        var rays = TouchToRay();
+        
+        if (rays.Length == 0)
+        {
+            NullifyBlock();
+            return;
+        }
 
+        var ray = rays[0];
+        
         if (ray.collider == null)
         {
             NullifyBlock();
@@ -142,7 +157,24 @@ public class BuildingSystem : MonoBehaviour
             {
                 if (collider.CompareTag("Ground") || collider.CompareTag("ARGround"))
                 {
-                    SpawnBlockOnTouch();
+                    if (selectedPrefabIndex >= 0) SpawnBlockOnTouch();
+                    else if (currentDrag != null)
+                    {
+                        DragObject();
+                    }
+                    else
+                    {
+                        NullifyBlock();
+                        foreach (var ray2 in rays)
+                        {
+                            if (ray2.collider.CompareTag("MoveableObject"))
+                            {
+                                Debug.Log(collider.gameObject);
+                                SelectBlock(collider);
+                                return;
+                            }
+                        }
+                    }
                     return;
                 }
                 
@@ -155,19 +187,11 @@ public class BuildingSystem : MonoBehaviour
 
         if (currentDrag&& currentDrag.gameObject == collider)
         {
-            Debug.Log("lol");
             return;
         }
 
         NullifyBlock();
-        currentDrag = collider.GetComponent<ObjectDrag>();
-        Debug.Log(currentDrag);
-        currentDrag.selected = true;
-        currentDrag.OnTouch(); //Does this basically: objectToPlace = currentDrag.script;
-        currentIndex = objectToPlace.index; 
-        objectToPlace.canvas.enabled = true;
-        MainTileMap = tileMaps[currentDrag.floorLevel]; 
-        objectToPlace.canBePlaced = CanBePlaced(objectToPlace, MainTileMap);
+        SelectBlock(collider);
         //currentTouchIndex = Input.GetTouch(0).fingerId;
     }
 
@@ -181,7 +205,9 @@ public class BuildingSystem : MonoBehaviour
             return;
         }
         
-        var ray = TouchToRay();
+        var rays = TouchToRay();
+        if (rays.Length == 0) return;
+        var ray = rays[0];
         
         if (ray.collider != null && ray.collider.gameObject.CompareTag("MoveableObject"))
         {
@@ -201,23 +227,39 @@ public class BuildingSystem : MonoBehaviour
     {
         Debug.Log("UIDrag");
         draggingUI = true;
-        Debug.Log("Started");
         Vector2 startPosition = new Vector2();
-        if (Input.GetTouch(0).phase == TouchPhase.Began) startPosition = Input.GetTouch(0).position;
-        while (Input.GetTouch(0).phase == TouchPhase.Moved)
-        {
-            yield return new WaitForFixedUpdate();
-        }
-        
-        Debug.Log("Passed while");
-
         Vector2 endPosition = new Vector2();
-        if (Input.GetTouch(0).phase == TouchPhase.Ended) endPosition = Input.GetTouch(0).position;
 
-        var distance = (endPosition - startPosition).magnitude;
+        switch (Input.touchCount)
+        {
+            case 0:
+                startPosition = Input.mousePosition;
+                while (Input.GetMouseButtonDown(0))
+                {
+                    yield return new WaitForFixedUpdate();
+                }
+
+                endPosition = Input.mousePosition;
+                break;
+            default:
+                if (Input.GetTouch(0).phase == TouchPhase.Began) startPosition = Input.GetTouch(0).position;
+                while (Input.GetTouch(0).phase == TouchPhase.Moved)
+                {
+                    yield return new WaitForFixedUpdate();
+                }
+
+                if (Input.GetTouch(0).phase == TouchPhase.Ended) endPosition = Input.GetTouch(0).position;
+                break;
+        }
+
+        draggingUI = false;
+
+        var distance = endPosition.y - startPosition.y;
 
         if (distance ! > minSwipeDistanceUI)
         {
+            NullifyBlock();
+            SelectObject();
             Debug.Log("Distance too small");
             yield return null;
         }
@@ -232,10 +274,11 @@ public class BuildingSystem : MonoBehaviour
         switch (distance)
         {
             case > 0:
-                if (MainTileMap != tileMaps[1]) SwapLayer(1);
+                if (MainTileMap != tileMaps[^1]) SwapLayer(layerIndex + 1);
                 break;
             case < 0:
-                if (MainTileMap != tileMaps[0]) SwapLayer(0);
+                //No need to fear it dropping below 0 cuz if it is 0 it can't be called again
+                if (MainTileMap != tileMaps[0]) SwapLayer(layerIndex - 1);
                 break;
         }
     }
@@ -245,7 +288,7 @@ public class BuildingSystem : MonoBehaviour
         if (CanBePlaced(objectToPlace, MainTileMap))
         {
             objectToPlace.Place();
-            objectToPlace.canvas.enabled = false;
+            objectToPlace.canvas.SetActive(false);
             var start = gridLayout.WorldToCell(objectToPlace.GetStartPosition());
             TakeArea(start, objectToPlace.Size);
             scrollArea.TurnOffUI(objectToPlace);
@@ -256,7 +299,10 @@ public class BuildingSystem : MonoBehaviour
     private void SpawnBlockOnTouch()
     {
         if (selectedPrefabIndex < 0) return;
-        InitializeWithObject(prefab[selectedPrefabIndex], TouchToRay().point);
+        var rays = TouchToRay();
+        if (!rays[0].collider) return;
+        var ray = rays[0];
+        InitializeWithObject(prefab[selectedPrefabIndex], ray.point);
     }
 
     public void RemoveBlock()
@@ -285,7 +331,7 @@ public class BuildingSystem : MonoBehaviour
         layerIndex++;
         MainTileMap = tileMaps[layerIndex];
         groundLayers[layerIndex].enabled = true;
-        currentDrag.UpdateLayer(1, layerMaterials[1]);
+        currentDrag.UpdateLayer(1);
     }
 
     public void MoveDown()
@@ -301,18 +347,12 @@ public class BuildingSystem : MonoBehaviour
         layerIndex--;
         MainTileMap = tileMaps[layerIndex];
         groundLayers[layerIndex].enabled = true;
-        currentDrag.UpdateLayer(0, layerMaterials[0]);
+        currentDrag.UpdateLayer(0);
     }
 
     public void ChangeSelectedBlock(int index)
     {
-        if (index < 0)
-        {
-            selectedPrefabIndex = index;
-            uiScript.AddBlockButton.SetActive(false);
-        }
-
-        if (!uiScript.AddBlockButton.activeSelf) uiScript.AddBlockButton.SetActive(true);
+        if (index < 0) selectedPrefabIndex = index;
         
         selectedPrefabIndex = index;
     }
@@ -327,6 +367,15 @@ public class BuildingSystem : MonoBehaviour
 
     #region Utils
 
+    private void SelectBlock(GameObject newBlock)
+    {
+        objectToPlace = newBlock.GetComponent<PlaceableObject>();
+        currentDrag = newBlock.GetComponent<ObjectDrag>();
+        currentDrag.selected = true;
+        currentDrag.OnTouch();
+        scrollArea.TurnOnUI(objectToPlace);
+    }
+    
     /// <summary>
     /// This function checks if the mouse or finger/touch is not hitting the UI
     /// </summary>
@@ -344,35 +393,72 @@ public class BuildingSystem : MonoBehaviour
 
     private void NullifyBlock()
     {
-        if (objectToPlace == null) return;
-        objectToPlace.canvas.enabled = false;
+        if (!objectToPlace) return;
+        objectToPlace.canvas.SetActive(false);
         objectToPlace = null;
+        
+        if (!currentDrag) return;
         currentDrag.UnSelect();
         currentDrag = null;
     }
 
     private void SwapLayer(int newTileMap)
     {
-        Debug.Log("Swaplayerssssss");
-        
-        var currentAlpha = layerMaterials[newTileMap].color.a;
-        while (currentAlpha !>= 1)
+        var currentAlpha = loweredAlphaLayer;
+
+        for (currentAlpha = 0; currentAlpha < 1; currentAlpha += alphaStepValue)
         {
-            for (int i = 0; i < layerMaterials.Count; i++)
+            foreach (var t in cubes)
             {
+                var reference = t.GetComponent<ObjectDrag>();
+                if (reference.floorLevel == newTileMap)
+                {
+                    reference.ChangeAlpha(alphaStepValue);
+                    continue;
+                }
+                reference.ChangeAlpha(-alphaStepValue);
+                /*var currentColor = layerMaterials[i].color;
+                
+                Debug.Log(currentColor.a);
+
                 if (i == newTileMap)
                 {
-                    var currentColor = layerMaterials[i].color;
-                    currentAlpha = currentColor.a -= alphaStepValue;
+                    currentColor.a += alphaStepValue;
                     layerMaterials[i].color = currentColor;
+
+                    foreach (var block in layerSave.Where(block => block.Value == i))
+                    {
+                        block.Key.GetComponent<ObjectDrag>().ChangeAlpha(currentColor.a);
+                    }
+
+                    continue; // Skip to the next iteration
                 }
-                
-                var currentColorOther = layerMaterials[i].color;
-                if (currentColorOther.a >= 1) continue;
-                currentColorOther.a += alphaStepValue;
-                layerMaterials[i].color = currentColorOther;
+
+                if (currentColor.a <= loweredAlphaLayer) continue;
+                currentColor.a -= alphaStepValue;
+                layerMaterials[i].color = currentColor;
+                foreach (var block in layerSave.Where(block => block.Value == i))
+                {
+                    block.Key.GetComponent<ObjectDrag>().ChangeAlpha(currentColor.a);
+                }*/
             }
         }
+        
+        bool up = newTileMap > layerIndex;
+        groundLayers[layerIndex].enabled = false;
+        layerIndex = newTileMap;
+        MainTileMap = tileMaps[layerIndex];
+        groundLayers[layerIndex].enabled = true;
+
+        if (!currentDrag || !objectToPlace) return;
+        
+        CheckList(objectToPlace.gameObject);    
+        
+        if (currentDrag.floorLevel == layerIndex) return;
+        var pos = objectToPlace.transform.position;
+        pos.y += up ? layerDistance : -layerDistance;
+        objectToPlace.transform.position = pos;
+        currentDrag.UpdateLayer(layerIndex);
     }
     
     //Debug
@@ -448,10 +534,10 @@ public class BuildingSystem : MonoBehaviour
         var color = objectToPlace.material.color;
         color.a = 255;
         objectToPlace.material.color = color;
-        objectToPlace.canvas.enabled = true;
+        objectToPlace.canvas.SetActive(true);
     }
     
-    private RaycastHit TouchToRay()
+    private RaycastHit[] TouchToRay()
     {
         Vector2 touchPosition;
         try
@@ -463,18 +549,9 @@ public class BuildingSystem : MonoBehaviour
             touchPosition = Input.mousePosition;
         }
         var ray = Camera.main!.ScreenPointToRay(touchPosition);
-        Physics.Raycast(ray, out var rayCastHit);
-        return rayCastHit;
+        var hits = Physics.RaycastAll(ray);
+        return hits;
     }
-    /*
-    private ARRaycastHit TouchToARRay()
-    {
-        var touchPosition = Input.GetTouch(0).position;
-        var ray = Camera.main!.ScreenPointToRay(touchPosition);
-        var rayCastHit = new List<ARRaycastHit>();
-        arRaycastManager.Raycast(ray, rayCastHit);
-        return rayCastHit[0];
-    }*/
 
     #endregion
 
@@ -494,10 +571,12 @@ public class BuildingSystem : MonoBehaviour
         currentIndex = objectToPlace.index = cubes.Count - 1;
         currentDrag = obj.GetComponent<ObjectDrag>();
         currentDrag.selected = true;
-        currentDrag.UpdateLayer(0, layerMaterials[0]);
-        obj.name = obj.name + cubes.Count;
+        currentDrag.floorLevel = layerIndex;
+        currentDrag.UpdateLayer(0);
+        obj.name += " " + cubes.Count;
         scrollArea.TurnOffUI(objectToPlace);
         scrollArea.NoBlockSelected();
+        layerSave.Add(obj, layerIndex);
     }
 
     private bool CanBePlaced(PlaceableObject placeableObject, Tilemap tilemap)

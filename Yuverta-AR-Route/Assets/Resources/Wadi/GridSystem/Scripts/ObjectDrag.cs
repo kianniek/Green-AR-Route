@@ -13,19 +13,30 @@ public class ObjectDrag : MonoBehaviour
     private float dragTime;
     public PlaceableObject script;
     public int floorLevel;
+    private MeshRenderer renderer;
 
     private void Start()
     {
+        renderer = gameObject.GetComponent<MeshRenderer>();
         floorLevel = 0;
         script = gameObject.GetComponent<PlaceableObject>();
     }
 
-    public void UpdateLayer(int newLayer, Material newLayerMaterial)
+    public void UpdateLayer(int newLayer)
     {
         floorLevel = newLayer;
-        var materials = gameObject.GetComponent<MeshRenderer>().materials;
-        if (materials.Contains(newLayerMaterial)) return;
-        materials[1] = newLayerMaterial;
+    }
+
+    public void ChangeAlpha(float newValue)
+    {
+        Debug.Log(newValue);
+        
+        var color = renderer.materials[0].color;
+        color.a = newValue;
+        
+        if (newValue < BuildingSystem.current.loweredAlphaLayer || newValue > 1) return;
+        
+        renderer.materials[0].color = color;
     }
 
     //Debug

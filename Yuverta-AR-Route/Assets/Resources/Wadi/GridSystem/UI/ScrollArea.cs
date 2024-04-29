@@ -38,13 +38,14 @@ public class ScrollArea : MonoBehaviour
 
     private IEnumerator StartPrefabs()
     {
-        yield return new WaitForFixedUpdate();
+        yield return new WaitForSeconds(0.1f);
         foreach (var image in spawnPrefabsDictionary.keys)
         {
             GameObject newClick = Instantiate(uiPrefab, contentParent.transform);
             newClick.GetComponent<Image>().sprite = image;
             uiClickAbles.Add(newClick);
             var prefab = spawnPrefabsDictionary.GetValue(image);
+            //If the code errors here double-check if changed were made in the scrollarea prefab list used in your scene
             prefab.GetComponent<PlaceableObject>().uiIndex = uiClickAbles.Count - 1;
             prefabs.Add(prefab);
             var button = newClick.GetComponent<Button>();
@@ -58,33 +59,7 @@ public class ScrollArea : MonoBehaviour
             {
                 Console.WriteLine(e);
             }
-            /*var triggers = newClick.GetComponentInChildren<EventTrigger>().triggers;
-            Debug.Log(triggers);
-            foreach (var trigger in triggers)
-            {
-                if (trigger.eventID == EventTriggerType.Select) trigger.callback.AddListener(selectEvent);
-                if (trigger.eventID == EventTriggerType.Deselect) trigger.callback.AddListener(OnDeselect());
-
-                if (uiClickAbles.Count == 1)
-                {
-                    BuildingSystem.current.ChangeSelectedBlock(0);
-                    EventSystem.current.firstSelectedGameObject = uiClickAbles[0];
-                    try
-                    {
-                        trigger.callback.Invoke(new PointerEventData(EventSystem.current));
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                    }
-                }
-            }*/
         }
-
-        /*foreach (var prefab in BuildingSystem.current.prefab)
-        {
-            DestroyImmediate(prefab.gameObject, true);
-        }*/
 
         BuildingSystem.current.prefab = prefabs.ToArray();
         yield return null;

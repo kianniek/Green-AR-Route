@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PlaceableObject : MonoBehaviour
 {
-    public Canvas canvas;
+    public GameObject canvas;
     public Button confirmPlacement;
     private Image confirmImage;
     public Button removeObject;
