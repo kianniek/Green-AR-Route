@@ -1289,6 +1289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 372981867}
   - component: {fileID: 372981868}
+  - component: {fileID: 372981869}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -1324,6 +1325,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: 0.3
+  gridPoints: []
+--- !u!114 &372981869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372981865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc8f39d8b685e4498d06f07123c34f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridsize: {x: 10, y: 10}
+  gridCellPadding: 0.2
+  gridPointPrefab: {fileID: 3203806166249828556, guid: e4256d401e98f4b49b605df00554a595,
+    type: 3}
 --- !u!1 &425410336
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,11 +27,7 @@ public class GridManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
-    private void Start()
-    {
-        
-    }
+    
     public void SnapToGrid(GameObject objToSnap)
     {
         float minDistance = Mathf.Infinity;

@@ -6,16 +6,6 @@
 
     public class GridSnapper : MonoBehaviour
     {
-        [SerializeField] private GameObject previewObject;  // Holds the preview duplicate of the object
-
-        private void Start()
-        {
-
-        }
-
-        private void Update()
-        {
-
-        }
+        [SerializeField] private GameObject previewObject; // Holds the preview duplicate of the object
     }
 }

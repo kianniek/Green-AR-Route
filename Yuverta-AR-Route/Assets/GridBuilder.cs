@@ -8,6 +8,8 @@ public class GridBuilder : MonoBehaviour
     private Vector2 gridsize = new Vector2(10, 10);
     [SerializeField]
     private float gridCellPadding = 0f;
+    [SerializeField]
+    private GameObject gridPointPrefab;
 
     private GridManager gridManager;
     // Start is called before the first frame update
@@ -17,16 +19,15 @@ public class GridBuilder : MonoBehaviour
         {
             gridManager = GetComponent<GridManager>();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
+        BuildGrid();
     }
 
     public void BuildGrid()
     {
+        //Making sure gridCellPadding does not equal 0 to prevent all positions being 0
+        gridCellPadding = gridCellPadding > 0 ? gridCellPadding : gridPointPrefab.GetComponent<Renderer>().bounds.size.x * 2;
+        
         // Create a grid of points
         for (int x = 0; x < gridsize.x; x++)
         {
@@ -34,9 +35,8 @@ public class GridBuilder : MonoBehaviour
             {
                 Vector3 position = new (x, 0, z);
                 position *= gridCellPadding;
-                GameObject gridPoint = new ($"Grid Point {x}-{z}");
-                gridPoint.transform.position = position;
-                gridPoint.transform.SetParent(transform);
+                GameObject gridPoint = Instantiate(gridPointPrefab, position, Quaternion.identity, transform);
+                gridPoint.name = $"GridPoint ({x}, {z})";
                 gridManager.gridPoints.Add(gridPoint);
             }
         }
@@ -53,18 +53,20 @@ public class GridBuilder : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        var localPadding = gridCellPadding = gridCellPadding > 0 ? gridCellPadding : gridPointPrefab.GetComponent<Renderer>().bounds.size.x * 2;
+        
         for (int x = 0; x < gridsize.x; x++)
         {
             for (int z = 0; z < gridsize.y; z++)
             {
                 Vector3 position = new (x, 0, z);
-                position *= gridCellPadding;
+                position *= localPadding;
                 Gizmos.color = Color.green;
 
                 Gizmos.DrawWireCube(position, Vector3.one * gridCellPadding);
                 Gizmos.color = Color.cyan;
 
-                Gizmos.DrawWireSphere(position, 0.1f);
+                Gizmos.DrawWireSphere(position, localPadding * 0.25f);
             }
         }
     }
