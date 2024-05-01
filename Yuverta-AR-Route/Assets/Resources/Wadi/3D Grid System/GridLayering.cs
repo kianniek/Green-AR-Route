@@ -26,6 +26,8 @@ public class GridLayering : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+
+        SwipeDetection.Instance.swipePerformed += context => { LayerSwap(context.y); };
     }
     
     private void Start()
@@ -33,31 +35,9 @@ public class GridLayering : MonoBehaviour
         gridText.text = gridDisplayText + gridCurrentLayer;
     }
 
-    public void LayerSwap()
+    public void LayerSwap(float upValue)
     {
-        #if UNITY_EDITOR
-        if (Input.GetMouseButtonUp(0))
-        {
-            var touchDirectionMouse = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")).normalized;
-        
-            if (Mathf.Abs(touchDirectionMouse.x) <= 0.5 && Mathf.Abs(touchDirectionMouse.y) <= 0.5) return;
-        
-            float directionMouse = Mathf.Abs(touchDirectionMouse.x) > Mathf.Abs(touchDirectionMouse.y) ? touchDirectionMouse.x : touchDirectionMouse.y;
-            gridCurrentLayer += Mathf.RoundToInt(directionMouse);
-            Debug.Log(gridCurrentLayer);
-            gridCurrentLayer = Mathf.Clamp(gridCurrentLayer, 0, gridDimensions.y);
-            gridText.text = gridDisplayText + gridCurrentLayer;
-            return;
-        }
-        #endif
-        
-        if (Input.touchCount == 0 || Input.GetTouch(0).phase != TouchPhase.Ended) return;
-
-        var touchDirection = Input.GetTouch(0).deltaPosition.normalized;
-        if (Mathf.Abs(touchDirection.x) <= 0.5 && Mathf.Abs(touchDirection.y) <= 0.5) return;
-        
-        float direction = Mathf.Abs(touchDirection.x) > Mathf.Abs(touchDirection.y) ? touchDirection.x : touchDirection.y;
-        gridCurrentLayer += Mathf.RoundToInt(direction);
+        gridCurrentLayer += Mathf.RoundToInt(upValue);
         Debug.Log(gridCurrentLayer);
         gridCurrentLayer = Mathf.Clamp(gridCurrentLayer, 0, gridDimensions.y);
         gridText.text = gridDisplayText + gridCurrentLayer;
