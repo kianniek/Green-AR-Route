@@ -7,6 +7,8 @@ public class GridBuilder : MonoBehaviour
     [SerializeField]
     private Vector2 gridsize = new Vector2(10, 10);
     [SerializeField]
+    private int gridHeight = 0;
+    [SerializeField]
     private float gridCellPadding = 0f;
     [SerializeField]
     private GameObject gridPointPrefab;
@@ -28,18 +30,30 @@ public class GridBuilder : MonoBehaviour
         //Making sure gridCellPadding does not equal 0 to prevent all positions being 0
         gridCellPadding = gridCellPadding > 0 ? gridCellPadding : gridPointPrefab.GetComponent<Renderer>().bounds.size.x * 2;
         
+        //Making sure gridHeight does not equal 0 to prevent no grid being created
+        gridHeight = gridHeight > 0 ? gridHeight : 1;
+        
         // Create a grid of points
-        for (int x = 0; x < gridsize.x; x++)
+        for (int y = 0; y < gridHeight; y++)
         {
-            for (int z = 0; z < gridsize.y; z++)
+            GameObject layerParent = new GameObject($"Layer {y}");
+            layerParent.transform.position = gameObject.transform.position;
+            layerParent.transform.SetParent(transform);
+            for (int x = 0; x < gridsize.x; x++)
             {
-                Vector3 position = new (x, 0, z);
-                position *= gridCellPadding;
-                GameObject gridPoint = Instantiate(gridPointPrefab, position, Quaternion.identity, transform);
-                gridPoint.name = $"GridPoint ({x}, {z})";
-                gridManager.gridPoints.Add(gridPoint);
+                for (int z = 0; z < gridsize.y; z++)
+                {
+                    Vector3 position = new (x, y, z);
+                    position *= gridCellPadding;
+                    GameObject gridPoint = Instantiate(gridPointPrefab, position, Quaternion.identity, layerParent.transform);
+                    gridPoint.name = $"GridPoint ({x}, {y}, {z})";
+                    gridManager.gridPoints.Add(gridPoint);
+                    gridManager.gridSortedLayer.Add(gridPoint, y);
+                }
             }
         }
+        
+        gridManager.gridDimensions = new Vector2Int(0, gridHeight - 1);
     }
 
     public void ClearGrid()
@@ -53,20 +67,27 @@ public class GridBuilder : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        //Making sure gridCellPadding does not equal 0 to prevent all positions being 0
         var localPadding = gridCellPadding = gridCellPadding > 0 ? gridCellPadding : gridPointPrefab.GetComponent<Renderer>().bounds.size.x * 2;
         
-        for (int x = 0; x < gridsize.x; x++)
+        //Making sure gridHeight does not equal 0 to prevent no grid being created
+        gridHeight = gridHeight > 0 ? gridHeight : 1;
+
+        for (int y = 0; y < gridHeight; y++)
         {
-            for (int z = 0; z < gridsize.y; z++)
+            for (int x = 0; x < gridsize.x; x++)
             {
-                Vector3 position = new (x, 0, z);
-                position *= localPadding;
-                Gizmos.color = Color.green;
+                for (int z = 0; z < gridsize.y; z++)
+                {
+                    Vector3 position = new (x, y, z);
+                    position *= localPadding;
+                    Gizmos.color = Color.green;
 
-                Gizmos.DrawWireCube(position, Vector3.one * gridCellPadding);
-                Gizmos.color = Color.cyan;
+                    Gizmos.DrawWireCube(position, Vector3.one * gridCellPadding);
+                    Gizmos.color = Color.cyan;
 
-                Gizmos.DrawWireSphere(position, localPadding * 0.25f);
+                    Gizmos.DrawWireSphere(position, localPadding * 0.25f);
+                }
             }
         }
     }
