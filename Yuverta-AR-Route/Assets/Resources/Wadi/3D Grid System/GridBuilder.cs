@@ -7,6 +7,7 @@ public class GridBuilder : MonoBehaviour
     [SerializeField]
     private Vector2 gridsize = new Vector2(10, 10);
     [SerializeField]
+    [Min(1)]
     private int gridHeight = 0;
     [SerializeField]
     private float gridCellPadding = 0f;
@@ -27,12 +28,6 @@ public class GridBuilder : MonoBehaviour
 
     public void BuildGrid()
     {
-        //Making sure gridCellPadding does not equal 0 to prevent all positions being 0
-        gridCellPadding = gridCellPadding > 0 ? gridCellPadding : gridPointPrefab.GetComponent<Renderer>().bounds.size.x * 2;
-        
-        //Making sure gridHeight does not equal 0 to prevent no grid being created
-        gridHeight = gridHeight > 0 ? gridHeight : 1;
-        
         // Create a grid of points
         for (int y = 0; y < gridHeight; y++)
         {

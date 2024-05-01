@@ -1150,7 +1150,7 @@ PrefabInstance:
     - target: {fileID: 2512387470528047738, guid: 48cb3fb68c91eb94999fd99957eb0cae,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.093
       objectReference: {fileID: 0}
     - target: {fileID: 2512387470528047738, guid: 48cb3fb68c91eb94999fd99957eb0cae,
         type: 3}
@@ -1333,6 +1333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridSize: 0.3
   gridPoints: []
+  gridDimensions: {x: 0, y: 0}
   placedObjects: []
 --- !u!114 &372981869
 MonoBehaviour:
@@ -1347,7 +1348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridsize: {x: 10, y: 10}
-  gridHeight: 2
+  gridHeight: 1
   gridCellPadding: 0.2
   gridPointPrefab: {fileID: 3203806166249828556, guid: e4256d401e98f4b49b605df00554a595,
     type: 3}
