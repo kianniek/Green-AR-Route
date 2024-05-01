@@ -1293,9 +1293,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 372981867}
+  - component: {fileID: 372981870}
   - component: {fileID: 372981868}
   - component: {fileID: 372981869}
-  - component: {fileID: 372981870}
+  - component: {fileID: 372981871}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -1331,8 +1332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: 0.3
-  gridText: {fileID: 1684037077}
   gridPoints: []
+  placedObjects: []
 --- !u!114 &372981869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1378,8 +1379,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 372981868}
-        m_TargetAssemblyTypeName: GridManager, Unity.XR.Interaction.Toolkit.Samples.StarterAssets
+      - m_Target: {fileID: 372981871}
+        m_TargetAssemblyTypeName: GridLayering, Assembly-CSharp
         m_MethodName: LayerSwap
         m_Mode: 1
         m_Arguments:
@@ -1397,6 +1398,21 @@ MonoBehaviour:
   m_DefaultActionMap: New action map
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &372981871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372981865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d63583744d5f34796970f090a076b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridText: {fileID: 1684037077}
+  gridDisplayText: 'Layer: '
+  gridDimensions: {x: 0, y: 0}
 --- !u!1 &425410336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,22 +1564,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 956dd6cf70eaca449a45b6a95b96c8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CameraToFace: {fileID: 0}
-  m_ObjectPrefabs:
-  - {fileID: 8986328500875594450, guid: d825bbdf58c379d4290da92e387f71d0, type: 3}
-  - {fileID: 7657548977611231357, guid: 3cbfcd4079a5031478389d5ab3c8c311, type: 3}
-  - {fileID: 3555902977704940904, guid: 23412048bf4821d4f8bf5c7d9c1abd5b, type: 3}
-  - {fileID: 5419581123709780336, guid: aaf6326249753074fbc1148303020f26, type: 3}
-  - {fileID: 7279467769842343898, guid: b1b37ac0eaa6a9a4785fc1f26065e8b3, type: 3}
-  - {fileID: 3745605318107395163, guid: daca7e1cd0a975941a64a8a9cbd8e5e5, type: 3}
-  - {fileID: 2668992677333385299, guid: 98cdacc32bf0d8d469092762a7263c4b, type: 3}
-  m_SpawnVisualizationPrefab: {fileID: 0}
-  m_SpawnOptionIndex: 0
-  m_OnlySpawnInView: 1
-  m_ViewportPeriphery: 0
-  m_ApplyRandomAngleAtSpawn: 1
-  m_SpawnAngleRange: 45
-  m_SpawnAsChildren: 1
 --- !u!4 &436358034
 Transform:
   m_ObjectHideFlags: 0
@@ -6003,9 +6003,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2099970469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100.00006, y: 25}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100.00006, y: -50}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1684037077

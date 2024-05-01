@@ -48,12 +48,12 @@ public class GridBuilder : MonoBehaviour
                     GameObject gridPoint = Instantiate(gridPointPrefab, position, Quaternion.identity, layerParent.transform);
                     gridPoint.name = $"GridPoint ({x}, {y}, {z})";
                     gridManager.gridPoints.Add(gridPoint);
-                    gridManager.gridSortedLayer.Add(gridPoint, y);
+                    GridLayering.Instance.gridSortedLayer.Add(gridPoint, y);
                 }
             }
         }
         
-        gridManager.gridDimensions = new Vector2Int(0, gridHeight - 1);
+        GridLayering.Instance.gridDimensions = new Vector2Int(0, gridHeight - 1);
     }
 
     public void ClearGrid()
