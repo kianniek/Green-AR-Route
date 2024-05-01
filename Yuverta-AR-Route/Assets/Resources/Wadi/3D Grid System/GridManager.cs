@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class GridManager : MonoBehaviour
 {
     public static GridManager Instance { get; private set; }
+    
+    public GridBuilder gridBuilder;
+    public GridLayering gridLayering;
 
     [SerializeField] private float gridSize = 1.0f;
     
@@ -30,9 +34,14 @@ public class GridManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        
     }
-    
+
+    private void Start()
+    {
+        gridBuilder = gameObject.GetComponent<GridBuilder>();
+        gridLayering = gameObject.GetComponent<GridLayering>();
+    }
+
     public void SnapToGrid(GameObject objToSnap)
     {
         float minDistance = Mathf.Infinity;

@@ -14,11 +14,11 @@ public class SwipeDetection : MonoBehaviour
 	private Vector2 currentPos => position.ReadValue<Vector2>();
 	private void Awake () 
 	{
+		Instance = this;
 		position.Enable();
 		press.Enable();	
 		press.performed += _ => { initialPos = currentPos; };
 		press.canceled += _ => DetectSwipe();
-        Instance = this;
 	}
 
 	private void DetectSwipe () 
