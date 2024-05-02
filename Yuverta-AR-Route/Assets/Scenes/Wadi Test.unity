@@ -1333,6 +1333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridBuilder: {fileID: 0}
   gridLayering: {fileID: 0}
+  objectMovement: {fileID: 0}
   gridSize: 0.3
   gridPoints: []
   placedObjects: []
@@ -1370,6 +1371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridText: {fileID: 1684037077}
   gridDisplayText: 'Layer: '
+  gridCurrentLayer: 0
   gridDimensions: {x: 0, y: 0}
 --- !u!114 &372981872
 MonoBehaviour:
@@ -1383,6 +1385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3476c41833f62624da6e838f2f1ca59b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackingObject: 0
   position:
     m_Name: Position
     m_Type: 0
@@ -1601,7 +1604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ARInteractorObject: {fileID: 331264286}
-  m_ObjectSpawner: {fileID: 0}
+  m_ObjectSpawner: {fileID: 436358036}
   m_RequireHorizontalUpSurface: 0
   m_SpawnTriggerType: 0
   m_SpawnAction:
@@ -1631,13 +1634,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CameraToFace: {fileID: 2050027992}
   m_ObjectPrefabs:
-  - {fileID: 613292779795284151, guid: ebd7292e888c84f05924605e51048072, type: 3}
-  - {fileID: 7109682686697656319, guid: 5642b79498b10465fa9219ba4682355b, type: 3}
-  - {fileID: 5923104921834008719, guid: 8ae99c55d89c449b4be74f60dc81e02b, type: 3}
-  - {fileID: 6091692148682916432, guid: 51f8c8c1205824bcf8fec9805e0312a3, type: 3}
-  - {fileID: 5811970893536397571, guid: 13241d599ff10413498d04c6d683ca10, type: 3}
-  - {fileID: 5239885138427989381, guid: 894d54703eb1549009ad9f909fc154d7, type: 3}
-  - {fileID: 7190559763459483146, guid: cec25213e5ba74da1ae7d3e2036e000d, type: 3}
+  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
+  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
+  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
+  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
+  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
+  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
+  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
   m_SpawnVisualizationPrefab: {fileID: 0}
   m_SpawnOptionIndex: -1
   m_OnlySpawnInView: 1
@@ -4942,6 +4945,50 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1284861180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1284861182}
+  - component: {fileID: 1284861181}
+  m_Layer: 0
+  m_Name: LogicHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1284861181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284861180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2900c329793d0e4d852a6419e7ad7ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1284861182
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284861180}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2766968, y: 0.21505111, z: 0.45052552}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1309057132
 GameObject:
   m_ObjectHideFlags: 0
@@ -7715,7 +7762,6 @@ MonoBehaviour:
   m_DebugPlane: {fileID: 1585201990951412, guid: 886609fc1566e4c27b399f1095d6de18,
     type: 3}
   m_PlaneManager: {fileID: 151853166}
-  m_DebugMenu: {fileID: 0}
   m_DebugMenuSlider: {fileID: 1139628616}
 --- !u!1 &2116170431
 GameObject:
@@ -8375,3 +8421,4 @@ SceneRoots:
   - {fileID: 2099970469}
   - {fileID: 331264285}
   - {fileID: 372981867}
+  - {fileID: 1284861182}

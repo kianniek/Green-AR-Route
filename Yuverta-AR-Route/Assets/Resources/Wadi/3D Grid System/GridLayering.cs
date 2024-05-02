@@ -12,7 +12,7 @@ public class GridLayering : MonoBehaviour
     [SerializeField] private TextMeshProUGUI gridText;
     [SerializeField] private string gridDisplayText;
     
-    private int gridCurrentLayer = 0;
+    public int gridCurrentLayer = 0;
     public Vector2Int gridDimensions = new Vector2Int(0, 0);
     
     private void Start()

@@ -171,18 +171,19 @@ public class ARTemplateMenuManager : MonoBehaviour
         set => m_PlaneManager = value;
     }
 
-    [SerializeField]
+    /*[SerializeField]
     [Tooltip("The AR debug menu.")]
     ARDebugMenu m_DebugMenu;
+    */
 
     /// <summary>
     /// The AR debug menu.
     /// </summary>
-    public ARDebugMenu debugMenu
+    /*public ARDebugMenu debugMenu
     {
         get => m_DebugMenu;
         set => m_DebugMenu = value;
-    }
+    }*/
 
     [SerializeField]
     [Tooltip("The slider for activating the debug menu.")]
@@ -239,12 +240,14 @@ public class ARTemplateMenuManager : MonoBehaviour
     {
         // Auto turn on/off debug menu. We want it initially active so it calls into 'Start', which will
         // allow us to move the menu properties later if the debug menu is turned on.
-        m_DebugMenu.gameObject.SetActive(true);
+        //m_DebugMenu.gameObject.SetActive(true);
         m_InitializingDebugMenu = true;
 
         InitializeDebugMenuOffsets();
         HideMenu();
         m_PlaneManager.planePrefab = m_DebugPlane;
+
+        m_ObjectSpawner = FindObjectOfType<ObjectSpawner>();
     }
 
     /// <summary>
@@ -254,7 +257,7 @@ public class ARTemplateMenuManager : MonoBehaviour
     {
         if (m_InitializingDebugMenu)
         {
-            m_DebugMenu.gameObject.SetActive(false);
+            //m_DebugMenu.gameObject.SetActive(false);
             m_InitializingDebugMenu = false;
         }
 
@@ -360,7 +363,7 @@ public class ARTemplateMenuManager : MonoBehaviour
     /// </summary>
     public void ShowHideDebugMenu()
     {
-        if (m_DebugMenu.gameObject.activeSelf)
+        /*if (m_DebugMenu.gameObject.activeSelf)
         {
             m_DebugMenuSlider.value = 0;
             m_DebugMenu.gameObject.SetActive(false);
@@ -370,7 +373,7 @@ public class ARTemplateMenuManager : MonoBehaviour
             m_DebugMenuSlider.value = 1;
             m_DebugMenu.gameObject.SetActive(true);
             AdjustARDebugMenuPosition();
-        }
+        }*/
     }
 
     /// <summary>
@@ -444,7 +447,7 @@ public class ARTemplateMenuManager : MonoBehaviour
         {
             Vector2 menuOffset = m_ShowObjectMenu ? m_ObjectMenuOffset : m_ObjectButtonOffset;
 
-            if (m_DebugMenu.toolbar.TryGetComponent<RectTransform>(out var rect))
+            /*if (m_DebugMenu.toolbar.TryGetComponent<RectTransform>(out var rect))
             {
                 rect.anchorMin = new Vector2(0.5f, 0);
                 rect.anchorMax = new Vector2(0.5f, 0);
@@ -494,7 +497,7 @@ public class ARTemplateMenuManager : MonoBehaviour
                 debugOptionsMenuRect.anchorMax = new Vector2(0.5f, 0);
                 debugOptionsMenuRect.pivot = new Vector2(0.5f, 0);
                 debugOptionsMenuRect.anchoredPosition = new Vector2(0, 150) + menuOffset;
-            }
+            }*/
         }
     }
 

@@ -30,6 +30,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         [SerializeField]
         [Tooltip("The list of prefabs available to spawn.")]
         List<GameObject> m_ObjectPrefabs = new List<GameObject>();
+        
+        List<GameObject> m_ObjectPrefabsUpdated = new List<GameObject>();
 
         /// <summary>
         /// The list of prefabs available to spawn.
@@ -76,7 +78,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// </summary>
         /// <seealso cref="spawnOptionIndex"/>
         /// <seealso cref="RandomizeSpawnOption"/>
-        public bool isSpawnOptionRandomized => m_SpawnOptionIndex < 0 || m_SpawnOptionIndex >= m_ObjectPrefabs.Count;
+        //public bool isSpawnOptionRandomized => m_SpawnOptionIndex < 0 || m_SpawnOptionIndex >= m_ObjectPrefabs.Count;
 
         [SerializeField]
         [Tooltip("Whether to only spawn an object if the spawn point is within view of the camera.")]
@@ -151,7 +153,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// Event invoked after an object is spawned.
         /// </summary>
         /// <seealso cref="TrySpawnObject"/>
-        public event Action<GameObject> objectSpawned;
+        public event Action<GameObject, int> objectSpawned;
         #endregion
         /// <summary>
         /// See <see cref="MonoBehaviour"/>.
@@ -159,6 +161,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         void Awake()
         {
             EnsureFacingCamera();
+            m_ObjectPrefabsUpdated.AddRange(m_ObjectPrefabs);
         }
 
         void EnsureFacingCamera()
@@ -205,8 +208,11 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
                 }
             }
 
-            var objectIndex = isSpawnOptionRandomized ? Random.Range(0, m_ObjectPrefabs.Count) : m_SpawnOptionIndex;
-            var newObject = Instantiate(m_ObjectPrefabs[objectIndex]);
+            //var objectIndex = isSpawnOptionRandomized ? Random.Range(0, m_ObjectPrefabsUpdated.Count) : m_SpawnOptionIndex;
+            var objectIndex = m_SpawnOptionIndex;
+            if (objectIndex < 0 || objectIndex >= m_ObjectPrefabsUpdated.Count) return false;
+            
+            var newObject = Instantiate(m_ObjectPrefabsUpdated[objectIndex]);
             if (m_SpawnAsChildren)
                 newObject.transform.parent = transform;
 
@@ -233,8 +239,15 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
                 visualizationTrans.rotation = newObject.transform.rotation;
             }
 
-            objectSpawned?.Invoke(newObject);
+            objectSpawned?.Invoke(newObject, objectIndex);
+            m_ObjectPrefabsUpdated.Remove(m_ObjectPrefabsUpdated[objectIndex]);
+            m_SpawnOptionIndex = -1;
             return true;
+        }
+        
+        public void OnObjectDelete(int objectPrefabIndex)
+        {
+            m_ObjectPrefabsUpdated.Add(m_ObjectPrefabs[objectPrefabIndex]);
         }
     }
 }

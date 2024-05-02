@@ -261,7 +261,8 @@ public class GoalManager : MonoBehaviour
         CompleteGoal();
     }
 
-    void OnObjectSpawned(GameObject spawnedObject)
+    //ObjectPrefabIndex is not used in this method, but is required for the ObjectSpawned event.
+    void OnObjectSpawned(GameObject spawnedObject, int objectPrefabIndex)
     {
         m_SurfacesTapped++;
         if (m_CurrentGoal.CurrentGoal == OnboardingGoals.TapSurface && m_SurfacesTapped >= k_NumberOfSurfacesTappedToCompleteGoal)
