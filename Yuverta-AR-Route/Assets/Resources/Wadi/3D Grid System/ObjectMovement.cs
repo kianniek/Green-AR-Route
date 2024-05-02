@@ -6,6 +6,7 @@ using UnityEngine.XR.ARFoundation;
 public class ObjectMovement : MonoBehaviour
 {
     private ARRaycastManager arRaycastManager;
+    public bool animationActive = false;
     
     private void Start()
     {
@@ -40,9 +41,8 @@ public class ObjectMovement : MonoBehaviour
 
     private IEnumerator TrackTouchPosition()
     {
-        while (Input.GetMouseButton(0) /*|| Input.GetTouch(0).phase != TouchPhase.Ended*/)
+        while (Input.GetMouseButton(0) || Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended)
         {
-            Debug.Log("WHooo");
             SwipeDetection.Instance.trackingObject = true;
             Vector3 newPosition = GetTouchWorldPosition();
             newPosition.y = 0;
@@ -51,7 +51,27 @@ public class ObjectMovement : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        gameObject.transform.position = GridManager.Instance.SnapToGrid(gameObject);
+        var closestGridPosition = GridManager.Instance.SnapToGrid(gameObject);
+
+        animationActive = true;
+        while (Vector3.Distance(gameObject.transform.position, closestGridPosition) > 0.001 && animationActive)
+        {
+            Debug.Log("WHooo");
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,closestGridPosition , 0.05f);
+            yield return new WaitForSeconds(0.01f);
+
+            if (!Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) continue;
+            
+            GameObject collidedObject = null;
+            SwipeDetection.Instance.CollideWithObject(out collidedObject);
+            if (!collidedObject || collidedObject != gameObject) continue;
+            
+            GridManager.Instance.SelectedObject(collidedObject);
+            animationActive = false;
+            StopCoroutine(TrackTouchPosition());
+        }
+        
+        gameObject.transform.position = closestGridPosition;
         
         yield return new WaitForSeconds(0.2f);
         SwipeDetection.Instance.trackingObject = false;

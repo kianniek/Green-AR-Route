@@ -97,6 +97,7 @@ public class GridManager : MonoBehaviour
     public void SelectedObject(GameObject selectedObject)
     {
         Debug.Log("Selected Object: " + selectedObject.name);
+        if (objectMovement) objectMovement.animationActive = false;
         objectMovement = selectedObject.GetComponent<ObjectMovement>();
         objectMovement.MoveObject();
     }

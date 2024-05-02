@@ -28,7 +28,6 @@ public class SwipeDetection : MonoBehaviour
 	{
 		initialPos = currentPos;
 		
-		Debug.Log("Before if");
 		GameObject collidedObject = null;
 		if (trackingObject || CollideWithObject(out collidedObject))
 		{
@@ -42,7 +41,6 @@ public class SwipeDetection : MonoBehaviour
 			}
 			return;
 		}
-		Debug.Log("After if");
 	}
 
 	private void DetectSwipe() 
@@ -58,17 +56,13 @@ public class SwipeDetection : MonoBehaviour
 		{
 			direction.y = Mathf.Clamp(delta.y, -1, 1);
 		}
-        Debug.Log($"delta: {delta}");
-
-        Debug.Log($"direction: {direction}");
 		if(direction != Vector2.zero & swipePerformed != null)
 			swipePerformed(direction);
 	}
 
-	private bool CollideWithObject(out GameObject collidedObject)
+	public bool CollideWithObject(out GameObject collidedObject)
 	{
 		var hits = SharedFunctionality.Instance.TouchToRay();
-		Debug.Log(hits.Length);
 		foreach (var hit in hits)
 		{
 			Debug.Log(hit.collider.gameObject.name);

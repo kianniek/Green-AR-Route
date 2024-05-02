@@ -224,7 +224,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             var facePosition = m_CameraToFace.transform.position;
             var forward = facePosition - spawnPoint;
             BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
-            newObject.transform.rotation = Quaternion.LookRotation(projectedForward, spawnNormal);
+            //newObject.transform.rotation = Quaternion.LookRotation(projectedForward, spawnNormal);
+            newObject.transform.rotation = Quaternion.identity;
 
             if (m_ApplyRandomAngleAtSpawn)
             {
