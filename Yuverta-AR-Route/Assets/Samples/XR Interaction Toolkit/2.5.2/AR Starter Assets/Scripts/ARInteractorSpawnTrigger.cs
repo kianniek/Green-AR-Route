@@ -1,5 +1,6 @@
 ﻿#if AR_FOUNDATION_PRESENT
 using System;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -128,8 +129,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
 
             if (m_ARInteractorObject == null) m_ARInteractorObject = FindObjectOfType<XRScreenSpaceController>();
 
-            Debug.Log(m_ARInteractorObject);
-
             m_ARInteractor = m_ARInteractorObject as IARInteractor;
             m_ARInteractorAsControllerInteractor = m_ARInteractorObject as XRBaseControllerInteractor;
             if (m_SpawnTriggerType == SpawnTriggerType.SelectAttempt && m_ARInteractorAsControllerInteractor == null)
@@ -175,15 +174,14 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
 
                 case SpawnTriggerType.InputAction:
                     if (m_SpawnAction.action.WasPerformedThisFrame())
-                    {
-                        Debug.Log("action.WasPerformedThisFrame()");
                         attemptSpawn = true;
-
-                    }
                     break;
             }
 
-            if (!attemptSpawn) return;
+            var touchID = Input.touchCount;
+            if (touchID > 0) touchID = Input.GetTouch(0).fingerId;
+            
+            if (!attemptSpawn || EventSystem.current.IsPointerOverGameObject(touchID) || EventSystem.current.IsPointerOverGameObject()) return;
             Debug.Log("Attempting to spawn object");
             var touchHits = TouchToRay();
 

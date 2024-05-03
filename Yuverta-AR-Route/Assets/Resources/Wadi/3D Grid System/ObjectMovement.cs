@@ -7,9 +7,11 @@ public class ObjectMovement : MonoBehaviour
 {
     private ARRaycastManager arRaycastManager;
     public bool animationActive = false;
+    public ObjectLogic objectLogic;
     
     private void Start()
     {
+        objectLogic = gameObject.GetComponent<ObjectLogic>();
         arRaycastManager = FindObjectOfType<ARRaycastManager>();
     }
     
@@ -45,7 +47,7 @@ public class ObjectMovement : MonoBehaviour
         {
             SwipeDetection.Instance.trackingObject = true;
             Vector3 newPosition = GetTouchWorldPosition();
-            newPosition.y = 0;
+            newPosition.y = gameObject.transform.position.y;
             gameObject.transform.position = newPosition;
             
             yield return new WaitForFixedUpdate();

@@ -11,7 +11,7 @@ public class GridManager : MonoBehaviour
     public GridBuilder gridBuilder;
     public GridLayering gridLayering;
     public ObjectMovement objectMovement;
-    public UIMenu uiMenu;
+    public UIMenuLogic uiMenu;
     public ObjectSpawner objectSpawner;
 
     [SerializeField] private float gridSize = 1.0f;
@@ -23,10 +23,10 @@ public class GridManager : MonoBehaviour
     }
 
     public List<GameObject> gridPoints = new();
-    private Dictionary<GameObject, bool> occupiedPositions = new Dictionary<GameObject, bool>();
+    public Dictionary<GameObject, bool> occupiedPositions = new Dictionary<GameObject, bool>();
     
     public List<GameObject> placedObjects = new List<GameObject>();
-    private int selectedObjectIndex = 0;
+    public int selectedObjectIndex = 0;
 
     void Awake()
     {
@@ -44,7 +44,7 @@ public class GridManager : MonoBehaviour
     {
         gridBuilder = gameObject.GetComponent<GridBuilder>();
         gridLayering = gameObject.GetComponent<GridLayering>();
-        uiMenu = FindObjectOfType<UIMenu>();
+        uiMenu = FindObjectOfType<UIMenuLogic>();
         objectSpawner = FindObjectOfType<ObjectSpawner>();
         
         uiMenu.StartUp(objectSpawner.objectPrefabs);
@@ -92,20 +92,29 @@ public class GridManager : MonoBehaviour
 
     private void NewObjectPlaced()
     {
-        GameObject newObject = objectSpawner.m_ObjectPrefabs[objectSpawner.m_SpawnOptionIndex];
+        GameObject newObject = objectSpawner.lastSpawnedObject;
         uiMenu.Remove(newObject);
         placedObjects.Add(newObject);
         var objectLogic = newObject.GetComponent<ObjectLogic>();
         objectLogic.objectIndex = selectedObjectIndex;
         objectLogic.objectLayer = gridLayering.gridCurrentLayer;
-        //objectLogic.objectPrefabIndex = objectPrefabIndex; //TODO: Implement objectPrefabIndex
+        objectLogic.objectPrefabIndex = objectSpawner.m_SpawnOptionIndex; //TODO: Implement objectPrefabIndex
     }
 
     public void SelectedObject(GameObject selectedObject)
     {
-        Debug.Log("Selected Object: " + selectedObject.name);
         if (objectMovement) objectMovement.animationActive = false;
         objectMovement = selectedObject.GetComponent<ObjectMovement>();
+        selectedObjectIndex = objectMovement.objectLogic.objectIndex;
         objectMovement.MoveObject();
+    }
+
+    public void DestroyObject()
+    {
+        if (placedObjects.Count <= 0) return;
+        var focusedObject = placedObjects[selectedObjectIndex];
+        placedObjects.Remove(focusedObject);
+        occupiedPositions.Remove(focusedObject);
+        Destroy(focusedObject.gameObject);
     }
 }

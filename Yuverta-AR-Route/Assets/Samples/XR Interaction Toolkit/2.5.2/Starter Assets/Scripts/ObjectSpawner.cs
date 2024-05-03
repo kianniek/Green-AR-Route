@@ -86,6 +86,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         [SerializeField]
         [Tooltip("The name of the prefab to spawn")]
         public string m_SpawnOptionName = "GridManager";
+        
+        public GameObject lastSpawnedObject;
 
         /// <summary>
         /// The index of the prefab to spawn. If outside the range of <see cref="objectPrefabs"/>, this behavior will
@@ -283,6 +285,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
                 visualizationTrans.rotation = newObject.transform.rotation;
             }
 
+            lastSpawnedObject = newObject;
             ObjectSpawned.Invoke();
             m_SpawnOptionIndex = -1;
             m_SpawnOptionName = "";
