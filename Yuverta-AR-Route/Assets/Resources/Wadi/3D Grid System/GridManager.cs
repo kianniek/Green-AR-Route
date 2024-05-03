@@ -11,6 +11,8 @@ public class GridManager : MonoBehaviour
     public GridBuilder gridBuilder;
     public GridLayering gridLayering;
     public ObjectMovement objectMovement;
+    public UIMenu uiMenu;
+    public ObjectSpawner objectSpawner;
 
     [SerializeField] private float gridSize = 1.0f;
     
@@ -43,6 +45,10 @@ public class GridManager : MonoBehaviour
     {
         gridBuilder = gameObject.GetComponent<GridBuilder>();
         gridLayering = gameObject.GetComponent<GridLayering>();
+        uiMenu = FindObjectOfType<UIMenu>();
+        objectSpawner = FindObjectOfType<ObjectSpawner>();
+        
+        uiMenu.StartUp(objectSpawner.objectPrefabs);
         
         FindObjectOfType<ObjectSpawner>().objectSpawned += NewObjectPlaced;
     }
@@ -87,6 +93,7 @@ public class GridManager : MonoBehaviour
 
     private void NewObjectPlaced(GameObject newObject, int objectPrefabIndex)
     {
+        uiMenu.Remove(newObject);
         placedObjects.Add(newObject);
         var objectLogic = newObject.GetComponent<ObjectLogic>();
         objectLogic.objectIndex = selectedObjectIndex;

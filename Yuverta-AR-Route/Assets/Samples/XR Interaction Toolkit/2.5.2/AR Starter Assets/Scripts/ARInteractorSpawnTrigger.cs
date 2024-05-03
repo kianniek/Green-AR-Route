@@ -178,6 +178,9 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
             if (!attemptSpawn) return;
             
             var touchHits = TouchToRay();
+            
+            if (touchHits.Length == 0) return;
+            
             foreach (var hit in touchHits)
             {
                 if (hit.collider.gameObject.CompareTag("Ground"))

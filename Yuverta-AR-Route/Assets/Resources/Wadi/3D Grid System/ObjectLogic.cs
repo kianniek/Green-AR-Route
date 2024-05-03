@@ -17,6 +17,10 @@ public class ObjectLogic : MonoBehaviour
 
     public void OnDestroy()
     {
-        FindObjectOfType<ObjectSpawner>().OnObjectDelete(objectPrefabIndex);
+        #if ApplicationIsClosing
+        return;
+        #endif
+        GridManager.Instance.objectSpawner.OnObjectDelete(objectPrefabIndex);
+        GridManager.Instance.uiMenu.Add(gameObject);
     }
 }

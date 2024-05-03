@@ -65,7 +65,6 @@ public class SwipeDetection : MonoBehaviour
 		var hits = SharedFunctionality.Instance.TouchToRay();
 		foreach (var hit in hits)
 		{
-			Debug.Log(hit.collider.gameObject.name);
 			if (!hit.collider.gameObject.CompareTag("MoveableObject")) continue;
 			
 			collidedObject = hit.collider.gameObject;
