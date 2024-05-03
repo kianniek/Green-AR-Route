@@ -48,9 +48,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
 
         [SerializeField]
         [Tooltip("The list of prefabs available to spawn.")]
-        List<GameObject> m_ObjectPrefabs = new List<GameObject>();
-        
-        List<GameObject> m_ObjectPrefabsUpdated = new List<GameObject>();
+        public List<GameObject> m_ObjectPrefabs = new List<GameObject>();
 
         /// <summary>
         /// The list of prefabs available to spawn.
@@ -78,7 +76,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
 
         [SerializeField]
         [Tooltip("The index of the prefab to spawn")]
-        int m_SpawnOptionIndex = -1;
+        public int m_SpawnOptionIndex = -1;
         
         [SerializeField]
         [Tooltip("The name of the prefab to spawn")]
@@ -198,7 +196,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         {
             EnsureFacingCamera();
             OnAwake.Invoke();
-            m_ObjectPrefabsUpdated.AddRange(m_ObjectPrefabs);
         }
 
         void EnsureFacingCamera()
@@ -252,9 +249,9 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
 
             //var objectIndex = isSpawnOptionRandomized ? Random.Range(0, m_ObjectPrefabsUpdated.Count) : m_SpawnOptionIndex;
             var objectIndex = GetIndex();
-            if (objectIndex < 0 || objectIndex >= m_ObjectPrefabsUpdated.Count) return false;
+            if (objectIndex < 0 || objectIndex >= m_ObjectPrefabs.Count) return false;
             
-            var newObject = Instantiate(m_ObjectPrefabsUpdated[m_SpawnOptionIndex]);
+            var newObject = Instantiate(m_ObjectPrefabs[m_SpawnOptionIndex]);
             if (m_SpawnAsChildren)
                 newObject.transform.parent = transform;
 
@@ -282,22 +279,16 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             }
 
             ObjectSpawned.Invoke();
-            m_ObjectPrefabsUpdated.Remove(m_ObjectPrefabsUpdated[objectIndex]);
             m_SpawnOptionIndex = -1;
             m_SpawnOptionName = "";
             return true;
         }
-        
-        public void OnObjectDelete(int objectPrefabIndex)
-        {
-            m_ObjectPrefabsUpdated.Add(m_ObjectPrefabs[objectPrefabIndex]);
-        }
 
         private int GetIndex()
         {
-            foreach (var prefab in m_ObjectPrefabsUpdated.Where(prefab => prefab.name == m_SpawnOptionName))
+            foreach (var prefab in m_ObjectPrefabs.Where(prefab => prefab.name == m_SpawnOptionName))
             {
-                m_SpawnOptionIndex = m_ObjectPrefabsUpdated.IndexOf(prefab);
+                m_SpawnOptionIndex = m_ObjectPrefabs.IndexOf(prefab);
                 Debug.Log(m_SpawnOptionIndex);
                 return m_SpawnOptionIndex;
             }

@@ -20,7 +20,7 @@ public class ObjectLogic : MonoBehaviour
         #if ApplicationIsClosing
         return;
         #endif
-        GridManager.Instance.objectSpawner.OnObjectDelete(objectPrefabIndex);
+        //GridManager.Instance.objectSpawner.OnObjectDelete(objectPrefabIndex);
         GridManager.Instance.uiMenu.Add(gameObject);
     }
 }

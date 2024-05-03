@@ -49,7 +49,7 @@ public class GridManager : MonoBehaviour
         
         uiMenu.StartUp(objectSpawner.objectPrefabs);
         
-        FindObjectOfType<ObjectSpawner>().ObjectSpawned += NewObjectPlaced;
+        objectSpawner.ObjectSpawned.AddListener(NewObjectPlaced);
     }
 
     public Vector3 SnapToGrid(GameObject objToSnap)
@@ -90,8 +90,9 @@ public class GridManager : MonoBehaviour
         return closestGridPoint;
     }
 
-    private void NewObjectPlaced(GameObject newObject)
+    private void NewObjectPlaced()
     {
+        GameObject newObject = objectSpawner.m_ObjectPrefabs[objectSpawner.m_SpawnOptionIndex];
         uiMenu.Remove(newObject);
         placedObjects.Add(newObject);
         var objectLogic = newObject.GetComponent<ObjectLogic>();
