@@ -1405,105 +1405,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 425410336}
   m_CullTransparentMesh: 1
---- !u!1 &436358032
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 436358034}
-  - component: {fileID: 436358035}
-  - component: {fileID: 436358036}
-  m_Layer: 0
-  m_Name: Object Spawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &436358034
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436358032}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &436358035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436358032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba63293f961b46a1a5b648e4ba02cfb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ARInteractorObject: {fileID: 331264286}
-  m_ObjectSpawner: {fileID: 436358036}
-  m_RequireHorizontalUpSurface: 0
-  m_SpawnTriggerType: 0
-  m_SpawnAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Spawn
-      m_Type: 1
-      m_ExpectedControlType: 
-      m_Id: 8db40ae6-2bbd-4a88-ab4d-ee209b4a18a9
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: 2494954584338170553, guid: c348712bda248c246b8c49b3db54643f,
-      type: 3}
---- !u!114 &436358036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436358032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ffa14d1311a2da4fb7c2f1c5c2ef9d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blockSpawn: 0
-  m_CameraToFace: {fileID: 2050027992}
-  m_ObjectPrefabs:
-  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
-  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
-  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
-  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
-  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
-  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
-  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
-  m_SpawnVisualizationPrefab: {fileID: 0}
-  m_SpawnOptionIndex: -1
-  m_SpawnOptionName: Bob
-  m_OnlySpawnInView: 1
-  m_ViewportPeriphery: 0.15
-  m_ApplyRandomAngleAtSpawn: 1
-  m_SpawnAngleRange: 45
-  m_SpawnHeightOffset: 1.5
-  m_SpawnAsChildren: 0
-  OnAwake:
-    m_PersistentCalls:
-      m_Calls: []
-  ObjectSpawned:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &451820663
 GameObject:
   m_ObjectHideFlags: 0
@@ -5931,7 +5832,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 2494954584338170553, guid: c348712bda248c246b8c49b3db54643f,
+    m_Reference: {fileID: -8660948776553027169, guid: bd64fbbbf6bea6349b0e4b2d4b39a23a,
       type: 3}
 --- !u!114 &1902923108
 MonoBehaviour:
@@ -5951,7 +5852,7 @@ MonoBehaviour:
   - {fileID: 5468812455401227516, guid: edec872878719de40a51aae7ac458edb, type: 3}
   m_SpawnVisualizationPrefab: {fileID: 0}
   m_SpawnOptionIndex: -1
-  m_SpawnOptionName: Bob
+  m_SpawnOptionName: GridManager
   m_OnlySpawnInView: 1
   m_ViewportPeriphery: 0.15
   m_ApplyRandomAngleAtSpawn: 1
@@ -5961,7 +5862,7 @@ MonoBehaviour:
   OnAwake:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 436358036}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets.ObjectSpawner,
           Unity.XR.Interaction.Toolkit.Samples.StarterAssets
         m_MethodName: BlockSpawn
@@ -5989,14 +5890,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 436358036}
+      - m_Target: {fileID: 1902923108}
         m_TargetAssemblyTypeName: UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets.ObjectSpawner,
           Unity.XR.Interaction.Toolkit.Samples.StarterAssets
-        m_MethodName: UnblockSpawn
-        m_Mode: 1
+        m_MethodName: SpawnGameObject
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 3506454365852987505, guid: 25ff8b40bbb7a7b40a247cf389142e3f,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6840,12 +6742,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047503719}
   m_CullTransparentMesh: 1
---- !u!20 &2050027992 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 2512387469002778331, guid: 48cb3fb68c91eb94999fd99957eb0cae,
-    type: 3}
-  m_PrefabInstance: {fileID: 331264285}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2060259425
 GameObject:
   m_ObjectHideFlags: 0
@@ -7218,7 +7114,7 @@ MonoBehaviour:
   m_ObjectMenu: {fileID: 72989974}
   m_ModalMenu: {fileID: 846084843}
   m_ObjectMenuAnimator: {fileID: 1024622698}
-  m_ObjectSpawner: {fileID: 436358036}
+  m_ObjectSpawner: {fileID: 0}
   m_CancelButton: {fileID: 1785409645}
   m_ScreenSpaceController: {fileID: 2095197249}
   m_InteractionGroup: {fileID: 2095197248}
@@ -8034,7 +7930,6 @@ SceneRoots:
   - {fileID: 702413259}
   - {fileID: 1075000276}
   - {fileID: 1323550134}
-  - {fileID: 436358034}
   - {fileID: 1902923109}
   - {fileID: 2099970469}
   - {fileID: 331264285}

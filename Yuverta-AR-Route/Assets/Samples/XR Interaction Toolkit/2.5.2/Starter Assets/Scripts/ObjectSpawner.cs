@@ -28,6 +28,11 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             Destroy(this);
         }
 
+        public void SpawnGameObject(GameObject prefab)
+        {
+            Instantiate(prefab);
+        }
+
         #region Variables
         [SerializeField]
         [Tooltip("The camera that objects will face when spawned. If not set, defaults to the main camera.")]
@@ -80,7 +85,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         
         [SerializeField]
         [Tooltip("The name of the prefab to spawn")]
-        public string m_SpawnOptionName = "Bob";
+        public string m_SpawnOptionName = "GridManager";
 
         /// <summary>
         /// The index of the prefab to spawn. If outside the range of <see cref="objectPrefabs"/>, this behavior will

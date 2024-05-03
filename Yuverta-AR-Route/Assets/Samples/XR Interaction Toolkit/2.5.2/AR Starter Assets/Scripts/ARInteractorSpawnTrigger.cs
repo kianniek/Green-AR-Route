@@ -124,8 +124,12 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
                 m_ObjectSpawner = FindAnyObjectByType<ObjectSpawner>();
 #else
                 m_ObjectSpawner = FindObjectOfType<ObjectSpawner>();
-#endif    
+#endif
 
+            if (m_ARInteractorObject == null) m_ARInteractorObject = FindObjectOfType<XRScreenSpaceController>();
+            
+            Debug.Log(m_ARInteractorObject);
+            
             m_ARInteractor = m_ARInteractorObject as IARInteractor;
             m_ARInteractorAsControllerInteractor = m_ARInteractorObject as XRBaseControllerInteractor;
             if (m_SpawnTriggerType == SpawnTriggerType.SelectAttempt && m_ARInteractorAsControllerInteractor == null)
@@ -176,7 +180,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
             }
 
             if (!attemptSpawn) return;
-            
+            Debug.Log("Attempting to spawn object");
             var touchHits = TouchToRay();
             
             if (touchHits.Length == 0) return;
@@ -186,8 +190,25 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
                 if (hit.collider.gameObject.CompareTag("Ground"))
                 {
                     m_ObjectSpawner.TrySpawnObject(hit.point, hit.normal);
+                    attemptSpawn = false;
+                    return;
                 }
             }
+
+            if (objectSpawner.objectPrefabs.Count == 1 && objectSpawner.objectPrefabs[0].name == "GridManager")
+            {
+                foreach (var hit in touchHits)
+                {
+                    if (hit.collider.gameObject.CompareTag("ARGround"))
+                    {
+                        m_ObjectSpawner.TrySpawnObject(hit.point, hit.normal);
+                        attemptSpawn = false;
+                        return;
+                    }
+                }
+            }
+            
+            attemptSpawn = false;
             /*if (m_ARInteractor.TryGetCurrentARRaycastHit(out var arRaycastHit))
                 {
                     var arPlane = arRaycastHit.trackable as ARPlane;
