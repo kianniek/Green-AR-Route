@@ -127,9 +127,9 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
 #endif
 
             if (m_ARInteractorObject == null) m_ARInteractorObject = FindObjectOfType<XRScreenSpaceController>();
-            
+
             Debug.Log(m_ARInteractorObject);
-            
+
             m_ARInteractor = m_ARInteractorObject as IARInteractor;
             m_ARInteractorAsControllerInteractor = m_ARInteractorObject as XRBaseControllerInteractor;
             if (m_SpawnTriggerType == SpawnTriggerType.SelectAttempt && m_ARInteractorAsControllerInteractor == null)
@@ -175,16 +175,20 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
 
                 case SpawnTriggerType.InputAction:
                     if (m_SpawnAction.action.WasPerformedThisFrame())
+                    {
+                        Debug.Log("action.WasPerformedThisFrame()");
                         attemptSpawn = true;
+
+                    }
                     break;
             }
 
             if (!attemptSpawn) return;
             Debug.Log("Attempting to spawn object");
             var touchHits = TouchToRay();
-            
+
             if (touchHits.Length == 0) return;
-            
+
             foreach (var hit in touchHits)
             {
                 if (hit.collider.gameObject.CompareTag("Ground"))
@@ -207,7 +211,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
                     }
                 }
             }
-            
+
             attemptSpawn = false;
             /*if (m_ARInteractor.TryGetCurrentARRaycastHit(out var arRaycastHit))
                 {
@@ -221,7 +225,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
                     m_ObjectSpawner.TrySpawnObject(arRaycastHit.pose.position, arPlane.normal);
                 }*/
         }
-        
+
         private RaycastHit[] TouchToRay()
         {
             Vector2 touchPosition;

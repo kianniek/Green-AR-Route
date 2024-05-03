@@ -2464,6 +2464,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Tap Start Click",
+                    "type": "Button",
+                    "id": "ada7078c-a2e9-48d1-b4ac-7c657383d71d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -2607,6 +2616,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pinch Gap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ae6219f-8697-47cf-815f-6b80e06ee549",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tap Start Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e615cb33-da67-4a17-9796-1731fb49cd4a",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tap Start Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
