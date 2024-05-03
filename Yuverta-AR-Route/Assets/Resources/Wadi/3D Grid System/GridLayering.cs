@@ -24,7 +24,6 @@ public class GridLayering : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
 
         SwipeDetection.Instance.swipePerformed += context => { LayerSwap(context.y); };

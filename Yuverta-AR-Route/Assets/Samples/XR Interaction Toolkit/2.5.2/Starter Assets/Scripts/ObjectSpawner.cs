@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit.Utilities;
 
 namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
@@ -9,6 +10,22 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
     /// </summary>
     public class ObjectSpawner : MonoBehaviour
     {
+        public bool blockSpawn = false;
+
+        public void BlockSpawn()
+        {
+            blockSpawn = true;
+        }
+
+        public void UnblockSpawn()
+        {
+            blockSpawn = false;
+        }
+
+        public void RemoveScript()
+        {
+            Destroy(this);
+        }
         #region Variables
         [SerializeField]
         [Tooltip("The camera that objects will face when spawned. If not set, defaults to the main camera.")]
@@ -124,6 +141,8 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             "in relation to the direction of the spawn point to the camera.")]
         float m_SpawnAngleRange = 45f;
 
+       
+
         /// <summary>
         /// The range in degrees that the object will randomly be rotated about the y axis when spawned, in relation
         /// to the direction of the spawn point to the camera.
@@ -132,6 +151,16 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         {
             get => m_SpawnAngleRange;
             set => m_SpawnAngleRange = value;
+        }
+
+        [SerializeField]
+        [Tooltip("The height the object goes off the surface of the plane the raycast has hit")]
+        float m_SpawnHeightOffset = 1.5f;
+
+        public float spawnHeightOffset
+        {
+            get => m_SpawnHeightOffset;
+            set => m_SpawnHeightOffset = value;
         }
 
         [SerializeField]
@@ -152,6 +181,9 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// </summary>
         /// <seealso cref="TrySpawnObject"/>
         public event Action<GameObject> objectSpawned;
+
+        public UnityEvent OnAwake;
+        public UnityEvent ObjectSpawned;
         #endregion
         /// <summary>
         /// See <see cref="MonoBehaviour"/>.
@@ -159,6 +191,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         void Awake()
         {
             EnsureFacingCamera();
+            OnAwake.Invoke();
         }
 
         void EnsureFacingCamera()
@@ -193,6 +226,11 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// <seealso cref="objectSpawned"/>
         public bool TrySpawnObject(Vector3 spawnPoint, Vector3 spawnNormal)
         {
+            if (blockSpawn)
+            {
+                Debug.Log("Spawn blocked");
+                return false;
+            }
             if (m_OnlySpawnInView)
             {
                 var inViewMin = m_ViewportPeriphery;
@@ -204,7 +242,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
                     return false;
                 }
             }
-
             var objectIndex = isSpawnOptionRandomized ? Random.Range(0, m_ObjectPrefabs.Count) : m_SpawnOptionIndex;
             var newObject = Instantiate(m_ObjectPrefabs[objectIndex]);
             if (m_SpawnAsChildren)
@@ -219,7 +256,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             var forward = facePosition - spawnPoint;
             BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
             newObject.transform.rotation = Quaternion.LookRotation(projectedForward, spawnNormal);
-
+            newObject.transform.position += spawnNormal * m_SpawnHeightOffset;
             if (m_ApplyRandomAngleAtSpawn)
             {
                 var randomRotation = Random.Range(-m_SpawnAngleRange, m_SpawnAngleRange);
@@ -234,6 +271,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             }
 
             objectSpawned?.Invoke(newObject);
+            ObjectSpawned.Invoke();
             return true;
         }
     }

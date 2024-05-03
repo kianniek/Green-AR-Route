@@ -28,7 +28,6 @@ public class GridManager : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         
     }
