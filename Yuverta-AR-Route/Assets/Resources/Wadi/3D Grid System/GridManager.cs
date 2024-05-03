@@ -13,6 +13,7 @@ public class GridManager : MonoBehaviour
     public ObjectMovement objectMovement;
     public UIMenuLogic uiMenu;
     public ObjectSpawner objectSpawner;
+    public int gridCurrentLayer = 0;
 
     [SerializeField] private float gridSize = 1.0f;
     
@@ -94,11 +95,11 @@ public class GridManager : MonoBehaviour
     {
         GameObject newObject = objectSpawner.lastSpawnedObject;
         uiMenu.Remove(newObject);
-        placedObjects.Add(newObject);
+        placedObjects.Add(newObject); 
         var objectLogic = newObject.GetComponent<ObjectLogic>();
         objectLogic.objectIndex = selectedObjectIndex;
-        objectLogic.objectLayer = gridLayering.gridCurrentLayer;
         objectLogic.objectPrefabIndex = objectSpawner.m_SpawnOptionIndex; //TODO: Implement objectPrefabIndex
+        objectLogic.objectLayer = gridCurrentLayer;
     }
 
     public void SelectedObject(GameObject selectedObject)
