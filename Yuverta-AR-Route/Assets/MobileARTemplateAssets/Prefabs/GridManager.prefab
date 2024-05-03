@@ -284,6 +284,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76a5963cb52b6e45bebdd1a896b0fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridBuilder: {fileID: 0}
+  gridLayering: {fileID: 0}
+  objectMovement: {fileID: 0}
+  uiMenu: {fileID: 0}
+  objectSpawner: {fileID: 0}
   gridSize: 0.15
   gridPoints: []
   placedObjects: []
@@ -304,6 +309,9 @@ MonoBehaviour:
   gridCellPadding: 0.15
   gridPointPrefab: {fileID: 3203806166249828556, guid: e4256d401e98f4b49b605df00554a595,
     type: 3}
+  gridParent: {fileID: 7323719228132672162, guid: 188c10f59b3d47a4e921e11090a02e95,
+    type: 3}
+  layerParents: []
 --- !u!114 &4318329506945333900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridText: {fileID: 2680831891092288139}
   gridDisplayText: 'Layer: '
+  gridCurrentLayer: 0
   gridDimensions: {x: 0, y: 0}
 --- !u!114 &595960355243497397
 MonoBehaviour:
@@ -331,6 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3476c41833f62624da6e838f2f1ca59b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trackingObject: 0
   position:
     m_Name: Position
     m_Type: 0

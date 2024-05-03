@@ -17,15 +17,6 @@ public class GridLayering : MonoBehaviour
     
     private void Start()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
-
         SwipeDetection.Instance.swipePerformed += context => { LayerSwap(context.y); };
         
         GridManager.Instance.gridBuilder.layerParents[0].SetActive(true);

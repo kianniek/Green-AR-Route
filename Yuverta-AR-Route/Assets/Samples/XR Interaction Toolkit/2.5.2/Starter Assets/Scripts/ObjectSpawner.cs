@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit.Utilities;
 
 namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
@@ -26,6 +27,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         {
             Destroy(this);
         }
+
         #region Variables
         [SerializeField]
         [Tooltip("The camera that objects will face when spawned. If not set, defaults to the main camera.")]
@@ -185,7 +187,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         /// Event invoked after an object is spawned.
         /// </summary>
         /// <seealso cref="TrySpawnObject"/>
-        public event Action<GameObject> objectSpawned;
 
         public UnityEvent OnAwake;
         public UnityEvent ObjectSpawned;
@@ -281,7 +282,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             }
 
             ObjectSpawned.Invoke();
-            objectSpawned?.Invoke(newObject, objectIndex);
             m_ObjectPrefabsUpdated.Remove(m_ObjectPrefabsUpdated[objectIndex]);
             m_SpawnOptionIndex = -1;
             m_SpawnOptionName = "";

@@ -20,20 +20,12 @@ public class GridBuilder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (gridManager == null)
-        {
-            gridManager = GetComponent<GridManager>();
-        }
 
         BuildGrid();
     }
 
     public void BuildGrid()
     {
-        if (gridManager == null)
-        {
-            gridManager = GetComponent<GridManager>();
-        }
         gridCellPadding = gridCellPadding > 0 ? gridCellPadding : gridPointPrefab.GetComponent<Renderer>().bounds.size.x * 2;
         // Create a grid of points
         for (int y = 0; y < gridHeight; y++)
@@ -84,18 +76,18 @@ public class GridBuilder : MonoBehaviour
 
         if (UnityEditor.EditorUtility.DisplayDialog("Clear Grid", "Are you sure you want to clear the grid?", "Yes", "No"))
         {
-            foreach (var gridPoint in gridManager.gridPoints)
+            foreach (var gridPoint in GridManager.Instance.gridPoints)
             {
                 DestroyImmediate(gridPoint);
             }
-            gridManager.gridPoints.Clear();
+            GridManager.Instance.gridPoints.Clear();
 
             return;
         }
 
         
 #endif
-        foreach (var gridPoint in gridManager.gridPoints)
+        foreach (var gridPoint in GridManager.Instance.gridPoints)
         {
             Destroy(gridPoint);
         }
