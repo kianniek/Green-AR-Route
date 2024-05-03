@@ -1,4 +1,5 @@
 ﻿#if AR_FOUNDATION_PRESENT
+using System;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -174,17 +175,46 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
                     break;
             }
 
-            if (attemptSpawn && m_ARInteractor.TryGetCurrentARRaycastHit(out var arRaycastHit))
+            if (!attemptSpawn) return;
+            
+            var touchHits = TouchToRay();
+            
+            if (touchHits.Length == 0) return;
+            
+            foreach (var hit in touchHits)
             {
-                var arPlane = arRaycastHit.trackable as ARPlane;
-                if (arPlane == null)
-                    return;
-
-                if (m_RequireHorizontalUpSurface && arPlane.alignment != PlaneAlignment.HorizontalUp)
-                    return;
-
-                m_ObjectSpawner.TrySpawnObject(arRaycastHit.pose.position, arPlane.normal);
+                if (hit.collider.gameObject.CompareTag("Ground"))
+                {
+                    m_ObjectSpawner.TrySpawnObject(hit.point, hit.normal);
+                }
             }
+            /*if (m_ARInteractor.TryGetCurrentARRaycastHit(out var arRaycastHit))
+                {
+                    var arPlane = arRaycastHit.trackable as ARPlane;
+                    if (arPlane == null)
+                        return;
+
+                    if (m_RequireHorizontalUpSurface && arPlane.alignment != PlaneAlignment.HorizontalUp)
+                        return;
+
+                    m_ObjectSpawner.TrySpawnObject(arRaycastHit.pose.position, arPlane.normal);
+                }*/
+        }
+        
+        private RaycastHit[] TouchToRay()
+        {
+            Vector2 touchPosition;
+            try
+            {
+                touchPosition = Input.GetTouch(0).position;
+            }
+            catch (Exception e)
+            {
+                touchPosition = Input.mousePosition;
+            }
+            var ray = Camera.main!.ScreenPointToRay(touchPosition);
+            var hits = Physics.RaycastAll(ray);
+            return hits;
         }
     }
 }

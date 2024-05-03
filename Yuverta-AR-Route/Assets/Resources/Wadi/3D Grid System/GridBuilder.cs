@@ -13,8 +13,10 @@ public class GridBuilder : MonoBehaviour
     private float gridCellPadding = 0f;
     [SerializeField]
     private GameObject gridPointPrefab;
-
-    private GridManager gridManager;
+    [SerializeField] 
+    private GameObject gridParent;
+    
+    public List<GameObject> layerParents = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -36,9 +38,10 @@ public class GridBuilder : MonoBehaviour
         // Create a grid of points
         for (int y = 0; y < gridHeight; y++)
         {
-            GameObject layerParent = new GameObject($"Layer {y}");
-            layerParent.transform.position = gameObject.transform.position;
-            layerParent.transform.SetParent(transform);
+            var layerParent = Instantiate(gridParent, gameObject.transform.position, Quaternion.identity, transform);
+            layerParent.name = $"Layer {y}";
+            
+            layerParents.Add(layerParent);
             for (int x = 0; x < gridsize.x; x++)
             {
                 for (int z = 0; z < gridsize.y; z++)
@@ -52,18 +55,27 @@ public class GridBuilder : MonoBehaviour
                     position += transform.position;
                     GameObject gridPoint = Instantiate(gridPointPrefab, position, Quaternion.identity, layerParent.transform);
                     gridPoint.name = $"GridPoint ({x}, {y}, {z})";
-                    gridManager.gridPoints.Add(gridPoint);
-                    if (GridLayering.Instance != null)
-                    {
-                        GridLayering.Instance.gridSortedLayer.Add(gridPoint, y);
-                    }
+                    GridManager.Instance.gridPoints.Add(gridPoint);
+                    GridManager.Instance.gridLayering.gridSortedLayer.Add(gridPoint, y);
                 }
             }
+
+            Transform firstChild = layerParent.transform.GetChild(0);
+            Transform lastChild = layerParent.transform.GetChild(layerParent.transform.childCount - 1);
+            
+            var sizeChild = firstChild.GetComponent<Renderer>().bounds.size;
+            
+            var distanceX = lastChild.position.x - firstChild.position.x;
+            var distanceZ = lastChild.position.z - firstChild.position.z;
+            
+            layerParent.GetComponent<BoxCollider>().center = new Vector3(distanceX / 2, 0, distanceZ / 2);
+            
+            distanceX += sizeChild.x;
+            distanceZ += sizeChild.z;
+            layerParent.GetComponent<BoxCollider>().size = new Vector3(distanceX, 0.001f, distanceZ);
         }
-        if (GridLayering.Instance != null)
-        {
-            GridLayering.Instance.gridDimensions = new Vector2Int(0, gridHeight - 1);
-        }
+        
+        GridManager.Instance.gridLayering.gridDimensions = new Vector2Int(0, gridHeight - 1);
     }
 
     public void ClearGrid()
@@ -87,7 +99,7 @@ public class GridBuilder : MonoBehaviour
         {
             Destroy(gridPoint);
         }
-        gridManager.gridPoints.Clear();
+        GridManager.Instance.gridPoints.Clear();
     }
 
     private void OnDrawGizmos()

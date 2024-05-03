@@ -461,13 +461,6 @@ public class BuildingSystem : MonoBehaviour
         currentDrag.UpdateLayer(layerIndex);
     }
     
-    //Debug
-    public static Vector3 GetMouseWorldPosition()
-    {
-        var ray = Camera.main!.ScreenPointToRay(Input.mousePosition);
-        return Physics.Raycast(ray, out var rayCastHit) ? rayCastHit.point : Vector3.zero;
-    }
-    
     public Vector3 GetTouchWorldPosition()
     {
         if (Input.touchCount <= 0) return GetMouseWorldPosition();
@@ -477,6 +470,13 @@ public class BuildingSystem : MonoBehaviour
         
         var rayCastHit = new List<ARRaycastHit>();
         return arRaycastManager.Raycast(ray, rayCastHit) ? rayCastHit[0].pose.position : Vector3.zero;
+    }
+    
+    //Debug
+    public static Vector3 GetMouseWorldPosition()
+    {
+        var ray = Camera.main!.ScreenPointToRay(Input.mousePosition);
+        return Physics.Raycast(ray, out var rayCastHit) ? rayCastHit.point : Vector3.zero;
     }
 
     public Vector3 SnapCoordinateToGrid(Vector3 newPosition, GameObject objectToMove = null)

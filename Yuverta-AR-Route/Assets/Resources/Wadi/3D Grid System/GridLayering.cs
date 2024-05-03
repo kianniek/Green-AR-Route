@@ -1,21 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
 public class GridLayering : MonoBehaviour
 {
-    public static GridLayering Instance { get; private set; }
     public Dictionary<GameObject, int> gridSortedLayer = new Dictionary<GameObject, int>();
     
     [SerializeField] private TextMeshProUGUI gridText;
     [SerializeField] private string gridDisplayText;
     
-    private int gridCurrentLayer = 0;
+    public int gridCurrentLayer = 0;
     public Vector2Int gridDimensions = new Vector2Int(0, 0);
-
-    void Awake()
+    
+    private void Start()
     {
         if (Instance != null && Instance != this)
         {
@@ -27,18 +27,24 @@ public class GridLayering : MonoBehaviour
         }
 
         SwipeDetection.Instance.swipePerformed += context => { LayerSwap(context.y); };
-    }
-    
-    private void Start()
-    {
-        gridText.text = gridDisplayText + gridCurrentLayer;
+        
+        GridManager.Instance.gridBuilder.layerParents[0].SetActive(true);
+        foreach (var layer in GridManager.Instance.gridBuilder.layerParents.Where(layer => layer != GridManager.Instance.gridBuilder.layerParents[0]))
+        {
+            layer.SetActive(false);
+        }
     }
 
-    public void LayerSwap(float upValue)
+    private void LayerSwap(float upValue)
     {
         gridCurrentLayer += Mathf.RoundToInt(upValue);
         Debug.Log(gridCurrentLayer);
         gridCurrentLayer = Mathf.Clamp(gridCurrentLayer, 0, gridDimensions.y);
         gridText.text = gridDisplayText + gridCurrentLayer;
+        GridManager.Instance.gridBuilder.layerParents[gridCurrentLayer].SetActive(true);
+        foreach (var layer in GridManager.Instance.gridBuilder.layerParents.Where(layer => layer != GridManager.Instance.gridBuilder.layerParents[gridCurrentLayer]))
+        {
+            layer.SetActive(false);
+        }
     }
 }
