@@ -11,8 +11,6 @@ public class GridLayering : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI gridText;
     [SerializeField] private string gridDisplayText;
-    
-    public int gridCurrentLayer = 0;
     public Vector2Int gridDimensions = new Vector2Int(0, 0);
     
     private void Start()
@@ -28,12 +26,12 @@ public class GridLayering : MonoBehaviour
 
     private void LayerSwap(float upValue)
     {
-        gridCurrentLayer += Mathf.RoundToInt(upValue);
-        Debug.Log(gridCurrentLayer);
-        gridCurrentLayer = Mathf.Clamp(gridCurrentLayer, 0, gridDimensions.y);
-        gridText.text = gridDisplayText + gridCurrentLayer;
-        GridManager.Instance.gridBuilder.layerParents[gridCurrentLayer].SetActive(true);
-        foreach (var layer in GridManager.Instance.gridBuilder.layerParents.Where(layer => layer != GridManager.Instance.gridBuilder.layerParents[gridCurrentLayer]))
+        GridManager.Instance.gridCurrentLayer += Mathf.RoundToInt(upValue);
+        Debug.Log(GridManager.Instance.gridCurrentLayer);
+        GridManager.Instance.gridCurrentLayer = Mathf.Clamp(GridManager.Instance.gridCurrentLayer, 0, gridDimensions.y);
+        gridText.text = gridDisplayText + GridManager.Instance.gridCurrentLayer;
+        GridManager.Instance.gridBuilder.layerParents[GridManager.Instance.gridCurrentLayer].SetActive(true);
+        foreach (var layer in GridManager.Instance.gridBuilder.layerParents.Where(layer => layer != GridManager.Instance.gridBuilder.layerParents[GridManager.Instance.gridCurrentLayer]))
         {
             layer.SetActive(false);
         }
