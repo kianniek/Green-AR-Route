@@ -101,6 +101,7 @@ public class UIMenuLogic : MonoBehaviour
 
     void OnEnable()
     {
+        HideMenu();
         clickOnScreen.action.started += HideTapOutsideUI;
         /*m_ScreenSpaceController.dragCurrentPositionAction.action.started += HideTapOutsideUI;
         m_ScreenSpaceController.tapStartPositionAction.action.started += HideTapOutsideUI;*/
@@ -140,10 +141,10 @@ public class UIMenuLogic : MonoBehaviour
 
     void ShowMenu()
     {
-        menuShown = !menuShown;
-        menuObject.SetActive(menuShown);
+        menuShown = true;
+        menuObject.SetActive(true);
         
-        menuAnimator.SetBool(Show, menuShown);
+        menuAnimator.SetBool(Show, true);
     }
     
     public void HideMenu()

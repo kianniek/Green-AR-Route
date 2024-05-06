@@ -297,7 +297,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
             foreach (var prefab in m_ObjectPrefabs.Where(prefab => prefab.name == m_SpawnOptionName))
             {
                 m_SpawnOptionIndex = m_ObjectPrefabs.IndexOf(prefab);
-                Debug.Log(m_SpawnOptionIndex);
                 return m_SpawnOptionIndex;
             }
 

@@ -58,7 +58,6 @@ public class ObjectMovement : MonoBehaviour
         animationActive = true;
         while (Vector3.Distance(gameObject.transform.position, closestGridPosition) > 0.001 && animationActive)
         {
-            Debug.Log("WHooo");
             gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,closestGridPosition , 0.05f);
             yield return new WaitForSeconds(0.01f);
 
