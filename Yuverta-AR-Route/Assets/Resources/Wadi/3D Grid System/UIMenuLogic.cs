@@ -65,7 +65,6 @@ public class UIMenuLogic : MonoBehaviour
 
     private void OnButtonClick(string name)
     {
-        Debug.Log(name);
         GridManager.Instance.objectSpawner.m_SpawnOptionName = name;
     }
 
@@ -103,19 +102,19 @@ public class UIMenuLogic : MonoBehaviour
     {
         HideMenu();
         clickOnScreen.action.started += HideTapOutsideUI;
-        /*m_ScreenSpaceController.dragCurrentPositionAction.action.started += HideTapOutsideUI;
-        m_ScreenSpaceController.tapStartPositionAction.action.started += HideTapOutsideUI;*/
+        
         createButton.onClick.AddListener(ShowMenu);
         cancelButton.onClick.AddListener(HideMenu);
         deleteButton.onClick.AddListener(DeleteFocusedObject);
+        
+        deleteButton.gameObject.SetActive(false);
     }
     
     void OnDisable()
     {
         menuShown = false;
         clickOnScreen.action.started -= HideTapOutsideUI;
-        /*m_ScreenSpaceController.dragCurrentPositionAction.action.started -= HideTapOutsideUI;
-        m_ScreenSpaceController.tapStartPositionAction.action.started -= HideTapOutsideUI;*/
+        
         createButton.onClick.RemoveListener(ShowMenu);
         cancelButton.onClick.RemoveListener(HideMenu);
         deleteButton.onClick.RemoveListener(DeleteFocusedObject);
@@ -125,29 +124,34 @@ public class UIMenuLogic : MonoBehaviour
     {
         if (menuShown)
         {
-            deleteButton.gameObject.SetActive(false);
-
-            clickOnUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(-1);
-            
-            if (Input.touchCount > 0) clickOnUI = EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
+            clickOnUI = SharedFunctionality.Instance.TouchUI();
         }
         else
         {
             clickOnUI = false;
             createButton.gameObject.SetActive(true);
-            deleteButton.gameObject.SetActive(true);
         }
+    }
+    
+    public void DeleteButtonVisibility()
+    {
+        deleteButton.gameObject.SetActive(GridManager.Instance.placedObjects.Count > 0);
     }
 
     void ShowMenu()
     {
+        if (menuShown)
+        {
+            HideMenu();
+            return;
+        }
         menuShown = true;
         menuObject.SetActive(true);
         
         menuAnimator.SetBool(Show, true);
     }
     
-    public void HideMenu()
+    private void HideMenu()
     {
         menuAnimator.SetBool(Show, false);
         menuShown = false;

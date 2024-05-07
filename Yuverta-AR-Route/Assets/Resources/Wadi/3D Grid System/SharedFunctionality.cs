@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SharedFunctionality : MonoBehaviour
 {
@@ -34,5 +35,17 @@ public class SharedFunctionality : MonoBehaviour
         var ray = Camera.main!.ScreenPointToRay(touchPosition);
         var hits = Physics.RaycastAll(ray);
         return hits;
+    }
+
+    public bool TouchUI()
+    {
+        if (EventSystem.current != null)
+        {
+            if (EventSystem.current.IsPointerOverGameObject(-1)) return true;
+            if (Input.touchCount > 0 && 
+                EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) return true;
+        }
+
+        return false;
     }
 }

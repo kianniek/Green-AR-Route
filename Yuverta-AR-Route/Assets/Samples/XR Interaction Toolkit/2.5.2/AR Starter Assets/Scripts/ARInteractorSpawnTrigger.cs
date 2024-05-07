@@ -182,7 +182,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
             if (touchID > 0) touchID = Input.GetTouch(0).fingerId;
             
             if (!attemptSpawn || EventSystem.current.IsPointerOverGameObject(touchID) || EventSystem.current.IsPointerOverGameObject()) return;
-            Debug.Log("Attempting to spawn object");
             var touchHits = TouchToRay();
 
             if (touchHits.Length == 0) return;

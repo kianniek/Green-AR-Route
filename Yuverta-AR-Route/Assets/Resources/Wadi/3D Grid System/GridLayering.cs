@@ -27,7 +27,6 @@ public class GridLayering : MonoBehaviour
     private void LayerSwap(float upValue)
     {
         GridManager.Instance.gridCurrentLayer += Mathf.RoundToInt(upValue);
-        Debug.Log(GridManager.Instance.gridCurrentLayer);
         GridManager.Instance.gridCurrentLayer = Mathf.Clamp(GridManager.Instance.gridCurrentLayer, 0, gridDimensions.y);
         gridText.text = gridDisplayText + GridManager.Instance.gridCurrentLayer;
         GridManager.Instance.gridBuilder.layerParents[GridManager.Instance.gridCurrentLayer].SetActive(true);

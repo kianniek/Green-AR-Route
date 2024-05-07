@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 public class SwipeDetection : MonoBehaviour 
 {
@@ -26,6 +27,7 @@ public class SwipeDetection : MonoBehaviour
 
 	private void CheckPressLocation()
 	{
+		if (SharedFunctionality.Instance.TouchUI()) return;
 		initialPos = currentPos;
 		
 		GameObject collidedObject = null;
@@ -45,7 +47,7 @@ public class SwipeDetection : MonoBehaviour
 
 	private void DetectSwipe() 
 	{
-		if (trackingObject) return;
+		if (trackingObject || SharedFunctionality.Instance.TouchUI()) return;
 		Vector2 delta = currentPos - initialPos;
 		Vector2 direction = Vector2.zero;
 		if(Mathf.Abs(delta.x) > swipeResistance)

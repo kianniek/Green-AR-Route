@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
@@ -66,20 +67,21 @@ public class GridManager : MonoBehaviour
             objectLogic.previousSnappedPosition = Vector3.negativeInfinity;
         }
         
-        var closestGridPoint = ClosestGridPoint(position);
+        var closestGridPoint = ClosestGridPoint(position, occupiedPositions.Keys.ToList());
         occupiedPositions.Add(closestGridPoint, true);
         objectLogic.isPlaced = true;
         objectLogic.previousSnappedPosition = closestGridPoint.transform.position;
         return closestGridPoint.transform.position;
     }
 
-    private GameObject ClosestGridPoint(Vector3 position)
+    private GameObject ClosestGridPoint(Vector3 position, List<GameObject> occupiedPositions = null)
     {
         float minDistance = Mathf.Infinity;
         GameObject closestGridPoint = null;
 
         foreach (var gridPoint in gridPoints)
         {
+            if (occupiedPositions != null && occupiedPositions.Contains(gridPoint)) continue;
             float distance = Vector3.Distance(position, gridPoint.transform.position);
             if (distance < minDistance)
             {
@@ -93,13 +95,25 @@ public class GridManager : MonoBehaviour
 
     private void NewObjectPlaced()
     {
+        //Getting the last object spawned by the object spawner
         GameObject newObject = objectSpawner.lastSpawnedObject;
-        uiMenu.Remove(newObject);
+        
+        //Adding the object to the list of placed objects
         placedObjects.Add(newObject); 
+        objectMovement = newObject.GetComponent<ObjectMovement>();
+        
+        //Updating the UI
+        uiMenu.Remove(newObject);
+        uiMenu.DeleteButtonVisibility();
+        
+        //Setting the values
         var objectLogic = newObject.GetComponent<ObjectLogic>();
-        objectLogic.objectIndex = selectedObjectIndex;
+        objectLogic.objectIndex = placedObjects.Count - 1;
         objectLogic.objectPrefabIndex = objectSpawner.m_SpawnOptionIndex; //TODO: Implement objectPrefabIndex
         objectLogic.objectLayer = gridCurrentLayer;
+        
+        //Snapping the object to the grid
+        objectMovement.MoveObject();
     }
 
     public void SelectedObject(GameObject selectedObject)
@@ -112,10 +126,34 @@ public class GridManager : MonoBehaviour
 
     public void DestroyObject()
     {
+        //Checking if the list is empty
         if (placedObjects.Count <= 0) return;
+        
+        //Getting the selected object
         var focusedObject = placedObjects[selectedObjectIndex];
+        
+        //Removing the object from the lists
         placedObjects.Remove(focusedObject);
         occupiedPositions.Remove(focusedObject);
+        
+        //Destroying the object
         Destroy(focusedObject.gameObject);
+        
+        //Updating the object indexes
+        foreach (var obj in placedObjects)
+        {
+            obj.GetComponent<ObjectLogic>().objectIndex = placedObjects.IndexOf(obj);
+        }
+        
+        //Setting the objectMovement to the first object in the list
+        if (placedObjects.Count > 0)
+        {
+            objectMovement = placedObjects[0].GetComponent<ObjectMovement>();
+        }
+        //Or updating the UI
+        else uiMenu.DeleteButtonVisibility();
+
+        //Resetting the swipe detection
+        SwipeDetection.Instance.trackingObject = false;
     }
 }

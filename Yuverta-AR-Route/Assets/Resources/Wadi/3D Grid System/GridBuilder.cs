@@ -57,14 +57,12 @@ public class GridBuilder : MonoBehaviour
             
             var sizeChild = firstChild.GetComponent<Renderer>().bounds.size;
             
-            var distanceX = lastChild.position.x - firstChild.position.x;
-            var distanceZ = lastChild.position.z - firstChild.position.z;
-            
-            layerParent.GetComponent<BoxCollider>().center = new Vector3(distanceX / 2, 0, distanceZ / 2);
+            var distanceX = (lastChild.position.x - firstChild.position.x) * 2;
+            var distanceZ = (lastChild.position.z - firstChild.position.z) * 2;
             
             distanceX += sizeChild.x;
             distanceZ += sizeChild.z;
-            layerParent.GetComponent<BoxCollider>().size = new Vector3(distanceX, 0.001f, distanceZ);
+            layerParent.GetComponent<BoxCollider>().size = new Vector3(Mathf.Abs(distanceX), 0.001f, Mathf.Abs(distanceZ));
         }
         
         GridManager.Instance.gridLayering.gridDimensions = new Vector2Int(0, gridHeight - 1);
@@ -96,6 +94,8 @@ public class GridBuilder : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (Application.isPlaying) return;
+        
         //Making sure gridCellPadding does not equal 0 to prevent all positions being 0
         var localPadding = gridCellPadding = gridCellPadding > 0 ? gridCellPadding : gridPointPrefab.GetComponent<Renderer>().bounds.size.x * 2;
 
