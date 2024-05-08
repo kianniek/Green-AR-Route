@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.XR.ARFoundation;
 
 public class SharedFunctionality : MonoBehaviour
 {
@@ -47,5 +48,23 @@ public class SharedFunctionality : MonoBehaviour
         }
 
         return false;
+    }
+    
+    public static Vector3 GetTouchWorldPosition()
+    {
+        if (Input.touchCount <= 0) return GetMouseWorldPosition();
+    
+        var touchPosition = Input.GetTouch(0).position;
+        var ray = Camera.main!.ScreenPointToRay(touchPosition);
+        
+        var rayCastHit = new List<ARRaycastHit>();
+        return FindObjectOfType<ARRaycastManager>().Raycast(ray, rayCastHit) ? rayCastHit[0].pose.position : Vector3.zero;
+    }
+    
+    //Debug
+    public static Vector3 GetMouseWorldPosition()
+    {
+        var ray = Camera.main!.ScreenPointToRay(Input.mousePosition);
+        return Physics.Raycast(ray, out var rayCastHit) ? rayCastHit.point : Vector3.zero;
     }
 }

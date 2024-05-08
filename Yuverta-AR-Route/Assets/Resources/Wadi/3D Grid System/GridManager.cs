@@ -5,7 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
-public class GridManager : MonoBehaviour
+public class GridManager : BaseManager
 {
     public static GridManager Instance { get; private set; }
     
@@ -97,7 +97,7 @@ public class GridManager : MonoBehaviour
         return closestGridPoint;
     }
 
-    private void NewObjectPlaced()
+    public override void NewObjectPlaced()
     {
         //Getting the last object spawned by the object spawner
         GameObject newObject = objectSpawner.lastSpawnedObject;
@@ -120,7 +120,7 @@ public class GridManager : MonoBehaviour
         objectMovement.MoveObject();
     }
 
-    public void SelectedObject(GameObject selectedObject)
+    public override void SelectedObject(GameObject selectedObject)
     {
         if (objectMovement) objectMovement.animationActive = false;
         objectMovement = selectedObject.GetComponent<ObjectMovement>();
@@ -128,7 +128,7 @@ public class GridManager : MonoBehaviour
         objectMovement.MoveObject();
     }
 
-    public void DestroyObject()
+    public override void DestroyObject()
     {
         //Checking if the list is empty
         if (placedObjects.Count <= 0) return;
