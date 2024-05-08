@@ -8,14 +8,16 @@ using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 public class ObjectLogic : MonoBehaviour
 {
     //Values are set on spawn through the gridmanager
-    public int objectLayer;
+    public int layerObj;
     public int objectIndex;
     public int objectPrefabIndex;
     
     public bool isPlaced;
     public Vector3 previousSnappedPosition;
 
-    Material targetMaterial;
+    [SerializeField] Material targetMaterial;
+    private static readonly int ObjectLayerId = Shader.PropertyToID("_ObjectLayerId");
+    private static readonly int CurrentLayerId = Shader.PropertyToID("_CurrentLayerId");
 
     private void Start()
     {
@@ -24,19 +26,17 @@ public class ObjectLogic : MonoBehaviour
 
     public void OnDestroy()
     {
-        #if ApplicationIsClosing
-        return;
-        #endif
-        //GridManager.Instance.objectSpawner.OnObjectDelete(objectPrefabIndex);
+        #if !ApplicationIsClosing
         GridManager.Instance.uiMenu.Add(gameObject);
+        #endif
     }
 
     public void SetObjectLayerID(int layerIdOfObject)
     {
-        objectLayer = layerIdOfObject;
+        layerObj = layerIdOfObject;
 
-        targetMaterial.SetFloat("_ObjectLayerId", layerIdOfObject);
-        targetMaterial.SetFloat("_CurrentLayerId", GridManager.Instance.gridCurrentLayer);
+        targetMaterial.SetFloat(ObjectLayerId, layerIdOfObject);
+        targetMaterial.SetFloat(CurrentLayerId, GridManager.Instance.gridCurrentLayer);
     }
 
     public void Update()
@@ -45,6 +45,6 @@ public class ObjectLogic : MonoBehaviour
         {
             return;
         }
-        targetMaterial.SetFloat("_CurrentLayerId", GridManager.Instance.gridCurrentLayer);
+        targetMaterial.SetFloat(CurrentLayerId, GridManager.Instance.gridCurrentLayer);
     }
 }

@@ -24,11 +24,14 @@ public class GridManager : MonoBehaviour
         set => gridSize = value;
     }
 
-    public List<GameObject> gridPoints = new();
+    //public List<GameObject> gridPoints = new();
+    public Dictionary<GameObject, int> gridPoints = new();
     public Dictionary<GameObject, bool> occupiedPositions = new Dictionary<GameObject, bool>();
     
     public List<GameObject> placedObjects = new List<GameObject>();
     public int selectedObjectIndex = 0;
+
+    public float distanceLayers;
 
     void Awake()
     {
@@ -79,9 +82,10 @@ public class GridManager : MonoBehaviour
         float minDistance = Mathf.Infinity;
         GameObject closestGridPoint = null;
 
-        foreach (var gridPoint in gridPoints)
+        foreach (var gridPoint in gridPoints.Where(pair => pair.Value == gridCurrentLayer).Select(pair => pair.Key))
         {
             if (occupiedPositions != null && occupiedPositions.Contains(gridPoint)) continue;
+            
             float distance = Vector3.Distance(position, gridPoint.transform.position);
             if (distance < minDistance)
             {
@@ -110,7 +114,7 @@ public class GridManager : MonoBehaviour
         var objectLogic = newObject.GetComponent<ObjectLogic>();
         objectLogic.objectIndex = placedObjects.Count - 1;
         objectLogic.objectPrefabIndex = objectSpawner.m_SpawnOptionIndex; //TODO: Implement objectPrefabIndex
-        objectLogic.objectLayer = gridCurrentLayer;
+        objectLogic.SetObjectLayerID(gridCurrentLayer);
         
         //Snapping the object to the grid
         objectMovement.MoveObject();

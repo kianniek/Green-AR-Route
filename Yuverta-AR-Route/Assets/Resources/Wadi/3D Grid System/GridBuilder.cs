@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 [RequireComponent(typeof(GridManager))]
 public class GridBuilder : MonoBehaviour
@@ -7,7 +8,7 @@ public class GridBuilder : MonoBehaviour
     [SerializeField]
     private Vector2 gridsize = new Vector2(10, 10);
     [SerializeField]
-    [Min(1)]
+    [Range(1, 2)]
     private int gridHeight = 0;
     [SerializeField]
     private float gridCellPadding = 0f;
@@ -30,7 +31,9 @@ public class GridBuilder : MonoBehaviour
         // Create a grid of points
         for (int y = 0; y < gridHeight; y++)
         {
-            var layerParent = Instantiate(gridParent, gameObject.transform.position, Quaternion.identity, transform);
+            var layerParentPos = gameObject.transform.position;
+            layerParentPos.y += y * gridCellPadding;
+            var layerParent = Instantiate(gridParent, layerParentPos, Quaternion.identity, transform);
             layerParent.name = $"Layer {y}";
             
             layerParents.Add(layerParent);
@@ -47,7 +50,7 @@ public class GridBuilder : MonoBehaviour
                     position += transform.position;
                     GameObject gridPoint = Instantiate(gridPointPrefab, position, Quaternion.identity, layerParent.transform);
                     gridPoint.name = $"GridPoint ({x}, {y}, {z})";
-                    GridManager.Instance.gridPoints.Add(gridPoint);
+                    GridManager.Instance.gridPoints.Add(gridPoint, y);
                     GridManager.Instance.gridLayering.gridSortedLayer.Add(gridPoint, y);
                 }
             }
@@ -65,6 +68,7 @@ public class GridBuilder : MonoBehaviour
             layerParent.GetComponent<BoxCollider>().size = new Vector3(Mathf.Abs(distanceX), 0.001f, Mathf.Abs(distanceZ));
         }
         
+        GridManager.Instance.distanceLayers = gridCellPadding;
         GridManager.Instance.gridLayering.gridDimensions = new Vector2Int(0, gridHeight - 1);
     }
 
@@ -76,7 +80,7 @@ public class GridBuilder : MonoBehaviour
         {
             foreach (var gridPoint in GridManager.Instance.gridPoints)
             {
-                DestroyImmediate(gridPoint);
+                DestroyImmediate(gridPoint.Key);
             }
             GridManager.Instance.gridPoints.Clear();
 
@@ -87,7 +91,7 @@ public class GridBuilder : MonoBehaviour
 #endif
         foreach (var gridPoint in GridManager.Instance.gridPoints)
         {
-            Destroy(gridPoint);
+            Destroy(gridPoint.Key);
         }
         GridManager.Instance.gridPoints.Clear();
     }
