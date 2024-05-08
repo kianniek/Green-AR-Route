@@ -122,7 +122,6 @@ public class GridManager : BaseManager
 
     public override void SelectedObject(GameObject selectedObject)
     {
-        if (objectMovement) objectMovement.animationActive = false;
         objectMovement = selectedObject.GetComponent<ObjectMovement>();
         selectedObjectIndex = objectMovement.objectLogic.objectIndex;
         objectMovement.MoveObject();

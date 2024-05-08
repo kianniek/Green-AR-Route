@@ -4320,6 +4320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1284861182}
   - component: {fileID: 1284861183}
+  - component: {fileID: 1284861184}
   m_Layer: 0
   m_Name: LogicHandler
   m_TagString: Untagged
@@ -4354,6 +4355,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2900c329793d0e4d852a6419e7ad7ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1284861184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1284861180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34c99051a5fd7dd48b46cdfe0647b97f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenOrientation: 1
 --- !u!1 &1309057132
 GameObject:
   m_ObjectHideFlags: 0
@@ -5822,6 +5836,7 @@ MonoBehaviour:
   m_SpawnVisualizationPrefab: {fileID: 0}
   m_SpawnOptionIndex: -1
   m_SpawnOptionName: GridManager
+  lastSpawnedObject: {fileID: 0}
   m_OnlySpawnInView: 1
   m_ViewportPeriphery: 0.15
   m_ApplyRandomAngleAtSpawn: 1

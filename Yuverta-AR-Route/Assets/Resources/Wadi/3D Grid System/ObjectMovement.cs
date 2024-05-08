@@ -8,6 +8,9 @@ public class ObjectMovement : BaseMovement
     private ARRaycastManager arRaycastManager;
     public ObjectLogic objectLogic;
     
+    //This bool is active if the object is snapping to a certain position
+    private bool animationActive;
+    
     private void Start()
     {
         currentManager = FindObjectOfType<BaseManager>();
@@ -17,8 +20,34 @@ public class ObjectMovement : BaseMovement
 
     public void MoveObject()
     {
-        CheckLayer();
         StartCoroutine(TrackTouchPosition());
+    }
+    
+    protected override IEnumerator TrackTouchPosition()
+    {
+        CheckLayer();
+        
+        yield return StartCoroutine(base.TrackTouchPosition());
+        
+        var closestGridPosition = GridManager.Instance.SnapToGrid(gameObject);
+
+        animationActive = true;
+        while (Vector3.Distance(gameObject.transform.position, closestGridPosition) > 0.002 && animationActive)
+        {
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position,closestGridPosition , 0.05f);
+            yield return new WaitForSeconds(0.01f);
+
+            if (!Input.GetMouseButtonDown(0) || Input.touchCount == 0) continue;
+
+            SwipeDetection.Instance.CollideWithObject(out var collidedObject);
+            if (!collidedObject || collidedObject != gameObject || collidedObject.GetComponent<ObjectMovement>() != this) continue;
+            
+            currentManager.SelectedObject(collidedObject);
+            animationActive = false;
+            StopCoroutine(TrackTouchPosition());
+        }
+        
+        gameObject.transform.position = closestGridPosition;
     }
 
     //GridManager only functions
