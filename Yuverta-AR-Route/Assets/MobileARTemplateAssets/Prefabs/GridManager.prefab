@@ -289,9 +289,11 @@ MonoBehaviour:
   objectMovement: {fileID: 0}
   uiMenu: {fileID: 0}
   objectSpawner: {fileID: 0}
+  gridCurrentLayer: 0
   gridSize: 0.15
-  gridPoints: []
   placedObjects: []
+  selectedObjectIndex: 0
+  distanceLayers: 0
 --- !u!114 &1580805498589218402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc8f39d8b685e4498d06f07123c34f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridsize: {x: 5, y: 5}
+  gridsize: {x: 2, y: 3}
   gridHeight: 2
   gridCellPadding: 0.15
   gridPointPrefab: {fileID: 3203806166249828556, guid: e4256d401e98f4b49b605df00554a595,
@@ -326,7 +328,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridText: {fileID: 2680831891092288139}
   gridDisplayText: 'Layer: '
-  gridCurrentLayer: 0
   gridDimensions: {x: 0, y: 0}
 --- !u!114 &595960355243497397
 MonoBehaviour:

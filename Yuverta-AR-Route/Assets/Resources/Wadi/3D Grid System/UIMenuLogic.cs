@@ -79,7 +79,7 @@ public class UIMenuLogic : MonoBehaviour
     }
     #endregion
     
-    #region Menu & Buttons
+    /*#region Menu & Buttons
 
     [Header("Menu & Buttons")]
     [SerializeField] private Button createButton;
@@ -171,5 +171,5 @@ public class UIMenuLogic : MonoBehaviour
         GridManager.Instance.DestroyObject();
     }
     
-    #endregion
+    #endregion*/
 }

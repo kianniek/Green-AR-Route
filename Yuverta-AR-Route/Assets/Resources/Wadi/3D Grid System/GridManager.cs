@@ -108,7 +108,7 @@ public class GridManager : BaseManager
         
         //Updating the UI
         uiMenu.Remove(newObject);
-        uiMenu.DeleteButtonVisibility();
+        //uiMenu.DeleteButtonVisibility();
         
         //Setting the values
         var objectLogic = newObject.GetComponent<ObjectLogic>();
@@ -154,7 +154,7 @@ public class GridManager : BaseManager
             objectMovement = placedObjects[0].GetComponent<ObjectMovement>();
         }
         //Or updating the UI
-        else uiMenu.DeleteButtonVisibility();
+        //else uiMenu.DeleteButtonVisibility();
 
         //Resetting the swipe detection
         SwipeDetection.Instance.trackingObject = false;
