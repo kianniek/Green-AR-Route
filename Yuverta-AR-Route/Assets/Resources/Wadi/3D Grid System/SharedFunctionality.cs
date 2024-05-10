@@ -50,7 +50,7 @@ public class SharedFunctionality : MonoBehaviour
         return false;
     }
     
-    public static Vector3 GetTouchWorldPosition()
+    public Vector3 GetTouchWorldPosition()
     {
         if (Input.touchCount <= 0) return GetMouseWorldPosition();
     

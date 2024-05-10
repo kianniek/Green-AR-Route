@@ -48,7 +48,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
 
         [SerializeField]
         [Tooltip("The behavior to use to spawn objects.")]
-        ObjectSpawner m_ObjectSpawner;
+        public ObjectSpawner m_ObjectSpawner;
 
         /// <summary>
         /// The behavior to use to spawn objects.
@@ -182,33 +182,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
             if (touchID > 0) touchID = Input.GetTouch(0).fingerId;
             
             if (!attemptSpawn || EventSystem.current.IsPointerOverGameObject(touchID) || EventSystem.current.IsPointerOverGameObject()) return;
-            var touchHits = TouchToRay();
-
-            if (touchHits.Length == 0) return;
-
-            foreach (var hit in touchHits)
-            {
-                if (hit.collider.gameObject.CompareTag("Ground"))
-                {
-                    m_ObjectSpawner.TrySpawnObject(hit.point, hit.normal);
-                    attemptSpawn = false;
-                    return;
-                }
-            }
-
-            if (objectSpawner.objectPrefabs.Count == 1 && objectSpawner.objectPrefabs[0].name == "GridManager")
-            {
-                foreach (var hit in touchHits)
-                {
-                    if (hit.collider.gameObject.CompareTag("ARGround"))
-                    {
-                        m_ObjectSpawner.TrySpawnObject(hit.point, hit.normal);
-                        attemptSpawn = false;
-                        return;
-                    }
-                }
-            }
-
+            SpawnObject();
             attemptSpawn = false;
             /*if (m_ARInteractor.TryGetCurrentARRaycastHit(out var arRaycastHit))
                 {
@@ -221,6 +195,35 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
 
                     m_ObjectSpawner.TrySpawnObject(arRaycastHit.pose.position, arPlane.normal);
                 }*/
+        }
+
+        public void SpawnObject()
+        {
+            if (!m_ObjectSpawner) return;
+            var touchHits = TouchToRay();
+
+            if (touchHits.Length == 0) return;
+
+            foreach (var hit in touchHits)
+            {
+                if (hit.collider.gameObject.CompareTag("Ground"))
+                {
+                    m_ObjectSpawner.TrySpawnObject(hit.point, hit.normal);
+                    return;
+                }
+            }
+
+            if (objectSpawner.objectPrefabs.Count == 1 && objectSpawner.objectPrefabs[0].name == "GridManager")
+            {
+                foreach (var hit in touchHits)
+                {
+                    if (hit.collider.gameObject.CompareTag("ARGround"))
+                    {
+                        m_ObjectSpawner.TrySpawnObject(hit.point, hit.normal);
+                        return;
+                    }
+                }
+            }
         }
 
         private RaycastHit[] TouchToRay()

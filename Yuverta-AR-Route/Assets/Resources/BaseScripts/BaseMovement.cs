@@ -15,7 +15,7 @@ public class BaseMovement : MonoBehaviour
         while (Input.GetMouseButton(0) || Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended)
         {
             SwipeDetection.Instance.trackingObject = true;
-            Vector3 newPosition = SharedFunctionality.GetTouchWorldPosition();
+            Vector3 newPosition = SharedFunctionality.Instance.GetTouchWorldPosition();
             newPosition.y = gameObject.transform.position.y;
             gameObject.transform.position = newPosition;
             

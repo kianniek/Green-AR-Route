@@ -65,13 +65,15 @@ public class UIMenuLogic : MonoBehaviour
 
     private void OnButtonClick(string name)
     {
+        GridManager.Instance.dragDropHandler.dragSprite = UIObjectImages.GetValue(name);
+        
         GridManager.Instance.objectSpawner.m_SpawnOptionName = name;
     }
 
     private bool CheckName(string newName)
     {
         if (UIObjects.Any(obj => obj.name == newName))
-        {
+        {   //Remember to put this to true once there are more objects
             return false;
         }
         
@@ -79,7 +81,7 @@ public class UIMenuLogic : MonoBehaviour
     }
     #endregion
     
-    /*#region Menu & Buttons
+    #region Menu & Buttons
 
     [Header("Menu & Buttons")]
     [SerializeField] private Button createButton;
@@ -100,6 +102,7 @@ public class UIMenuLogic : MonoBehaviour
 
     void OnEnable()
     {
+        return;
         HideMenu();
         clickOnScreen.action.started += HideTapOutsideUI;
         
@@ -120,7 +123,7 @@ public class UIMenuLogic : MonoBehaviour
         deleteButton.onClick.RemoveListener(DeleteFocusedObject);
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (menuShown)
         {
@@ -131,7 +134,7 @@ public class UIMenuLogic : MonoBehaviour
             clickOnUI = false;
             createButton.gameObject.SetActive(true);
         }
-    }
+    }*/
     
     public void DeleteButtonVisibility()
     {
@@ -171,5 +174,5 @@ public class UIMenuLogic : MonoBehaviour
         GridManager.Instance.DestroyObject();
     }
     
-    #endregion*/
+    #endregion
 }
