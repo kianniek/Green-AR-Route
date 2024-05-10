@@ -1,7 +1,7 @@
 # Feature: 
 
 ## Description
-> Description of what this feature intails
+> Description of what this feature entails
 
 ## Functional Requirements
 > This is to list everything this feature/issue should handle. If the requirements spread out to far please consider adding an other feature.
