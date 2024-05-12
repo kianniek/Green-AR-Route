@@ -4,7 +4,7 @@
 > Description of what this feature entails
 
 ## Functional Requirements
-> This is to list everything this feature/issue should handle. If the requirements spread out too far please consider adding another feature.
+> This is to list everything this feature/issue should handle. If the requirements are spread out too far please consider adding another feature.
 
 - [ ] It should be able to ...
 - [ ] It should be able to ...
