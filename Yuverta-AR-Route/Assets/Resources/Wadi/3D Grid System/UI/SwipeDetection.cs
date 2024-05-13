@@ -27,7 +27,7 @@ public class SwipeDetection : MonoBehaviour
 
 	private void CheckPressLocation()
 	{
-		if (SharedFunctionality.Instance.TouchUI()) return;
+		if (Conditions()) return;
 		initialPos = currentPos;
 		
 		GameObject collidedObject = null;
@@ -39,7 +39,7 @@ public class SwipeDetection : MonoBehaviour
 			}
 			catch (Exception e)
 			{
-				FindObjectOfType<GridManager>().objectMovement.MoveObject();
+				GridManager.Instance.objectMovement.MoveObject();
 			}
 			return;
 		}
@@ -47,7 +47,7 @@ public class SwipeDetection : MonoBehaviour
 
 	private void DetectSwipe() 
 	{
-		if (trackingObject || SharedFunctionality.Instance.TouchUI()) return;
+		if (trackingObject || Conditions()) return;
 		Vector2 delta = currentPos - initialPos;
 		Vector2 direction = Vector2.zero;
 		if(Mathf.Abs(delta.x) > swipeResistance)
@@ -75,5 +75,10 @@ public class SwipeDetection : MonoBehaviour
 
 		collidedObject = null;
 		return false;
+	}
+
+	private bool Conditions()
+	{
+		return SharedFunctionality.Instance.TouchUI() || GridManager.Instance.uiMenu.isDragging;
 	}
 }

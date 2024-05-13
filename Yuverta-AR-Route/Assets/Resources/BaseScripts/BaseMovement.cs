@@ -12,7 +12,7 @@ public class BaseMovement : MonoBehaviour
     protected virtual IEnumerator TrackTouchPosition()
     {
         //While the object is being moved its position (x and z) is being updated
-        while (Input.GetMouseButton(0) || Input.touchCount > 0 && Input.GetTouch(0).phase != TouchPhase.Ended)
+        while (Input.GetMouseButton(0) || Input.touchCount > 0)
         {
             SwipeDetection.Instance.trackingObject = true;
             Vector3 newPosition = SharedFunctionality.Instance.GetTouchWorldPosition();

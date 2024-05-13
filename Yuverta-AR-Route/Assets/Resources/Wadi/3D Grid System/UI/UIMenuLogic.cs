@@ -23,6 +23,8 @@ public class UIMenuLogic : MonoBehaviour
     private SerializableDictionary<string, Sprite> UIObjectImages;
     
     private List<GameObject> UIObjects = new List<GameObject>();
+    
+    public bool  isDragging;
 
     private void Start()
     {
@@ -47,7 +49,7 @@ public class UIMenuLogic : MonoBehaviour
         var newUIObject = Instantiate(UIObjectPrefab, UIObjectParent.transform);
         newUIObject.name = prefab.name;
         //newUIObject.GetComponent<Image>().sprite = UIObjectImages.GetValue(prefab.name);
-        newUIObject.GetComponent<Button>(). onClick.AddListener(() => OnButtonClick(newUIObject.name));
+        newUIObject.GetComponent<Button>(). onClick.AddListener(() => OnButtonClick(newUIObject));
         UIObjects.Add(newUIObject);
     }
 
@@ -63,11 +65,13 @@ public class UIMenuLogic : MonoBehaviour
         Destroy(objToRemove);
     }
 
-    private void OnButtonClick(string name)
+    private void OnButtonClick(GameObject obj)
     {
-        GridManager.Instance.dragDropHandler.dragSprite = UIObjectImages.GetValue(name);
+        DragDropHandler thisObj = obj.GetComponent<DragDropHandler>();
+        thisObj.dragSprite = UIObjectImages.GetValue(obj.name);
+        isDragging = true;
         
-        GridManager.Instance.objectSpawner.m_SpawnOptionName = name;
+        GridManager.Instance.objectSpawner.m_SpawnOptionName = obj.name;
     }
 
     private bool CheckName(string newName)
@@ -115,6 +119,9 @@ public class UIMenuLogic : MonoBehaviour
     
     void OnDisable()
     {
+        if (SharedFunctionality.IsQuitting)
+            return; // Stop the function if the application is closing
+        
         menuShown = false;
         clickOnScreen.action.started -= HideTapOutsideUI;
         

@@ -26,6 +26,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("Pointer Down");
+        gameObject.GetComponent<Button>().onClick.Invoke();
         CreateDragImage(eventData);
         isDragging = false; // Reset dragging state
     }
@@ -44,6 +45,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         if (isDragging)
         {
             SpawnObject();
+            GridManager.Instance.uiMenu.isDragging = false;
             Destroy(dragObject);
             /*if (PlaceItemInGrid(Input.mousePosition))
             {

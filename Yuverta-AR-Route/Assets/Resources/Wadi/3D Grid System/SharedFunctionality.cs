@@ -9,6 +9,13 @@ public class SharedFunctionality : MonoBehaviour
 {
     public static SharedFunctionality Instance;
     
+    public static bool IsQuitting { get; private set; }
+
+    private void OnApplicationQuit()
+    {
+        IsQuitting = true;
+    }
+    
     void Awake()
     {
         if (Instance != null && Instance != this)

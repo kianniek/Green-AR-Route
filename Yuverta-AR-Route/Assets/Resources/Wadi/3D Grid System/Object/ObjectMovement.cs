@@ -29,6 +29,8 @@ public class ObjectMovement : BaseMovement
         
         yield return StartCoroutine(base.TrackTouchPosition());
         
+        Debug.Log("Touch ended");
+        
         var closestGridPosition = GridManager.Instance.SnapToGrid(gameObject);
 
         animationActive = true;

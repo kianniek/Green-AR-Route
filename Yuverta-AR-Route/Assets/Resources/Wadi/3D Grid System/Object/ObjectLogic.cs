@@ -26,9 +26,10 @@ public class ObjectLogic : MonoBehaviour
 
     public void OnDestroy()
     {
-        #if !ApplicationIsClosing
+        if (SharedFunctionality.IsQuitting)
+            return; // Stop the function if the application is closing
+        
         GridManager.Instance.uiMenu.Add(gameObject);
-        #endif
     }
 
     public void SetObjectLayerID(int layerIdOfObject)

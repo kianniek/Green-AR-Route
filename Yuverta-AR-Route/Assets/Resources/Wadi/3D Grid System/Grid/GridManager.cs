@@ -15,7 +15,6 @@ public class GridManager : BaseManager
     public ObjectMovement objectMovement;
     public UIMenuLogic uiMenu;
     public ObjectSpawner objectSpawner;
-    public DragDropHandler dragDropHandler;
     public int gridCurrentLayer = 0;
 
     [SerializeField] private float gridSize = 1.0f;
@@ -53,7 +52,6 @@ public class GridManager : BaseManager
         gridLayering = gameObject.GetComponent<GridLayering>();
         uiMenu = FindObjectOfType<UIMenuLogic>();
         objectSpawner = FindObjectOfType<ObjectSpawner>();
-        dragDropHandler = FindObjectOfType<DragDropHandler>();
         Destroy(FindObjectOfType<ARInteractorSpawnTrigger>());
         
         uiMenu.StartUp(objectSpawner.objectPrefabs);
