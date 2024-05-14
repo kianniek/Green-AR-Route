@@ -25,7 +25,6 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("Pointer Down");
         gameObject.GetComponent<Button>().onClick.Invoke();
         CreateDragImage(eventData);
         isDragging = false; // Reset dragging state

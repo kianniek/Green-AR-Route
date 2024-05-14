@@ -57,6 +57,17 @@ public class SharedFunctionality : MonoBehaviour
         return false;
     }
     
+    public Vector2 WorldToCanvasPosition(Canvas canvas, Camera camera, Vector3 worldPosition)
+    {
+        // Convert the world position to screen position
+        Vector3 screenPosition = camera.WorldToScreenPoint(worldPosition);
+
+        // Convert the screen position to a position relative to the canvas
+        //RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, screenPosition, canvas.worldCamera, out Vector2 canvasPosition);
+        
+        return screenPosition;
+    }
+    
     public Vector3 GetTouchWorldPosition()
     {
         if (Input.touchCount <= 0) return GetMouseWorldPosition();

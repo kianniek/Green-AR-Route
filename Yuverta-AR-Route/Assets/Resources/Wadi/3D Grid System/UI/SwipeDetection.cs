@@ -16,6 +16,9 @@ public class SwipeDetection : MonoBehaviour
 	[SerializeField] private float swipeResistance = 100;
 	private Vector2 initialPos;
 	private Vector2 currentPos => position.ReadValue<Vector2>();
+
+	private float clickTime;
+	private const float clickDelay = 0.5f;
 	private void Awake () 
 	{
 		Instance = this;
@@ -28,6 +31,15 @@ public class SwipeDetection : MonoBehaviour
 	private void CheckPressLocation()
 	{
 		if (Conditions()) return;
+
+		if (Time.time - clickTime < clickDelay)
+		{
+			GridManager.Instance.DestroyObject();
+			return;
+		}
+		
+		clickTime = Time.time;
+		
 		initialPos = currentPos;
 		
 		GameObject collidedObject = null;

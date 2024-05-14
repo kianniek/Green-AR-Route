@@ -66,27 +66,31 @@ public class GridManager : BaseManager
 
         if (objectLogic.isPlaced)
         {
-            var previousSnappedGridPoint = ClosestGridPoint(objectLogic.previousSnappedPosition, null, true);
+            var previousSnappedGridPoint = ClosestGridPoint(objectLogic.previousSnappedPosition, findLastPoint: true);
             occupiedPositions.Remove(previousSnappedGridPoint);
             objectLogic.isPlaced = false;
             objectLogic.previousSnappedPosition = Vector3.negativeInfinity;
         }
         
         var closestGridPoint = ClosestGridPoint(position, occupiedPositions.Keys.ToList());
+        if (closestGridPoint == null)
+        {
+            closestGridPoint = ClosestGridPoint(position, occupiedPositions.Keys.ToList(), ignoreLayer: true);
+        }
         occupiedPositions.Add(closestGridPoint, true);
         objectLogic.isPlaced = true;
         objectLogic.previousSnappedPosition = closestGridPoint.transform.position;
         return closestGridPoint.transform.position;
     }
 
-    private GameObject ClosestGridPoint(Vector3 position, List<GameObject> occupiedPositions = null, bool findLastPoint = false)
+    private GameObject ClosestGridPoint(Vector3 position, List<GameObject> occupiedPositions = null, bool findLastPoint = false, bool ignoreLayer = false)
     {
         float minDistance = Mathf.Infinity;
         GameObject closestGridPoint = null;
 
         foreach (var gridPoint in gridPoints.Keys)
         {
-            if (!findLastPoint && gridPoints[gridPoint] != gridCurrentLayer) continue;
+            if (!ignoreLayer && !findLastPoint && gridPoints[gridPoint] != gridCurrentLayer) continue;
             if (occupiedPositions != null && occupiedPositions.Contains(gridPoint)) continue;
             
             float distance = Vector3.Distance(position, gridPoint.transform.position);
@@ -140,7 +144,7 @@ public class GridManager : BaseManager
         
         //Removing the object from the lists
         placedObjects.Remove(focusedObject);
-        occupiedPositions.Remove(focusedObject);
+        occupiedPositions.Remove(ClosestGridPoint(focusedObject.transform.position, findLastPoint: true));
         
         //Destroying the object
         Destroy(focusedObject.gameObject);
