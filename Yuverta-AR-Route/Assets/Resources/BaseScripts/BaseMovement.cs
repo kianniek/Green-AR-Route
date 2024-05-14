@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 //This class is to be inherited by all movement scripts for objects in the AR world
 public class BaseMovement : MonoBehaviour
 {
-    //The manager for that scene
+    [Description("The manager that is active in that scene.")]
     protected virtual BaseManager currentManager { get; set; }
 
     //This function is to be called when the object is being moved

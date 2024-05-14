@@ -64,9 +64,9 @@ public class GridManager : BaseManager
         ObjectLogic objectLogic = objToSnap.GetComponent<ObjectLogic>();
         Vector3 position = objToSnap.transform.position;
 
-        if (objectLogic.isPlaced && objectLogic.previousSnappedPosition != Vector3.negativeInfinity)
+        if (objectLogic.isPlaced)
         {
-            var previousSnappedGridPoint = ClosestGridPoint(objectLogic.previousSnappedPosition);
+            var previousSnappedGridPoint = ClosestGridPoint(objectLogic.previousSnappedPosition, null, true);
             occupiedPositions.Remove(previousSnappedGridPoint);
             objectLogic.isPlaced = false;
             objectLogic.previousSnappedPosition = Vector3.negativeInfinity;
@@ -79,13 +79,14 @@ public class GridManager : BaseManager
         return closestGridPoint.transform.position;
     }
 
-    private GameObject ClosestGridPoint(Vector3 position, List<GameObject> occupiedPositions = null)
+    private GameObject ClosestGridPoint(Vector3 position, List<GameObject> occupiedPositions = null, bool findLastPoint = false)
     {
         float minDistance = Mathf.Infinity;
         GameObject closestGridPoint = null;
 
-        foreach (var gridPoint in gridPoints.Where(pair => pair.Value == gridCurrentLayer).Select(pair => pair.Key))
+        foreach (var gridPoint in gridPoints.Keys)
         {
+            if (!findLastPoint && gridPoints[gridPoint] != gridCurrentLayer) continue;
             if (occupiedPositions != null && occupiedPositions.Contains(gridPoint)) continue;
             
             float distance = Vector3.Distance(position, gridPoint.transform.position);

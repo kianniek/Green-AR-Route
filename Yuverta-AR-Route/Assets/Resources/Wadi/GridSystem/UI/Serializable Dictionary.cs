@@ -28,6 +28,28 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
         }
     }
 
+    public void Remove(TKey key)
+    {
+        if (dictionary.ContainsKey(key))
+        {
+            int index = keys.IndexOf(key);
+            keys.RemoveAt(index);
+            values.RemoveAt(index);
+            dictionary.Remove(key);
+        }
+        else
+        {
+            Debug.LogWarning($"Key '{key}' does not exist in the dictionary.");
+        }
+    }
+
+    public void Clear()
+    {
+        dictionary.Clear();
+        keys.Clear();
+        values.Clear();
+    }
+
     // Retrieve the value associated with the specified key
     public TValue GetValue(TKey key)
     {
