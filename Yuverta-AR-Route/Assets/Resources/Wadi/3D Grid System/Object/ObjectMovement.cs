@@ -41,11 +41,37 @@ public class ObjectMovement : BaseMovement
     {
         if (animationActive) yield break;
         CheckLayer();
-
+        
         //While the object is being moved its position (x and z) is being updated
         while (Input.GetMouseButton(0) || Input.touchCount > 0)
         {
             SwipeDetection.Instance.trackingObject = true;
+            
+            var cameraPos = Camera.main!.transform.position;
+            
+            float distanceToCamera = Vector3.Distance(cameraPos, gameObject.transform.position);
+            
+            
+            if (distanceToCamera > 1f)
+            {
+                distanceToCamera = 1f;
+            }
+
+            // Get the position of the touch in screen coordinates
+            Vector3 touchPosition = Input.touchCount switch
+            {
+                0 => Input.mousePosition,
+                _ => Input.GetTouch(0).position
+            };
+
+            // Convert the screen position to world position
+            Vector3 newPosition = Camera.main!.ScreenToWorldPoint(new Vector3(touchPosition.x, touchPosition.y, distanceToCamera));
+            newPosition.y = gameObject.transform.position.y;
+            gameObject.transform.position = newPosition;
+
+            yield return new WaitForFixedUpdate();
+            
+            /*SwipeDetection.Instance.trackingObject = true;
             Vector3 newPosition = SharedFunctionality.Instance.GetTouchWorldPosition();
             if (newPosition == Vector3.zero)
             {
@@ -53,12 +79,13 @@ public class ObjectMovement : BaseMovement
                 continue;
             }
 
-            var distance = Vector3.Distance(newPosition, gameObject.transform.position);
+            var yDiff = Mathf.Abs(newPosition.y - gameObject.transform.position.y);
+            yDiff *= -Camera.main!.transform.forward.magnitude;
 
             newPosition.y = gameObject.transform.position.y;
             gameObject.transform.position = newPosition;
 
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForFixedUpdate();*/
         }
 
         SwipeDetection.Instance.trackingObject = false;

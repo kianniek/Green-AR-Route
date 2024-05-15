@@ -59,8 +59,8 @@ public class GridBuilder : MonoBehaviour
             
             var sizeChild = firstChild.GetComponent<Renderer>().bounds.size;
             
-            var distanceX = (lastChild.position.x - firstChild.position.x) * 2;
-            var distanceZ = (lastChild.position.z - firstChild.position.z) * 2;
+            var distanceX = (lastChild.position.x - firstChild.position.x) * 4;
+            var distanceZ = (lastChild.position.z - firstChild.position.z) * 4;
             
             distanceX += sizeChild.x;
             distanceZ += sizeChild.z;

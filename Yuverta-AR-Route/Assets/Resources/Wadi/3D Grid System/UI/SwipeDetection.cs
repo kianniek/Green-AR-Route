@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using TouchPhase = UnityEngine.TouchPhase;
+
 public class SwipeDetection : MonoBehaviour 
 {
 	public static SwipeDetection Instance;
@@ -31,14 +33,6 @@ public class SwipeDetection : MonoBehaviour
 	private void CheckPressLocation()
 	{
 		if (Conditions()) return;
-
-		if (Time.time - clickTime < clickDelay)
-		{
-			GridManager.Instance.DestroyObject();
-			return;
-		}
-		
-		clickTime = Time.time;
 		
 		initialPos = currentPos;
 		
@@ -81,6 +75,14 @@ public class SwipeDetection : MonoBehaviour
 		{
 			if (!hit.collider.gameObject.CompareTag("MoveableObject")) continue;
 			
+			if (Time.time - clickTime < clickDelay && Time.time - clickTime > 0.1f)
+			{
+				GridManager.Instance.DestroyObject();
+				collidedObject = null;
+				return false;
+			}
+		
+			clickTime = Time.time;
 			collidedObject = hit.collider.gameObject;
 			return true;
 		}
