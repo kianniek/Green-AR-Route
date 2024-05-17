@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using TMPro;
 using UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
@@ -15,9 +13,9 @@ public class GridManager : BaseManager
     public ObjectMovement objectMovement;
     public UIMenuLogic uiMenu;
     public ObjectSpawner objectSpawner;
-    public int gridCurrentLayer = 0;
+    public int gridCurrentLayer;
 
-    [SerializeField] private float gridSize = 1.0f;
+    [SerializeField] private float gridSize;
     
     public float GridSize
     {
@@ -115,7 +113,6 @@ public class GridManager : BaseManager
         
         //Updating the UI
         uiMenu.Remove(newObject);
-        //uiMenu.DeleteButtonVisibility();
         
         //Setting the values
         var objectLogic = newObject.GetComponent<ObjectLogic>();

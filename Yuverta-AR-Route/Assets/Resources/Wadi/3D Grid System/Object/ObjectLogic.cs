@@ -1,12 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 public class ObjectLogic : MonoBehaviour
 {
+    public enum ObjectType
+    {
+        SpecialSand,
+        Gravel,
+        DrainageTube,
+        DrainPipe,
+        Drain,
+        Dirt,
+    }
+    
     //Values are set on spawn through the gridmanager
     public int layerObj;
     public int objectIndex;

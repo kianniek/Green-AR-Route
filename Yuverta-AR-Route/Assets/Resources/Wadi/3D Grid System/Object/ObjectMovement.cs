@@ -1,14 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.XR.ARFoundation;
 
 public class ObjectMovement : BaseMovement
 {
-    private ARRaycastManager arRaycastManager;
     public ObjectLogic objectLogic;
 
     //This bool is active if the object is snapping to a certain position
@@ -29,7 +25,6 @@ public class ObjectMovement : BaseMovement
     {
         currentManager = FindObjectOfType<BaseManager>();
         objectLogic = gameObject.GetComponent<ObjectLogic>();
-        arRaycastManager = FindObjectOfType<ARRaycastManager>();
     }
 
     public void MoveObject()
@@ -152,6 +147,7 @@ public class ObjectMovement : BaseMovement
         switch (debugPos)
         {
             case null:
+                currentPos.y += GridManager.Instance.distanceLayers * newLayerIndex;
                 break;
             default:
                 currentPos = (Vector3) debugPos;
@@ -162,13 +158,14 @@ public class ObjectMovement : BaseMovement
         while (Vector3.Distance(gameObject.transform.position, currentPos) > snapDistanceWhile)
         {
             whileTimeCalled++;
-            if (whileTimeCalled * timeWaitWhile > maxWhileRepeatTime) yield break;
+            if (whileTimeCalled > maxWhileRepeatTime) yield break;
             var whilePos = gameObject.transform.position;
             whilePos.y = Mathf.Lerp(gameObject.transform.position.y, currentPos.y, lerpSpeed);
             gameObject.transform.position = whilePos;
             yield return new WaitForSeconds(timeWaitWhile);
+            Debug.Log(whileTimeCalled);
         }
-        
+        gameObject.transform.position = currentPos;
         objectLogic.SetObjectLayerID(newLayer);
     }
 }

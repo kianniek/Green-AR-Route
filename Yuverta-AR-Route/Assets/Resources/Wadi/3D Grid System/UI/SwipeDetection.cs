@@ -1,10 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using TouchPhase = UnityEngine.TouchPhase;
 
 public class SwipeDetection : MonoBehaviour 
 {
@@ -20,7 +16,7 @@ public class SwipeDetection : MonoBehaviour
 	private Vector2 currentPos => position.ReadValue<Vector2>();
 
 	private float clickTime;
-	private const float clickDelay = 0.5f;
+	private const float ClickDelay = 0.5f;
 	private void Awake () 
 	{
 		Instance = this;
@@ -45,9 +41,9 @@ public class SwipeDetection : MonoBehaviour
 			}
 			catch (Exception e)
 			{
+				Debug.LogError(e);
 				GridManager.Instance.objectMovement.MoveObject();
 			}
-			return;
 		}
 	}
 
@@ -75,7 +71,7 @@ public class SwipeDetection : MonoBehaviour
 		{
 			if (!hit.collider.gameObject.CompareTag("MoveableObject")) continue;
 			
-			if (Time.time - clickTime < clickDelay && Time.time - clickTime > 0.1f)
+			if (Time.time - clickTime < ClickDelay && Time.time - clickTime > 0.1f)
 			{
 				GridManager.Instance.DestroyObject();
 				collidedObject = null;

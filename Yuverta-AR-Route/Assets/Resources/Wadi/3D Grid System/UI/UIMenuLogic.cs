@@ -3,11 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
-using UnityEngine.XR.Interaction.Toolkit.UI;
 
 public class UIMenuLogic : MonoBehaviour
 {
@@ -48,7 +45,7 @@ public class UIMenuLogic : MonoBehaviour
         }
     }
 
-    public void Add(GameObject prefab)
+    private void Add(GameObject prefab)
     {
         if (CheckName(prefab.name) || prefab == null) return;
         var newUIObject = Instantiate(UIObjectPrefab, UIObjectParent.transform);

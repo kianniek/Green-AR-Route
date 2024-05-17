@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+
 [RequireComponent(typeof(GridManager))]
 public class GridBuilder : MonoBehaviour
 {
+    [FormerlySerializedAs("gridsize")] [SerializeField]
+    private Vector2 gridSize;
+
+    [SerializeField] 
+    [Range(1, 2)] 
+    private int gridHeight;
     [SerializeField]
-    private Vector2 gridsize = new Vector2(10, 10);
-    [SerializeField]
-    [Range(1, 2)]
-    private int gridHeight = 0;
-    [SerializeField]
-    private float gridCellPadding = 0f;
+    private float gridCellPadding;
     [SerializeField]
     private GameObject gridPointPrefab;
     [SerializeField] 
@@ -36,14 +39,14 @@ public class GridBuilder : MonoBehaviour
             layerParent.name = $"Layer {y}";
             
             layerParents.Add(layerParent);
-            for (int x = 0; x < gridsize.x; x++)
+            for (int x = 0; x < gridSize.x; x++)
             {
-                for (int z = 0; z < gridsize.y; z++)
+                for (int z = 0; z < gridSize.y; z++)
                 {
                     Vector3 position = new(x, y, z);
                     position *= gridCellPadding;
                     //center the grid horizontally on the x and z axis
-                    Vector3 center = new Vector3(gridsize.x / 2, 0, gridsize.y / 2) * gridCellPadding;
+                    Vector3 center = new Vector3(gridSize.x / 2, 0, gridSize.y / 2) * gridCellPadding;
                     center -= position + Vector3.one * gridCellPadding * 0.5f;
                     position = new Vector3(center.x, position.y, center.z);
                     position += transform.position;
@@ -107,14 +110,14 @@ public class GridBuilder : MonoBehaviour
 
         for (int y = 0; y < gridHeight; y++)
         {
-            for (int x = 0; x < gridsize.x; x++)
+            for (int x = 0; x < gridSize.x; x++)
             {
-                for (int z = 0; z < gridsize.y; z++)
+                for (int z = 0; z < gridSize.y; z++)
                 {
                     Vector3 position = new(x, y, z);
                     position *= localPadding;
                     //center the grid horizontally on the x and z axis
-                    Vector3 center = new Vector3(gridsize.x / 2, 0, gridsize.y / 2) * localPadding;
+                    Vector3 center = new Vector3(gridSize.x / 2, 0, gridSize.y / 2) * localPadding;
                     center -= position + Vector3.one * localPadding * 0.5f;
                     position = new Vector3(center.x, position.y, center.z);
                     position += transform.position;
