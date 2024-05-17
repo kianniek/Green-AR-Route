@@ -26,6 +26,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets
         public void RemoveScript()
         {
             Destroy(this);
+            //test
         }
 
         public void SpawnGameObject(GameObject prefab)
