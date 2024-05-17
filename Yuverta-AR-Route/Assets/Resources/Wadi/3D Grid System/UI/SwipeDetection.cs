@@ -28,7 +28,7 @@ public class SwipeDetection : MonoBehaviour
 
 	private void CheckPressLocation()
 	{
-		if (Conditions()) return;
+		if (Conditions() || trackingObject) return;
 		
 		initialPos = currentPos;
 		
@@ -42,6 +42,7 @@ public class SwipeDetection : MonoBehaviour
 			catch (Exception e)
 			{
 				Debug.LogError(e);
+				if (trackingObject) return;
 				GridManager.Instance.objectMovement.MoveObject();
 			}
 		}
@@ -60,7 +61,7 @@ public class SwipeDetection : MonoBehaviour
 		{
 			direction.y = Mathf.Clamp(delta.y, -1, 1);
 		}
-		if(direction != Vector2.zero & swipePerformed != null)
+		if(direction != Vector2.zero & swipePerformed != null && !trackingObject)
 			swipePerformed(direction);
 	}
 
