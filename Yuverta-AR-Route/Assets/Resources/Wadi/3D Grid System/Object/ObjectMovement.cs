@@ -158,7 +158,7 @@ public class ObjectMovement : BaseMovement
         while (Vector3.Distance(gameObject.transform.position, currentPos) > snapDistanceWhile)
         {
             whileTimeCalled++;
-            if (whileTimeCalled > maxWhileRepeatTime) yield break;
+            if (whileTimeCalled > maxWhileRepeatTime) break;
             var whilePos = gameObject.transform.position;
             whilePos.y = Mathf.Lerp(gameObject.transform.position.y, currentPos.y, lerpSpeed);
             gameObject.transform.position = whilePos;
