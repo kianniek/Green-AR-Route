@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - MoveableObject
+  - ARGround
+  - UI
+  - Ground
+  - GridPoint
   layers:
   - Default
   - TransparentFX
@@ -11,6 +16,9 @@ TagManager:
   - 
   - Water
   - UI
+  - OutlinedObjects
+  - NotActiveGridLayer
+  - ActiveGridLayer
   - 
   - 
   - 
@@ -32,10 +40,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - XR Simulation
   - 
   m_SortingLayers:
   - name: Default
