@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3506454365852987505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1230929532951254524}
+  - component: {fileID: 623504494362759189}
+  - component: {fileID: 461678362065806338}
+  m_Layer: 0
+  m_Name: Object Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1230929532951254524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3506454365852987505}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &623504494362759189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3506454365852987505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba63293f961b46a1a5b648e4ba02cfb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ARInteractorObject: {fileID: 0}
+  m_ObjectSpawner: {fileID: 461678362065806338}
+  m_RequireHorizontalUpSurface: 0
+  m_SpawnTriggerType: 1
+  m_SpawnAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Spawn
+      m_Type: 1
+      m_ExpectedControlType: 
+      m_Id: 8db40ae6-2bbd-4a88-ab4d-ee209b4a18a9
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -243286475773516173, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+--- !u!114 &461678362065806338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3506454365852987505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ffa14d1311a2da4fb7c2f1c5c2ef9d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockSpawn: 0
+  m_CameraToFace: {fileID: 0}
+  m_ObjectPrefabs:
+  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
+  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
+  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
+  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
+  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
+  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
+  - {fileID: 8979999504926960577, guid: 0cd78207c8d54d84cae92eebb1b322ef, type: 3}
+  m_SpawnVisualizationPrefab: {fileID: 0}
+  m_SpawnOptionIndex: -1
+  m_SpawnOptionName: Bob
+  lastSpawnedObject: {fileID: 0}
+  m_OnlySpawnInView: 1
+  m_ViewportPeriphery: 0.15
+  m_ApplyRandomAngleAtSpawn: 1
+  m_SpawnAngleRange: 45
+  m_SpawnHeightOffset: 0
+  m_SpawnAsChildren: 0
+  OnAwake:
+    m_PersistentCalls:
+      m_Calls: []
+  ObjectSpawned:
+    m_PersistentCalls:
+      m_Calls: []
