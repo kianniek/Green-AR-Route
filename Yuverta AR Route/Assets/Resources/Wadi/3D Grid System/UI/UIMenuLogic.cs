@@ -50,7 +50,7 @@ public class UIMenuLogic : MonoBehaviour
         if (CheckName(prefab.name) || prefab == null) return;
         var newUIObject = Instantiate(UIObjectPrefab, UIObjectParent.transform);
         newUIObject.name = CloneTagRemover(prefab.name);
-        //newUIObject.GetComponent<Image>().sprite = UIObjectImages.GetValue(prefab.name);
+        newUIObject.GetComponent<Image>().sprite = UIObjectImages.GetValue(prefab.name);
         newUIObject.GetComponent<Button>(). onClick.AddListener(() => OnButtonClick(newUIObject));
         UIObjects.Add(newUIObject);
     }
@@ -72,7 +72,7 @@ public class UIMenuLogic : MonoBehaviour
         Debug.Log(canvasPosition);
         var newUIObject = Instantiate(UIObjectPrefab, canvasPosition, Quaternion.identity, canvas.transform);
         newUIObject.name = CloneTagRemover(prefab.name);
-        //newUIObject.GetComponent<Image>().sprite = UIObjectImages.GetValue(prefab.name);
+        newUIObject.GetComponent<Image>().sprite = UIObjectImages.GetValue(prefab.name);
         newUIObject.GetComponent<Button>(). onClick.AddListener(() => OnButtonClick(newUIObject));
         newUIObject.transform.position = canvasPosition;
         StartCoroutine(RouteToFollow(newUIObject));

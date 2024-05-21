@@ -28,6 +28,7 @@ public class SwipeDetection : MonoBehaviour
 
 	private void CheckPressLocation()
 	{
+		Debug.Log("CheckPressLocation");
 		if (Conditions() || trackingObject) return;
 		
 		initialPos = currentPos;

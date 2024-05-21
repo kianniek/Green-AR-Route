@@ -4,9 +4,8 @@ public class ObjectLogic : MonoBehaviour
 {
     public enum ObjectType
     {
-        SpecialSand,
-        Gravel,
-        DrainageTube,
+        Sand,
+        Pipe,
         DrainPipe,
         Drain,
         Dirt,
@@ -16,6 +15,7 @@ public class ObjectLogic : MonoBehaviour
     public int layerObj;
     public int objectIndex;
     public int objectPrefabIndex;
+    public ObjectType objectType;
     
     public bool isPlaced;
     public Vector3 previousSnappedPosition;

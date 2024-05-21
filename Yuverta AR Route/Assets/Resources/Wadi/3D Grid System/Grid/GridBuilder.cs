@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(GridManager))]
 public class GridBuilder : MonoBehaviour
 {
-    [FormerlySerializedAs("gridsize")] [SerializeField]
+    [SerializeField]
     private Vector2 gridSize;
 
     [SerializeField] 

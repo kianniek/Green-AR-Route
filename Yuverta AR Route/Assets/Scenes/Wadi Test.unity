@@ -968,7 +968,6 @@ MonoBehaviour:
   m_TrackedDeviceDragThresholdMultiplier: 2
   m_TrackedScrollDeltaMultiplier: 5
   m_ActiveInputMode: 1
-  m_MaxTrackedDeviceRaycastDistance: 1000
   m_EnableXRInput: 1
   m_EnableMouseInput: 1
   m_EnableTouchInput: 1
@@ -1069,7 +1068,7 @@ MonoBehaviour:
   blockSpawn: 0
   m_CameraToFace: {fileID: 0}
   m_ObjectPrefabs:
-  - {fileID: 5468812455401227516, guid: edec872878719de40a51aae7ac458edb, type: 3}
+  - {fileID: 5468812455401227516, guid: 6b69db9ed4757c94e80eff5418e0e63c, type: 3}
   m_SpawnVisualizationPrefab: {fileID: 0}
   m_SpawnOptionIndex: -1
   m_SpawnOptionName: GridManager
@@ -1261,9 +1260,17 @@ MonoBehaviour:
     type: 3}
   UIObjectImages:
     keys:
-    - TempPrefab
+    - Sand
+    - Dirt
+    - Drainpipe
+    - Pipe
+    - Drain
     values:
-    - {fileID: 21300000, guid: 930e939e9def94ef69711892eaa9af81, type: 3}
+    - {fileID: 21300000, guid: 5b761a716f9a14b1f96d86db91468013, type: 3}
+    - {fileID: 21300000, guid: 8d991699eeb4f403c9eda28f96d7c6f6, type: 3}
+    - {fileID: 21300000, guid: 7d7267d5f5b16410f885ec459e512806, type: 3}
+    - {fileID: 21300000, guid: 9acf48fe73f174b7d8b31772eb10e075, type: 3}
+    - {fileID: 21300000, guid: 23564d3378a9d4983988576f242089eb, type: 3}
   isDragging: 0
   speedModifier: 1
   createButton: {fileID: 0}
