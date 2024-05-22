@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets;
@@ -27,12 +28,60 @@ public class GridManager : BaseManager
 
     //public List<GameObject> gridPoints = new();
     public Dictionary<GameObject, int> gridPoints = new();
-    public Dictionary<GameObject, bool> occupiedPositions = new Dictionary<GameObject, bool>();
+    public Dictionary<GameObject, bool> occupiedPositions = new();
     
-    public List<GameObject> placedObjects = new List<GameObject>();
-    public int selectedObjectIndex = 0;
+    public List<GameObject> placedObjects = new();
+    public int selectedObjectIndex;
 
     public float distanceLayers;
+
+    #region Enum
+
+    public enum ObjectPosition
+    {
+        BottomLeft, //0 0 0
+        BottomMiddle, //0 0 1
+        BottomRight, //0 0 2
+        MiddleLeft, //1 0 0
+        Middle, //1 0 1
+        MiddleRight, //1 0 2
+        UpperLeft, //2 0 0
+        UpperMiddle, //2 0 1
+        UpperRight, //2 0 2
+        BottomLeft2, //0 1 0
+        BottomMiddle2, //0 1 1
+        BottomRight2,   //0 1 2
+        MiddleLeft2, //1 1 0
+        Middle2,    //1 1 1
+        MiddleRight2, //1 1 2
+        UpperLeft2, //2 1 0
+        UpperMiddle2, //2 1 1
+        UpperRight2, //2 1 2
+    }
+
+    public List<String> ObjectPositionName = new List<string>()
+    {
+        "BottomLeft", //0 0 0
+        "BottomMiddle", //0 0 1
+        "BottomRight", //0 0 2
+        "MiddleLeft", //1 0 0
+        "Middle", //1 0 1
+        "MiddleRight", //1 0 2
+        "UpperLeft", //2 0 0
+        "UpperMiddle", //2 0 1
+        "UpperRight", //2 0 2
+        "BottomLeft2", //0 1 0
+        "BottomMiddle2", //0 1 1
+        "BottomRight2",   //0 1 2
+        "MiddleLeft2", //1 1 0
+        "Middle2",    //1 1 1
+        "MiddleRight2", //1 1 2
+        "UpperLeft2", //2 1 0
+        "UpperMiddle2", //2 1 1
+        "UpperRight2", //2 1 2
+    };
+
+    #endregion
 
     void Awake()
     {
@@ -134,14 +183,18 @@ public class GridManager : BaseManager
         objectMovement.MoveObject();
     }
 
-    public override void DestroyObject()
+    public override void DestroyObject(GameObject objectToDestroy = null)
     {
         //Checking if the list is empty
         if (placedObjects.Count <= 0) return;
         
         //Getting the selected object
-        var focusedObject = placedObjects[selectedObjectIndex];
-        
+        GameObject focusedObject = objectToDestroy switch
+        {
+            null => placedObjects[selectedObjectIndex],
+            _ => objectToDestroy
+        };
+
         //Removing the object from the lists
         placedObjects.Remove(focusedObject);
         occupiedPositions.Remove(ClosestGridPoint(focusedObject.transform.position, findLastPoint: true));
@@ -165,5 +218,28 @@ public class GridManager : BaseManager
 
         //Resetting the swipe detection
         SwipeDetection.Instance.trackingObject = false;
+    }
+
+    public bool CheckPosition(out List<GameObject> wrongPlaces)
+    {
+        wrongPlaces = new List<GameObject>();
+        foreach (var obj in placedObjects)
+        {
+            var script = obj.GetComponent<ObjectLogic>();
+            var gridPoint = ClosestGridPoint(obj.transform.position, findLastPoint: true);
+            if (script.objectPosition.ToString() == gridPoint.GetComponent<GridPointScript>().objectPosition)
+            {
+                continue;
+            }
+
+            wrongPlaces.Add(obj);
+            continue;
+        }
+
+        return wrongPlaces.Count switch
+        {
+            0 => true,
+            _ => false
+        };
     }
 }

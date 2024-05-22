@@ -51,7 +51,12 @@ public class GridBuilder : MonoBehaviour
                     position = new Vector3(center.x, position.y, center.z);
                     position += transform.position;
                     GameObject gridPoint = Instantiate(gridPointPrefab, position, Quaternion.identity, layerParent.transform);
-                    gridPoint.name = $"GridPoint ({x}, {y}, {z})";
+                    var script = gridPoint.GetComponent<GridPointScript>();
+                    script.objectPosition =
+                        GridManager.Instance.ObjectPositionName[GridManager.Instance.gridPoints.Count];
+                    //Inputting rotation here later
+                    gridPoint.name =
+                        $"{script.objectPosition} {x} {y} {z}";
                     GridManager.Instance.gridPoints.Add(gridPoint, y);
                     GridManager.Instance.gridLayering.gridSortedLayer.Add(gridPoint, y);
                 }

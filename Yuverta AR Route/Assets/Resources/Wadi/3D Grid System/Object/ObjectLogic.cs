@@ -2,20 +2,12 @@ using UnityEngine;
 
 public class ObjectLogic : MonoBehaviour
 {
-    public enum ObjectType
-    {
-        Sand,
-        Pipe,
-        DrainPipe,
-        Drain,
-        Dirt,
-    }
     
     //Values are set on spawn through the gridmanager
     public int layerObj;
     public int objectIndex;
     public int objectPrefabIndex;
-    public ObjectType objectType;
+    public GridManager.ObjectPosition objectPosition;
     
     public bool isPlaced;
     public Vector3 previousSnappedPosition;
@@ -47,7 +39,7 @@ public class ObjectLogic : MonoBehaviour
 
     public void Update()
     {
-        if(GridManager.Instance == null)
+        if (GridManager.Instance == null)
         {
             return;
         }

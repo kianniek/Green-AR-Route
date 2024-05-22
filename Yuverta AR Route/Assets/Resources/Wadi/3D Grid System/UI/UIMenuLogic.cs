@@ -20,6 +20,8 @@ public class UIMenuLogic : MonoBehaviour
     
     [SerializeField]
     private SerializableDictionary<string, Sprite> UIObjectImages;
+
+    [SerializeField] private Button startAnimationsButton;
     
     private List<GameObject> UIObjects = new List<GameObject>();
     
@@ -30,6 +32,7 @@ public class UIMenuLogic : MonoBehaviour
 
     private void Start()
     {
+        startAnimationsButton.gameObject.SetActive(false);
         if (UIObjectParent.transform.childCount <= 0) return;
         foreach (Transform child in UIObjectParent.transform)
         {
@@ -63,6 +66,16 @@ public class UIMenuLogic : MonoBehaviour
         var objToRemove = UIObjects.Find(obj => obj.name == prefabName);
         UIObjects.Remove(objToRemove);
         Destroy(objToRemove);
+
+        switch (UIObjects.Count)
+        {
+            case 0:
+                startAnimationsButton.gameObject.SetActive(true);
+                break;
+            default:
+                startAnimationsButton.gameObject.SetActive(false);
+                break;
+        }
     }
 
     public void OnObjectDelete(GameObject prefab)
@@ -72,9 +85,10 @@ public class UIMenuLogic : MonoBehaviour
         Debug.Log(canvasPosition);
         var newUIObject = Instantiate(UIObjectPrefab, canvasPosition, Quaternion.identity, canvas.transform);
         newUIObject.name = CloneTagRemover(prefab.name);
-        newUIObject.GetComponent<Image>().sprite = UIObjectImages.GetValue(prefab.name);
+        newUIObject.GetComponent<Image>().sprite = UIObjectImages.GetValue(newUIObject.name);
         newUIObject.GetComponent<Button>(). onClick.AddListener(() => OnButtonClick(newUIObject));
         newUIObject.transform.position = canvasPosition;
+        startAnimationsButton.gameObject.SetActive(false);
         StartCoroutine(RouteToFollow(newUIObject));
     }
 
@@ -116,7 +130,7 @@ public class UIMenuLogic : MonoBehaviour
     {
         if (UIObjects.Any(obj => obj.name == newName))
         {   //Remember to put this to true once there are more objects
-            return false;
+            return true;
         }
         
         return false;
@@ -132,102 +146,18 @@ public class UIMenuLogic : MonoBehaviour
         }
         return checkString;
     }
-    #endregion
-    
-    #region Menu & Buttons
 
-    [Header("Menu & Buttons")]
-    [SerializeField] private Button createButton;
-    [SerializeField] private Button cancelButton;
-    [SerializeField] private Button deleteButton;
-    
-    [SerializeField] private Animator menuAnimator;
-    [SerializeField] private GameObject menuObject;
-    
-    [SerializeField]
-    InputActionProperty clickOnScreen;
-    
-    //private XRUIInputModule inputActionReference;
-    
-    private bool menuShown;
-    bool clickOnUI;
-    private static readonly int Show = Animator.StringToHash("Show");
-
-    void OnEnable()
+    public void StartAnimations()
     {
-        return;
-        HideMenu();
-        clickOnScreen.action.started += HideTapOutsideUI;
+        GridManager.Instance.CheckPosition(out var wrongPlacedObjs);
         
-        createButton.onClick.AddListener(ShowMenu);
-        cancelButton.onClick.AddListener(HideMenu);
-        deleteButton.onClick.AddListener(DeleteFocusedObject);
-        
-        deleteButton.gameObject.SetActive(false);
-    }
-    
-    void OnDisable()
-    {
-        if (SharedFunctionality.IsQuitting)
-            return; // Stop the function if the application is closing
-        
-        menuShown = false;
-        clickOnScreen.action.started -= HideTapOutsideUI;
-        
-        createButton.onClick.RemoveListener(ShowMenu);
-        cancelButton.onClick.RemoveListener(HideMenu);
-        deleteButton.onClick.RemoveListener(DeleteFocusedObject);
-    }
-
-    /*private void Update()
-    {
-        if (menuShown)
+        if (wrongPlacedObjs.Count > 0)
         {
-            clickOnUI = SharedFunctionality.Instance.TouchUI();
+            foreach (var obj in wrongPlacedObjs)
+            {
+                GridManager.Instance.DestroyObject(obj);
+            }
         }
-        else
-        {
-            clickOnUI = false;
-            createButton.gameObject.SetActive(true);
-        }
-    }*/
-    
-    public void DeleteButtonVisibility()
-    {
-        deleteButton.gameObject.SetActive(GridManager.Instance.placedObjects.Count > 0);
-    }
-
-    void ShowMenu()
-    {
-        if (menuShown)
-        {
-            HideMenu();
-            return;
-        }
-        menuShown = true;
-        menuObject.SetActive(true);
-        
-        menuAnimator.SetBool(Show, true);
-    }
-    
-    private void HideMenu()
-    {
-        menuAnimator.SetBool(Show, false);
-        menuShown = false;
-    }
-    
-    void HideTapOutsideUI(InputAction.CallbackContext context)
-    {
-        if (!clickOnUI)
-        {
-            if (menuShown)
-                HideMenu();
-        }
-    }
-    
-    private void DeleteFocusedObject()
-    {
-        GridManager.Instance.DestroyObject();
     }
     
     #endregion
