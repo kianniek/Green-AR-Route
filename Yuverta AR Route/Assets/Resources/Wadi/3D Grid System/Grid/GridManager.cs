@@ -16,7 +16,7 @@ public class GridManager : BaseManager
     public ObjectSpawner objectSpawner;
     public int gridCurrentLayer;
 
-    public SerializableDictionary<GameObject, int> objsToSpawnAmount = new();
+    public SerializableDictionary<GameObject, ObjectPosition> objsToSpawnAmount = new();
 
     [SerializeField] private float gridSize;
     
@@ -107,6 +107,7 @@ public class GridManager : BaseManager
         
         objectSpawner.ObjectSpawned.AddListener(NewObjectPlaced);
         objectSpawner.m_ObjectPrefabs = objsToSpawnAmount.keys.ToList();
+        objsToSpawnAmount.OnAfterDeserialize();
     }
 
     public Vector3 SnapToGrid(GameObject objToSnap)

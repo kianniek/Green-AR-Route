@@ -15,9 +15,12 @@ public class ObjectLogic : MonoBehaviour
     [SerializeField] Material targetMaterial;
     private static readonly int ObjectLayerId = Shader.PropertyToID("_ObjectLayerId");
     private static readonly int CurrentLayerId = Shader.PropertyToID("_CurrentLayerId");
+    private static readonly Vector3 newScale = new Vector3(0.2f,  0.2f, 0.2f);
 
     private void Start()
     {
+        gameObject.transform.localScale = newScale;
+        gameObject.transform.rotation = Quaternion.Euler(0, -90, 0);
         targetMaterial = GetComponent<MeshRenderer>().material;
     }
 
@@ -33,8 +36,8 @@ public class ObjectLogic : MonoBehaviour
     {
         layerObj = layerIdOfObject;
 
-        targetMaterial.SetFloat(ObjectLayerId, layerIdOfObject);
-        targetMaterial.SetFloat(CurrentLayerId, GridManager.Instance.gridCurrentLayer);
+        /*targetMaterial.SetFloat(ObjectLayerId, layerIdOfObject);
+        targetMaterial.SetFloat(CurrentLayerId, GridManager.Instance.gridCurrentLayer);*/
     }
 
     public void Update()

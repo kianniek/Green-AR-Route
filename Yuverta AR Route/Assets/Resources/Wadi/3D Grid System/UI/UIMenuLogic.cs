@@ -53,7 +53,7 @@ public class UIMenuLogic : MonoBehaviour
         if (CheckName(prefab.name) || prefab == null) return;
         var newUIObject = Instantiate(UIObjectPrefab, UIObjectParent.transform);
         newUIObject.name = CloneTagRemover(prefab.name);
-        newUIObject.GetComponent<Image>().sprite = UIObjectImages.GetValue(prefab.name);
+        //newUIObject.GetComponent<Image>().sprite = UIObjectImages.GetValue(prefab.name);
         newUIObject.GetComponent<Button>(). onClick.AddListener(() => OnButtonClick(newUIObject));
         UIObjects.Add(newUIObject);
     }
@@ -85,7 +85,7 @@ public class UIMenuLogic : MonoBehaviour
         Debug.Log(canvasPosition);
         var newUIObject = Instantiate(UIObjectPrefab, canvasPosition, Quaternion.identity, canvas.transform);
         newUIObject.name = CloneTagRemover(prefab.name);
-        newUIObject.GetComponent<Image>().sprite = UIObjectImages.GetValue(newUIObject.name);
+        //newUIObject.GetComponent<Image>().sprite = UIObjectImages.GetValue(newUIObject.name);
         newUIObject.GetComponent<Button>(). onClick.AddListener(() => OnButtonClick(newUIObject));
         newUIObject.transform.position = canvasPosition;
         startAnimationsButton.gameObject.SetActive(false);
@@ -120,7 +120,7 @@ public class UIMenuLogic : MonoBehaviour
     private void OnButtonClick(GameObject obj)
     {
         DragDropHandler thisObj = obj.GetComponent<DragDropHandler>();
-        thisObj.dragSprite = UIObjectImages.GetValue(obj.name);
+        //thisObj.dragSprite = UIObjectImages.GetValue(obj.name);
         isDragging = true;
         
         GridManager.Instance.objectSpawner.m_SpawnOptionName = obj.name;

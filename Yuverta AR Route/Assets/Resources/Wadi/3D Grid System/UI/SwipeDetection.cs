@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -68,6 +69,7 @@ public class SwipeDetection : MonoBehaviour
 
 	public bool CollideWithObject(out GameObject collidedObject)
 	{
+		List<GameObject> collidedObjects = new List<GameObject>();
 		var hits = SharedFunctionality.Instance.TouchToRay();
 		foreach (var hit in hits)
 		{
@@ -77,16 +79,45 @@ public class SwipeDetection : MonoBehaviour
 			{
 				GridManager.Instance.DestroyObject();
 				collidedObject = null;
-				return false;
+				continue;
 			}
 		
 			clickTime = Time.time;
 			collidedObject = hit.collider.gameObject;
-			return true;
+			collidedObjects.Add(collidedObject);
+		}
+		
+		switch (collidedObjects.Count)
+		{
+			case > 1:
+				collidedObject = DistanceChecker(collidedObjects);
+				return true;
+			case 1:
+				collidedObject = collidedObjects[0];
+				return true;
+			default:
+				collidedObject = null;
+				return false;
+		}
+	}
+
+	private GameObject DistanceChecker(List<GameObject> checkedObjects)
+	{
+		Vector3 user = Camera.main!.transform.position;
+		float closestDistance = Mathf.NegativeInfinity;
+		GameObject closestObject = null;
+
+		foreach (var obj in checkedObjects)
+		{
+			var currentDistance = Vector3.Distance(user, obj.transform.position);
+			if (currentDistance < closestDistance)
+			{
+				closestDistance = currentDistance;
+				closestObject = obj;
+			}
 		}
 
-		collidedObject = null;
-		return false;
+		return closestObject;
 	}
 
 	private bool Conditions()
