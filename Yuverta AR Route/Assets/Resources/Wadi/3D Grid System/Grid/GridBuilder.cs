@@ -20,16 +20,20 @@ public class GridBuilder : MonoBehaviour
     private GameObject gridParent;
     
     public List<GameObject> layerParents = new List<GameObject>();
+    
+    private float blockSize;
     // Start is called before the first frame update
     void Start()
     {
-
+        var obj = GridManager.Instance.objsToSpawnAmount.keys[0];
+        blockSize = obj.GetComponent<MeshRenderer>().bounds.size.y / 4;
         BuildGrid();
     }
 
     public void BuildGrid()
     {
         gridCellPadding = gridCellPadding > 0 ? gridCellPadding : gridPointPrefab.GetComponent<Renderer>().bounds.size.x * 2;
+        gridCellPadding += blockSize;
         // Create a grid of points
         for (int y = 0; y < gridHeight; y++)
         {
@@ -65,7 +69,7 @@ public class GridBuilder : MonoBehaviour
             Transform firstChild = layerParent.transform.GetChild(0);
             Transform lastChild = layerParent.transform.GetChild(layerParent.transform.childCount - 1);
             
-            var sizeChild = firstChild.GetComponent<Renderer>().bounds.size;
+            var sizeChild = firstChild.GetComponentInChildren<Renderer>().bounds.size;
             
             var distanceX = (lastChild.position.x - firstChild.position.x) * 4;
             var distanceZ = (lastChild.position.z - firstChild.position.z) * 4;
