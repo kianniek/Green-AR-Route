@@ -22,6 +22,7 @@ public class UIMenuLogic : MonoBehaviour
     private SerializableDictionary<string, Sprite> UIObjectImages;
 
     [SerializeField] private Button startAnimationsButton;
+    [SerializeField] private Button clearGridButton;
     
     private List<GameObject> UIObjects = new List<GameObject>();
     
@@ -33,6 +34,7 @@ public class UIMenuLogic : MonoBehaviour
     private void Start()
     {
         startAnimationsButton.gameObject.SetActive(false);
+        clearGridButton.gameObject.SetActive(false);
         if (UIObjectParent.transform.childCount <= 0) return;
         foreach (Transform child in UIObjectParent.transform)
         {
@@ -71,9 +73,15 @@ public class UIMenuLogic : MonoBehaviour
         {
             case 0:
                 startAnimationsButton.gameObject.SetActive(true);
+                clearGridButton.gameObject.SetActive(false);
+                break;
+            case >= 16:
+                startAnimationsButton.gameObject.SetActive(false);
+                clearGridButton.gameObject.SetActive(false);
                 break;
             default:
                 startAnimationsButton.gameObject.SetActive(false);
+                clearGridButton.gameObject.SetActive(true);
                 break;
         }
     }
@@ -154,6 +162,18 @@ public class UIMenuLogic : MonoBehaviour
         if (wrongPlacedObjs.Count > 0)
         {
             foreach (var obj in wrongPlacedObjs)
+            {
+                GridManager.Instance.DestroyObject(obj);
+            }
+        }
+    }
+
+    public void ClearGrid()
+    {
+        var objToDelete =  new List<GameObject>(GridManager.Instance.placedObjects);
+        if (objToDelete.Count > 0)
+        {
+            foreach (var obj in objToDelete)
             {
                 GridManager.Instance.DestroyObject(obj);
             }

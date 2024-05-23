@@ -23,6 +23,11 @@ public class ObjectMovement : BaseMovement
     [SerializeField] private float snapDistanceWhile;
     private void Start()
     {
+        //Temporary fixing of the values
+        maxWhileRepeatTime = 150;
+        timeWaitWhile = 0.01f;
+        lerpSpeed = 0.05f;
+        
         currentManager = FindObjectOfType<BaseManager>();
         objectLogic = gameObject.GetComponent<ObjectLogic>();
     }
