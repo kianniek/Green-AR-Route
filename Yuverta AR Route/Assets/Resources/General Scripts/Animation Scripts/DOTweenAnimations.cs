@@ -8,7 +8,7 @@ public class DOTweenAnimations : MonoBehaviour
     // Exposed parameters for the shake effect
     [Header("Shake Parameters")]
     public float shakeDuration = 0.5f;
-    public float shakeStrength = 1f;
+    public float shakeStrength = 0.1f;
     public int shakeVibrato = 10;
     public float shakeRandomness = 90f;
     public bool shakeSnapping = false;
