@@ -9,13 +9,13 @@ public class ObjectMovement : BaseMovement
 {
     public ObjectLogic objectLogic;
 
-    //This bool is active if the object is snapping to a certain position
+    [Tooltip("This bool is active if the object is snapping to a certain position.")]
     public bool animationActive;
     
     [Tooltip("The maximum amount of times a while should repeat itself before stopping.")]
     [SerializeField] private int maxWhileRepeatTime = 0;
 
-    [Tooltip("The time that the while loop needs to pause before running again")]
+    [Tooltip("The time that the while loop needs to pause before running again.")]
     [SerializeField] private float timeWaitWhile = 0;
     
     [Tooltip("The speed at which the object should lerp to the new position.")]
@@ -24,19 +24,25 @@ public class ObjectMovement : BaseMovement
     [Tooltip("The distance the object should be from the new position until it snaps to the grid-position.")]
     [SerializeField] private float snapDistanceWhile;
     
+    [Tooltip("AR Ray-cast Manager")]
     private ARRaycastManager raycastManager;
     private void Start()
     {
-        raycastManager = FindObjectOfType<ARRaycastManager>();
-        //Temporary fixing of the values
+        
+        //Setting the values to a default if they were not set yet
         if (maxWhileRepeatTime == 0) maxWhileRepeatTime = 150;
         if (timeWaitWhile == 0) timeWaitWhile = 0.01f;
         if (lerpSpeed == 0) lerpSpeed = 0.05f;
         
+        //Finding objects
         currentManager = FindObjectOfType<BaseManager>();
         objectLogic = gameObject.GetComponent<ObjectLogic>();
+        raycastManager = FindObjectOfType<ARRaycastManager>();
     }
 
+    /// <summary>
+    /// This function makes the object follow the touch position.
+    /// </summary>
     public void MoveObject()
     {
         StartCoroutine(TrackTouchPosition());
@@ -46,78 +52,30 @@ public class ObjectMovement : BaseMovement
     {
         if (animationActive) yield break;
         CheckLayer();
-        
+        bool editor = Application.isEditor;
         //While the object is being moved its position (x and z) is being updated
         while (Input.GetMouseButton(0) || Input.touchCount > 0)
         {
             SwipeDetection.Instance.trackingObject = true;
             
-            /*Touch touch = Input.GetTouch(0);
-            
-            if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
-            {*/
-                // Create a list to hold the hit results
-                List<ARRaycastHit> hits = new List<ARRaycastHit>();
+            // Create a list to hold the hit results
+            List<ARRaycastHit> hits = new List<ARRaycastHit>();
+                
+            Vector3 position = editor ? Input.mousePosition : Input.GetTouch(0).position;
+            // Raycast from the touch position
+            if (raycastManager.Raycast(position, hits, TrackableType.Planes))
+            {
+                // Get the hit position
+                Pose hitPose = hits[0].pose;
 
-                // Raycast from the touch position
-                if (raycastManager.Raycast(Input.mousePosition/*touch.position*/, hits, TrackableType.Planes))
-                {
-                    // Get the hit position
-                    Pose hitPose = hits[0].pose;
+                // Calculate the adjusted position at the fixed y-level
+                Vector3 adjustedPosition = GetPointOnYPlane(hitPose.position, gameObject.transform.position.y, editor);
 
-                    // Calculate the adjusted position at the fixed y-level
-                    #if UNITY_EDITOR
-                    Vector3 adjustedPosition = GetPointOnYPlane(hitPose.position, gameObject.transform.position.y, true);
-                    #else
-                    Vector3 adjustedPosition = GetPointOnYPlane(hitPose.position, gameObject.transform.position.y);
-                    #endif
-
-                    // Move the object to the adjusted position
-                    gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, adjustedPosition, Time.deltaTime * 10);
-                }
-            //}
+                // Move the object to the adjusted position
+                gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, adjustedPosition, Time.deltaTime * 10);
+            }
             
             yield return new WaitForFixedUpdate();
-            
-            /*var cameraPos = Camera.main!.transform.position;
-            
-            float distanceToCamera = Vector3.Distance(cameraPos, gameObject.transform.position);
-            
-            
-            if (distanceToCamera > 1f)
-            {
-                distanceToCamera = 1f;
-            }
-
-            // Get the position of the touch in screen coordinates
-            Vector3 touchPosition = Input.touchCount switch
-            {
-                0 => Input.mousePosition,
-                _ => Input.GetTouch(0).position
-            };
-
-            // Convert the screen position to world position
-            Vector3 newPosition = Camera.main!.ScreenToWorldPoint(new Vector3(touchPosition.x, touchPosition.y, distanceToCamera));
-            newPosition.y = gameObject.transform.position.y;
-            gameObject.transform.position = newPosition;*/
-
-            yield return new WaitForFixedUpdate();
-            
-            /*SwipeDetection.Instance.trackingObject = true;
-            Vector3 newPosition = SharedFunctionality.Instance.GetTouchWorldPosition();
-            if (newPosition == Vector3.zero)
-            {
-                yield return new WaitForFixedUpdate();
-                continue;
-            }
-
-            var yDiff = Mathf.Abs(newPosition.y - gameObject.transform.position.y);
-            yDiff *= -Camera.main!.transform.forward.magnitude;
-
-            newPosition.y = gameObject.transform.position.y;
-            gameObject.transform.position = newPosition;
-
-            yield return new WaitForFixedUpdate();*/
         }
 
         SwipeDetection.Instance.trackingObject = false;
@@ -153,6 +111,9 @@ public class ObjectMovement : BaseMovement
         gameObject.transform.position = closestGridPosition;
     }
     
+    /// <summary>
+    /// Calculate the objects position relative to its y-level and the last touch/mouse position.
+    /// </summary>
     Vector3 GetPointOnYPlane(Vector3 hitPosition, float yLevel, bool debug = false)
     {
         // Create a ray from the camera through the touch position
@@ -169,6 +130,9 @@ public class ObjectMovement : BaseMovement
     }
 
     //GridManager only functions
+    /// <summary>
+    /// Checking if the object is on the right layer.
+    /// </summary>
     private void CheckLayer()
     {
         if (!GridManager.Instance || !objectLogic) return;
@@ -177,6 +141,9 @@ public class ObjectMovement : BaseMovement
         StartCoroutine(ChangeLayer(GridManager.Instance.gridCurrentLayer));
     }
 
+    /// <summary>
+    /// Forcing the object to snap to the right layer.
+    /// </summary>
     private void DebugLayer()
     {
         if (!GridManager.Instance || !objectLogic) return;
@@ -186,6 +153,9 @@ public class ObjectMovement : BaseMovement
         if (Vector3.Distance(gridPointPos, currentPos) > snapDistanceWhile) StartCoroutine(ChangeLayer(GridManager.Instance.gridCurrentLayer, true, gridPointPos));
     }
 
+    /// <summary>
+    /// Changing the objects layers
+    /// </summary>
     private IEnumerator ChangeLayer(int newLayer, bool debug = false, Vector3? debugPos = null)
     {
         var currentPos = gameObject.transform.position;
