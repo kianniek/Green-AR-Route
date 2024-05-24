@@ -108,6 +108,8 @@ public class GridManager : BaseManager
         objectSpawner.ObjectSpawned.AddListener(NewObjectPlaced);
         objectSpawner.m_ObjectPrefabs = objsToSpawnAmount.keys.ToList();
         objsToSpawnAmount.OnAfterDeserialize();
+        SwipeDetection.Instance.currentManager = this;
+        SwipeDetection.Instance.tagToCheck = "MoveableObject";
     }
 
     public Vector3 SnapToGrid(GameObject objToSnap)
@@ -181,6 +183,11 @@ public class GridManager : BaseManager
     {
         objectMovement = selectedObject.GetComponent<ObjectMovement>();
         selectedObjectIndex = objectMovement.objectLogic.objectIndex;
+        objectMovement.MoveObject();
+    }
+
+    public override void UpdateObject()
+    {
         objectMovement.MoveObject();
     }
 
