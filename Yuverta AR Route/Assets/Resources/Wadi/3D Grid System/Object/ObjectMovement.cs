@@ -1,7 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 public class ObjectMovement : BaseMovement
 {
@@ -11,22 +13,25 @@ public class ObjectMovement : BaseMovement
     public bool animationActive;
     
     [Tooltip("The maximum amount of times a while should repeat itself before stopping.")]
-    [SerializeField] private int maxWhileRepeatTime;
+    [SerializeField] private int maxWhileRepeatTime = 0;
 
     [Tooltip("The time that the while loop needs to pause before running again")]
-    [SerializeField] private float timeWaitWhile;
+    [SerializeField] private float timeWaitWhile = 0;
     
     [Tooltip("The speed at which the object should lerp to the new position.")]
-    [SerializeField] private float lerpSpeed;
+    [SerializeField] private float lerpSpeed = 0;
     
     [Tooltip("The distance the object should be from the new position until it snaps to the grid-position.")]
     [SerializeField] private float snapDistanceWhile;
+    
+    private ARRaycastManager raycastManager;
     private void Start()
     {
+        raycastManager = FindObjectOfType<ARRaycastManager>();
         //Temporary fixing of the values
-        maxWhileRepeatTime = 150;
-        timeWaitWhile = 0.01f;
-        lerpSpeed = 0.05f;
+        if (maxWhileRepeatTime == 0) maxWhileRepeatTime = 150;
+        if (timeWaitWhile == 0) timeWaitWhile = 0.01f;
+        if (lerpSpeed == 0) lerpSpeed = 0.05f;
         
         currentManager = FindObjectOfType<BaseManager>();
         objectLogic = gameObject.GetComponent<ObjectLogic>();
@@ -47,7 +52,34 @@ public class ObjectMovement : BaseMovement
         {
             SwipeDetection.Instance.trackingObject = true;
             
-            var cameraPos = Camera.main!.transform.position;
+            /*Touch touch = Input.GetTouch(0);
+            
+            if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
+            {*/
+                // Create a list to hold the hit results
+                List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+                // Raycast from the touch position
+                if (raycastManager.Raycast(Input.mousePosition/*touch.position*/, hits, TrackableType.Planes))
+                {
+                    // Get the hit position
+                    Pose hitPose = hits[0].pose;
+
+                    // Calculate the adjusted position at the fixed y-level
+                    #if UNITY_EDITOR
+                    Vector3 adjustedPosition = GetPointOnYPlane(hitPose.position, gameObject.transform.position.y, true);
+                    #else
+                    Vector3 adjustedPosition = GetPointOnYPlane(hitPose.position, gameObject.transform.position.y);
+                    #endif
+
+                    // Move the object to the adjusted position
+                    gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, adjustedPosition, Time.deltaTime * 10);
+                }
+            //}
+            
+            yield return new WaitForFixedUpdate();
+            
+            /*var cameraPos = Camera.main!.transform.position;
             
             float distanceToCamera = Vector3.Distance(cameraPos, gameObject.transform.position);
             
@@ -67,7 +99,7 @@ public class ObjectMovement : BaseMovement
             // Convert the screen position to world position
             Vector3 newPosition = Camera.main!.ScreenToWorldPoint(new Vector3(touchPosition.x, touchPosition.y, distanceToCamera));
             newPosition.y = gameObject.transform.position.y;
-            gameObject.transform.position = newPosition;
+            gameObject.transform.position = newPosition;*/
 
             yield return new WaitForFixedUpdate();
             
@@ -120,6 +152,21 @@ public class ObjectMovement : BaseMovement
         animationActive = false;
         gameObject.transform.position = closestGridPosition;
     }
+    
+    Vector3 GetPointOnYPlane(Vector3 hitPosition, float yLevel, bool debug = false)
+    {
+        // Create a ray from the camera through the touch position
+        Vector3 touchPosition = debug ? Input.mousePosition : Input.GetTouch(0).position;
+        Ray ray = Camera.main!.ScreenPointToRay(touchPosition);
+
+        // Calculate the distance to the yLevel plane from the camera
+        float distanceToYLevel = (yLevel - ray.origin.y) / ray.direction.y;
+
+        // Get the point of intersection
+        Vector3 pointOnYPlane = ray.origin + ray.direction * distanceToYLevel;
+
+        return new Vector3(pointOnYPlane.x, yLevel, pointOnYPlane.z);
+    }
 
     //GridManager only functions
     private void CheckLayer()
@@ -168,7 +215,6 @@ public class ObjectMovement : BaseMovement
             whilePos.y = Mathf.Lerp(gameObject.transform.position.y, currentPos.y, lerpSpeed);
             gameObject.transform.position = whilePos;
             yield return new WaitForSeconds(timeWaitWhile);
-            Debug.Log(whileTimeCalled);
         }
         gameObject.transform.position = currentPos;
         objectLogic.SetObjectLayerID(newLayer);
