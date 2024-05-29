@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class SnowMaterialController : MonoBehaviour
+public class MaterialController : MonoBehaviour
 {
     private bool isSnowing;
+    private bool isRaining;
 
     public bool IsSnowing
     {
@@ -16,21 +17,39 @@ public class SnowMaterialController : MonoBehaviour
             SetSnowing(isSnowing);
         }
     }
+    
+    public bool IsRaining
+    {
+        get => isRaining;
+        set
+        {
+            isRaining = value;
+            SetRaining(isRaining);
+        }
+    }
 
     [Header("Snow Material")]
     [SerializeField] private Material snowMaterial;  // Assign your material in the Inspector
 
-    [Header("Material Properties")]
+    [Header("Snow Material Properties")]
     [SerializeField] private string normalThresholdProperty = "_NormalThreshold_snow";
     [SerializeField] private string contrastProperty = "_contrast_snow";
     [SerializeField] private string noiseStrengthProperty = "_NoiseStrength_snow";
     [SerializeField] private string displacementStrengthProperty = "_DisplacementStrength_snow";
+    
+    [Header("Rain Material Properties")]
+    [SerializeField] private string rainNormalThresholdProperty = "_NormalThreshold_rain";
+    [SerializeField] private string rainContrastProperty = "_contrast_rain";
 
     [Header("Snow Settings")]
     public float normalThreshold;
     public float contrast;
     public float noiseStrength;
     public float displacementStrength;
+    
+    [Header("Rain Settings")]
+    public float normalThresholdRain;
+    public float contrastRain;
     
     [Header("Snow Animator")]
     [SerializeField] private Animator snowAnimator;
@@ -51,6 +70,9 @@ public class SnowMaterialController : MonoBehaviour
         contrast = snowMaterial.GetFloat(contrastProperty);
         noiseStrength = snowMaterial.GetFloat(noiseStrengthProperty);
         displacementStrength = snowMaterial.GetFloat(displacementStrengthProperty);
+        
+        normalThresholdRain = snowMaterial.GetFloat(rainNormalThresholdProperty);
+        contrastRain = snowMaterial.GetFloat(rainContrastProperty);
     }
 
     void Update()
@@ -59,6 +81,9 @@ public class SnowMaterialController : MonoBehaviour
         snowMaterial.SetFloat(contrastProperty, contrast);
         snowMaterial.SetFloat(noiseStrengthProperty, noiseStrength);
         snowMaterial.SetFloat(displacementStrengthProperty, displacementStrength);
+        
+        snowMaterial.SetFloat(rainNormalThresholdProperty, normalThresholdRain);
+        snowMaterial.SetFloat(rainContrastProperty, contrastRain);
     }
     
     public void ToggleSnowing()
@@ -68,5 +93,15 @@ public class SnowMaterialController : MonoBehaviour
     private void SetSnowing(bool isSnowing)
     {
         snowAnimator.SetBool("isSnowing", isSnowing);
+    }
+    
+    public void ToggleRaining()
+    {
+        IsRaining = !IsRaining;
+    }
+    
+    private void SetRaining(bool isRaining)
+    {
+        snowAnimator.SetBool("isRaining", isRaining);
     }
 }
