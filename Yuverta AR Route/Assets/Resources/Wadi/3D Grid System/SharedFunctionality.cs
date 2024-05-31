@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 public class SharedFunctionality : MonoBehaviour
 {
@@ -66,6 +67,70 @@ public class SharedFunctionality : MonoBehaviour
         //RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, screenPosition, canvas.worldCamera, out Vector2 canvasPosition);
         
         return screenPosition;
+    }
+
+    public Vector3 ObjectMovement(ARRaycastManager raycastManager, GameObject obj)
+    {
+        Debug.Log("Yup");
+        // Create a list to hold the hit results
+        List<ARRaycastHit> hits = new List<ARRaycastHit>();
+                
+        Vector3 position = Application.isEditor ? Input.mousePosition : Input.GetTouch(0).position;
+        // Raycast from the touch position
+        var rayCast =  ARRayCast(raycastManager, position, obj, hits);
+
+        if (rayCast != Vector3.zero)
+        {
+            return new Vector3(rayCast.x, obj.transform.position.y, rayCast.z);
+        }
+        Debug.Log("Raycast failed");
+        
+        var ray = Camera.main!.ScreenPointToRay(position);
+        
+        if (Physics.Raycast(ray, out var hit))
+        {
+            Debug.Log("Raycast2 hit");
+            var hit2 = ARRayCast(raycastManager, hit.transform.position, obj, hits);
+            return new Vector3(hit2.x, obj.transform.position.y, hit2.z);
+        }
+        Debug.Log("Raycasts failed");
+
+        return obj.transform.position;
+    }
+
+    Vector3 ARRayCast(ARRaycastManager raycastManager, Vector3 position, GameObject gameObject, List<ARRaycastHit> hits)
+    {
+        if (raycastManager.Raycast(position, hits, TrackableType.Planes))
+        {
+            // Get the hit position
+            Pose hitPose = hits[0].pose;
+
+            // Calculate the adjusted position at the fixed y-level
+            Vector3 adjustedPosition = GetPointOnYPlane(hitPose.position, gameObject.transform.position.y, Application.isEditor);
+
+            // Move the object to the adjusted position
+            return Vector3.Lerp(gameObject.transform.position, adjustedPosition, Time.deltaTime * 10);
+        }
+
+        return Vector3.zero;
+    }
+    
+    /// <summary>
+    /// Calculate the objects position relative to its y-level and the last touch/mouse position.
+    /// </summary>
+    Vector3 GetPointOnYPlane(Vector3 hitPosition, float yLevel, bool debug = false)
+    {
+        // Create a ray from the camera through the touch position
+        Vector3 touchPosition = debug ? Input.mousePosition : Input.GetTouch(0).position;
+        Ray ray = Camera.main!.ScreenPointToRay(touchPosition);
+
+        // Calculate the distance to the yLevel plane from the camera
+        float distanceToYLevel = (yLevel - ray.origin.y) / ray.direction.y;
+
+        // Get the point of intersection
+        Vector3 pointOnYPlane = ray.origin + ray.direction * distanceToYLevel;
+
+        return new Vector3(pointOnYPlane.x, yLevel, pointOnYPlane.z);
     }
     
     public Vector3 GetTouchWorldPosition()

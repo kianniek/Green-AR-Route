@@ -10,7 +10,6 @@ using Random = UnityEngine.Random;
 public class VideoPlayerScript : MonoBehaviour
 {
     [SerializeField] public VideoPlayer videoPlayer;
-    //private const string folderPath = @"C:\Users\Trist\OneDrive\Documenten\GitHub\Onder-het-Maaiveld\Onder-het-Maaiveld\Assets\Resources\Videos"; // Path to the folder containing videos
     //public string videoUrl;
     [SerializeField] public VideoClip videoClip;
 
@@ -22,7 +21,8 @@ public class VideoPlayerScript : MonoBehaviour
         videoPlayer.EnableAudioTrack(0, true);
         videoPlayer.Prepare();  
         videoPlayer.Pause();
-        StartCoroutine(FollowUser());
+        //gameObject.transform.LookAt(Camera.main!.transform);
+        //StartCoroutine(FollowUser());
     }
 
     private string SetVideoUrl()
@@ -47,12 +47,6 @@ public class VideoPlayerScript : MonoBehaviour
 
     public void OnClick()
     {
-        if (!videoPlayer.isPlaying && !videoPlayer.isPaused)
-        {
-            videoPlayer.Play();
-            return;
-        }
-        
         switch (videoPlayer.isPaused)
         {
             case false:
@@ -61,6 +55,7 @@ public class VideoPlayerScript : MonoBehaviour
             
             case true:
                 videoPlayer.Play();
+                StartCoroutine(FollowUser());
                 break;
         }
     }
@@ -71,13 +66,6 @@ public class VideoPlayerScript : MonoBehaviour
         {
             gameObject.transform.LookAt(Camera.main!.transform);
             Debug.Log("Following user");
-            yield return new WaitForFixedUpdate();
-        }
-        
-        if (!videoPlayer.isPlaying) yield break;
-
-        while (videoPlayer.isPlaying && videoPlayer.isPaused)
-        {
             yield return new WaitForFixedUpdate();
         }
     }

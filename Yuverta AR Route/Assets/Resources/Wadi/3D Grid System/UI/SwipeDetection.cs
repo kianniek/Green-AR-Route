@@ -35,8 +35,9 @@ public class SwipeDetection : MonoBehaviour
 
 	private void CheckPressLocation()
 	{
-		Debug.Log("CheckPressLocation");
 		if (Conditions() || trackingObject) return;
+		
+		Debug.Log("Checking press location");
 		
 		initialPos = currentPos;
 		
@@ -79,7 +80,7 @@ public class SwipeDetection : MonoBehaviour
 		var hits = SharedFunctionality.Instance.TouchToRay();
 		foreach (var hit in hits)
 		{
-			if (!hit.collider.gameObject.CompareTag(tagToCheck)) continue;
+			if (!hit.collider.gameObject.CompareTag(tagToCheck) && !hit.collider.gameObject.CompareTag("WorldUI")) continue;
 			
 			if (Time.time - clickTime < ClickDelay && Time.time - clickTime > 0.1f)
 			{
@@ -125,9 +126,10 @@ public class SwipeDetection : MonoBehaviour
 
 		return closestObject;
 	}
-
+	
 	private bool Conditions()
 	{
-		return SharedFunctionality.Instance.TouchUI() || GridManager.Instance && GridManager.Instance.uiMenu.isDragging;
+		if (GridManager.Instance && GridManager.Instance.uiMenu.isDragging) return true;
+		return SharedFunctionality.Instance.TouchUI();
 	}
 }
