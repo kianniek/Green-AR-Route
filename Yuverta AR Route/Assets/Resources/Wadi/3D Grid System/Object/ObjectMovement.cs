@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -188,5 +190,17 @@ public class ObjectMovement : BaseMovement
         }
         gameObject.transform.position = currentPos;
         objectLogic.SetObjectLayerID(newLayer);
+    }
+
+    private void Update()
+    {
+        KeepObjectOnSnappedPosition();
+    }
+
+    public void KeepObjectOnSnappedPosition()
+    {
+        if (!objectLogic.SnappedObject) return;
+        var closestGridPosition = objectLogic.SnappedObject.transform.position;
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, closestGridPosition, lerpSpeed);
     }
 }

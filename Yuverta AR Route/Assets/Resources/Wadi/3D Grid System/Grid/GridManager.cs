@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
@@ -34,6 +35,14 @@ public class GridManager : BaseManager
     public int selectedObjectIndex;
 
     public float distanceLayers;
+    
+    private List<CenterObjects> centerObjects = new();
+    
+    public List<CenterObjects> CenterObjectsList
+    {
+        get => centerObjects;
+        set => centerObjects = value;
+    }
 
     #region Enum
 
@@ -56,30 +65,8 @@ public class GridManager : BaseManager
         MiddleRight2, //1 1 2
         UpperLeft2, //2 1 0
         UpperMiddle2, //2 1 1
-        UpperRight2, //2 1 2
+        UpperRight2 //2 1 2
     }
-
-    public List<String> ObjectPositionName = new List<string>()
-    {
-        "BottomLeft", //0 0 0
-        "BottomMiddle", //0 0 1
-        "BottomRight", //0 0 2
-        "MiddleLeft", //1 0 0
-        "Middle", //1 0 1
-        "MiddleRight", //1 0 2
-        "UpperLeft", //2 0 0
-        "UpperMiddle", //2 0 1
-        "UpperRight", //2 0 2
-        "BottomLeft2", //0 1 0
-        "BottomMiddle2", //0 1 1
-        "BottomRight2",   //0 1 2
-        "MiddleLeft2", //1 1 0
-        "Middle2",    //1 1 1
-        "MiddleRight2", //1 1 2
-        "UpperLeft2", //2 1 0
-        "UpperMiddle2", //2 1 1
-        "UpperRight2", //2 1 2
-    };
 
     #endregion
 
@@ -133,6 +120,7 @@ public class GridManager : BaseManager
         occupiedPositions.Add(closestGridPoint, true);
         objectLogic.isPlaced = true;
         objectLogic.previousSnappedPosition = closestGridPoint.transform.position;
+        objectLogic.SnappedObject = closestGridPoint;
         return closestGridPoint.transform.position;
     }
 
@@ -160,7 +148,7 @@ public class GridManager : BaseManager
     public override void NewObjectPlaced()
     {
         //Getting the last object spawned by the object spawner
-        GameObject newObject = objectSpawner.lastSpawnedObject;
+        var newObject = objectSpawner.lastSpawnedObject;
         
         //Adding the object to the list of placed objects
         placedObjects.Add(newObject); 
@@ -234,13 +222,13 @@ public class GridManager : BaseManager
         foreach (var obj in placedObjects)
         {
             var script = obj.GetComponent<ObjectLogic>();
-            var gridPoint = ClosestGridPoint(obj.transform.position, findLastPoint: true);
-            if (script.objectPosition.ToString() == gridPoint.GetComponent<GridPointScript>().objectPosition)
+            if (script.IsCorrectlyPlaced())
             {
                 continue;
             }
 
             wrongPlaces.Add(obj);
+            Debug.Log($"Object {obj.name} is not correctly placed.");
             continue;
         }
 
@@ -250,4 +238,11 @@ public class GridManager : BaseManager
             _ => false
         };
     }
+    
+    public bool CheckIfAllPlaced()
+    {
+        return placedObjects.Count == objsToSpawnAmount.keys.Count;
+    }
+    
+    
 }
