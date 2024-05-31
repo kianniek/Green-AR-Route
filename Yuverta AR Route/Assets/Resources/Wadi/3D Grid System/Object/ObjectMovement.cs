@@ -59,23 +59,8 @@ public class ObjectMovement : BaseMovement
         while (Input.GetMouseButton(0) || Input.touchCount > 0)
         {
             SwipeDetection.Instance.trackingObject = true;
-            
-            // Create a list to hold the hit results
-            List<ARRaycastHit> hits = new List<ARRaycastHit>();
-                
-            Vector3 position = editor ? Input.mousePosition : Input.GetTouch(0).position;
-            // Raycast from the touch position
-            if (raycastManager.Raycast(position, hits, TrackableType.Planes))
-            {
-                // Get the hit position
-                Pose hitPose = hits[0].pose;
 
-                // Calculate the adjusted position at the fixed y-level
-                Vector3 adjustedPosition = GetPointOnYPlane(hitPose.position, gameObject.transform.position.y, editor);
-
-                // Move the object to the adjusted position
-                gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, adjustedPosition, Time.deltaTime * 10);
-            }
+            gameObject.transform.position = SharedFunctionality.Instance.ObjectMovement(raycastManager, gameObject);
             
             yield return new WaitForFixedUpdate();
         }
@@ -111,24 +96,6 @@ public class ObjectMovement : BaseMovement
 
         animationActive = false;
         gameObject.transform.position = closestGridPosition;
-    }
-    
-    /// <summary>
-    /// Calculate the objects position relative to its y-level and the last touch/mouse position.
-    /// </summary>
-    Vector3 GetPointOnYPlane(Vector3 hitPosition, float yLevel, bool debug = false)
-    {
-        // Create a ray from the camera through the touch position
-        Vector3 touchPosition = debug ? Input.mousePosition : Input.GetTouch(0).position;
-        Ray ray = Camera.main!.ScreenPointToRay(touchPosition);
-
-        // Calculate the distance to the yLevel plane from the camera
-        float distanceToYLevel = (yLevel - ray.origin.y) / ray.direction.y;
-
-        // Get the point of intersection
-        Vector3 pointOnYPlane = ray.origin + ray.direction * distanceToYLevel;
-
-        return new Vector3(pointOnYPlane.x, yLevel, pointOnYPlane.z);
     }
 
     //GridManager only functions

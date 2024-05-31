@@ -38,7 +38,7 @@ public class ImageTracking : MonoBehaviour
     {
         GameObject spawnedObject = Instantiate(prefabToSpawn, trackedImage.transform.position, trackedImage.transform.rotation);
         spawnedObject.name = trackedImage.referenceImage.name;
-        DisplayVideoHandler.Instance.VideoPlayerSpawned(spawnedObject);
+        DisplayVideoManager.Instance.VideoPlayerSpawned(spawnedObject);
     }
 
     private void UpdateObject(ARTrackedImage trackedImage)
