@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -12,6 +13,7 @@ public class GridBuilder : MonoBehaviour
     [SerializeField] private float gridCellPadding;
     [SerializeField] private GameObject gridPointPrefab;
     [SerializeField] private GameObject gridParent;
+    private CenterHorizontaly centerHorizontaly;
 
     public List<GameObject> layerParents = new List<GameObject>();
 
@@ -24,6 +26,7 @@ public class GridBuilder : MonoBehaviour
         stoppingDistance = new Vector3(-0.1f, 1, 0.4f);
         var obj = GridManager.Instance.objsToSpawnAmount.keys[0];
         blockSize = obj.GetComponent<MeshRenderer>().bounds.size.y / 4;
+        centerHorizontaly = GetComponent<CenterHorizontaly>();
         BuildGrid();
     }
 
@@ -33,20 +36,24 @@ public class GridBuilder : MonoBehaviour
         gridCellPadding = gridCellPadding > 0
             ? gridCellPadding
             : gridPointPrefab.GetComponent<Renderer>().bounds.size.x * 2;
+
         gridCellPadding += blockSize;
 
         var indexOfGridPoint = 0;
+
+
         // Create a grid of points
         for (int y = 0; y < gridHeight; y++)
         {
             var layerParentPos = gameObject.transform.position;
             layerParentPos.y += y * gridCellPadding;
-            
+
             var layerParent = Instantiate(gridParent, layerParentPos, Quaternion.identity, transform);
             layerParent.name = $"Layer {y}";
-            
+
+            centerHorizontaly.AddObject = layerParent;
+
             var centerObjects = layerParent.AddComponent<CenterObjects>();
-            centerObjects.limitAxis = CenterObjects.Axis.None;
             centerObjects.stoppingDistance = stoppingDistance;
 
             layerParents.Add(layerParent);
@@ -82,13 +89,7 @@ public class GridBuilder : MonoBehaviour
                 }
             }
 
-            //Add all children to the center objects script
-            centerObjects.objects = new List<GameObject>();
-            for (int i = 0; i < layerParent.transform.childCount; i++)
-            {
-                centerObjects.objects.Add(layerParent.transform.GetChild(i).gameObject);
-            }
-
+            // Set the size of the box collider of the layer parent
             var firstChild = layerParent.transform.GetChild(0);
             var lastChild = layerParent.transform.GetChild(layerParent.transform.childCount - 1);
 
@@ -101,9 +102,20 @@ public class GridBuilder : MonoBehaviour
             distanceZ += sizeChild.z;
             layerParent.GetComponent<BoxCollider>().size =
                 new Vector3(Mathf.Abs(distanceX), 0.001f, Mathf.Abs(distanceZ));
-            
+
+            //Add all children to the center objects script
+            centerObjects.objects = new List<GameObject>();
+            for (int i = 0; i < layerParent.transform.childCount; i++)
+            {
+                centerObjects.objects.Add(layerParent.transform.GetChild(i).gameObject);
+            }
+
+
+            //Add the center objects script to the center objects list of the grid manager
             GridManager.Instance.CenterObjectsList.Add(centerObjects);
         }
+
+        GridManager.Instance.CenterHorizontaly = centerHorizontaly;
         GridManager.Instance.distanceLayers = gridCellPadding;
         GridManager.Instance.gridLayering.gridDimensions = new Vector2Int(0, gridHeight - 1);
     }

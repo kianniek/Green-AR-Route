@@ -1,37 +1,25 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CenterObjects : MonoBehaviour
 {
-    public enum Axis
-    {
-        None,
-        X,
-        Y,
-        Z
-    }
-
     public List<GameObject> objects;
-    
-    public Vector3 stoppingDistance = new Vector3(0.1f,0.1f,0.1f);
-    
-    public Axis limitAxis = Axis.None;
 
-    private List<Vector3> initalPositions = new List<Vector3>();
+    public Vector3 stoppingDistance = new Vector3(0.1f, 0.1f, 0.1f);
+
+    private Dictionary<GameObject, Vector3> initialPositions = new Dictionary<GameObject, Vector3>();
+    private Dictionary<GameObject, Vector3> centerPositions = new Dictionary<GameObject, Vector3>();
 
     private void Start()
     {
-        // Store initial positions
-
-        initalPositions.Clear();
-        foreach (var obj in objects)
-        {
-            initalPositions.Add(obj.transform.position);
-        }
+        initialPositions = new Dictionary<GameObject, Vector3>();
+        centerPositions = new Dictionary<GameObject, Vector3>();
+        CalculateCenterPositions();
     }
 
-    public void MoveToCenter()
+    public void CalculateCenterPositions()
     {
         if (objects == null || objects.Count == 0)
         {
@@ -39,12 +27,35 @@ public class CenterObjects : MonoBehaviour
             return;
         }
         
-        Debug.Log("Moving objects to center.");
-        Vector3 center = CalculateCenterPosition(objects);
-        Debug.Log($"Center position: {center}");
-        MoveObjectsToCenter(objects, center);
+        // Store initial positions
+        foreach (var obj in objects)
+        {
+            initialPositions.Add(obj, obj.transform.localPosition);
+        }
+        
+        var center = CalculateCenterPosition(initialPositions.Values.ToList());
+
+        // Store center positions
+        foreach (var initialPosition in initialPositions)
+        {
+            centerPositions.Add(initialPosition.Key, CalculateObjectsCenteredPosition(initialPosition.Key, center));
+        }
     }
 
+    public void MoveObjectsToCenter()
+    {
+        if (objects == null || objects.Count == 0)
+        {
+            Debug.LogError("No objects assigned.");
+            return;
+        }
+
+        foreach (var t in objects)
+        {
+            t.transform.localPosition = centerPositions[t];
+        }
+    }
+    
     public void ResetPositions()
     {
         if (objects == null || objects.Count == 0)
@@ -53,40 +64,32 @@ public class CenterObjects : MonoBehaviour
             return;
         }
 
-        Debug.Log("Resetting object positions.");
-        for (int i = 0; i < objects.Count; i++)
+        foreach (var t in objects)
         {
-            objects[i].transform.position = initalPositions[i];
+            t.transform.localPosition = initialPositions[t];
         }
     }
 
-    Vector3 CalculateCenterPosition(List<GameObject> objects)
+    private Vector3 CalculateCenterPosition(List<Vector3> Positions)
     {
-        Vector3 center = Vector3.zero;
-
-        foreach (GameObject obj in objects)
+        var center = new Vector3();
+        foreach (var pos in Positions)
         {
-            center += obj.transform.position;
+            center += pos;
         }
 
-        center /= objects.Count;
-
+        center /= Positions.Count;
         return center;
     }
 
-    private void MoveObjectsToCenter(List<GameObject> objects, Vector3 center)
+    private Vector3 CalculateObjectsCenteredPosition(GameObject obj, Vector3 center)
     {
-        foreach (var obj in objects)
-        {
-            var collider = obj.GetComponentInChildren<Collider>();
-            if (collider)
-            {
-                var local = obj.transform.localPosition;
-                var x = local.x * stoppingDistance.x;
-                var y = local.y * stoppingDistance.y;
-                var z = local.z * stoppingDistance.z;
-                obj.transform.localPosition = new Vector3(x, y, z);
-            }
-        }
+        var local = obj.transform.localPosition;
+        var x = local.x * stoppingDistance.x;
+        var y = local.y * stoppingDistance.y;
+        var z = local.z * stoppingDistance.z;
+
+        var newPos = new Vector3(x, y, z);
+        return newPos;
     }
 }

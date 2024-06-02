@@ -164,7 +164,7 @@ public class ObjectMovement : BaseMovement
         KeepObjectOnSnappedPosition();
     }
 
-    public void KeepObjectOnSnappedPosition()
+    private void KeepObjectOnSnappedPosition()
     {
         if (!objectLogic.SnappedObject) return;
         var closestGridPosition = objectLogic.SnappedObject.transform.position;

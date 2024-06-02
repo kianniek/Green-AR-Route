@@ -35,14 +35,10 @@ public class GridManager : BaseManager
     public int selectedObjectIndex;
 
     public float distanceLayers;
-    
-    private List<CenterObjects> centerObjects = new();
-    
-    public List<CenterObjects> CenterObjectsList
-    {
-        get => centerObjects;
-        set => centerObjects = value;
-    }
+
+    public List<CenterObjects> CenterObjectsList { get; set; } = new();
+
+    public CenterHorizontaly CenterHorizontaly { get; set; }
 
     #region Enum
 

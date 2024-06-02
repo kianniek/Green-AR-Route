@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 270314048403859025}
   - component: {fileID: 1580805498589218402}
   - component: {fileID: 4318329506945333900}
+  - component: {fileID: 4796725143264040545}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -314,7 +315,6 @@ MonoBehaviour:
   placedObjects: []
   selectedObjectIndex: 0
   distanceLayers: 0
-  ObjectPositionName: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &1580805498589218402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +335,7 @@ MonoBehaviour:
   gridParent: {fileID: 7323719228132672162, guid: 188c10f59b3d47a4e921e11090a02e95,
     type: 3}
   layerParents: []
+  stoppingDistance: {x: -0.1, y: 1, z: 0.4}
 --- !u!114 &4318329506945333900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,3 +351,15 @@ MonoBehaviour:
   gridText: {fileID: 2680831891092288139}
   gridDisplayText: 'Layer: '
   gridDimensions: {x: 0, y: 0}
+--- !u!114 &4796725143264040545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5468812455401227516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4acf2c5e13b429d4a8ce5dd19c1024f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
