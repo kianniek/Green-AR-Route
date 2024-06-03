@@ -12,6 +12,8 @@ public class CenterObjects : MonoBehaviour
     private Dictionary<GameObject, Vector3> initialPositions = new Dictionary<GameObject, Vector3>();
     private Dictionary<GameObject, Vector3> centerPositions = new Dictionary<GameObject, Vector3>();
 
+
+    private Vector3 globalCenter;
     private void Start()
     {
         initialPositions = new Dictionary<GameObject, Vector3>();
@@ -33,12 +35,12 @@ public class CenterObjects : MonoBehaviour
             initialPositions.Add(obj, obj.transform.localPosition);
         }
         
-        var center = CalculateCenterPosition(initialPositions.Values.ToList());
+        globalCenter = CalculateCenterPosition(initialPositions.Values.ToList());
 
         // Store center positions
         foreach (var initialPosition in initialPositions)
         {
-            centerPositions.Add(initialPosition.Key, CalculateObjectsCenteredPosition(initialPosition.Key, center));
+            centerPositions.Add(initialPosition.Key, CalculateObjectsCenteredPosition(initialPosition.Key, globalCenter));
         }
     }
 
@@ -52,6 +54,12 @@ public class CenterObjects : MonoBehaviour
 
         foreach (var t in objects)
         {
+            //check if t is in centerPositions and if not calculate it
+            if (!centerPositions.ContainsKey(t))
+            {
+                centerPositions.Add(t, CalculateObjectsCenteredPosition(t, globalCenter));
+            }
+            
             t.transform.localPosition = centerPositions[t];
         }
     }

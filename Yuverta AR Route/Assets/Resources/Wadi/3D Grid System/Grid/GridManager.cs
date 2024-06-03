@@ -38,7 +38,7 @@ public class GridManager : BaseManager
 
     public List<CenterObjects> CenterObjectsList { get; set; } = new();
 
-    public CenterHorizontaly CenterHorizontaly { get; set; }
+    public CenterVertically CenterVertically { get; set; }
 
     #region Enum
 

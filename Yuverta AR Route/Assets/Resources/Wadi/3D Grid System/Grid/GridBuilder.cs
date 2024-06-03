@@ -13,7 +13,7 @@ public class GridBuilder : MonoBehaviour
     [SerializeField] private float gridCellPadding;
     [SerializeField] private GameObject gridPointPrefab;
     [SerializeField] private GameObject gridParent;
-    private CenterHorizontaly centerHorizontaly;
+    private CenterVertically centerVertically;
 
     public List<GameObject> layerParents = new List<GameObject>();
 
@@ -26,7 +26,7 @@ public class GridBuilder : MonoBehaviour
         stoppingDistance = new Vector3(-0.1f, 1, 0.4f);
         var obj = GridManager.Instance.objsToSpawnAmount.keys[0];
         blockSize = obj.GetComponent<MeshRenderer>().bounds.size.y / 4;
-        centerHorizontaly = GetComponent<CenterHorizontaly>();
+        centerVertically = GetComponent<CenterVertically>();
         BuildGrid();
     }
 
@@ -51,7 +51,7 @@ public class GridBuilder : MonoBehaviour
             var layerParent = Instantiate(gridParent, layerParentPos, Quaternion.identity, transform);
             layerParent.name = $"Layer {y}";
 
-            centerHorizontaly.AddObject = layerParent;
+            centerVertically.AddObject = layerParent;
 
             var centerObjects = layerParent.AddComponent<CenterObjects>();
             centerObjects.stoppingDistance = stoppingDistance;
@@ -115,7 +115,7 @@ public class GridBuilder : MonoBehaviour
             GridManager.Instance.CenterObjectsList.Add(centerObjects);
         }
 
-        GridManager.Instance.CenterHorizontaly = centerHorizontaly;
+        GridManager.Instance.CenterVertically = centerVertically;
         GridManager.Instance.distanceLayers = gridCellPadding;
         GridManager.Instance.gridLayering.gridDimensions = new Vector2Int(0, gridHeight - 1);
     }

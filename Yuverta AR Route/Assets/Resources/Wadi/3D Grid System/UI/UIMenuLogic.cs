@@ -174,7 +174,7 @@ public class UIMenuLogic : MonoBehaviour
             centerObjectScript.MoveObjectsToCenter();
         }
         
-        GridManager.Instance.CenterHorizontaly.CenterObjects();
+        GridManager.Instance.CenterVertically.CenterObjects();
         
         yield return new WaitForSeconds(3);
         
@@ -196,7 +196,7 @@ public class UIMenuLogic : MonoBehaviour
                 centerObjectScript.ResetPositions();
                 
             }
-            GridManager.Instance.CenterHorizontaly.MoveCenteredObjecsBack();
+            GridManager.Instance.CenterVertically.MoveCenteredObjectsBack();
 
         }
         else
