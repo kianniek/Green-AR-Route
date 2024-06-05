@@ -15,6 +15,11 @@ public class BaseManager : MonoBehaviour
         
     }
 
+    public virtual void UpdateObject()
+    {
+        
+    }
+
     //This function handles when an object is destroyed
     public virtual void DestroyObject(GameObject objectToDestroy = null)
     {

@@ -10,6 +10,12 @@ public class SwipeDetection : MonoBehaviour
 	public bool trackingObject;
 	public delegate void Swipe(Vector2 direction);
 	public event Swipe swipePerformed;
+	
+	[Tooltip("The current manager that is being used")]
+	public BaseManager currentManager;
+	[Tooltip("The tag that the object should have to be selected")]
+	public string tagToCheck;
+	
 	[SerializeField] private InputAction position, press;
 
 	[SerializeField] private float swipeResistance = 100;
@@ -29,8 +35,9 @@ public class SwipeDetection : MonoBehaviour
 
 	private void CheckPressLocation()
 	{
-		Debug.Log("CheckPressLocation");
 		if (Conditions() || trackingObject) return;
+		
+		Debug.Log("Checking press location");
 		
 		initialPos = currentPos;
 		
@@ -39,13 +46,13 @@ public class SwipeDetection : MonoBehaviour
 		{
 			try
 			{
-				if (collidedObject) GridManager.Instance.SelectedObject(collidedObject);
+				if (collidedObject) currentManager.SelectedObject(collidedObject);
 			}
 			catch (Exception e)
 			{
 				Debug.LogError(e);
 				if (trackingObject) return;
-				GridManager.Instance.objectMovement.MoveObject();
+				currentManager.UpdateObject();
 			}
 		}
 	}
@@ -73,11 +80,11 @@ public class SwipeDetection : MonoBehaviour
 		var hits = SharedFunctionality.Instance.TouchToRay();
 		foreach (var hit in hits)
 		{
-			if (!hit.collider.gameObject.CompareTag("MoveableObject")) continue;
+			if (!hit.collider.gameObject.CompareTag(tagToCheck) && !hit.collider.gameObject.CompareTag("WorldUI")) continue;
 			
 			if (Time.time - clickTime < ClickDelay && Time.time - clickTime > 0.1f)
 			{
-				GridManager.Instance.DestroyObject();
+				currentManager.DestroyObject();
 				collidedObject = null;
 				continue;
 			}
@@ -119,9 +126,10 @@ public class SwipeDetection : MonoBehaviour
 
 		return closestObject;
 	}
-
+	
 	private bool Conditions()
 	{
-		return SharedFunctionality.Instance.TouchUI() || GridManager.Instance.uiMenu.isDragging;
+		if (GridManager.Instance && GridManager.Instance.uiMenu.isDragging) return true;
+		return SharedFunctionality.Instance.TouchUI();
 	}
 }

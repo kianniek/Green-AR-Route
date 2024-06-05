@@ -9,7 +9,9 @@ public class BaseMovement : MonoBehaviour
     [Description("The manager that is active in that scene.")]
     protected virtual BaseManager currentManager { get; set; }
 
-    //This function is to be called when the object is being moved
+    /// <summary>
+    /// This function makes the object follow the touch position.
+    /// </summary>
     protected virtual IEnumerator TrackTouchPosition()
     {
         //While the object is being moved its position (x and z) is being updated

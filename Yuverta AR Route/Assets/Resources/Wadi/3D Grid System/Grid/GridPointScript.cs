@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class GridPointScript : MonoBehaviour
 {
-    public string objectPosition;
-    public Quaternion newRotation;
+    public GridManager.ObjectPosition objectPosition;
 }

@@ -1,32 +1,50 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 public class ObjectMovement : BaseMovement
 {
     public ObjectLogic objectLogic;
 
-    //This bool is active if the object is snapping to a certain position
+    [Tooltip("This bool is active if the object is snapping to a certain position.")]
     public bool animationActive;
     
     [Tooltip("The maximum amount of times a while should repeat itself before stopping.")]
-    [SerializeField] private int maxWhileRepeatTime;
+    [SerializeField] private int maxWhileRepeatTime = 0;
 
-    [Tooltip("The time that the while loop needs to pause before running again")]
-    [SerializeField] private float timeWaitWhile;
+    [Tooltip("The time that the while loop needs to pause before running again.")]
+    [SerializeField] private float timeWaitWhile = 0;
     
     [Tooltip("The speed at which the object should lerp to the new position.")]
-    [SerializeField] private float lerpSpeed;
+    [SerializeField] private float lerpSpeed = 0;
     
     [Tooltip("The distance the object should be from the new position until it snaps to the grid-position.")]
     [SerializeField] private float snapDistanceWhile;
+    
+    [Tooltip("AR Ray-cast Manager")]
+    private ARRaycastManager raycastManager;
     private void Start()
     {
+        
+        //Setting the values to a default if they were not set yet
+        if (maxWhileRepeatTime == 0) maxWhileRepeatTime = 150;
+        if (timeWaitWhile == 0) timeWaitWhile = 0.01f;
+        if (lerpSpeed == 0) lerpSpeed = 0.05f;
+        
+        //Finding objects
         currentManager = FindObjectOfType<BaseManager>();
         objectLogic = gameObject.GetComponent<ObjectLogic>();
+        raycastManager = FindObjectOfType<ARRaycastManager>();
     }
 
+    /// <summary>
+    /// This function makes the object follow the touch position.
+    /// </summary>
     public void MoveObject()
     {
         StartCoroutine(TrackTouchPosition());
@@ -36,51 +54,15 @@ public class ObjectMovement : BaseMovement
     {
         if (animationActive) yield break;
         CheckLayer();
-        
+        bool editor = Application.isEditor;
         //While the object is being moved its position (x and z) is being updated
         while (Input.GetMouseButton(0) || Input.touchCount > 0)
         {
             SwipeDetection.Instance.trackingObject = true;
-            
-            var cameraPos = Camera.main!.transform.position;
-            
-            float distanceToCamera = Vector3.Distance(cameraPos, gameObject.transform.position);
-            
-            
-            if (distanceToCamera > 1f)
-            {
-                distanceToCamera = 1f;
-            }
 
-            // Get the position of the touch in screen coordinates
-            Vector3 touchPosition = Input.touchCount switch
-            {
-                0 => Input.mousePosition,
-                _ => Input.GetTouch(0).position
-            };
-
-            // Convert the screen position to world position
-            Vector3 newPosition = Camera.main!.ScreenToWorldPoint(new Vector3(touchPosition.x, touchPosition.y, distanceToCamera));
-            newPosition.y = gameObject.transform.position.y;
-            gameObject.transform.position = newPosition;
-
+            gameObject.transform.position = SharedFunctionality.Instance.ObjectMovement(raycastManager, gameObject);
+            
             yield return new WaitForFixedUpdate();
-            
-            /*SwipeDetection.Instance.trackingObject = true;
-            Vector3 newPosition = SharedFunctionality.Instance.GetTouchWorldPosition();
-            if (newPosition == Vector3.zero)
-            {
-                yield return new WaitForFixedUpdate();
-                continue;
-            }
-
-            var yDiff = Mathf.Abs(newPosition.y - gameObject.transform.position.y);
-            yDiff *= -Camera.main!.transform.forward.magnitude;
-
-            newPosition.y = gameObject.transform.position.y;
-            gameObject.transform.position = newPosition;
-
-            yield return new WaitForFixedUpdate();*/
         }
 
         SwipeDetection.Instance.trackingObject = false;
@@ -117,6 +99,9 @@ public class ObjectMovement : BaseMovement
     }
 
     //GridManager only functions
+    /// <summary>
+    /// Checking if the object is on the right layer.
+    /// </summary>
     private void CheckLayer()
     {
         if (!GridManager.Instance || !objectLogic) return;
@@ -125,6 +110,9 @@ public class ObjectMovement : BaseMovement
         StartCoroutine(ChangeLayer(GridManager.Instance.gridCurrentLayer));
     }
 
+    /// <summary>
+    /// Forcing the object to snap to the right layer.
+    /// </summary>
     private void DebugLayer()
     {
         if (!GridManager.Instance || !objectLogic) return;
@@ -134,6 +122,9 @@ public class ObjectMovement : BaseMovement
         if (Vector3.Distance(gridPointPos, currentPos) > snapDistanceWhile) StartCoroutine(ChangeLayer(GridManager.Instance.gridCurrentLayer, true, gridPointPos));
     }
 
+    /// <summary>
+    /// Changing the objects layers
+    /// </summary>
     private IEnumerator ChangeLayer(int newLayer, bool debug = false, Vector3? debugPos = null)
     {
         var currentPos = gameObject.transform.position;
@@ -163,9 +154,20 @@ public class ObjectMovement : BaseMovement
             whilePos.y = Mathf.Lerp(gameObject.transform.position.y, currentPos.y, lerpSpeed);
             gameObject.transform.position = whilePos;
             yield return new WaitForSeconds(timeWaitWhile);
-            Debug.Log(whileTimeCalled);
         }
         gameObject.transform.position = currentPos;
         objectLogic.SetObjectLayerID(newLayer);
+    }
+
+    private void Update()
+    {
+        KeepObjectOnSnappedPosition();
+    }
+
+    private void KeepObjectOnSnappedPosition()
+    {
+        if (!objectLogic.SnappedObject) return;
+        var closestGridPosition = objectLogic.SnappedObject.transform.position;
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, closestGridPosition, lerpSpeed);
     }
 }
