@@ -1,0 +1,1 @@
+Note that there are more demo scenes for your selected input system, inside the InputExtension folder if you are using the new input system and the InputLegacy folder if you are using the old input system. The demo scenes in this folder doesn't have any input components attached to the weapon wheels.

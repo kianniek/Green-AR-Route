@@ -1,0 +1,410 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &691094779208113529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 691094779208113534}
+  - component: {fileID: 691094779208113535}
+  - component: {fileID: 691094779208113532}
+  - component: {fileID: 7571934053626940896}
+  m_Layer: 5
+  m_Name: P_WeaponWheelInput
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &691094779208113534
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691094779208113529}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 691094780101352346}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &691094779208113535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691094779208113529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f66271c753234f84fb849bceb99f301c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoRefresh: 1
+  sliceBorderWidth: 14
+  sliceBorderCutInnerAdjustment: -3
+  sliceBorderCutOuterAdjustment: 1
+  cutCirclesToo: 1
+  sliceBorderColors:
+    color: {r: 0, g: 0, b: 0, a: 1}
+    highlightColor: {r: 1, g: 0.43345436, b: 0, a: 1}
+    highlightAnimations: []
+    selectAnimations: []
+  sliceContentColors:
+    color: {r: 1, g: 1, b: 1, a: 1}
+    highlightColor: {r: 1, g: 0, b: 0, a: 1}
+    highlightAnimations: []
+    selectAnimations: []
+  rotation: 0
+  sliceContents: []
+  logSelectionEvents: 1
+  circleDatas:
+  - isMain: 1
+    diameter: 1000
+    thickness: 424
+    colors:
+      color: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 0.69411767}
+      highlightColor: {r: 1, g: 1, b: 1, a: 1}
+      highlightAnimations: []
+      selectAnimations: []
+      fillTexture: {fileID: 0}
+      textureScale: 1
+      textureRotation: 0
+      textureOffset: 0
+    overridingSliceColors: []
+    overridingSprites:
+      circleSprite: {fileID: 21300000, guid: 8fce71c58063cec4194a90db51f6c592, type: 3}
+      holeTexture: {fileID: 2800000, guid: 311c056bd3da5ad4f8328cddf5f0c6b9, type: 3}
+    isFoldedOut: 1
+  - isMain: 0
+    diameter: 1043
+    thickness: 42.6
+    colors:
+      color: {r: 0, g: 0, b: 0, a: 1}
+      highlightColor: {r: 0, g: 0.10793519, b: 1, a: 1}
+      highlightAnimations: []
+      selectAnimations: []
+      fillTexture: {fileID: 0}
+      textureScale: 1
+      textureRotation: 0
+      textureOffset: 0
+    overridingSliceColors: []
+    overridingSprites:
+      circleSprite: {fileID: 21300000, guid: 8fce71c58063cec4194a90db51f6c592, type: 3}
+      holeTexture: {fileID: 2800000, guid: aca7b9ca2437fbd4dabb29b46bab404f, type: 3}
+    isFoldedOut: 1
+  - isMain: 0
+    diameter: 577.5
+    thickness: 39
+    colors:
+      color: {r: 0, g: 0, b: 0, a: 1}
+      highlightColor: {r: 0.2844566, g: 1, b: 0, a: 1}
+      highlightAnimations: []
+      selectAnimations: []
+      fillTexture: {fileID: 0}
+      textureScale: 1
+      textureRotation: 0
+      textureOffset: 0
+    overridingSliceColors: []
+    overridingSprites:
+      circleSprite: {fileID: 21300000, guid: 8fce71c58063cec4194a90db51f6c592, type: 3}
+      holeTexture: {fileID: 2800000, guid: 311c056bd3da5ad4f8328cddf5f0c6b9, type: 3}
+    isFoldedOut: 1
+  fadeInDuration: 0
+  fadeOutDuration: 0
+  OnSliceHighlighted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSliceDehighlighted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSliceSelected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWheelVisible:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWheelInvisible:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAnyEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  sliceBorderMaterial: {fileID: 2100000, guid: c468d328616af6e448155f2e0316427a, type: 2}
+  circleMaterial: {fileID: 2100000, guid: d670a52a8ab66e1459279c95baa2d6a4, type: 2}
+  circleUncutMaterial: {fileID: 2100000, guid: 4830e2b1d729ea04992a8dd8afb17a93, type: 2}
+  circleMaskMaterial: {fileID: 2100000, guid: 2c957479e69871b459e1eb356db7ca0a, type: 2}
+  circleHoleMaskMaterial: {fileID: 2100000, guid: 94359776c24744d4e977988f2773aa0d, type: 2}
+  generatedObjectsContainer: {fileID: 691094780101352341}
+  circleSprites:
+    circleSprite: {fileID: 21300000, guid: 8fce71c58063cec4194a90db51f6c592, type: 3}
+    holeTexture: {fileID: 2800000, guid: 311c056bd3da5ad4f8328cddf5f0c6b9, type: 3}
+  sliceBorderSprite: {fileID: 0}
+--- !u!114 &691094779208113532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691094779208113529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c5a3c5c74588bb4ab3c7b32c1cbfe46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holdButtonToShow: 1
+  hideOnSelected: 1
+  showAgainCooldown: 0.4
+  highlightSliceOnDigitPress: 0
+  selectSliceOnDigitPress: 0
+  firstSliceOffset: 0
+  confirmOnButtonRelease: 1
+  actionMap:
+    m_Name: Action Map
+    m_Id: 382dd642-1a02-4902-86f8-d906b18cce4b
+    m_Asset: {fileID: 0}
+    m_Actions:
+    - m_Name: RightStick
+      m_Type: 2
+      m_ExpectedControlType: Vector2
+      m_Id: 14f1dab8-0955-40eb-ab41-54d537bcc336
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: ToggleWeaponWheel
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 95fdf02e-cced-4390-808f-d9ba0ff10b32
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Confirm
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 8682f8a2-7961-4037-bb74-feb2d3128f9b
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: PointerPosition
+      m_Type: 2
+      m_ExpectedControlType: Vector2
+      m_Id: ea239b23-e481-41ee-b8e0-c3888bfe8eba
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Bindings:
+    - m_Name: 
+      m_Id: 84658c48-31c7-44ee-ace1-609d2d622ad8
+      m_Path: <Gamepad>/rightStick
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: RightStick
+      m_Flags: 0
+    - m_Name: 
+      m_Id: ccb4567f-cbf9-4827-94e4-cb3a318f0855
+      m_Path: <Gamepad>/leftShoulder
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: ToggleWeaponWheel
+      m_Flags: 0
+    - m_Name: 
+      m_Id: ae4e56f2-c290-4641-9f1e-3b57157510f8
+      m_Path: <Keyboard>/tab
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: ToggleWeaponWheel
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 803ac356-839b-4bf6-a461-439286c0c6aa
+      m_Path: <Gamepad>/rightTrigger
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Confirm
+      m_Flags: 0
+    - m_Name: 
+      m_Id: ede51d44-de71-4a15-874a-03d7409d579d
+      m_Path: <Touchscreen>/Press
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Confirm
+      m_Flags: 0
+    - m_Name: 
+      m_Id: bf20738f-d751-4d52-a068-d017687abf3f
+      m_Path: <Pointer>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: PointerPosition
+      m_Flags: 0
+    - m_Name: 
+      m_Id: a2169eec-e629-40ec-920f-3340a1480146
+      m_Path: <Touchscreen>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: PointerPosition
+      m_Flags: 0
+  useExistingPlayerInput: 0
+  playerInput: {fileID: 0}
+  playerInputActionMapName: 
+  currentActionMap:
+    m_Name: Action Map
+    m_Id: 
+    m_Asset: {fileID: 0}
+    m_Actions:
+    - m_Name: RightStick
+      m_Type: 2
+      m_ExpectedControlType: Vector2
+      m_Id: b9e351a3-6773-4dda-a8a0-fd5f06c6daf7
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: ToggleWeaponWheel
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 54965e89-930b-45dc-8bd5-7b7c6f6187d7
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: Confirm
+      m_Type: 1
+      m_ExpectedControlType: Button
+      m_Id: 61ffc19e-3d30-4183-8062-8711ca998145
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    - m_Name: PointerPosition
+      m_Type: 2
+      m_ExpectedControlType: Vector2
+      m_Id: 3c0c92dd-db34-46e4-8015-e2f406faaae0
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Bindings:
+    - m_Name: 
+      m_Id: 
+      m_Path: <Gamepad>/rightStick
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: RightStick
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 
+      m_Path: <Gamepad>/leftShoulder
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: ToggleWeaponWheel
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 
+      m_Path: <Keyboard>/tab
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: ToggleWeaponWheel
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 
+      m_Path: <Gamepad>/rightTrigger
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Confirm
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 
+      m_Path: <Touchscreen>/Press
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Confirm
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 
+      m_Path: <Pointer>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: PointerPosition
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 
+      m_Path: <Touchscreen>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: PointerPosition
+      m_Flags: 0
+--- !u!225 &7571934053626940896
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691094779208113529}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!1 &691094780101352341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 691094780101352346}
+  m_Layer: 5
+  m_Name: GeneratedObjectsContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &691094780101352346
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691094780101352341}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 691094779208113534}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
