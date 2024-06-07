@@ -52,50 +52,22 @@ public class ObjectMovement : BaseMovement
 
     protected override IEnumerator TrackTouchPosition()
     {
-        if (animationActive) yield break;
-        CheckLayer();
-        bool editor = Application.isEditor;
         //While the object is being moved its position (x and z) is being updated
         while (Input.GetMouseButton(0) || Input.touchCount > 0)
         {
             SwipeDetection.Instance.trackingObject = true;
-
+            objectLogic.SnappedObject = null;
             gameObject.transform.position = SharedFunctionality.Instance.ObjectMovement(raycastManager, gameObject);
             
             yield return new WaitForFixedUpdate();
         }
-
+        
+        yield return new WaitForFixedUpdate();
+        
         SwipeDetection.Instance.trackingObject = false;
 
-        var closestGridPosition = GridManager.Instance.SnapToGrid(gameObject);
-        DebugLayer();
-        animationActive = true;
-        int whileTimeCalled = 0;
-        while (Vector3.Distance(gameObject.transform.position, closestGridPosition) > snapDistanceWhile && animationActive)
-        {
-            whileTimeCalled++;
-            if (whileTimeCalled * timeWaitWhile > maxWhileRepeatTime) animationActive = false;
-            
-            yield return new WaitForSeconds(timeWaitWhile);
-            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, closestGridPosition, lerpSpeed);
-
-            if (!Input.GetMouseButtonDown(0) && Input.touchCount == 0) continue;
-
-            SwipeDetection.Instance.CollideWithObject(out var collidedObject);
-            if (!collidedObject || collidedObject != gameObject ||
-                collidedObject.GetComponent<ObjectMovement>() != this) continue;
-
-            animationActive = false;
-        }
-
-        if (!animationActive)
-        {
-            currentManager.SelectedObject(this.gameObject);
-            yield break;
-        }
-
-        animationActive = false;
-        gameObject.transform.position = closestGridPosition;
+        GridManager.Instance.SnapToGrid(gameObject);
+        
     }
 
     //GridManager only functions

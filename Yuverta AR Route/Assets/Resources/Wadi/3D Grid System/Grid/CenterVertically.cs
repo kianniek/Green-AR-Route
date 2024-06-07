@@ -6,7 +6,7 @@ using UnityEngine;
 public class CenterVertically : MonoBehaviour
 {
     [Tooltip("Multiplier for the movement of the objects to the center")]
-    public float centerMultiplier = 1.3f;
+    public float centerMultiplier = 0.633f;
     private List<GameObject> objects = new List<GameObject>();
     
     private Dictionary<GameObject, Vector3> initialPositionsDict = new Dictionary<GameObject, Vector3>();
@@ -22,6 +22,8 @@ public class CenterVertically : MonoBehaviour
             initialPositionsDict.Add(value, value.transform.localPosition);
         }
     }
+
+    public bool debug;
     
     public void CenterObjects()
     {
@@ -56,15 +58,28 @@ public class CenterVertically : MonoBehaviour
     
     private void CenterObjectsVertically()
     {
-        foreach (var obj in objects)
+        if (debug)
         {
-            //check if obj is in centerPositions and if not calculate it
-            if (!centerPositionsDict.ContainsKey(obj))
+            centerPositionsDict.Clear();
+            foreach (var obj in objects)
             {
                 centerPositionsDict.Add(obj, CalculateObjectsCenteredPosition(obj, globalCenter));
-            }
             
-            obj.transform.localPosition = centerPositionsDict[obj];
+                obj.transform.localPosition = centerPositionsDict[obj];
+            }
+        }
+        else
+        {
+            foreach (var obj in objects)
+            {
+                //check if obj is in centerPositions and if not calculate it
+                if (!centerPositionsDict.ContainsKey(obj))
+                {
+                    centerPositionsDict.Add(obj, CalculateObjectsCenteredPosition(obj, globalCenter));
+                }
+            
+                obj.transform.localPosition = centerPositionsDict[obj];
+            }
         }
     }
     

@@ -9,7 +9,22 @@ using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 public class GridManager : BaseManager
 {
     public static GridManager Instance { get; private set; }
-    
+    private bool _wadiCompleted;
+    public bool WadiCompleted 
+    { 
+        get => _wadiCompleted;
+        set
+        {
+            DisplayWeather(value);
+        }
+    }
+
+    private void DisplayWeather(bool value)
+    {
+        weatherObject.SetActive(value);
+    }
+
+    public GameObject weatherObject;
     public GridBuilder gridBuilder;
     public GridLayering gridLayering;
     public ObjectMovement objectMovement;
@@ -76,6 +91,8 @@ public class GridManager : BaseManager
         {
             Instance = this;
         }
+        
+        weatherObject.SetActive(false);
     }
 
     private void Start()
@@ -160,14 +177,15 @@ public class GridManager : BaseManager
         objectLogic.SetObjectLayerID(gridCurrentLayer);
         
         //Snapping the object to the grid
-        objectMovement.MoveObject();
+        UpdateObject();
     }
 
     public override void SelectedObject(GameObject selectedObject)
     {
+        SwipeDetection.Instance.trackingObject = false;
         objectMovement = selectedObject.GetComponent<ObjectMovement>();
         selectedObjectIndex = objectMovement.objectLogic.objectIndex;
-        objectMovement.MoveObject();
+        UpdateObject();
     }
 
     public override void UpdateObject()
@@ -225,7 +243,6 @@ public class GridManager : BaseManager
 
             wrongPlaces.Add(obj);
             Debug.Log($"Object {obj.name} is not correctly placed.");
-            continue;
         }
 
         return wrongPlaces.Count switch

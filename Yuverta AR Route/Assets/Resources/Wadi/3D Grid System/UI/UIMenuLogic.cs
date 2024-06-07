@@ -202,6 +202,7 @@ public class UIMenuLogic : MonoBehaviour
         else
         {
             Debug.Log("Correct positions");
+            GridManager.Instance.WadiCompleted = true;
             onWadiCorrect.Invoke();
         }
         yield return null;
@@ -220,4 +221,5 @@ public class UIMenuLogic : MonoBehaviour
     }
 
     #endregion
+
 }

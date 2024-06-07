@@ -7,11 +7,12 @@ public class CenterObjects : MonoBehaviour
 {
     public List<GameObject> objects;
 
-    public Vector3 stoppingDistance = new Vector3(0.1f, 0.1f, 0.1f);
+    public Vector3 stoppingDistance = new Vector3(0.475f, 1, 0.725f);
 
     private Dictionary<GameObject, Vector3> initialPositions = new Dictionary<GameObject, Vector3>();
     private Dictionary<GameObject, Vector3> centerPositions = new Dictionary<GameObject, Vector3>();
 
+    public bool debug;
 
     private Vector3 globalCenter;
     private void Start()
@@ -52,15 +53,31 @@ public class CenterObjects : MonoBehaviour
             return;
         }
 
-        foreach (var t in objects)
+        if (debug)
         {
-            //check if t is in centerPositions and if not calculate it
-            if (!centerPositions.ContainsKey(t))
+            centerPositions.Clear();
+            foreach (var t in objects)
             {
-                centerPositions.Add(t, CalculateObjectsCenteredPosition(t, globalCenter));
-            }
+                //check if t is in centerPositions and if not calculate it
+                if (!centerPositions.ContainsKey(t))
+                {
+                    centerPositions.Add(t, CalculateObjectsCenteredPosition(t, globalCenter));
+                }
             
-            t.transform.localPosition = centerPositions[t];
+                t.transform.localPosition = centerPositions[t];
+            }
+        }else
+        {
+            foreach (var t in objects)
+            {
+                //check if t is in centerPositions and if not calculate it
+                if (!centerPositions.ContainsKey(t))
+                {
+                    centerPositions.Add(t, CalculateObjectsCenteredPosition(t, globalCenter));
+                }
+                
+                t.transform.localPosition = centerPositions[t];
+            }
         }
     }
     

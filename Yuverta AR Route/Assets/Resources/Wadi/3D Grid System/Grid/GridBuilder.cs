@@ -17,13 +17,12 @@ public class GridBuilder : MonoBehaviour
 
     public List<GameObject> layerParents = new List<GameObject>();
 
-    [SerializeField] private Vector3 stoppingDistance = new Vector3(-0.1f, 1, 0.4f);
+    [SerializeField] private Vector3 stoppingDistance = new Vector3(0.47f, 1, 0.725f);
     private float blockSize;
 
     // Start is called before the first frame update
     void Start()
     {
-        stoppingDistance = new Vector3(-0.1f, 1, 0.4f);
         var obj = GridManager.Instance.objsToSpawnAmount.keys[0];
         blockSize = obj.GetComponent<MeshRenderer>().bounds.size.y / 4;
         centerVertically = GetComponent<CenterVertically>();

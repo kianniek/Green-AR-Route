@@ -46,12 +46,16 @@ public class SwipeDetection : MonoBehaviour
 		{
 			try
 			{
-				if (collidedObject) currentManager.SelectedObject(collidedObject);
+				if (collidedObject) 
+					currentManager.SelectedObject(collidedObject);
 			}
 			catch (Exception e)
 			{
 				Debug.LogError(e);
-				if (trackingObject) return;
+				
+				if (trackingObject) 
+					return;
+				
 				currentManager.UpdateObject();
 			}
 		}
@@ -59,7 +63,8 @@ public class SwipeDetection : MonoBehaviour
 
 	private void DetectSwipe() 
 	{
-		if (trackingObject || Conditions()) return;
+		if (Conditions() || trackingObject) return;
+		
 		Vector2 delta = currentPos - initialPos;
 		Vector2 direction = Vector2.zero;
 		if(Mathf.Abs(delta.x) > swipeResistance)
@@ -70,8 +75,13 @@ public class SwipeDetection : MonoBehaviour
 		{
 			direction.y = Mathf.Clamp(delta.y, -1, 1);
 		}
-		if(direction != Vector2.zero & swipePerformed != null && !trackingObject)
+
+		if (direction != Vector2.zero & swipePerformed != null && !trackingObject)
+		{
 			swipePerformed(direction);
+			Debug.Log("Swipe detected");
+		}
+		
 	}
 
 	public bool CollideWithObject(out GameObject collidedObject)

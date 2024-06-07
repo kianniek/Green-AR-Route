@@ -71,7 +71,6 @@ public class SharedFunctionality : MonoBehaviour
 
     public Vector3 ObjectMovement(ARRaycastManager raycastManager, GameObject obj)
     {
-        Debug.Log("Yup");
         // Create a list to hold the hit results
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
                 
