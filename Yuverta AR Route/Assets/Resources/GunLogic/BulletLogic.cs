@@ -5,11 +5,14 @@ public class BulletLogic : MonoBehaviour
 {
     public Ammo ammo;
     public UnityEvent onImpact;
+    private float spawnTimer;
 
     // Update is called once per frame
     void Update()
     {
-        if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hit, ammo.projectileSpeed * Time.deltaTime))
+        spawnTimer += Time.deltaTime;
+        if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hit,
+                ammo.projectileSpeed * Time.deltaTime))
         {
             // Invoke the onImpact event when the bullet hits something
             onImpact.Invoke();
@@ -18,10 +21,15 @@ public class BulletLogic : MonoBehaviour
             Destroy(gameObject, 1f);
             Destroy(this);
         }
+        else if (spawnTimer > 5f)
+        {
+            // Destroy the bullet after 5 seconds
+            Destroy(gameObject);
+        }
         else
         {
             // Move the bullet forward
-            transform.Translate(Vector3.forward * ammo.projectileSpeed * Time.deltaTime);
+            transform.Translate((Vector3.forward * ammo.projectileSpeed - new Vector3(0, ammo.bulletDrop * spawnTimer, 0)) * Time.deltaTime);
         }
     }
 }

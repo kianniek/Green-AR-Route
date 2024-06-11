@@ -127,12 +127,23 @@ public class SharedFunctionality : MonoBehaviour
         return Vector3.zero;
     }
 
-    Vector3 GetPointOnYPlane(Vector3 point, float y, bool isEditor)
-    {
-        // Adjust the y-coordinate to the fixed y-level
-        point.y = y;
-        return point;
-    }
+    /// <summary>
+        /// Calculate the objects position relative to its y-level and the last touch/mouse position.
+        /// </summary>
+        Vector3 GetPointOnYPlane(Vector3 hitPosition, float yLevel, bool debug = false)
+        {
+            // Create a ray from the camera through the touch position
+            Vector3 touchPosition = debug ? Input.mousePosition : Input.GetTouch(0).position;
+            Ray ray = Camera.main!.ScreenPointToRay(touchPosition);
+    
+            // Calculate the distance to the yLevel plane from the camera
+            float distanceToYLevel = (yLevel - ray.origin.y) / ray.direction.y;
+    
+            // Get the point of intersection
+            Vector3 pointOnYPlane = ray.origin + ray.direction * distanceToYLevel;
+    
+            return new Vector3(pointOnYPlane.x, yLevel, pointOnYPlane.z);
+        }
 
 
     /// <summary>

@@ -6,4 +6,5 @@ using UnityEngine;
 public class Ammo : ScriptableObject
 {
     public float projectileSpeed;
+    public float bulletDrop;
 }

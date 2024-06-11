@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 //[CreateAssetMenu(fileName = "GunScript", menuName = "ScriptableObjects/GunScript", order = 1)]
@@ -16,50 +18,92 @@ public class BaseGunScript : MonoBehaviour
     [Space(10)]
     
     [Header("Ammunition variables")]
-    [SerializeField] protected int fullAmmunition;
-    [Min(0.01f)] [SerializeField] 
-    protected float fireRateLimit;
+    [SerializeField] protected int magazineSize;
+    [Min(0.1f)] [SerializeField] 
     protected float fireRate;
-    private int ammunition;
+    protected float fireRateCooldown;
+    private int currentAmmunition;
     private bool isReloading = false;
-    
-    public int Ammunition
-    {
-        get { return ammunition; }
-        set { ammunition = value; }
-    }
+
+    private Ammo currentAmmo;
+    private Weapon currentWeapon;
+    private readonly Vector3 weaponOffset = new Vector3(1, -1f, 1f);
     
     protected virtual void Start()
     {
-        ammunition = fullAmmunition;
-        fireRate = 0;
+        currentAmmunition = magazineSize;
+        fireRateCooldown = 0;
     }
     
     void Update()
     {
         // Decrease the fire rate timer
-        if (fireRate > 0)
+        if (fireRateCooldown > 0)
         {
-            fireRate -= Time.deltaTime;
+            fireRateCooldown -= Time.deltaTime;
         }
     }
-    
+
+    public void ChangeWeapon(Weapon newWeapon)
+    {
+        if (transform.childCount > 0) Destroy(transform.GetChild(0).gameObject);
+        currentWeapon = newWeapon;
+        var weaponInstance = Instantiate(currentWeapon.prefab, transform);
+        weaponInstance.transform.localPosition = weaponOffset;
+        animator = weaponInstance.GetComponent<Animator>();
+        animator.SetTrigger("Equip");
+        currentAmmo = currentWeapon.ammo;
+        currentAmmunition = magazineSize = currentWeapon.magazineSize;
+        fireRate = currentWeapon.fireRate;
+        for (int i = 0; i < weaponInstance.transform.childCount; i++)
+        {
+            if (weaponInstance.transform.GetChild(i).name == "BulletSpawnPoint")
+            {
+                bulletSpawnPoint = weaponInstance.transform.GetChild(i);
+            }
+        }
+    }
+
     public virtual void Shoot()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+        if (Application.isEditor)
+        {
+            StartCoroutine(Shooting(() => Input.GetMouseButton(0)));
+        }
+        else if (Input.touchCount > 0)
+        {
+            StartCoroutine(Shooting(() => Input.GetTouch(0).phase != TouchPhase.Ended));
+        }
+    }
+
+    private IEnumerator Shooting(Func<bool> isPressed)
+    {
+        while (isPressed())
+        {
+            ShootBullet();
+            yield return new WaitForSeconds(fireRate);
+        }
+    }
+
+    public virtual void ShootBullet()
+    {
         if (isReloading) return;
-        if (ammunition > 0 && fireRate <= 0)
+        if (currentAmmunition > 0 && fireRateCooldown <= 0)
         {
             var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-            ammunition--;
+            bullet.GetComponent<BulletLogic>().ammo = currentAmmo;
+            currentAmmunition--;
             if (animator != null)
             {
                 animator.SetTrigger("Shoot");
             }
             
             // Reset the fire rate timer
-            fireRate = fireRateLimit;
+            fireRateCooldown = fireRate;
         }
-        else if (ammunition <= 0)
+        else if (currentAmmunition <= 0)
         {
             if (animator != null)
             {
@@ -85,7 +129,7 @@ public class BaseGunScript : MonoBehaviour
 
         // After the reload animation, refill the ammunition
         // Replace 10 with the actual ammunition count after reloading
-        ammunition = fullAmmunition;
+        currentAmmunition = magazineSize;
         isReloading = false;
     }
 }
