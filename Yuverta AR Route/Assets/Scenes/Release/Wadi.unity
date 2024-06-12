@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackedImageManager: {fileID: 331264288}
-  prefabToSpawn: {fileID: 0}
+  prefabToSpawn: {fileID: 2095888308}
 --- !u!4 &315121757
 Transform:
   m_ObjectHideFlags: 0
@@ -285,8 +285,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315121755}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8635075, y: 1.8350627, z: -0.3239692}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.8635254, y: 1.8350627, z: -0.3239746}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -306,6 +306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageTracking: {fileID: 315121756}
   dragObject: {fileID: 0}
+  objectToSpawn: {fileID: 1902923106}
 --- !u!1001 &331264285
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1756,7 +1757,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1902923107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1872,6 +1873,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2095888308 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4564399794808519095, guid: b0fac24ded5c92e45931d3f62e1121e7,
+    type: 3}
+  m_PrefabInstance: {fileID: 971774206563849947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2099970465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2047,7 +2054,7 @@ PrefabInstance:
     - target: {fileID: 3752573547912700685, guid: b0fac24ded5c92e45931d3f62e1121e7,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3752573547912700685, guid: b0fac24ded5c92e45931d3f62e1121e7,
         type: 3}
@@ -2082,7 +2089,7 @@ PrefabInstance:
     - target: {fileID: 4564399794808519095, guid: b0fac24ded5c92e45931d3f62e1121e7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7002709352110987824, guid: b0fac24ded5c92e45931d3f62e1121e7,
         type: 3}
@@ -2266,8 +2273,8 @@ SceneRoots:
   - {fileID: 1075000276}
   - {fileID: 2099970469}
   - {fileID: 1323550134}
-  - {fileID: 971774206563849947}
-  - {fileID: 315121757}
   - {fileID: 293640607}
   - {fileID: 1284861182}
   - {fileID: 1902923109}
+  - {fileID: 971774206563849947}
+  - {fileID: 315121757}

@@ -65,7 +65,6 @@ public class VideoPlayerScript : MonoBehaviour
         while (!videoPlayer.isPaused)
         {
             gameObject.transform.LookAt(Camera.main!.transform);
-            Debug.Log("Following user");
             yield return new WaitForFixedUpdate();
         }
     }
