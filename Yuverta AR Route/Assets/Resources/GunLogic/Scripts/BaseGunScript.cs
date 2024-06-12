@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 //[CreateAssetMenu(fileName = "GunScript", menuName = "ScriptableObjects/GunScript", order = 1)]
 public class BaseGunScript : MonoBehaviour
@@ -28,6 +26,10 @@ public class BaseGunScript : MonoBehaviour
     private Ammo currentAmmo;
     private Weapon currentWeapon;
     private readonly Vector3 weaponOffset = new Vector3(1, -1f, 1f);
+    private WeaponType weaponType;
+    private int burstCount; // This field will only be visible if weaponType is Burst
+    private float burstRate;
+    private bool firing;
     
     protected virtual void Start()
     {
@@ -55,17 +57,27 @@ public class BaseGunScript : MonoBehaviour
         currentAmmo = currentWeapon.ammo;
         currentAmmunition = magazineSize = currentWeapon.magazineSize;
         fireRate = currentWeapon.fireRate;
+        weaponType = currentWeapon.weaponType;
+        if (currentWeapon.weaponType == WeaponType.Burst)
+        {
+            burstCount = currentWeapon.burstCount;
+            burstRate = currentWeapon.burstRate;
+        }
         for (int i = 0; i < weaponInstance.transform.childCount; i++)
         {
             if (weaponInstance.transform.GetChild(i).name == "BulletSpawnPoint")
             {
                 bulletSpawnPoint = weaponInstance.transform.GetChild(i);
+                break;
             }
         }
+
+        firing = false;
     }
 
     public virtual void Shoot()
     {
+        if (firing) return;
         if (EventSystem.current.IsPointerOverGameObject())
             return;
         if (Application.isEditor)
@@ -77,20 +89,78 @@ public class BaseGunScript : MonoBehaviour
             StartCoroutine(Shooting(() => Input.GetTouch(0).phase != TouchPhase.Ended));
         }
     }
-
+    
     private IEnumerator Shooting(Func<bool> isPressed)
+    {
+        firing = true;
+        switch (weaponType)
+        {
+            case WeaponType.Single:
+                yield return StartCoroutine(SingleShot(isPressed));
+                break;
+            case WeaponType.Burst:
+                yield return StartCoroutine(BurstShot(isPressed));
+                break;
+            case WeaponType.Automatic:
+                yield return StartCoroutine(AutomaticShot(isPressed));
+                break;
+        }
+    }
+
+    private IEnumerator SingleShot(Func<bool> isPressed)
     {
         while (isPressed())
         {
             ShootBullet();
             yield return new WaitForSeconds(fireRate);
         }
+        firing = false;
+    }
+
+    private IEnumerator BurstShot(Func<bool> isPressed)
+    {
+        Debug.Log(burstCount);
+        var currentBurstCount = burstCount;
+        while (isPressed())
+        {
+            if (currentBurstCount > 0)
+            {
+                Debug.Log(currentBurstCount);
+                ShootBullet();
+                currentBurstCount--;
+                yield return new WaitForSeconds(burstRate);
+            }
+            else
+            {
+                Debug.Log("Cooldown");
+                currentBurstCount = burstCount;
+                yield return new WaitForSeconds(fireRate);
+            }
+            /*for (int i = 0; i < burstCount; i++)
+            {
+                ShootBullet();
+                if (!isPressed()) break;
+                yield return new WaitForSeconds(burstRate);
+            }
+            yield return new WaitForSeconds(fireRate);*/
+        }
+        firing = false;
+    }
+
+    private IEnumerator AutomaticShot(Func<bool> isPressed)
+    {
+        while (isPressed())
+        {
+            ShootBullet();
+            yield return new WaitForSeconds(fireRate);
+        }
+        firing = false;
     }
 
     public virtual void ShootBullet()
     {
         if (isReloading) return;
-        if (currentAmmunition > 0 && fireRateCooldown <= 0)
+        if (currentAmmunition > 0 /*&& fireRateCooldown <= 0*/)
         {
             var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             bullet.GetComponent<BulletLogic>().ammo = currentAmmo;
@@ -100,8 +170,8 @@ public class BaseGunScript : MonoBehaviour
                 animator.SetTrigger("Shoot");
             }
             
-            // Reset the fire rate timer
-            fireRateCooldown = fireRate;
+            /*// Reset the fire rate timer
+            fireRateCooldown = fireRate;*/
         }
         else if (currentAmmunition <= 0)
         {

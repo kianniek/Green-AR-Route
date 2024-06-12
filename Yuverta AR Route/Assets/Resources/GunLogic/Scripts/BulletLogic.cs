@@ -12,7 +12,7 @@ public class BulletLogic : MonoBehaviour
     {
         spawnTimer += Time.deltaTime;
         if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hit,
-                ammo.projectileSpeed * Time.deltaTime))
+                ammo.projectileSpeed * Time.deltaTime) && !hit.collider.gameObject.CompareTag("Bullet"))
         {
             // Invoke the onImpact event when the bullet hits something
             onImpact.Invoke();
