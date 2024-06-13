@@ -17,24 +17,29 @@ public class BaseGunScript : MonoBehaviour
     
     [Header("Ammunition variables")]
     [SerializeField] protected int magazineSize;
+    private int currentAmmunition;
+    private bool isReloading = false;
+    private Ammo currentAmmo;
+    
+    [Header("Weapon variables")]
     [Min(0.1f)] [SerializeField] 
     protected float fireRate;
     protected float fireRateCooldown;
-    private int currentAmmunition;
-    private bool isReloading = false;
-
-    private Ammo currentAmmo;
     private Weapon currentWeapon;
-    private readonly Vector3 weaponOffset = new Vector3(1, -1f, 1f);
+    private readonly Vector3 weaponOffset = new Vector3(1, -0.8f, 1f);
     private WeaponType weaponType;
     private int burstCount; // This field will only be visible if weaponType is Burst
     private float burstRate;
     private bool firing;
     
+    [Header("Normal variables")]
+    private Camera mainCamera;
+    
     protected virtual void Start()
     {
         currentAmmunition = magazineSize;
         fireRateCooldown = 0;
+        mainCamera = Camera.main;
     }
     
     void Update()
@@ -73,6 +78,16 @@ public class BaseGunScript : MonoBehaviour
         }
 
         firing = false;
+    }
+    
+    void LateUpdate()
+    {
+        // Keep the position of the object in front of the camera even when the camera rotates
+        Vector3 targetPosition = mainCamera.transform.position + mainCamera.transform.rotation * weaponOffset;
+        transform.position = Vector3.Lerp(transform.position, targetPosition, 0.1f);
+        
+        // Follow camera rotation
+        transform.rotation = mainCamera.transform.rotation;
     }
 
     public virtual void Shoot()
