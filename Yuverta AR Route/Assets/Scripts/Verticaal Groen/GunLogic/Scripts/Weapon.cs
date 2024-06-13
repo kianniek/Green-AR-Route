@@ -12,11 +12,17 @@ public class Weapon : ScriptableObject
     public int roundsPerMinute;
     // This field will only be visible if weaponType is Burst because of the GUI
     public int burstCount; 
+    
+    //Catapult fields
+    public int maxCharge;
+    public float chargeRate;
+    public float launchForce;
 }
 
 public enum WeaponType
 {
     Single,
     Burst,
-    Automatic
+    Automatic,
+    Catapult
 }

@@ -3366,7 +3366,7 @@ MonoBehaviour:
   weapons:
   - {fileID: 11400000, guid: fb7dc3ab789d2c94aa746b886546a264, type: 2}
   - {fileID: 11400000, guid: 4e06c790671594f48a4dc8e3fa8fc780, type: 2}
-  - {fileID: 11400000, guid: 51ade991624dada4eb6d2b62e29aa17b, type: 2}
+  - {fileID: 11400000, guid: 7e49d419f8931df4d96a4612e16daa9d, type: 2}
   wheel: {fileID: 1615291346}
   gunController: {fileID: 6141505327195849717, guid: 38a6eceecd4e2014d845996f98994deb,
     type: 3}
@@ -3450,7 +3450,7 @@ PrefabInstance:
     - target: {fileID: 3876646053683216009, guid: 38a6eceecd4e2014d845996f98994deb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.465
       objectReference: {fileID: 0}
     - target: {fileID: 3876646053683216009, guid: 38a6eceecd4e2014d845996f98994deb,
         type: 3}
@@ -3491,6 +3491,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GunController
+      objectReference: {fileID: 0}
+    - target: {fileID: 7536632980431502095, guid: 38a6eceecd4e2014d845996f98994deb,
+        type: 3}
+      propertyPath: collisionMask.m_Bits
+      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
