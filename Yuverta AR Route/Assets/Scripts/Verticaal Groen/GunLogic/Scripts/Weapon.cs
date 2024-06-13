@@ -4,15 +4,14 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Weapon : ScriptableObject
 {
+    //All serialized in WeaponEditorGUI so add the variables there too
     public GameObject prefab;
     public Ammo ammo;
     public int magazineSize;
     public WeaponType weaponType;
-    //Serialized in the custom GUI
-    [NonSerialized] public float fireRate;
-    // This field will only be visible if weaponType is Burst
-    [NonSerialized] public float burstRate;
-    [NonSerialized] public int burstCount; 
+    public int roundsPerMinute;
+    // This field will only be visible if weaponType is Burst because of the GUI
+    public int burstCount; 
 }
 
 public enum WeaponType

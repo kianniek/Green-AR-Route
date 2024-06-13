@@ -61,12 +61,13 @@ public class BaseGunScript : MonoBehaviour
         animator.SetTrigger("Equip");
         currentAmmo = currentWeapon.ammo;
         currentAmmunition = magazineSize = currentWeapon.magazineSize;
-        fireRate = currentWeapon.fireRate;
+        fireRate = 60f / currentWeapon.roundsPerMinute;
         weaponType = currentWeapon.weaponType;
         if (currentWeapon.weaponType == WeaponType.Burst)
         {
+            Debug.Log("Burst");
             burstCount = currentWeapon.burstCount;
-            burstRate = currentWeapon.burstRate;
+            burstRate = fireRate / burstCount;
         }
         for (int i = 0; i < weaponInstance.transform.childCount; i++)
         {
@@ -142,8 +143,9 @@ public class BaseGunScript : MonoBehaviour
             {
                 Debug.Log(currentBurstCount);
                 ShootBullet();
-                currentBurstCount--;
                 yield return new WaitForSeconds(burstRate);
+                currentBurstCount--;
+                continue;
             }
             else
             {
