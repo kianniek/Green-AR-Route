@@ -24,6 +24,7 @@ public class WeaponEditor : Editor
                 weapon.maxCharge = EditorGUILayout.IntField("Maximum charge", weapon.maxCharge);
                 weapon.chargeRate = EditorGUILayout.FloatField("Charge rate per second", weapon.chargeRate);
                 weapon.launchForce = EditorGUILayout.FloatField("Launch force", weapon.launchForce);
+                weapon.chargeTime = EditorGUILayout.FloatField("Charge time in seconds", weapon.chargeTime);
                 break;
             default:
                 weapon.magazineSize = EditorGUILayout.IntField("Magazine Size", weapon.magazineSize);

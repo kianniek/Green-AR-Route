@@ -35,11 +35,10 @@ public class BaseGunScript : MonoBehaviour
     [Header("Catapult variables")]
     [Tooltip("The mask containing all the objects that the catapultProjectile can collide with.")]
     [SerializeField] private LayerMask collisionMask;
-    private LineRenderer trajectoryLine;
-    private readonly int trajectoryResolution = 10;
     private float chargeRate;
     private float maxCharge;
     private float launchForce;
+    private float chargeTime;
     
     [Header("Normal variables")]
     private Camera mainCamera;
@@ -90,11 +89,10 @@ public class BaseGunScript : MonoBehaviour
         
         if (currentWeapon.weaponType == WeaponType.Catapult)
         {
-            trajectoryLine = GetComponent<LineRenderer>();
-            trajectoryLine.positionCount = trajectoryResolution;
             maxCharge = currentWeapon.maxCharge;
             chargeRate = currentWeapon.chargeRate;
             launchForce = currentWeapon.launchForce;
+            chargeTime = currentWeapon.chargeTime;
         }
         
         for (int i = 0; i < weaponInstance.transform.childCount; i++)
@@ -203,9 +201,7 @@ public class BaseGunScript : MonoBehaviour
             currentCharge = Mathf.Clamp(currentCharge, 0, maxCharge);
 
             // Calculate and display the trajectory
-            RenderTrajectory(currentCharge);
-            Debug.Log(currentCharge);
-            yield return StartCoroutine(CheckFire(1f, 0.1f, isPressed));
+            yield return StartCoroutine(CheckFire(chargeTime, chargeTime / 10f, isPressed));
         }
         StartCoroutine(LaunchProjectile(currentCharge));
         firing = false;
@@ -234,87 +230,6 @@ public class BaseGunScript : MonoBehaviour
         
         StartCoroutine(Reload());
     }
-    
-    void RenderTrajectory(float currentCharge)
-    {
-        Vector3[] trajectoryPoints = CalculateTrajectoryPoints(bulletSpawnPoint.position, bulletSpawnPoint.forward * (launchForce * currentCharge));
-        trajectoryLine.positionCount = trajectoryPoints.Length;
-        trajectoryLine.SetPositions(trajectoryPoints);
-    }
-
-    Vector3[] CalculateTrajectoryPoints(Vector3 startPoint, Vector3 initialVelocity)
-    {
-        var maxPoints = 100;
-        var timeBetweenPoints = 0.1f;
-        Vector3[] points = new Vector3[trajectoryResolution];
-        Vector3 currentPosition = startPoint;
-        Vector3 velocity = initialVelocity;
-
-        points[0] = currentPosition;
-
-        for (int i = 1; i < trajectoryResolution; i++)
-        {
-            // Calculate the next position
-            Vector3 nextPosition = currentPosition + velocity * timeBetweenPoints;
-
-            // Check for collision using Raycast
-            RaycastHit hit;
-            if (Physics.Raycast(currentPosition, velocity, out hit, (nextPosition - currentPosition).magnitude, collisionMask))
-            {
-                // If we hit something, set the final point and break
-                nextPosition = hit.point;
-                points[i] = nextPosition;
-                break;
-            }
-
-            // Check for coordinate difference of 50 units
-            if (Vector3.Distance(startPoint, nextPosition) > 50f)
-            {
-                points[i] = nextPosition;
-                break;
-            }
-
-            points[i] = nextPosition;
-            currentPosition = nextPosition;
-            velocity += Physics.gravity * timeBetweenPoints;
-        }
-
-        // Trim the points array to the actual number of calculated points
-        int trimmedPointsCount = Array.FindIndex(points, p => p == Vector3.zero);
-        if (trimmedPointsCount > 0)
-        {
-            Array.Resize(ref points, trimmedPointsCount);
-        }
-
-        return points;
-    }
-
-    /*void CalculateTrajectory(float currentCharge)
-    {
-        Vector3 velocity = bulletSpawnPoint.forward * (currentCharge * launchForce);
-        float flightTime = (2 * velocity.y) / currentAmmo.bulletDrop;
-
-        trajectoryLine.positionCount = trajectoryResolution + 1;
-        for (int i = 0; i <= trajectoryResolution; i++)
-        {
-            float t = i / (float)trajectoryResolution;
-            // Reverse the order in which the positions are set
-            trajectoryLine.SetPosition(trajectoryResolution  - i, CalculatePosition(t, flightTime, velocity));
-        }
-    }
-
-    Vector3 CalculatePosition2(float t, float flightTime, Vector3 velocity)
-    {
-        float x = velocity.x * (t * flightTime);
-    }
-
-    Vector3 CalculatePosition(float t, float flightTime, Vector3 velocity)
-    {
-        float x = velocity.x * (t * flightTime);
-        float y = velocity.y * (t * flightTime) - 1f * currentAmmo.bulletDrop * Mathf.Pow(t * flightTime, 2);
-        float z = velocity.z * (t * flightTime);
-        return bulletSpawnPoint.position + new Vector3(x, y, z);
-    }*/
 
     private IEnumerator CheckFire(float totalTime, float interval, Func<bool> isPressed)
     {
