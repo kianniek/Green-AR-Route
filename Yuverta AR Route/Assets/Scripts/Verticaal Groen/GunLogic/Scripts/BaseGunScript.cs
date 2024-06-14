@@ -7,24 +7,23 @@ using UnityEngine.EventSystems;
 public class BaseGunScript : MonoBehaviour
 {
     [Header("Animator")]
-    [SerializeField] protected Animator animator;
+    private Animator animator;
     [Space(10)]
     
     [Header("Bullet variables")]
-    [SerializeField] protected GameObject bulletPrefab;
-    [SerializeField] protected Transform bulletSpawnPoint;
+    private GameObject bulletPrefab;
+    private Transform bulletSpawnPoint;
     [Space(10)]
     
     [Header("Ammunition variables")]
-    [SerializeField] protected int magazineSize;
+    private int magazineSize;
     private int currentAmmunition;
     private bool isReloading = false;
     private Ammo currentAmmo;
     
     [Header("Weapon variables")]
-    [Min(0.1f)] [SerializeField] 
-    protected float fireRate;
-    protected float fireRateCooldown;
+    private float fireRate;
+    private float fireRateCooldown;
     private Weapon currentWeapon;
     private readonly Vector3 weaponOffset = new Vector3(1, -0.8f, 1f);
     private WeaponType weaponType;
@@ -33,8 +32,6 @@ public class BaseGunScript : MonoBehaviour
     private bool firing;
     
     [Header("Catapult variables")]
-    [Tooltip("The mask containing all the objects that the catapultProjectile can collide with.")]
-    [SerializeField] private LayerMask collisionMask;
     private float chargeRate;
     private float maxCharge;
     private float launchForce;
@@ -74,6 +71,8 @@ public class BaseGunScript : MonoBehaviour
         //Setting the ammo and weapon variables
         currentAmmo = currentWeapon.ammo;
         bulletPrefab = currentAmmo.bulletPrefab;
+        FindObjectOfType<SplatMakerExample>().splatScale = currentAmmo.splatScale;
+        
         //Start with a full magazine
         currentAmmunition = magazineSize = currentWeapon.magazineSize;
         
@@ -94,7 +93,6 @@ public class BaseGunScript : MonoBehaviour
                 break;
             }
         }
-
         
         if (currentWeapon.weaponType == WeaponType.Catapult)
         {

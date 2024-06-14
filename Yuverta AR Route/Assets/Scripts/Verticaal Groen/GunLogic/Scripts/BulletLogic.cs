@@ -19,6 +19,7 @@ public class BulletLogic : MonoBehaviour
             // Invoke the onImpact event when the bullet hits something
             onImpact.Invoke();
             gameObject.GetComponent<MeshRenderer>().enabled = false;
+            FindObjectOfType<SplatMakerExample>().OnHit(hit);
             OnBulletHit(hit.point);
             // Destroy the bullet
             Destroy(gameObject, 1f);
