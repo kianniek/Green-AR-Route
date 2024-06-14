@@ -6,6 +6,8 @@ public class BulletLogic : MonoBehaviour
     public Ammo ammo;
     public UnityEvent onImpact;
     private float spawnTimer;
+    public delegate void BulletHitEvent(Vector3 hitPosition);
+    public static event BulletHitEvent OnBulletHit;
 
     // Update is called once per frame
     void Update()
@@ -17,6 +19,7 @@ public class BulletLogic : MonoBehaviour
             // Invoke the onImpact event when the bullet hits something
             onImpact.Invoke();
             gameObject.GetComponent<MeshRenderer>().enabled = false;
+            OnBulletHit(hit.point);
             // Destroy the bullet
             Destroy(gameObject, 1f);
             Destroy(this);
