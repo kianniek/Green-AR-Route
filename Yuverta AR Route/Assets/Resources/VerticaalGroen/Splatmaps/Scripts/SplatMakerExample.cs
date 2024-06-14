@@ -42,11 +42,13 @@ public class SplatMakerExample : MonoBehaviour {
 		// This just picks a rendom scale and bias for a 4x4 splat atlas
 		// You could use a larger atlas of splat textures and pick a scale and offset for the specific splat you want to use
 		if (Input.GetMouseButton (0)) {
-			
+			Debug.Log("Mouse Down");
+			Debug.Log("Mouse Position: " + Input.mousePosition);
+			Debug.Log("ScreenPointToRay: " + Camera.main.ScreenPointToRay( Input.mousePosition ));
 			Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
 			RaycastHit hit;
 			if( Physics.Raycast( ray, out hit, 10000 ) ){
-				
+				Debug.Log(hit.collider.gameObject.name);
 				Vector3 leftVec = Vector3.Cross ( hit.normal, Vector3.up );
 				float randScale = Random.Range(0.5f,1.5f);
 				

@@ -18,7 +18,7 @@ Material:
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses: []
@@ -51,10 +51,26 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 32fade85ff686dc43b500707658a4dab, type: 3}
+        m_Texture: {fileID: 2800000, guid: 379dbc64b9e961945bb85ccde59979cd, type: 3}
         m_Scale: {x: 4, y: 4}
         m_Offset: {x: 0, y: 0}
+    - _MainTextureNormal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MaskedTexture:
+        m_Texture: {fileID: 2800000, guid: 32fade85ff686dc43b500707658a4dab, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskedTextureNormal:
+        m_Texture: {fileID: 2800000, guid: 02dfedd8569589b4ab544775effdcee3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetalicMainTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetalicMaskedTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -75,7 +91,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SplatTileNormalTex:
-        m_Texture: {fileID: 2800000, guid: 8a20113fd4622124b9c0476530de04fc, type: 3}
+        m_Texture: {fileID: 2800000, guid: f71157a788477834aa4644bb582dd875, type: 3}
         m_Scale: {x: 4, y: 4}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
