@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6320909009912024101}
   m_Layer: 0
   m_Name: GunController
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,8 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ee0f9efca85e244bb1b63e8d2f019d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilAnimation: {fileID: 0}
-  reloadAnimation: {fileID: 0}
+  recoilAnimation: {fileID: 6320909009912024101}
+  reloadAnimation: {fileID: 7205754866918702852}
+  weapons:
+  - {fileID: 11400000, guid: fb7dc3ab789d2c94aa746b886546a264, type: 2}
+  - {fileID: 11400000, guid: 4e06c790671594f48a4dc8e3fa8fc780, type: 2}
+  - {fileID: 11400000, guid: 51ade991624dada4eb6d2b62e29aa17b, type: 2}
+  weaponOffset: {x: 0.04, y: -0.03, z: 0}
 --- !u!114 &65584641526216448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,7 +82,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2030370207476040906}
         m_TargetAssemblyTypeName: BaseGunScript, Assembly-CSharp
         m_MethodName: Shoot
         m_Mode: 1
