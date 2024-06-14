@@ -1,34 +1,67 @@
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
 
 [CustomEditor(typeof(Weapon))]
 public class WeaponEditor : Editor
 {
-    private int bulletsPerSecond;
+    SerializedProperty prefab;
+    SerializedProperty ammo;
+    SerializedProperty weaponType;
+    SerializedProperty magazineSize;
+    SerializedProperty roundsPerMinute;
+    SerializedProperty burstCount;
+    SerializedProperty maxCharge;
+    SerializedProperty chargeRate;
+    SerializedProperty launchForce;
+
+    void OnEnable()
+    {
+        // Link the properties with the serialized object
+        prefab = serializedObject.FindProperty("prefab");
+        ammo = serializedObject.FindProperty("ammo");
+        weaponType = serializedObject.FindProperty("weaponType");
+        magazineSize = serializedObject.FindProperty("magazineSize");
+        roundsPerMinute = serializedObject.FindProperty("roundsPerMinute");
+        burstCount = serializedObject.FindProperty("burstCount");
+        maxCharge = serializedObject.FindProperty("maxCharge");
+        chargeRate = serializedObject.FindProperty("chargeRate");
+        launchForce = serializedObject.FindProperty("launchForce");
+    }
+
     public override void OnInspectorGUI()
     {
-        Weapon weapon = (Weapon)target;
+        // Start tracking changes to the serialized object
+        serializedObject.Update();
 
-        // Custom GUI for Weapon class
-        weapon.prefab = (GameObject)EditorGUILayout.ObjectField("Prefab", weapon.prefab, typeof(GameObject), false);
-        weapon.ammo = (Ammo)EditorGUILayout.ObjectField("Ammo", weapon.ammo, typeof(Ammo), false);
-        weapon.weaponType = (WeaponType)EditorGUILayout.EnumPopup("Weapon Type", weapon.weaponType);
-        switch (weapon.weaponType)
+        // Draw the fields using serialized properties
+        EditorGUILayout.PropertyField(prefab);
+        EditorGUILayout.PropertyField(ammo);
+        EditorGUILayout.PropertyField(weaponType);
+
+        // Draw fields based on the weapon type
+        WeaponType currentWeaponType = (WeaponType)weaponType.enumValueIndex;
+
+        switch (currentWeaponType)
         {
             case WeaponType.Burst:
-                weapon.magazineSize = EditorGUILayout.IntField("Magazine Size", weapon.magazineSize);
-                weapon.roundsPerMinute = EditorGUILayout.IntField("Bursts Per Minute", weapon.roundsPerMinute);
-                weapon.burstCount = EditorGUILayout.IntField("Burst Count", weapon.burstCount);
+                EditorGUILayout.PropertyField(magazineSize);
+                EditorGUILayout.PropertyField(roundsPerMinute, new GUIContent("Bursts Per Minute"));
+                EditorGUILayout.PropertyField(burstCount);
                 break;
+
             case WeaponType.Catapult:
-                weapon.maxCharge = EditorGUILayout.IntField("Maximum charge", weapon.maxCharge);
-                weapon.chargeRate = EditorGUILayout.FloatField("Charge rate per second", weapon.chargeRate);
-                weapon.launchForce = EditorGUILayout.FloatField("Launch force", weapon.launchForce);
+                EditorGUILayout.PropertyField(maxCharge);
+                EditorGUILayout.PropertyField(chargeRate);
+                EditorGUILayout.PropertyField(launchForce);
                 break;
+
             default:
-                weapon.magazineSize = EditorGUILayout.IntField("Magazine Size", weapon.magazineSize);
-                weapon.roundsPerMinute = EditorGUILayout.IntField("Rounds Per Minute", weapon.roundsPerMinute);
+                EditorGUILayout.PropertyField(magazineSize);
+                EditorGUILayout.PropertyField(roundsPerMinute);
                 break;
         }
+
+        // Apply changes to the serialized object
+        serializedObject.ApplyModifiedProperties();
     }
 }

@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 public class VerticaalGroenManager : BaseManager
 {
-    [SerializeField] private List<Weapon> weapons;
     [SerializeField] private SgWeaponWheel wheel;
     [SerializeField] private GameObject gunController;
     private int currentWeaponIndex = 0;
@@ -16,10 +15,11 @@ public class VerticaalGroenManager : BaseManager
     {
         SwipeDetection.Instance.currentManager = this;
         SwipeDetection.Instance.tagToCheck = "UI";
-        if (Camera.main!.transform.childCount > 0) Destroy(Camera.main!.transform.GetChild(0).gameObject);
-        var gunControllerInstance = Instantiate(gunController, Camera.main!.transform);
+        
+        if(gunController == null) gunController = GetComponent<BaseGunScript>().gameObject;
+        var gunControllerInstance = gunController;
         currentWeapon = gunControllerInstance.GetComponent<BaseGunScript>();
-        currentWeapon.ChangeWeapon(weapons[currentWeaponIndex]);
+        currentWeapon.ChangeWeapon(currentWeaponIndex);
         wheel.OnSliceSelected.AddListener(OnSliceSelected);
         wheel.OnSliceSelected.Invoke(wheel.sliceContents[currentWeaponIndex]);
     }
@@ -27,6 +27,6 @@ public class VerticaalGroenManager : BaseManager
     private void OnSliceSelected(SgSliceController slice)
     {
         currentWeaponIndex = slice.sliceIndex;
-        currentWeapon.ChangeWeapon(weapons[currentWeaponIndex]);
+        currentWeapon.ChangeWeapon(currentWeaponIndex);
     }
 }

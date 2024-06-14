@@ -9,8 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3876646053683216009}
-  - component: {fileID: 7536632980431502095}
+  - component: {fileID: 2030370207476040906}
   - component: {fileID: 65584641526216448}
+  - component: {fileID: 7205754866918702852}
+  - component: {fileID: 6320909009912024101}
   m_Layer: 0
   m_Name: GunController
   m_TagString: Untagged
@@ -33,7 +35,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7536632980431502095
+--- !u!114 &2030370207476040906
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,15 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ee0f9efca85e244bb1b63e8d2f019d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  bulletPrefab: {fileID: 5361658060817026628, guid: f3121034f936acb48ad2cc602eaa37bf,
-    type: 3}
-  bulletSpawnPoint: {fileID: 0}
-  magazineSize: 0
-  fireRate: 0
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 0
+  recoilAnimation: {fileID: 0}
+  reloadAnimation: {fileID: 0}
 --- !u!114 &65584641526216448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +77,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7536632980431502095}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BaseGunScript, Assembly-CSharp
         m_MethodName: Shoot
         m_Mode: 1
@@ -101,3 +96,32 @@ MonoBehaviour:
   m_DefaultActionMap: GunControls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &7205754866918702852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6141505327195849717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 489e340564d7802428e9d7a1822cfd09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponTransform: {fileID: 3876646053683216009}
+  reloadDuration: 1
+--- !u!114 &6320909009912024101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6141505327195849717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3db617cda7cce7147bc26120174149aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponTransform: {fileID: 3876646053683216009}
+  recoilDistance: 0.1
+  recoilDuration: 0.1
