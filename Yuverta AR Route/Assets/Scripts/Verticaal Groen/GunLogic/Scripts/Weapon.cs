@@ -17,7 +17,6 @@ public class Weapon : ScriptableObject
     public int maxCharge;
     public float chargeRate;
     public float launchForce;
-    public float chargeTime;
 }
 
 public enum WeaponType

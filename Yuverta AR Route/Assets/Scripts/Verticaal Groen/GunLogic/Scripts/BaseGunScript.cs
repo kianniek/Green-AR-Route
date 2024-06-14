@@ -38,7 +38,6 @@ public class BaseGunScript : MonoBehaviour
     private float chargeRate;
     private float maxCharge;
     private float launchForce;
-    private float chargeTime;
     
     [Header("Normal variables")]
     private Camera mainCamera;
@@ -87,14 +86,6 @@ public class BaseGunScript : MonoBehaviour
             burstRate = fireRate / burstCount;
         }
         
-        if (currentWeapon.weaponType == WeaponType.Catapult)
-        {
-            maxCharge = currentWeapon.maxCharge;
-            chargeRate = currentWeapon.chargeRate;
-            launchForce = currentWeapon.launchForce;
-            chargeTime = currentWeapon.chargeTime;
-        }
-        
         for (int i = 0; i < weaponInstance.transform.childCount; i++)
         {
             if (weaponInstance.transform.GetChild(i).name == "BulletSpawnPoint")
@@ -104,6 +95,14 @@ public class BaseGunScript : MonoBehaviour
             }
         }
 
+        
+        if (currentWeapon.weaponType == WeaponType.Catapult)
+        {
+            maxCharge = currentWeapon.maxCharge;
+            chargeRate = currentWeapon.chargeRate;
+            launchForce = currentWeapon.launchForce;
+            bulletSpawnPoint.transform.Rotate(new Vector3(-60, 0,0 ));
+        }
         firing = false;
     }
     
@@ -193,16 +192,13 @@ public class BaseGunScript : MonoBehaviour
 
     private IEnumerator CatapultShot(Func<bool> isPressed)
     {
-        var currentCharge = 0f;
+        //var currentCharge = 0f;
+        var time = Time.time;
         while (isPressed())
         {
-            // Charge up the catapult
-            currentCharge += chargeRate;
-            currentCharge = Mathf.Clamp(currentCharge, 0, maxCharge);
-
-            // Calculate and display the trajectory
-            yield return StartCoroutine(CheckFire(chargeTime, chargeTime / 10f, isPressed));
+            yield return new WaitForSeconds(0.1f);
         }
+        var currentCharge = Mathf.Clamp((Time.time - time) * chargeRate, 0, maxCharge);
         StartCoroutine(LaunchProjectile(currentCharge));
         firing = false;
     }
@@ -210,9 +206,9 @@ public class BaseGunScript : MonoBehaviour
     IEnumerator LaunchProjectile(float currentCharge)
     {
         CatapultProjectile projectileInstance = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity).GetComponent<CatapultProjectile>();
-        projectileInstance.Launch(bulletSpawnPoint.forward * (currentCharge * launchForce));
         currentAmmo.projectileSpeed = currentCharge * launchForce;
         projectileInstance.ammo = currentAmmo;
+        projectileInstance.Launch(bulletSpawnPoint.forward * (currentCharge * launchForce));
         
         if (animator != null)
         {
