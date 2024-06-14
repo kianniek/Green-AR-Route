@@ -53,6 +53,8 @@ public class CatapultProjectile : MonoBehaviour
         {
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             FindObjectOfType<SplatMakerExample>().OnHit(hit);
+            
+            VerticaalGroenManager.Instance.scoreManager.AddScore();
             // Destroy the bullet
             Destroy(gameObject, 1f);
             Destroy(this);
