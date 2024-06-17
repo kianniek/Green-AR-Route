@@ -18,7 +18,7 @@ public class QuizManager : MonoBehaviour
     public TextMeshPro questionText;
     
     [Tooltip("All the buttons that will be used to answer the quiz questions")]
-    [SerializeField] private QuizButton[] choiceButtons;
+    private QuizButton[] choiceButtons;
     
     [Tooltip("The scriptable object containing the quiz questions")]
     public QuizQuestions quizQuestions;
