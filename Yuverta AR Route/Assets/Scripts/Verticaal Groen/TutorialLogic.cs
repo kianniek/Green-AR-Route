@@ -6,7 +6,6 @@ using System.Collections;
 
 public class TutorialLogic : MonoBehaviour, IDragHandler, IEndDragHandler
 {
-
     public List<Sprite> images;
     public Image displayImage;
     public RectTransform displayImageRectTransform;
@@ -15,6 +14,8 @@ public class TutorialLogic : MonoBehaviour, IDragHandler, IEndDragHandler
     public Transform paginationContainer;
     public GameObject paginationIndicatorPrefab;
     public float paginationIndicatorSpacing;
+    public GameObject exitButton;
+    public GameObject parentObject;
 
     private List<PaginationIndicator> paginationIndicators;
     private int currentImageIndex = 0;
@@ -23,6 +24,8 @@ public class TutorialLogic : MonoBehaviour, IDragHandler, IEndDragHandler
     void Start()
     {
         paginationIndicators = new List<PaginationIndicator>();
+        exitButton.SetActive(false);
+        exitButton.gameObject.GetComponent<Button>().onClick.AddListener(OnExitClick);
 
         foreach (Transform child in paginationContainer)
         {
@@ -148,6 +151,9 @@ public class TutorialLogic : MonoBehaviour, IDragHandler, IEndDragHandler
         currentImageIndex = newImageIndex;
         displayImage.sprite = images[currentImageIndex];
         UpdatePaginationIndicators();
+        
+        if (currentImageIndex == images.Count - 1 && !exitButton.gameObject.activeSelf)
+            exitButton.SetActive(true);
 
         // Transition in
         initialPosition = -targetPosition;
@@ -168,5 +174,10 @@ public class TutorialLogic : MonoBehaviour, IDragHandler, IEndDragHandler
         prevButton.interactable = true;
         
         rectTransform.anchoredPosition = Vector2.zero;
+    }
+
+    private void OnExitClick()
+    {
+        parentObject.SetActive(false);
     }
 }
