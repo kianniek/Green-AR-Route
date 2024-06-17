@@ -115,4 +115,12 @@ public class QuizManager : MonoBehaviour
             Debug.Log("Wrong Answer");
         }
     }
+
+    public void ResetQuiz()
+    {
+        currentQuestionIndex = 0;
+        correctQuestions = 0;
+        totalQuestions = 0;
+        DisplayQuestion();
+    }
 }
