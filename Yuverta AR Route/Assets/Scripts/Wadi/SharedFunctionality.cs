@@ -26,7 +26,6 @@ public class SharedFunctionality : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
     }
     
