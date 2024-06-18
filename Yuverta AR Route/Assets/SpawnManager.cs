@@ -51,7 +51,8 @@ public class SpawnableManager : MonoBehaviour
         {
             Destroy(spawnedObject);
         }
-        spawnedObject = Instantiate(spawnablePrefab, spawnPosition, Quaternion.identity);
+        spawnedObject = Instantiate(spawnablePrefab);
+        spawnedObject.transform.position = spawnPosition;
         
         if (spawnOnce)
             gameObject.SetActive(false);

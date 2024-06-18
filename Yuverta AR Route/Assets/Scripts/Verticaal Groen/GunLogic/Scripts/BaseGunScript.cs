@@ -12,34 +12,34 @@ public class BaseGunScript : MonoBehaviour
     [Space(10)]
     
     [Header("Bullet variables")]
-    private GameObject bulletPrefab;
-    private Transform bulletSpawnPoint;
+    [SerializeField]private GameObject bulletPrefab;
+    [SerializeField]private Transform bulletSpawnPoint;
     [Space(10)]
     
     [Header("Ammunition variables")]
-    private int magazineSize;
-    private int currentAmmunition;
-    private bool isReloading = false;
-    private Ammo currentAmmo;
+    [SerializeField]private int magazineSize;
+    [SerializeField]private int currentAmmunition;
+    [SerializeField]private bool isReloading = false;
+    [SerializeField]private Ammo currentAmmo;
     
     [Header("Weapon variables")]
     [SerializeField] private List<Weapon> weapons;
-    private float fireRate;
-    private float fireRateCooldown;
-    private Weapon currentWeapon;
+    [SerializeField]private float fireRate;
+    [SerializeField]private float fireRateCooldown;
+    [SerializeField]private Weapon currentWeapon;
     [SerializeField] private Vector3 weaponOffset = new Vector3(1, -0.8f, 1f);
-    private WeaponType weaponType;
-    private int burstCount; // This field will only be visible if weaponType is Burst
-    private float burstRate;
-    private bool firing;
+    [SerializeField]private WeaponType weaponType;
+    [SerializeField]private int burstCount; // This field will only be visible if weaponType is Burst
+    [SerializeField]private float burstRate;
+    [SerializeField]private bool firing;
     
     [Header("Catapult variables")]
-    private float chargeRate;
-    private float maxCharge;
-    private float launchForce;
+    [SerializeField]private float chargeRate;
+    [SerializeField]private float maxCharge;
+    [SerializeField]private float launchForce;
     
     [Header("Normal variables")]
-    private Camera mainCamera;
+    [SerializeField]private Camera mainCamera;
     
     protected virtual void Start()
     {
