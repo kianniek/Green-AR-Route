@@ -804,7 +804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wheel: {fileID: 1846346048}
   gunController: {fileID: 1147084118}
-  scoreManager: {fileID: 0}
+  scoreManager: {fileID: 342152452}
 --- !u!1 &348978561
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,6 +2373,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 913648171}
     m_Modifications:
+    - target: {fileID: 2030370207476040906, guid: 38a6eceecd4e2014d845996f98994deb,
+        type: 3}
+      propertyPath: weapons.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7e49d419f8931df4d96a4612e16daa9d,
+        type: 2}
     - target: {fileID: 3876646053683216009, guid: 38a6eceecd4e2014d845996f98994deb,
         type: 3}
       propertyPath: m_LocalPosition.x

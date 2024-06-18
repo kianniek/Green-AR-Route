@@ -93,9 +93,9 @@ public class BaseGunScript : MonoBehaviour
         
         for (int i = 0; i < weaponInstance.transform.childCount; i++)
         {
-            if (weaponInstance.transform.GetChild(i).name == "BulletSpawnPoint")
+            if (weaponInstance.transform.GetChild(i).GetChild(0).name == "BulletSpawnPoint")
             {
-                bulletSpawnPoint = weaponInstance.transform.GetChild(i);
+                bulletSpawnPoint = weaponInstance.transform.GetChild(i).GetChild(0);
                 break;
             }
         }
@@ -206,8 +206,8 @@ public class BaseGunScript : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         var currentCharge = Mathf.Clamp((Time.time - time) * chargeRate, 0, maxCharge);
-        StartCoroutine(LaunchProjectile(currentCharge));
         firing = false;
+        StartCoroutine(LaunchProjectile(currentCharge));
     }
     
     IEnumerator LaunchProjectile(float currentCharge)
@@ -254,9 +254,9 @@ public class BaseGunScript : MonoBehaviour
     private IEnumerator Reload()
     {
         isReloading = true;
+        
         reloadAnimation.TriggerReload();
         
-
         //The animation has to be triggerd to get the length of the animation which takes time
         yield return new WaitForSeconds(reloadAnimation.reloadDuration);
 
