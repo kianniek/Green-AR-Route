@@ -8,6 +8,9 @@ public class DaktuinManager : BaseManager
     public static DaktuinManager Instance;
     
     [NonSerialized] public QuizManager quizManager;
+
+    [NonSerialized] public QRCodeManager QrCodeManager;
+    [NonSerialized] public LeafCollectionScript leafScript;
     
     private void Awake()
     {
@@ -28,6 +31,8 @@ public class DaktuinManager : BaseManager
         SwipeDetection.Instance.currentManager = this;
         SwipeDetection.Instance.tagToCheck = "WorldUI";
         quizManager = FindObjectOfType<QuizManager>();
+        leafScript = FindObjectOfType<LeafCollectionScript>();
+        QrCodeManager = FindObjectOfType<QRCodeManager>();
     }
 
     // Update is called once per frame

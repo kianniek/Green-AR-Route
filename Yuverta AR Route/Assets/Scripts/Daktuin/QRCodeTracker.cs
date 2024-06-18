@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Events;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.ARFoundation;
@@ -14,10 +15,10 @@ public class QRCodeManager : MonoBehaviour
     {
         public string name;
         public bool scanned;
-        public UnityEvent action;
+        public IntEvent action;
     }
     
-    private List<QRCode> qrCodes;
+    public List<QRCode> qrCodes;
     
     public XRReferenceImageLibrary referenceImageLibrary;
     
@@ -27,12 +28,24 @@ public class QRCodeManager : MonoBehaviour
 
         foreach (var image in referenceImageLibrary)
         {
+            Debug.Log("Ey");
             qrCodes.Add(new QRCode
             {
                 name = image.name,
                 scanned = false,
-                action = new UnityEvent()
+                action = new IntEvent()
             });
+        }
+        
+        DaktuinManager.Instance.leafScript.SetQRCodeEvents();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Debug.Log("Invoke");
+            qrCodes[0].action.Invoke(0);
         }
     }
     
@@ -82,7 +95,7 @@ public class QRCodeManager : MonoBehaviour
         
         if (scannedQRCode.name == null) return;
         scannedQRCode.scanned = true;
-        scannedQRCode.action.Invoke();
+        scannedQRCode.action.Invoke(qrCodes.IndexOf(scannedQRCode));
     }
 
     //Function for when a QR code is scanned for the second time
