@@ -18,7 +18,7 @@ public class SplatManagerSystem
 {
     static SplatManagerSystem m_Instance;
 
-    static public SplatManagerSystem instance
+    public static SplatManagerSystem instance
     {
         get
         {
@@ -57,6 +57,7 @@ public class SplatManagerSystem
         }
 
         Debug.Log("Adding Renderer");
+        Debug.Log(renderer.lightmapIndex);
         m_RendererAray[renderer.lightmapIndex].Add(renderer);
         m_Renderers.Add(renderer);
     }

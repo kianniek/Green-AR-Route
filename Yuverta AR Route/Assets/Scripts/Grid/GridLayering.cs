@@ -20,7 +20,7 @@ public class GridLayering : MonoBehaviour
         GridManager.Instance.gridBuilder.layerParents[0].SetActive(true);
         foreach (var layer in GridManager.Instance.gridBuilder.layerParents.Where(layer => layer != GridManager.Instance.gridBuilder.layerParents[0]))
         {
-            layer.SetActive(false);
+            layer.SetActive(true);
         }
     }
 
@@ -32,7 +32,7 @@ public class GridLayering : MonoBehaviour
         GridManager.Instance.gridBuilder.layerParents[GridManager.Instance.gridCurrentLayer].SetActive(true);
         foreach (var layer in GridManager.Instance.gridBuilder.layerParents.Where(layer => layer != GridManager.Instance.gridBuilder.layerParents[GridManager.Instance.gridCurrentLayer]))
         {
-            layer.SetActive(false);
+            layer.SetActive(true);
         }
     }
 }
