@@ -1,9 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 public class LeafCollectionScript : MonoBehaviour
 {
@@ -15,22 +16,23 @@ public class LeafCollectionScript : MonoBehaviour
         public string animationName;
         public bool collected;
     }
-
-    public UnityEvent AllLeavesCollected;
     public List<Leaf> leaves;
-    private int collectedLeafCount = 0;
-    private Animator animator;
+    public List<GameObject> animationPrefabs;
+
+    public UnityEvent allLeavesCollected;
+    private int collectedLeafCount;
     
-    private void Start()
+    private ARRaycastManager arRaycastManager;
+
+    void Awake()
     {
-        animator = FindObjectOfType<Animator>();
+        arRaycastManager = FindObjectOfType<ARRaycastManager>();
     }
 
-    public void SetQRCodeEvents()
+    public void SetQrCodeEvents()
     {
         for (int i = 0; i < DaktuinManager.Instance.QrCodeManager.qrCodes.Count; i++)
         {
-            // ReSharper disable once AccessToModifiedClosure
             DaktuinManager.Instance.QrCodeManager.qrCodes[i].action.AddListener(OnLeafCollected);
         }
     }
@@ -40,11 +42,34 @@ public class LeafCollectionScript : MonoBehaviour
         Leaf leaf = leaves[index];
         leaf.collected = true;
         leaf.image.sprite = leaf.sprite;
-        animator.Play(leaf.animationName);
+        PerformRaycast(animationPrefabs[index]);
         collectedLeafCount++;
         if (collectedLeafCount == leaves.Count)
         {
-            AllLeavesCollected.Invoke();
+            allLeavesCollected.Invoke();
+        }
+    }
+
+    private void SpawnNewAnimation(GameObject animationPrefab, Vector3 position)
+    {
+        var animation = Instantiate(animationPrefab, position, Quaternion.identity);
+        animation.transform.GetChild(1).gameObject.AddComponent<AnimationDeleter>();
+    }
+    
+    private void PerformRaycast(GameObject animationPrefab)
+    {
+        // Create a list to store the raycast hits
+        List<ARRaycastHit> hits = new List<ARRaycastHit>();
+
+        // Perform the raycast straight down from the device
+        if (arRaycastManager.Raycast(new Vector2(Screen.width / 2f, Screen.height / 2f), hits, TrackableType.Planes))
+        {
+            // If we hit a plane, get the hit position
+            ARRaycastHit hit = hits[0];
+            Vector3 hitPosition = hit.pose.position;
+
+            // Spawn the object at the hit position
+            SpawnNewAnimation(animationPrefab, hitPosition);
         }
     }
 }

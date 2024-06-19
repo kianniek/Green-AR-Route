@@ -28,7 +28,6 @@ public class QRCodeManager : MonoBehaviour
 
         foreach (var image in referenceImageLibrary)
         {
-            Debug.Log("Ey");
             qrCodes.Add(new QRCode
             {
                 name = image.name,
@@ -37,7 +36,7 @@ public class QRCodeManager : MonoBehaviour
             });
         }
         
-        DaktuinManager.Instance.leafScript.SetQRCodeEvents();
+        DaktuinManager.Instance.leafScript.SetQrCodeEvents();
     }
 
     private void Update()
