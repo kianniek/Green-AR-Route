@@ -13,11 +13,10 @@ public class LeafCollectionScript : MonoBehaviour
     {
         public Image image;
         public Sprite sprite;
-        public string animationName;
+        public GameObject animation;
         public bool collected;
     }
     public List<Leaf> leaves;
-    public List<GameObject> animationPrefabs;
 
     public UnityEvent allLeavesCollected;
     private int collectedLeafCount;
@@ -42,7 +41,7 @@ public class LeafCollectionScript : MonoBehaviour
         Leaf leaf = leaves[index];
         leaf.collected = true;
         leaf.image.sprite = leaf.sprite;
-        PerformRaycast(animationPrefabs[index]);
+        PerformRaycast(leaf.animation);
         collectedLeafCount++;
         if (collectedLeafCount == leaves.Count)
         {
