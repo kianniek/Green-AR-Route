@@ -50,7 +50,7 @@ public class QuizManager : MonoBehaviour
             questions.Add(quiz);
         }
         
-        if (choiceButtons.Length == 0)
+        if (choiceButtons == null || choiceButtons.Length == 0)
         {
             choiceButtons = new QuizButton[4];
             var buttons = FindObjectsOfType<QuizButton>();
@@ -83,6 +83,7 @@ public class QuizManager : MonoBehaviour
                 if (i < question.options.Count)
                 {
                     choiceButtons[i].GetComponentInChildren<TextMeshPro>().text = question.options[i].answer;
+                    //AdjustFontSize(choiceButtons[i].GetComponentInChildren<TextMeshPro>(), choiceButtons[i].gameObject, int.MaxValue, int.MinValue, 1);
                     choiceButtons[i].gameObject.SetActive(true);
                 }
                 else
