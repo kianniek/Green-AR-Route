@@ -35,10 +35,6 @@ public class DisplayVideoManager : BaseManager
 
     private void Start()
     {
-        //Setting up swipe detection
-        SwipeDetection.Instance.currentManager = this;
-        SwipeDetection.Instance.tagToCheck = "VideoPlayer";
-        
         //Finding scripts
         imageTracking = FindObjectOfType<ImageTracking>();
         raycastManager = FindObjectOfType<ARRaycastManager>();

@@ -10,29 +10,24 @@ using UnityEngine.UI;
 
 public class UIMenuLogic : MonoBehaviour
 {
-    [Header("General")] [SerializeField] private Canvas canvas;
-
-    #region ScrollArea
+    [Header("General")] 
+    [SerializeField] private Canvas canvas;
 
     [Header("Scroll Area")] [SerializeField]
     private GameObject UIObjectParent;
 
     [SerializeField] private GameObject UIObjectPrefab;
-
     [SerializeField] private SerializableDictionary<string, Sprite> UIObjectImages;
-
     [SerializeField] private Button startAnimationsButton;
     [SerializeField] private Button clearGridButton;
 
-    private List<GameObject> UIObjects = new List<GameObject>();
+    private List<GameObject> UIObjects = new ();
 
-    public bool isDragging;
-    
+    [Header("Moving Objects To Scroll Area")] 
+    [SerializeField] private float speedModifier;
+
     [SerializeField] private UnityEvent onWadiCorrect;
     [SerializeField] private UnityEvent onWadiIncorrect;
-
-    [Header("Moving Objects To Scroll Area")] [SerializeField]
-    private float speedModifier;
 
     private void Start()
     {
@@ -92,8 +87,7 @@ public class UIMenuLogic : MonoBehaviour
     public void OnObjectDelete(GameObject prefab)
     {
         if (CheckName(prefab.name) || prefab == null) return;
-        var canvasPosition =
-            SharedFunctionality.Instance.WorldToCanvasPosition(canvas, Camera.main, prefab.transform.position);
+        var canvasPosition = Camera.main.WorldToScreenPoint(prefab.transform.position);
         Debug.Log(canvasPosition);
         var newUIObject = Instantiate(UIObjectPrefab, canvasPosition, Quaternion.identity, canvas.transform);
         newUIObject.name = CloneTagRemover(prefab.name);
@@ -133,10 +127,7 @@ public class UIMenuLogic : MonoBehaviour
     private void OnButtonClick(GameObject obj)
     {
         DragDropHandler thisObj = obj.GetComponent<DragDropHandler>();
-        //thisObj.dragSprite = UIObjectImages.GetValue(obj.name);
-        isDragging = true;
 
-        GridManager.Instance.objectSpawner.m_SpawnOptionName = obj.name;
     }
 
     private bool CheckName(string newName)
@@ -161,65 +152,4 @@ public class UIMenuLogic : MonoBehaviour
 
         return checkString;
     }
-
-    public void StartAnimations()
-    {
-        StartCoroutine(WadiCheckAnimation());
-    }
-
-    IEnumerator WadiCheckAnimation()
-    {
-        foreach (var centerObjectScript in GridManager.Instance.CenterObjectsList)
-        {
-            centerObjectScript.MoveObjectsToCenter();
-        }
-        
-        GridManager.Instance.CenterVertically.CenterObjects();
-        
-        yield return new WaitForSeconds(3);
-        
-        Debug.Log("Checking positions");
-        GridManager.Instance.CheckPosition(out var wrongPlacedObjs);
-
-        if (wrongPlacedObjs.Count > 0)
-        {
-            Debug.Log("Incorrect positions");
-
-            foreach (var obj in wrongPlacedObjs)
-            {
-                obj.GetComponent<ObjectLogic>().ShakeObject();
-            }
-            yield return new WaitForSeconds(3);
-            onWadiIncorrect.Invoke();
-            foreach (var centerObjectScript in GridManager.Instance.CenterObjectsList)
-            {
-                centerObjectScript.ResetPositions();
-                
-            }
-            GridManager.Instance.CenterVertically.MoveCenteredObjectsBack();
-
-        }
-        else
-        {
-            Debug.Log("Correct positions");
-            GridManager.Instance.WadiCompleted = true;
-            onWadiCorrect.Invoke();
-        }
-        yield return null;
-    }
-
-    public void ClearGrid()
-    {
-        var objToDelete = new List<GameObject>(GridManager.Instance.placedObjects);
-        if (objToDelete.Count > 0)
-        {
-            foreach (var obj in objToDelete)
-            {
-                GridManager.Instance.DestroyObject(obj);
-            }
-        }
-    }
-
-    #endregion
-
 }

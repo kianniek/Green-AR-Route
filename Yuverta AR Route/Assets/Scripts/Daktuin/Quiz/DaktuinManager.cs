@@ -28,8 +28,6 @@ public class DaktuinManager : BaseManager
     // Start is called before the first frame update
     void Start()
     {
-        SwipeDetection.Instance.currentManager = this;
-        SwipeDetection.Instance.tagToCheck = "WorldUI";
         quizManager = FindObjectOfType<QuizManager>();
         leafScript = FindObjectOfType<LeafCollectionScript>();
         QrCodeManager = FindObjectOfType<QRCodeManager>();

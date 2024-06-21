@@ -7,72 +7,51 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(GridManager))]
 public class GridBuilder : MonoBehaviour
 {
-    [SerializeField] private Vector2 gridSize;
+    [SerializeField] private Vector2Int gridSize;
 
     [SerializeField] [Range(1, 2)] private int gridHeight;
-    [SerializeField] private float gridCellPadding;
+    [SerializeField] private Vector3 gridCellPadding;
+    [SerializeField] private float blockSizeMultiplier = 1;
     [SerializeField] private GameObject gridPointPrefab;
-    [SerializeField] private GameObject gridParent;
-    private CenterVertically centerVertically;
-
-    public List<GameObject> layerParents = new List<GameObject>();
-
     [SerializeField] private Vector3 stoppingDistance = new Vector3(0.47f, 1, 0.725f);
-    private float blockSize;
+    [SerializeField] private float blockSize;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        var obj = GridManager.Instance.objsToSpawnAmount.keys[0];
-        blockSize = obj.GetComponent<MeshRenderer>().bounds.size.y / 4;
-        centerVertically = GetComponent<CenterVertically>();
-        BuildGrid();
-    }
-
-    // ReSharper disable Unity.PerformanceAnalysis
     public void BuildGrid()
     {
-        gridCellPadding = gridCellPadding > 0
-            ? gridCellPadding
-            : gridPointPrefab.GetComponent<Renderer>().bounds.size.x * 2;
+        var size = gridPointPrefab.GetComponentInChildren<Renderer>().bounds.size * blockSizeMultiplier;
 
-        gridCellPadding += blockSize;
+        //Making sure gridHeight does not equal 0 to prevent no grid being created
+        gridHeight = gridHeight > 0 ? gridHeight : 1;
 
         var indexOfGridPoint = 0;
 
-
         // Create a grid of points
-        for (int y = 0; y < gridHeight; y++)
+        for (var y = 0; y < gridHeight; y++)
         {
-            var layerParentPos = gameObject.transform.position;
-            layerParentPos.y += y * gridCellPadding;
-
-            var layerParent = Instantiate(gridParent, layerParentPos, Quaternion.identity, transform);
-            layerParent.name = $"Layer {y}";
-
-            centerVertically.AddObject = layerParent;
-
-            var centerObjects = layerParent.AddComponent<CenterObjects>();
-            centerObjects.stoppingDistance = stoppingDistance;
-
-            layerParents.Add(layerParent);
-            for (int z = 0; z < gridSize.y; z++)
+            for (var x = 0; x < gridSize.x; x++)
             {
-                for (int x = 0; x < gridSize.x; x++)
+                for (var z = 0; z < gridSize.y; z++)
                 {
-                    // Calculate the position of the grid point
                     Vector3 position = new(x, y, z);
-                    position *= gridCellPadding;
+                    position.x += gridCellPadding.x;
+                    position.y += gridCellPadding.y;
+                    position.z += gridCellPadding.z;
 
-                    // Center the grid horizontally on the x and z axis
-                    Vector3 centerOffset = new Vector3(gridSize.x - 1, 0, gridSize.y - 1) * gridCellPadding * 0.5f;
+                    //center the grid
+                    var centerOffset = new Vector3(
+                        (gridSize.x - 1) * 0.5f + (x * (gridCellPadding.x)),
+                        (gridHeight - 1) * 0.5f + (y * (gridCellPadding.y) * gridHeight),
+                        (gridSize.y - 1) * 0.5f + (z * (gridCellPadding.z))
+                    );
                     position -= centerOffset;
 
                     // Set the position of the grid point
                     position += transform.position;
 
                     // Instantiate the grid point
-                    var gridPoint = Instantiate(gridPointPrefab, position, Quaternion.identity, layerParent.transform);
+                    var gridPoint = Instantiate(gridPointPrefab, position, Quaternion.identity, transform);
+                    gridPoint.transform.localScale = size;
+                    
                     var gridPointScript = gridPoint.GetComponent<GridPointScript>();
 
                     // Set the object position of the grid point based on the indexOfGridPoint
@@ -80,103 +59,58 @@ public class GridBuilder : MonoBehaviour
 
                     // Inputting rotation here later
                     gridPoint.name = $"{gridPointScript.objectPosition} {x} {y} {z}";
-                    GridManager.Instance.gridPoints.Add(gridPoint, y);
-                    GridManager.Instance.gridLayering.gridSortedLayer.Add(gridPoint, y);
 
                     // Keep track of the index of the grid point
                     ++indexOfGridPoint;
                 }
             }
-
-            // Set the size of the box collider of the layer parent
-            var firstChild = layerParent.transform.GetChild(0);
-            var lastChild = layerParent.transform.GetChild(layerParent.transform.childCount - 1);
-
-            var sizeChild = firstChild.GetComponentInChildren<Renderer>().bounds.size;
-
-            var distanceX = (lastChild.position.x - firstChild.position.x) * 4;
-            var distanceZ = (lastChild.position.z - firstChild.position.z) * 4;
-
-            distanceX += sizeChild.x;
-            distanceZ += sizeChild.z;
-            layerParent.GetComponent<BoxCollider>().size =
-                new Vector3(Mathf.Abs(distanceX), 0.001f, Mathf.Abs(distanceZ));
-
-            //Add all children to the center objects script
-            centerObjects.objects = new List<GameObject>();
-            for (int i = 0; i < layerParent.transform.childCount; i++)
-            {
-                centerObjects.objects.Add(layerParent.transform.GetChild(i).gameObject);
-            }
-
-
-            //Add the center objects script to the center objects list of the grid manager
-            GridManager.Instance.CenterObjectsList.Add(centerObjects);
         }
-
-        GridManager.Instance.CenterVertically = centerVertically;
-        GridManager.Instance.distanceLayers = gridCellPadding;
-        GridManager.Instance.gridLayering.gridDimensions = new Vector2Int(0, gridHeight - 1);
     }
 
     public void ClearGrid()
     {
-#if UNITY_EDITOR
-
-        if (UnityEditor.EditorUtility.DisplayDialog("Clear Grid", "Are you sure you want to clear the grid?", "Yes",
-                "No"))
+        
+        // Destroy all children of the grid in forloop
+        for (var i = transform.childCount - 1; i >= 0; i--)
         {
-            foreach (var gridPoint in GridManager.Instance.gridPoints)
-            {
-                DestroyImmediate(gridPoint.Key);
-            }
-
-            GridManager.Instance.gridPoints.Clear();
-
-            return;
+            if(Application.isPlaying)
+                Destroy(transform.GetChild(i).gameObject);
+            else
+                DestroyImmediate(transform.GetChild(i).gameObject);
         }
-
-
-#endif
-        foreach (var gridPoint in GridManager.Instance.gridPoints)
-        {
-            Destroy(gridPoint.Key);
-        }
-
-        GridManager.Instance.gridPoints.Clear();
     }
 
     private void OnDrawGizmos()
     {
         if (Application.isPlaying) return;
 
-        //Making sure gridCellPadding does not equal 0 to prevent all positions being 0
-        var localPadding = gridCellPadding = gridCellPadding > 0
-            ? gridCellPadding
-            : gridPointPrefab.GetComponent<Renderer>().bounds.size.x * 2;
+        var size = gridPointPrefab.GetComponentInChildren<Renderer>().bounds.size * blockSizeMultiplier;
 
         //Making sure gridHeight does not equal 0 to prevent no grid being created
         gridHeight = gridHeight > 0 ? gridHeight : 1;
 
-        for (int y = 0; y < gridHeight; y++)
+        for (var y = 0; y < gridHeight; y++)
         {
-            for (int x = 0; x < gridSize.x; x++)
+            for (var x = 0; x < gridSize.x; x++)
             {
-                for (int z = 0; z < gridSize.y; z++)
+                for (var z = 0; z < gridSize.y; z++)
                 {
                     Vector3 position = new(x, y, z);
-                    position *= localPadding;
-                    //center the grid horizontally on the x and z axis
-                    Vector3 center = new Vector3(gridSize.x / 2, 0, gridSize.y / 2) * localPadding;
-                    center -= position + Vector3.one * localPadding * 0.5f;
-                    position = new Vector3(center.x, position.y, center.z);
-                    position += transform.position;
+                    position.x += gridCellPadding.x;
+                    position.y += gridCellPadding.y;
+                    position.z += gridCellPadding.z;
+
+                    //center the grid
+                    var centerOffset = new Vector3(
+                        (gridSize.x - 1) * 0.5f + (x * (gridCellPadding.x)),
+                        (gridHeight - 1) * 0.5f + (y * (gridCellPadding.y) * gridHeight),
+                        (gridSize.y - 1) * 0.5f + (z * (gridCellPadding.z))
+                    );
+                    position -= centerOffset;
+
+
                     Gizmos.color = Color.green;
-
-                    Gizmos.DrawWireCube(position, Vector3.one * gridCellPadding);
-                    Gizmos.color = Color.cyan;
-
-                    Gizmos.DrawWireSphere(position, localPadding * 0.25f);
+                    Gizmos.DrawWireCube(position, size);
                 }
             }
         }

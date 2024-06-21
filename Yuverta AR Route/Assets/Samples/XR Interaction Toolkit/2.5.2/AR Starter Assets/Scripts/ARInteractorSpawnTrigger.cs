@@ -212,18 +212,6 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets
                     return;
                 }
             }
-
-            if (objectSpawner.objectPrefabs.Count == 1 && objectSpawner.objectPrefabs[0].name == "GridManager")
-            {
-                foreach (var hit in touchHits)
-                {
-                    if (hit.collider.gameObject.CompareTag("ARGround"))
-                    {
-                        m_ObjectSpawner.TrySpawnObject(hit.point, hit.normal);
-                        return;
-                    }
-                }
-            }
         }
 
         private RaycastHit[] TouchToRay()

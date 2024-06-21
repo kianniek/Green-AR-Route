@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3791446668921110149}
   - component: {fileID: 5844674834686962958}
   - component: {fileID: 7966075747387208109}
-  - component: {fileID: 1933999523405146648}
   - component: {fileID: 2190929030095967583}
   m_Layer: 0
   m_Name: LogicHandler
@@ -61,72 +60,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenOrientation: 1
---- !u!114 &1933999523405146648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725267953559002403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3476c41833f62624da6e838f2f1ca59b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trackingObject: 0
-  currentManager: {fileID: 0}
-  tagToCheck: 
-  position:
-    m_Name: Position
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: c16cf90b-a923-4d89-94dc-972be211ce9b
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 8e1e5c1f-5125-4e83-abd0-1b5866bf5652
-      m_Path: <Mouse>/position
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Position
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 21889802-3ecd-49f5-945d-4c786a396cd1
-      m_Path: <Touchscreen>/position
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Position
-      m_Flags: 0
-    m_Flags: 0
-  press:
-    m_Name: Press
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: c35ffd1a-3b8b-4954-9eb2-9e29a41d658a
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 6c7e3eb7-96d9-42cd-b67e-661d5ab2a074
-      m_Path: <Mouse>/leftButton
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Press
-      m_Flags: 0
-    - m_Name: 
-      m_Id: de4e53e6-0553-4fa6-a996-b5c848445004
-      m_Path: <Touchscreen>/Press
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Press
-      m_Flags: 0
-    m_Flags: 0
-  swipeResistance: 100
 --- !u!114 &2190929030095967583
 MonoBehaviour:
   m_ObjectHideFlags: 0
