@@ -1,4 +1,3 @@
-
 using Events;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -26,16 +25,16 @@ public class ObjectSpawner : MonoBehaviour
         set => m_CameraToFace = value;
     }
 
-    [FormerlySerializedAs("m_ObjectPrefabs")] [SerializeField] [Tooltip("The list of prefabs available to spawn.")]
-    public GameObject m_ObjectPrefab;
+    [FormerlySerializedAs("m_ObjectPrefab")] [SerializeField] [Tooltip("The list of prefabs available to spawn.")]
+    public GameObject[] m_ObjectPrefabs;
 
     /// <summary>
     /// The list of prefabs available to spawn.
     /// </summary>
-    public GameObject ObjectPrefabs
+    public GameObject[] ObjectPrefabs
     {
-        get => m_ObjectPrefab;
-        set => m_ObjectPrefab = value;
+        get => m_ObjectPrefabs;
+        set => m_ObjectPrefabs = value;
     }
 
     [SerializeField] [Tooltip("Whether to only spawn an object if the spawn point is within view of the camera.")]
@@ -169,28 +168,34 @@ public class ObjectSpawner : MonoBehaviour
             }
         }
 
-        var newObject = Instantiate(m_ObjectPrefab);
-        if (mSpawnAsChild)
-            newObject.transform.parent = transform;
-
-        // Set the initial position and add the GridSnapper component
-        newObject.transform.position = spawnPoint;
-
-        EnsureFacingCamera();
-
-        var facePosition = m_CameraToFace.transform.position;
-        var forward = facePosition - spawnPoint;
-        BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
-        newObject.transform.rotation = Quaternion.LookRotation(projectedForward, spawnNormal);
-        newObject.transform.position += spawnNormal * m_SpawnHeightOffset;
-        if (m_ApplyRandomAngleAtSpawn)
+        objectSpawned = null; 
+        
+        foreach (var objPrefab in m_ObjectPrefabs)
         {
-            var randomRotation = Random.Range(-m_SpawnAngleRange, m_SpawnAngleRange);
-            newObject.transform.Rotate(Vector3.up, randomRotation);
+            var newObject = Instantiate(objPrefab);
+            if (mSpawnAsChild)
+                newObject.transform.parent = transform;
+
+            // Set the initial position and add the GridSnapper component
+            newObject.transform.position = spawnPoint;
+
+            EnsureFacingCamera();
+
+            var facePosition = m_CameraToFace.transform.position;
+            var forward = facePosition - spawnPoint;
+            BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
+            newObject.transform.rotation = Quaternion.LookRotation(projectedForward, spawnNormal);
+            newObject.transform.position += spawnNormal * m_SpawnHeightOffset;
+            if (m_ApplyRandomAngleAtSpawn)
+            {
+                var randomRotation = Random.Range(-m_SpawnAngleRange, m_SpawnAngleRange);
+                newObject.transform.Rotate(Vector3.up, randomRotation);
+            }
+
+            ObjectSpawned.Invoke(newObject);
+            objectSpawned = newObject;
         }
 
-        ObjectSpawned.Invoke(newObject);
-        objectSpawned = newObject;
         return true;
     }
 }

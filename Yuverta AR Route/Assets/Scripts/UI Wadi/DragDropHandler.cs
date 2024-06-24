@@ -45,6 +45,12 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
     private void Update()
     {
+        //if ARRaycastManager is not set, find it
+        if (!m_RaycastManager)
+        {
+            m_RaycastManager = FindObjectOfType<ARRaycastManager>();
+        }
+        
         // Handle touch input
         if (touchAction.action.triggered)
         {
