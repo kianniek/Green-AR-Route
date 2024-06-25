@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4635548303194485528}
   - component: {fileID: -7033481330395327168}
   - component: {fileID: 5805393484683280695}
+  - component: {fileID: 399706117603331914}
+  - component: {fileID: 5467428282052207888}
   m_Layer: 0
   m_Name: BottomMiddle
   m_TagString: MoveableObject
@@ -29,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7790564467881088729}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1, y: -0.24999996, z: -0.0000050578033}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -120,13 +122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016b355e87b653d48abaaa6f3d8cf953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridManager: {fileID: 0}
   layerObj: 0
-  objectIndex: 0
-  objectPrefabIndex: 0
-  objectPosition: 1
-  isPlaced: 0
-  previousSnappedPosition: {x: 0, y: 0, z: 0}
-  targetMaterial: {fileID: 0}
+  objectGridLocation: 1
 --- !u!114 &5805393484683280695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,9 +137,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3b57f8a81321a243962989ecdb8495d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectLogic: {fileID: 0}
-  animationActive: 0
-  maxWhileRepeatTime: 0
-  timeWaitWhile: 0
   lerpSpeed: 0
-  snapDistanceWhile: 0
+  snapDistance: 0.01
+--- !u!114 &399706117603331914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790564467881088729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72abe521d82809342b5c017f0112e354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CameraToFace: {fileID: 0}
+  m_ObjectPrefabs: []
+  m_OnlySpawnInView: 1
+  m_ViewportPeriphery: 0.15
+  m_ApplyRandomAngleAtSpawn: 1
+  m_SpawnAngleRange: 45
+  m_SpawnHeightOffset: 1.5
+  mSpawnAsChild: 0
+  ObjectSpawned:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5467428282052207888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7790564467881088729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19db367333b75334dab523d43de05056, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefab: {fileID: 0}
+  dragSprite: {fileID: 0}
+  m_RaycastManager: {fileID: 0}
+  touchAction: {fileID: 0}

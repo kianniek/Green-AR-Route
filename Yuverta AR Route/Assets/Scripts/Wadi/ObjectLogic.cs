@@ -7,7 +7,7 @@ public class ObjectLogic : MonoBehaviour
     [SerializeField] private GridManager gridManager;
     //Values are set on spawn through the gridmanager
     public int layerObj;
-    public GridManager.ObjectPosition objectPosition;
+    [FormerlySerializedAs("objectPosition")] public GridManager.ObjectGridLocation objectGridLocation;
     
     private GameObject _snappedObject;
     public GameObject SnappedObject
@@ -33,7 +33,8 @@ public class ObjectLogic : MonoBehaviour
 
     public void OnDestroy()
     {
-        gridManager.UIMenuLogic.OnObjectDelete(gameObject);
+        var uiMenuLogic = FindObjectOfType<UIMenuLogic>();
+        uiMenuLogic.OnObjectDelete(gameObject);
     }
 
     public void SetObjectLayerID(int layerIdOfObject)
@@ -46,7 +47,7 @@ public class ObjectLogic : MonoBehaviour
     
     public bool IsCorrectlyPlaced()
     {
-        return objectPosition == snappedGridPoint.objectPosition;
+        return objectGridLocation == snappedGridPoint.objectGridLocation;
     }
     
     public void ShakeObject()

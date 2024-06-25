@@ -56,10 +56,10 @@ public class GridBuilder : MonoBehaviour
                     var gridPointScript = gridPoint.GetComponent<GridPointScript>();
 
                     // Set the object position of the grid point based on the indexOfGridPoint
-                    gridPointScript.objectPosition = (GridManager.ObjectPosition)indexOfGridPoint;
+                    gridPointScript.objectGridLocation = (GridManager.ObjectGridLocation)indexOfGridPoint;
 
                     // Inputting rotation here later
-                    gridPoint.name = $"{gridPointScript.objectPosition} {x} {y} {z}";
+                    gridPoint.name = $"{gridPointScript.objectGridLocation} {x} {y} {z}";
 
                     // Keep track of the index of the grid point
                     ++indexOfGridPoint;

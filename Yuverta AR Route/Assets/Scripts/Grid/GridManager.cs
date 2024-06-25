@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets;
+using Object = UnityEngine.Object;
 
 [RequireComponent(typeof(GridBuilder))]
 public class GridManager : MonoBehaviour
@@ -13,7 +14,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GridBuilder gridBuilder;
     [SerializeField] private UIMenuLogic uiMenuLogic;
 
-    [SerializeField] private SerializableDictionary<GameObject, ObjectPosition> objsToSpawnAmount = new();
+    [SerializeField] private SerializableDictionary<GameObject, ObjectGridLocation> objsToSpawn = new();
 
     [SerializeField] private List<GameObject> placedObjects = new();
     [SerializeField] private int selectedObjectIndex;
@@ -21,7 +22,7 @@ public class GridManager : MonoBehaviour
     private Dictionary<GameObject, int> gridPoints = new();
     private Dictionary<GameObject, bool> occupiedPositions = new();
 
-    public enum ObjectPosition
+    public enum ObjectGridLocation
     {
         BottomLeft, //0 0 0
         BottomMiddle, //0 0 1
@@ -49,18 +50,14 @@ public class GridManager : MonoBehaviour
         //set => DisplayWeather(value);
     }
     
-    public UIMenuLogic UIMenuLogic => uiMenuLogic;
+    public SerializableDictionary<GameObject, ObjectGridLocation> ObjsToSpawn => objsToSpawn;
 
     private void Start()
     {
         gridBuilder = gameObject.GetComponent<GridBuilder>();
-
-        uiMenuLogic = FindObjectOfType<UIMenuLogic>();
         Destroy(FindObjectOfType<ARInteractorSpawnTrigger>());
 
-        uiMenuLogic.StartUp(objsToSpawnAmount.keys.ToList());
-
-        objsToSpawnAmount.OnAfterDeserialize();
+        objsToSpawn.OnAfterDeserialize();
 
         gridBuilder.BuildGrid();
     }
@@ -109,6 +106,6 @@ public class GridManager : MonoBehaviour
 
     public bool CheckIfAllPlaced()
     {
-        return placedObjects.Count == objsToSpawnAmount.keys.Count;
+        return placedObjects.Count == objsToSpawn.keys.Count;
     }
 }
