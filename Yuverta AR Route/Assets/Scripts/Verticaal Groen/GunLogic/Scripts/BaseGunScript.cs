@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-//[CreateAssetMenu(fileName = "GunScript", menuName = "ScriptableObjects/GunScript", order = 1)]
 public class BaseGunScript : MonoBehaviour
 {
     [Header("Animator")]
-    private Animator animator;
+    public RecoilAnimation recoilAnimation;
+    public ReloadAnimation reloadAnimation;
     [Space(10)]
     
     [Header("Bullet variables")]
@@ -22,10 +23,11 @@ public class BaseGunScript : MonoBehaviour
     private Ammo currentAmmo;
     
     [Header("Weapon variables")]
+    [SerializeField] private List<Weapon> weapons;
     private float fireRate;
     private float fireRateCooldown;
     private Weapon currentWeapon;
-    private readonly Vector3 weaponOffset = new Vector3(1, -0.8f, 1f);
+    [SerializeField] private Vector3 weaponOffset = new Vector3(1, -0.8f, 1f);
     private WeaponType weaponType;
     private int burstCount; // This field will only be visible if weaponType is Burst
     private float burstRate;
@@ -44,6 +46,8 @@ public class BaseGunScript : MonoBehaviour
         currentAmmunition = magazineSize;
         fireRateCooldown = 0;
         mainCamera = Camera.main;
+        
+        transform.parent = mainCamera.transform;
     }
     
     void Update()
@@ -55,18 +59,20 @@ public class BaseGunScript : MonoBehaviour
         }
     }
 
-    public void ChangeWeapon(Weapon newWeapon)
+    public void ChangeWeapon(int weaponIndex)
     {
         //Destroying old gun
         if (transform.childCount > 0) Destroy(transform.GetChild(0).gameObject);
         //Spawning the new gun
-        currentWeapon = newWeapon;
+        currentWeapon = weapons[weaponIndex];
         var weaponInstance = Instantiate(currentWeapon.prefab, transform);
-        weaponInstance.transform.localPosition = weaponOffset;
         
-        //Setting and activating the animator
-        animator = weaponInstance.GetComponent<Animator>();
-        animator.SetTrigger("Equip");
+        //Setting and activating the animations validation
+        if (!recoilAnimation || !reloadAnimation)
+        {
+            Debug.LogError("Recoil or reload animation not set");
+        }
+        
         
         //Setting the ammo and weapon variables
         currentAmmo = currentWeapon.ammo;
@@ -87,9 +93,9 @@ public class BaseGunScript : MonoBehaviour
         
         for (int i = 0; i < weaponInstance.transform.childCount; i++)
         {
-            if (weaponInstance.transform.GetChild(i).name == "BulletSpawnPoint")
+            if (weaponInstance.transform.GetChild(i).GetChild(0).name == "BulletSpawnPoint")
             {
-                bulletSpawnPoint = weaponInstance.transform.GetChild(i);
+                bulletSpawnPoint = weaponInstance.transform.GetChild(i).GetChild(0);
                 break;
             }
         }
@@ -116,9 +122,12 @@ public class BaseGunScript : MonoBehaviour
 
     public virtual void Shoot()
     {
-        if (firing) return;
+        if (firing) 
+            return;
+        
         if (EventSystem.current.IsPointerOverGameObject())
             return;
+        
         if (Application.isEditor)
         {
             StartCoroutine(Shooting(() => Input.GetMouseButton(0)));
@@ -197,8 +206,8 @@ public class BaseGunScript : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         var currentCharge = Mathf.Clamp((Time.time - time) * chargeRate, 0, maxCharge);
-        StartCoroutine(LaunchProjectile(currentCharge));
         firing = false;
+        StartCoroutine(LaunchProjectile(currentCharge));
     }
     
     IEnumerator LaunchProjectile(float currentCharge)
@@ -207,22 +216,7 @@ public class BaseGunScript : MonoBehaviour
         currentAmmo.projectileSpeed = currentCharge * launchForce;
         projectileInstance.ammo = currentAmmo;
         projectileInstance.Launch(bulletSpawnPoint.forward * (currentCharge * launchForce));
-        
-        if (animator != null)
-        {
-            animator.SetTrigger("Shoot");
-        }
-
-        //The animation has to be triggerd to get the length of the animation which takes time
-        yield return new WaitForSeconds(0.1f);
-        
-        // Get the length of the Reload animation
-        float shootAnimationLength = animator.GetCurrentAnimatorStateInfo(0).length;
-
-        yield return new WaitForSeconds(shootAnimationLength);
-
-        
-        StartCoroutine(Reload());
+        yield return null;
     }
 
     private IEnumerator CheckFire(float totalTime, float interval, Func<bool> isPressed)
@@ -235,26 +229,23 @@ public class BaseGunScript : MonoBehaviour
 
     public virtual void ShootBullet()
     {
-        if (isReloading) return;
+        if (isReloading) 
+            return;
+        
         if (currentAmmunition > 0 /*&& fireRateCooldown <= 0*/)
         {
             var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             bullet.GetComponent<BulletLogic>().ammo = currentAmmo;
             currentAmmunition--;
-            if (animator != null)
-            {
-                animator.SetTrigger("Shoot");
-            }
+            
+            recoilAnimation.TriggerRecoil();
             
             /*// Reset the fire rate timer
             fireRateCooldown = fireRate;*/
         }
         else if (currentAmmunition <= 0)
         {
-            if (animator != null)
-            {
-                StartCoroutine(Reload());
-            }
+            StartCoroutine(Reload());
         }
     }
     
@@ -263,19 +254,17 @@ public class BaseGunScript : MonoBehaviour
     private IEnumerator Reload()
     {
         isReloading = true;
-        animator.SetTrigger("Reload");
-
-        //The animation has to be triggerd to get the length of the animation which takes time
-        yield return new WaitForSeconds(0.1f);
         
-        // Get the length of the Reload animation
-        float reloadAnimationLength = animator.GetCurrentAnimatorStateInfo(0).length;
-
-        yield return new WaitForSeconds(reloadAnimationLength);
+        reloadAnimation.TriggerReload();
+        
+        //The animation has to be triggerd to get the length of the animation which takes time
+        yield return new WaitForSeconds(reloadAnimation.reloadDuration);
 
         // After the reload animation, refill the ammunition
         // Replace 10 with the actual ammunition count after reloading
         currentAmmunition = magazineSize;
         isReloading = false;
+
+        yield return null;
     }
 }

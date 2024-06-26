@@ -292,22 +292,11 @@ public class ARTemplateMenuManager : MonoBehaviour
     /// This is effectively an override of the default behavior or randomly spawning an object.
     /// </summary>
     /// <param name="objectIndex">The index in the array of the object to spawn with the ObjectSpawner</param>
-    public void SetObjectToSpawn(int objectIndex)
+    public void SetObjectToSpawn()
     {
         if (m_ObjectSpawner == null)
         {
             Debug.LogWarning("Object Spawner not configured correctly: no ObjectSpawner set.");
-        }
-        else
-        {
-            if (m_ObjectSpawner.objectPrefabs.Count > objectIndex)
-            {
-                m_ObjectSpawner.spawnOptionIndex = objectIndex;
-            }
-            else
-            {
-                Debug.LogWarning("Object Spawner not configured correctly: object index larger than number of Object Prefabs.");
-            }
         }
 
         HideMenu();

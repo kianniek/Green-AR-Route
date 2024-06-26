@@ -41,17 +41,17 @@ public class SplatMakerExample : MonoBehaviour {
 		// Cast a ray from the camera to the mouse pointer and draw a splat there.
 		// This just picks a rendom scale and bias for a 4x4 splat atlas
 		// You could use a larger atlas of splat textures and pick a scale and offset for the specific splat you want to use
-		if (Input.GetMouseButton (0)) {
-			Debug.Log("Mouse Down");
-			Debug.Log("Mouse Position: " + Input.mousePosition);
-			Debug.Log("ScreenPointToRay: " + Camera.main.ScreenPointToRay( Input.mousePosition ));
-			Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
-			RaycastHit hit;
-			if( Physics.Raycast( ray, out hit, 10000 ) ){
-				Debug.Log(hit.collider.gameObject.name);
-				OnHit(hit);
-			}
-		}
+		// if (Input.GetMouseButton (0)) {
+		// 	Debug.Log("Mouse Down");
+		// 	Debug.Log("Mouse Position: " + Input.mousePosition);
+		// 	Debug.Log("ScreenPointToRay: " + Camera.main.ScreenPointToRay( Input.mousePosition ));
+		// 	Ray ray = Camera.main.ScreenPointToRay( Input.mousePosition );
+		// 	RaycastHit hit;
+		// 	if( Physics.Raycast( ray, out hit, 10000 ) ){
+		// 		Debug.Log(hit.collider.gameObject.name);
+		// 		OnHit(hit);
+		// 	}
+		// }
 	
 	}
 

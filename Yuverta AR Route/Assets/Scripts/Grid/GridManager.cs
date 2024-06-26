@@ -1,63 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets;
-using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
+using Object = UnityEngine.Object;
 
-public class GridManager : BaseManager
+[RequireComponent(typeof(GridBuilder))]
+public class GridManager : MonoBehaviour
 {
-    public static GridManager Instance { get; private set; }
-    private bool _wadiCompleted;
-    public bool WadiCompleted 
-    { 
-        get => _wadiCompleted;
-        set
-        {
-            DisplayWeather(value);
-        }
-    }
+    [SerializeField] private bool _wadiCompleted;
 
-    private void DisplayWeather(bool value)
-    {
-        weatherObject.SetActive(value);
-    }
+    [SerializeField] private GridBuilder gridBuilder;
+    [SerializeField] private UIMenuLogic uiMenuLogic;
 
-    public GameObject weatherObject;
-    public GridBuilder gridBuilder;
-    public GridLayering gridLayering;
-    public ObjectMovement objectMovement;
-    public UIMenuLogic uiMenu;
-    public ObjectSpawner objectSpawner;
-    public int gridCurrentLayer;
+    [SerializeField] private SerializableDictionary<GameObject, ObjectGridLocation> objsToSpawn = new();
 
-    public SerializableDictionary<GameObject, ObjectPosition> objsToSpawnAmount = new();
+    [SerializeField] private List<GameObject> placedObjects = new();
+    [SerializeField] private int selectedObjectIndex;
 
-    [SerializeField] private float gridSize;
-    
-    public float GridSize
-    {
-        get => gridSize;
-        set => gridSize = value;
-    }
+    private Dictionary<GameObject, int> gridPoints = new();
+    private Dictionary<GameObject, bool> occupiedPositions = new();
 
-    //public List<GameObject> gridPoints = new();
-    public Dictionary<GameObject, int> gridPoints = new();
-    public Dictionary<GameObject, bool> occupiedPositions = new();
-    
-    public List<GameObject> placedObjects = new();
-    public int selectedObjectIndex;
-
-    public float distanceLayers;
-
-    public List<CenterObjects> CenterObjectsList { get; set; } = new();
-
-    public CenterVertically CenterVertically { get; set; }
-
-    #region Enum
-
-    public enum ObjectPosition
+    public enum ObjectGridLocation
     {
         BottomLeft, //0 0 0
         BottomMiddle, //0 0 1
@@ -70,164 +35,69 @@ public class GridManager : BaseManager
         UpperRight, //2 0 2
         BottomLeft2, //0 1 0
         BottomMiddle2, //0 1 1
-        BottomRight2,   //0 1 2
+        BottomRight2, //0 1 2
         MiddleLeft2, //1 1 0
-        Middle2,    //1 1 1
+        Middle2, //1 1 1
         MiddleRight2, //1 1 2
         UpperLeft2, //2 1 0
         UpperMiddle2, //2 1 1
         UpperRight2 //2 1 2
     }
 
-    #endregion
-
-    void Awake()
+    public bool WadiCompleted
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
+        get => _wadiCompleted;
+        //set => DisplayWeather(value);
+    }
+    
+    public SerializableDictionary<GameObject, ObjectGridLocation> ObjsToSpawn => objsToSpawn;
+
+    private void Awake()
+    {
         
-        weatherObject.SetActive(false);
     }
 
     private void Start()
     {
+        //find the UI Menu Logic
+        uiMenuLogic = FindObjectOfType<UIMenuLogic>();
+        
+        //enable the canvas
+        uiMenuLogic.EnableCanvas(true);
+        
         gridBuilder = gameObject.GetComponent<GridBuilder>();
-        gridLayering = gameObject.GetComponent<GridLayering>();
-        uiMenu = FindObjectOfType<UIMenuLogic>();
-        objectSpawner = FindObjectOfType<ObjectSpawner>();
         Destroy(FindObjectOfType<ARInteractorSpawnTrigger>());
+
+        objsToSpawn.OnAfterDeserialize();
+
+        var gameObjectList = gridBuilder.BuildGrid();
         
-        uiMenu.StartUp(objsToSpawnAmount.keys.ToList());
-        
-        objectSpawner.ObjectSpawned.AddListener(NewObjectPlaced);
-        objectSpawner.m_ObjectPrefabs = objsToSpawnAmount.keys.ToList();
-        objsToSpawnAmount.OnAfterDeserialize();
-        SwipeDetection.Instance.currentManager = this;
-        SwipeDetection.Instance.tagToCheck = "MoveableObject";
+        //for every object in the dictionary, add a available position to the dictionary
+        foreach (var obj in gameObjectList)
+        {
+            occupiedPositions.Add(obj, false);
+        }
     }
 
-    public Vector3 SnapToGrid(GameObject objToSnap)
+    public GameObject SnapToGridPoint(GameObject objToSnap)
     {
-        ObjectLogic objectLogic = objToSnap.GetComponent<ObjectLogic>();
-        Vector3 position = objToSnap.transform.position;
-
-        if (objectLogic.isPlaced)
-        {
-            var previousSnappedGridPoint = ClosestGridPoint(objectLogic.previousSnappedPosition, findLastPoint: true);
-            occupiedPositions.Remove(previousSnappedGridPoint);
-            objectLogic.isPlaced = false;
-            objectLogic.previousSnappedPosition = Vector3.negativeInfinity;
-        }
+        //Getting the closest grid point
+        var closestGridPoint = ClosestGridPoint(objToSnap.transform.position);
         
-        var closestGridPoint = ClosestGridPoint(position, occupiedPositions.Keys.ToList());
-        if (closestGridPoint == null)
-        {
-            closestGridPoint = ClosestGridPoint(position, occupiedPositions.Keys.ToList(), ignoreLayer: true);
-        }
-        occupiedPositions.Add(closestGridPoint, true);
-        objectLogic.isPlaced = true;
-        objectLogic.previousSnappedPosition = closestGridPoint.transform.position;
-        objectLogic.SnappedObject = closestGridPoint;
-        return closestGridPoint.transform.position;
-    }
-
-    private GameObject ClosestGridPoint(Vector3 position, List<GameObject> occupiedPositions = null, bool findLastPoint = false, bool ignoreLayer = false)
-    {
-        float minDistance = Mathf.Infinity;
-        GameObject closestGridPoint = null;
-
-        foreach (var gridPoint in gridPoints.Keys)
-        {
-            if (!ignoreLayer && !findLastPoint && gridPoints[gridPoint] != gridCurrentLayer) continue;
-            if (occupiedPositions != null && occupiedPositions.Contains(gridPoint)) continue;
-            
-            float distance = Vector3.Distance(position, gridPoint.transform.position);
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                closestGridPoint = gridPoint;
-            }
-        }
-        
+        Debug.Log($"Closest grid point is {closestGridPoint.name}");
+        //Setting the object position to the grid point
         return closestGridPoint;
     }
 
-    public override void NewObjectPlaced()
+    private GameObject ClosestGridPoint(Vector3 startPosition)
     {
-        //Getting the last object spawned by the object spawner
-        var newObject = objectSpawner.lastSpawnedObject;
+        //check for every occupied position and filter out the available ones
+        var availablePositions = occupiedPositions.Where(x => !x.Value).ToList();
         
-        //Adding the object to the list of placed objects
-        placedObjects.Add(newObject); 
-        objectMovement = newObject.GetComponent<ObjectMovement>();
+        //Getting the closest grid point
+        var closestGridPoint = availablePositions.OrderBy(x => Vector3.Distance(x.Key.transform.position, startPosition)).FirstOrDefault().Key;
         
-        //Updating the UI
-        uiMenu.Remove(newObject);
-        
-        //Setting the values
-        var objectLogic = newObject.GetComponent<ObjectLogic>();
-        objectLogic.objectIndex = placedObjects.Count - 1;
-        objectLogic.objectPrefabIndex = objectSpawner.m_SpawnOptionIndex; //TODO: Implement objectPrefabIndex
-        objectLogic.SetObjectLayerID(gridCurrentLayer);
-        
-        //Snapping the object to the grid
-        UpdateObject();
-    }
-
-    public override void SelectedObject(GameObject selectedObject)
-    {
-        SwipeDetection.Instance.trackingObject = false;
-        objectMovement = selectedObject.GetComponent<ObjectMovement>();
-        selectedObjectIndex = objectMovement.objectLogic.objectIndex;
-        UpdateObject();
-    }
-
-    public override void UpdateObject()
-    {
-        objectMovement.MoveObject();
-    }
-
-    public override void DestroyObject(GameObject objectToDestroy = null)
-    {
-        //Checking if the list is empty
-        if (placedObjects.Count <= 0) return;
-        
-        //Getting the selected object
-        GameObject focusedObject = objectToDestroy switch
-        {
-            null => placedObjects[selectedObjectIndex],
-            _ => objectToDestroy
-        };
-
-        //Removing the object from the lists
-        placedObjects.Remove(focusedObject);
-        occupiedPositions.Remove(ClosestGridPoint(focusedObject.transform.position, findLastPoint: true));
-        
-        //Destroying the object
-        Destroy(focusedObject.gameObject);
-        
-        //Updating the object indexes
-        foreach (var obj in placedObjects)
-        {
-            obj.GetComponent<ObjectLogic>().objectIndex = placedObjects.IndexOf(obj);
-        }
-        
-        //Setting the objectMovement to the first object in the list
-        if (placedObjects.Count > 0)
-        {
-            objectMovement = placedObjects[0].GetComponent<ObjectMovement>();
-        }
-        //Or updating the UI
-        //else uiMenu.DeleteButtonVisibility();
-
-        //Resetting the swipe detection
-        SwipeDetection.Instance.trackingObject = false;
+        return closestGridPoint;
     }
 
     public bool CheckPosition(out List<GameObject> wrongPlaces)
@@ -251,11 +121,9 @@ public class GridManager : BaseManager
             _ => false
         };
     }
-    
+
     public bool CheckIfAllPlaced()
     {
-        return placedObjects.Count == objsToSpawnAmount.keys.Count;
+        return placedObjects.Count == objsToSpawn.keys.Count;
     }
-    
-    
 }
