@@ -948,10 +948,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19db367333b75334dab523d43de05056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_RaycastManager: {fileID: 0}
   itemPrefab: {fileID: 0}
   dragSprite: {fileID: 0}
-  m_RaycastManager: {fileID: 0}
-  touchAction: {fileID: 0}
+  dragDeltaAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: fe2826b9-8594-4010-9bef-a890a1139cf8
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
 --- !u!114 &3439341282023834050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,7 +982,7 @@ MonoBehaviour:
   m_ViewportPeriphery: 0.15
   m_ApplyRandomAngleAtSpawn: 1
   m_SpawnAngleRange: 45
-  m_SpawnHeightOffset: 1.5
+  m_SpawnHeightOffset: 0
   mSpawnAsChild: 0
   ObjectSpawned:
     m_PersistentCalls:
@@ -1245,6 +1256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 3512743801311496811}
+  swipeCanvas: {fileID: 0}
   uiObjectParentTransform: {fileID: 4697943244277263685}
   uiButtonPrefab: {fileID: 4232318595526188969, guid: f59e796214d7ac043a8606d4f29c9cb3,
     type: 3}

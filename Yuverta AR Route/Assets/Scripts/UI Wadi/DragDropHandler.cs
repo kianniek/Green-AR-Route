@@ -13,7 +13,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     [SerializeField] private ARRaycastManager m_RaycastManager;
     public GameObject itemPrefab; // The actual item to place on the grid
     public Sprite dragSprite; // The sprite to display while dragging
-    
+
     private GameObject dragObject; // The temporary drag object (UI representation)
     private Canvas _canvas;
     private bool isDragging;
@@ -140,19 +140,12 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
     private void SpawnObject(Vector2 screenPosition)
     {
-        var hitResults = new List<ARRaycastHit>();
-        m_RaycastManager.Raycast(screenPosition, hitResults, UnityEngine.XR.ARSubsystems.TrackableType.Planes);
-
-        if (hitResults.Count == 0) return;
-
-        foreach (var hit in hitResults)
+        var RayFromScreen = Camera.main.ScreenPointToRay(screenPosition);
+        //raycast to find the position to spawn the object
+        if(Physics.Raycast(RayFromScreen, out var hit, 100f))
         {
-            if (hit.pose != null && hit.trackable != null)
-            {
-                var hitNormal = hit.pose.rotation * Vector3.up;
-                _objectSpawner.TrySpawnObject(hit.pose.position, hitNormal.normalized, out var spawnedObject);
-                return;
-            }
+            _objectSpawner.TrySpawnObject(hit.point, hit.normal, out var spawnedObject);
+            return;
         }
     }
 }
