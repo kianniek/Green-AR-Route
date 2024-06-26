@@ -20,6 +20,8 @@ public class LerpedObjectMovement : MonoBehaviour
     private void Start()
     {
         _objectLogic = gameObject.GetComponent<ObjectLogic>();
+        
+        
     }
     
     private void Update()
@@ -29,10 +31,10 @@ public class LerpedObjectMovement : MonoBehaviour
 
     private void KeepObjectOnSnappedPosition()
     {
-        if (!_objectLogic.SnappedObject) 
+        if (!_objectLogic.SnappedGridPoint) 
             return;
         
-        var closestGridPosition = _objectLogic.SnappedObject.transform.position;
+        var closestGridPosition = _objectLogic.SnappedGridPoint.transform.position;
         
         //Lerp the object to the closest grid position and snap it to the point if the distance is less than 0.01
         if (Vector3.Distance(gameObject.transform.position, closestGridPosition) > snapDistance)

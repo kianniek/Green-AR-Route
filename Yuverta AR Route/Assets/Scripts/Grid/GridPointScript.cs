@@ -5,5 +5,5 @@ using UnityEngine.Serialization;
 
 public class GridPointScript : MonoBehaviour
 {
-    [FormerlySerializedAs("objectPosition")] public GridManager.ObjectGridLocation objectGridLocation;
+    public GridManager.ObjectGridLocation objectGridLocation;
 }

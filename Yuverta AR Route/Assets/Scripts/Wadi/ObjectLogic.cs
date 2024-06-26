@@ -5,27 +5,23 @@ using UnityEngine.Serialization;
 public class ObjectLogic : MonoBehaviour
 {
     public GridManager.ObjectGridLocation objectGridLocation;
+
+    public GameObject SnappedGridPoint { get; set; }
+
+    private GridPointScript currentGridPoint;
     
-    private GameObject _snappedObject;
-    public GameObject SnappedObject
-    {
-        get => _snappedObject;
-        set
-        {
-            _snappedObject = value;
-            if (value != null)
-            {
-                snappedGridPoint = value.GetComponent<GridPointScript>();
-            }
-        }
-    }
-    private GridPointScript snappedGridPoint;
+    private GridManager gridManager;
+    
     private static readonly Vector3 newScale = new Vector3(0.2f,  0.2f, 0.2f);
 
     private void Start()
     {
+        gridManager = FindObjectOfType<GridManager>();
+        
         gameObject.transform.localScale = newScale;
         gameObject.transform.rotation = Quaternion.Euler(0, -90, 0);
+        
+        SnappedGridPoint = gridManager.SnapToGridPoint(gameObject);
     }
 
     public void OnDestroy()
@@ -36,7 +32,7 @@ public class ObjectLogic : MonoBehaviour
     
     public bool IsCorrectlyPlaced()
     {
-        return objectGridLocation == snappedGridPoint.objectGridLocation;
+        return objectGridLocation == currentGridPoint.objectGridLocation;
     }
     
     public void ShakeObject()

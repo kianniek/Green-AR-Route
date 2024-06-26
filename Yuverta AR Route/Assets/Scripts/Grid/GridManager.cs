@@ -52,10 +52,16 @@ public class GridManager : MonoBehaviour
     
     public SerializableDictionary<GameObject, ObjectGridLocation> ObjsToSpawn => objsToSpawn;
 
+    private void Awake()
+    {
+        
+    }
+
     private void Start()
     {
         //find the UI Menu Logic
         uiMenuLogic = FindObjectOfType<UIMenuLogic>();
+        
         //enable the canvas
         uiMenuLogic.EnableCanvas(true);
         
@@ -64,16 +70,23 @@ public class GridManager : MonoBehaviour
 
         objsToSpawn.OnAfterDeserialize();
 
-        gridBuilder.BuildGrid();
+        var gameObjectList = gridBuilder.BuildGrid();
+        
+        //for every object in the dictionary, add a available position to the dictionary
+        foreach (var obj in gameObjectList)
+        {
+            occupiedPositions.Add(obj, false);
+        }
     }
 
-    public Vector3 SnapToGridPoint(GameObject objToSnap)
+    public GameObject SnapToGridPoint(GameObject objToSnap)
     {
         //Getting the closest grid point
         var closestGridPoint = ClosestGridPoint(objToSnap.transform.position);
         
+        Debug.Log($"Closest grid point is {closestGridPoint.name}");
         //Setting the object position to the grid point
-        return closestGridPoint.transform.position;
+        return closestGridPoint;
     }
 
     private GameObject ClosestGridPoint(Vector3 startPosition)

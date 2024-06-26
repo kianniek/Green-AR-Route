@@ -17,9 +17,10 @@ public class GridBuilder : MonoBehaviour
     [SerializeField] private Vector3 stoppingDistance = new Vector3(0.47f, 1, 0.725f);
     [SerializeField] private float blockSize;
 
-    public void BuildGrid()
+    public List<GameObject> BuildGrid()
     {
         var size = gridPointPrefab.GetComponentInChildren<Renderer>().bounds.size * blockSizeMultiplier;
+        var gameObjectList = new List<GameObject>();
 
         //Making sure gridHeight does not equal 0 to prevent no grid being created
         gridHeight = gridHeight > 0 ? gridHeight : 1;
@@ -61,11 +62,17 @@ public class GridBuilder : MonoBehaviour
                     // Inputting rotation here later
                     gridPoint.name = $"{gridPointScript.objectGridLocation} {x} {y} {z}";
 
+                    // Add the grid point to the list of grid points
+                    gameObjectList.Add(gridPoint);
+                    
                     // Keep track of the index of the grid point
                     ++indexOfGridPoint;
+                    
                 }
             }
         }
+        
+        return gameObjectList;
     }
 
     public void ClearGrid()

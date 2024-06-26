@@ -948,21 +948,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19db367333b75334dab523d43de05056, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tagToRaycast: GridPoint
   m_RaycastManager: {fileID: 0}
-  itemPrefab: {fileID: 0}
-  dragSprite: {fileID: 0}
+  itemPrefab: {fileID: 5859861886021885041, guid: 90a14dd5ee3d767409818a49fe7c1308,
+    type: 3}
+  dragSprite: {fileID: 21300000, guid: dbfcacb03d1a11f4cb2b51f8a982edc6, type: 3}
   dragDeltaAction:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
-      m_Name: 
+      m_Name: Drag Delta
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: fe2826b9-8594-4010-9bef-a890a1139cf8
+      m_Id: 1c4f8444-996b-4272-8823-85f452b00843
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: -3603844561257126198, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
 --- !u!114 &3439341282023834050
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(ObjectSpawner))]
 public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IPointerUpHandler
 {
+    [SerializeField] private string tagToRaycast;
     [SerializeField] private ARRaycastManager m_RaycastManager;
     public GameObject itemPrefab; // The actual item to place on the grid
     public Sprite dragSprite; // The sprite to display while dragging
@@ -142,8 +143,11 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     {
         var RayFromScreen = Camera.main.ScreenPointToRay(screenPosition);
         //raycast to find the position to spawn the object
-        if(Physics.Raycast(RayFromScreen, out var hit, 100f))
+        if (Physics.Raycast(RayFromScreen, out var hit, 100f))
         {
+            if (!hit.transform.CompareTag(tagToRaycast))
+                return;
+            
             _objectSpawner.TrySpawnObject(hit.point, hit.normal, out var spawnedObject);
             return;
         }
