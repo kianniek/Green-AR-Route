@@ -25,9 +25,6 @@ public class VerticaalGroenManager : BaseManager
     // Start is called before the first frame update
     void Start()
     {
-        SwipeDetection.Instance.currentManager = this;
-        SwipeDetection.Instance.tagToCheck = "UI";
-        
         if (!scoreManager) scoreManager = FindObjectOfType<ScoreManager>();
         var gunControllerInstance = gunController;
         currentWeapon = gunControllerInstance.GetComponent<BaseGunScript>();

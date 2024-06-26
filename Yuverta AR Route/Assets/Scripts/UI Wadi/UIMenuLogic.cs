@@ -6,46 +6,62 @@ using Events.GameEvents.Typed;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UIMenuLogic : MonoBehaviour
 {
     [Header("General")] [SerializeField] private Canvas canvas;
 
-    #region ScrollArea
-
-    [Header("Scroll Area")] [SerializeField]
-    private GameObject UIObjectParent;
-
-    [SerializeField] private GameObject UIObjectPrefab;
-
-    [SerializeField] private SerializableDictionary<string, Sprite> UIObjectImages;
+    [Header("Scroll Area")] 
+    [SerializeField] private Transform uiObjectParentTransform;
+    [SerializeField] private GameObject uiButtonPrefab;
+    [SerializeField] private GameObject gridmanagerPrefab;
 
     [SerializeField] private Button startAnimationsButton;
     [SerializeField] private Button clearGridButton;
 
-    private List<GameObject> UIObjects = new List<GameObject>();
+    private List<GameObject> uiObjects = new();
 
-    public bool isDragging;
-    
+    [Header("Moving Objects To Scroll Area")] 
+    [SerializeField] private float speedModifier;
+
     [SerializeField] private UnityEvent onWadiCorrect;
     [SerializeField] private UnityEvent onWadiIncorrect;
 
-    [Header("Moving Objects To Scroll Area")] [SerializeField]
-    private float speedModifier;
+    private Dictionary<string, Sprite> UIObjectImages = new ();
 
     private void Start()
     {
         startAnimationsButton.gameObject.SetActive(false);
         clearGridButton.gameObject.SetActive(false);
-        if (UIObjectParent.transform.childCount <= 0) return;
-        foreach (Transform child in UIObjectParent.transform)
+
+        foreach (Transform child in uiObjectParentTransform.transform)
         {
             Destroy(child.gameObject);
         }
+
+        var objectsToSpawn = gridmanagerPrefab.GetComponent<GridManager>().ObjsToSpawn;
+        foreach (var obj in objectsToSpawn.keys)
+        {
+            var dragDropHandler = obj.GetComponent<DragDropHandler>();
+            
+            var objName = dragDropHandler.itemPrefab.name;
+            var objSprite = dragDropHandler.dragSprite;
+
+            if (objSprite == null)
+            {
+                objSprite = null;
+            }
+            
+            UIObjectImages.Add(objName, objSprite);
+            uiObjects.Add(obj);
+        }
+        
+        AddRange(uiObjects);
     }
 
-    public void StartUp(List<GameObject> prefabList)
+    private void AddRange(List<GameObject> prefabList)
     {
         foreach (var prefab in prefabList)
         {
@@ -55,24 +71,24 @@ public class UIMenuLogic : MonoBehaviour
 
     private void Add(GameObject prefab)
     {
-        if (CheckName(prefab.name) || prefab == null) return;
-        var newUIObject = Instantiate(UIObjectPrefab, UIObjectParent.transform);
+        if (prefab == null)
+            return;
+
+        var newUIObject = Instantiate(uiButtonPrefab, uiObjectParentTransform.transform);
         newUIObject.name = CloneTagRemover(prefab.name);
-        //newUIObject.GetComponent<Image>().sprite = UIObjectImages.GetValue(prefab.name);
+
         newUIObject.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(newUIObject));
-        UIObjects.Add(newUIObject);
+        uiObjects.Add(newUIObject);
     }
 
-    //Index is not used in this function but is required for the event
     public void Remove(GameObject prefab)
     {
         var prefabName = CloneTagRemover(prefab.name);
 
-        var objToRemove = UIObjects.Find(obj => obj.name == prefabName);
-        UIObjects.Remove(objToRemove);
-        Destroy(objToRemove);
+        uiObjects.Remove(prefab);
+        Destroy(prefab);
 
-        switch (UIObjects.Count)
+        switch (uiObjects.Count)
         {
             case 0:
                 startAnimationsButton.gameObject.SetActive(true);
@@ -91,17 +107,21 @@ public class UIMenuLogic : MonoBehaviour
 
     public void OnObjectDelete(GameObject prefab)
     {
-        if (CheckName(prefab.name) || prefab == null) return;
-        var canvasPosition =
-            SharedFunctionality.Instance.WorldToCanvasPosition(canvas, Camera.main, prefab.transform.position);
-        Debug.Log(canvasPosition);
-        var newUIObject = Instantiate(UIObjectPrefab, canvasPosition, Quaternion.identity, canvas.transform);
-        newUIObject.name = CloneTagRemover(prefab.name);
-        //newUIObject.GetComponent<Image>().sprite = UIObjectImages.GetValue(newUIObject.name);
-        newUIObject.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(newUIObject));
-        newUIObject.transform.position = canvasPosition;
+        if (prefab == null)
+            return;
+
+        var canvasPosition = Camera.main.WorldToScreenPoint(prefab.transform.position);
+
+        var uiObject = Instantiate(uiButtonPrefab, canvasPosition, Quaternion.identity, canvas.transform);
+        uiObject.name = CloneTagRemover(prefab.name);
+
+        uiObject.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(uiObject));
+
+        uiObject.transform.position = canvasPosition;
+
         startAnimationsButton.gameObject.SetActive(false);
-        StartCoroutine(RouteToFollow(newUIObject));
+
+        StartCoroutine(RouteToFollow(uiObject));
     }
 
     private IEnumerator RouteToFollow(GameObject spriteToMove)
@@ -125,29 +145,14 @@ public class UIMenuLogic : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        UIObjects.Add(spriteToMove);
-        spriteToMove.transform.SetParent(UIObjectParent.transform);
+        uiObjects.Add(spriteToMove);
+        spriteToMove.transform.SetParent(uiObjectParentTransform.transform);
         //spriteToMove.transform.position = UIObjects.Last().transform.position;
     }
 
     private void OnButtonClick(GameObject obj)
     {
-        DragDropHandler thisObj = obj.GetComponent<DragDropHandler>();
-        //thisObj.dragSprite = UIObjectImages.GetValue(obj.name);
-        isDragging = true;
-
-        GridManager.Instance.objectSpawner.m_SpawnOptionName = obj.name;
-    }
-
-    private bool CheckName(string newName)
-    {
-        if (UIObjects.Any(obj => obj.name == newName))
-        {
-            //Remember to put this to true once there are more objects
-            return true;
-        }
-
-        return false;
+        var thisObj = obj.GetComponent<DragDropHandler>();
     }
 
     private string CloneTagRemover(string checkString)
@@ -161,65 +166,4 @@ public class UIMenuLogic : MonoBehaviour
 
         return checkString;
     }
-
-    public void StartAnimations()
-    {
-        StartCoroutine(WadiCheckAnimation());
-    }
-
-    IEnumerator WadiCheckAnimation()
-    {
-        foreach (var centerObjectScript in GridManager.Instance.CenterObjectsList)
-        {
-            centerObjectScript.MoveObjectsToCenter();
-        }
-        
-        GridManager.Instance.CenterVertically.CenterObjects();
-        
-        yield return new WaitForSeconds(3);
-        
-        Debug.Log("Checking positions");
-        GridManager.Instance.CheckPosition(out var wrongPlacedObjs);
-
-        if (wrongPlacedObjs.Count > 0)
-        {
-            Debug.Log("Incorrect positions");
-
-            foreach (var obj in wrongPlacedObjs)
-            {
-                obj.GetComponent<ObjectLogic>().ShakeObject();
-            }
-            yield return new WaitForSeconds(3);
-            onWadiIncorrect.Invoke();
-            foreach (var centerObjectScript in GridManager.Instance.CenterObjectsList)
-            {
-                centerObjectScript.ResetPositions();
-                
-            }
-            GridManager.Instance.CenterVertically.MoveCenteredObjectsBack();
-
-        }
-        else
-        {
-            Debug.Log("Correct positions");
-            GridManager.Instance.WadiCompleted = true;
-            onWadiCorrect.Invoke();
-        }
-        yield return null;
-    }
-
-    public void ClearGrid()
-    {
-        var objToDelete = new List<GameObject>(GridManager.Instance.placedObjects);
-        if (objToDelete.Count > 0)
-        {
-            foreach (var obj in objToDelete)
-            {
-                GridManager.Instance.DestroyObject(obj);
-            }
-        }
-    }
-
-    #endregion
-
 }

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GridPointScript : MonoBehaviour
 {
-    public GridManager.ObjectPosition objectPosition;
+    [FormerlySerializedAs("objectPosition")] public GridManager.ObjectGridLocation objectGridLocation;
 }
