@@ -54,6 +54,11 @@ public class GridManager : MonoBehaviour
 
     private void Start()
     {
+        //find the UI Menu Logic
+        uiMenuLogic = FindObjectOfType<UIMenuLogic>();
+        //enable the canvas
+        uiMenuLogic.EnableCanvas(true);
+        
         gridBuilder = gameObject.GetComponent<GridBuilder>();
         Destroy(FindObjectOfType<ARInteractorSpawnTrigger>());
 

@@ -29,6 +29,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         _gridManager = FindObjectOfType<GridManager>();
         _objectSpawner = GetComponent<ObjectSpawner>();
 
+        _objectSpawner.ObjectPrefabs.Clear();
         _objectSpawner.ObjectPrefabs.Add(itemPrefab);
 
         if (!_canvas)
@@ -146,7 +147,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
         foreach (var hit in hitResults)
         {
-            if (hit.pose != null && hit.trackable != null && hit.trackable.gameObject.CompareTag("Ground"))
+            if (hit.pose != null && hit.trackable != null)
             {
                 var hitNormal = hit.pose.rotation * Vector3.up;
                 _objectSpawner.TrySpawnObject(hit.pose.position, hitNormal.normalized, out var spawnedObject);

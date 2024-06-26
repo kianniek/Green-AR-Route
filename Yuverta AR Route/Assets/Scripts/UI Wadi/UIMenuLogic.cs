@@ -12,9 +12,11 @@ using UnityEngine.UI;
 public class UIMenuLogic : MonoBehaviour
 {
     [Header("General")] [SerializeField] private Canvas canvas;
+    [SerializeField] private GameObject swipeCanvas;
 
-    [Header("Scroll Area")] 
-    [SerializeField] private Transform uiObjectParentTransform;
+    [Header("Scroll Area")] [SerializeField]
+    private Transform uiObjectParentTransform;
+
     [SerializeField] private GameObject uiButtonPrefab;
     [SerializeField] private GameObject gridmanagerPrefab;
 
@@ -23,29 +25,30 @@ public class UIMenuLogic : MonoBehaviour
 
     private List<GameObject> uiObjects = new();
 
-    [Header("Moving Objects To Scroll Area")] 
-    [SerializeField] private float speedModifier;
+    [Header("Moving Objects To Scroll Area")] [SerializeField]
+    private float speedModifier;
 
     [SerializeField] private UnityEvent onWadiCorrect;
     [SerializeField] private UnityEvent onWadiIncorrect;
 
-    private Dictionary<string, Sprite> UIObjectImages = new ();
+    private Dictionary<string, Sprite> UIObjectImages = new();
 
     private void Start()
     {
         startAnimationsButton.gameObject.SetActive(false);
         clearGridButton.gameObject.SetActive(false);
 
-        foreach (Transform child in uiObjectParentTransform.transform)
-        {
-            Destroy(child.gameObject);
-        }
+        //Add all the objects to the scroll area
+        // foreach (Transform child in uiObjectParentTransform.transform)
+        // {
+        //     Destroy(child.gameObject);
+        // }
 
         var objectsToSpawn = gridmanagerPrefab.GetComponent<GridManager>().ObjsToSpawn;
         foreach (var obj in objectsToSpawn.keys)
         {
             var dragDropHandler = obj.GetComponent<DragDropHandler>();
-            
+
             var objName = dragDropHandler.itemPrefab.name;
             var objSprite = dragDropHandler.dragSprite;
 
@@ -53,12 +56,12 @@ public class UIMenuLogic : MonoBehaviour
             {
                 objSprite = null;
             }
-            
+
             UIObjectImages.Add(objName, objSprite);
             uiObjects.Add(obj);
         }
-        
-        AddRange(uiObjects);
+
+        EnableCanvas(false);
     }
 
     private void AddRange(List<GameObject> prefabList)
@@ -165,5 +168,13 @@ public class UIMenuLogic : MonoBehaviour
         }
 
         return checkString;
+    }
+
+    /// <summary>
+    /// Enables the canvas. used for the start of the game when grid is spawned
+    /// </summary>
+    public void EnableCanvas(bool enable)
+    {
+        swipeCanvas.gameObject.SetActive(enable);
     }
 }

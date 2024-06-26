@@ -509,6 +509,12 @@ MonoBehaviour:
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
   m_CancelButton: Cancel
+--- !u!1 &1493174768 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 294799147233873718, guid: bc285eb939703134badf84a4111ccccb,
+    type: 3}
+  m_PrefabInstance: {fileID: 1555792432}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1555792432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -532,6 +538,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4100077905609060168, guid: bc285eb939703134badf84a4111ccccb,
+        type: 3}
+      propertyPath: swipeCanvas
+      value: 
+      objectReference: {fileID: 1493174768}
     - target: {fileID: 4697943244277263685, guid: bc285eb939703134badf84a4111ccccb,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -644,9 +655,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8345436230626248483, guid: bc285eb939703134badf84a4111ccccb,
         type: 3}
+      propertyPath: dragSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: dbfcacb03d1a11f4cb2b51f8a982edc6,
+        type: 3}
+    - target: {fileID: 8345436230626248483, guid: bc285eb939703134badf84a4111ccccb,
+        type: 3}
+      propertyPath: itemPrefab
+      value: 
+      objectReference: {fileID: 5859861886021885041, guid: 90a14dd5ee3d767409818a49fe7c1308,
+        type: 3}
+    - target: {fileID: 8345436230626248483, guid: bc285eb939703134badf84a4111ccccb,
+        type: 3}
+      propertyPath: m_RaycastManager
+      value: 
+      objectReference: {fileID: 2512387470231460731}
+    - target: {fileID: 8345436230626248483, guid: bc285eb939703134badf84a4111ccccb,
+        type: 3}
       propertyPath: selectAction.m_Action.m_Id
       value: 3ae14198-9a48-49fe-953a-c59514074489
       objectReference: {fileID: 0}
+    - target: {fileID: 8345436230626248483, guid: bc285eb939703134badf84a4111ccccb,
+        type: 3}
+      propertyPath: dragDeltaAction.m_Reference
+      value: 
+      objectReference: {fileID: -3603844561257126198, guid: c348712bda248c246b8c49b3db54643f,
+        type: 3}
     - target: {fileID: 8345436230626248483, guid: bc285eb939703134badf84a4111ccccb,
         type: 3}
       propertyPath: selectAction.m_UseReference
