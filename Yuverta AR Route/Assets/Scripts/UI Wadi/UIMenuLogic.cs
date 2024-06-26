@@ -29,7 +29,7 @@ public class UIMenuLogic : MonoBehaviour
     [SerializeField] private UnityEvent onWadiCorrect;
     [SerializeField] private UnityEvent onWadiIncorrect;
 
-    private Dictionary<string, Sprite> UIObjectImages;
+    private Dictionary<string, Sprite> UIObjectImages = new ();
 
     private void Start()
     {
@@ -47,20 +47,21 @@ public class UIMenuLogic : MonoBehaviour
             var dragDropHandler = obj.GetComponent<DragDropHandler>();
             
             var objName = dragDropHandler.itemPrefab.name;
-            var objSprite = dragDropHandler.itemPrefab.GetComponentInChildren<SpriteRenderer>().sprite;
+            var objSprite = dragDropHandler.dragSprite;
 
-            if (objName == null || objSprite == null)
+            if (objSprite == null)
             {
-                objName = "Default";
                 objSprite = null;
             }
             
             UIObjectImages.Add(objName, objSprite);
             uiObjects.Add(obj);
         }
+        
+        AddRange(uiObjects);
     }
 
-    public void AddRange(List<GameObject> prefabList)
+    private void AddRange(List<GameObject> prefabList)
     {
         foreach (var prefab in prefabList)
         {

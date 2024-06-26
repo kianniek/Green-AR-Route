@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Events;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -26,12 +27,12 @@ public class ObjectSpawner : MonoBehaviour
     }
 
     [FormerlySerializedAs("m_ObjectPrefab")] [SerializeField] [Tooltip("The list of prefabs available to spawn.")]
-    public GameObject[] m_ObjectPrefabs;
+    public List<GameObject> m_ObjectPrefabs = new ();
 
     /// <summary>
     /// The list of prefabs available to spawn.
     /// </summary>
-    public GameObject[] ObjectPrefabs
+    public List<GameObject> ObjectPrefabs
     {
         get => m_ObjectPrefabs;
         set => m_ObjectPrefabs = value;

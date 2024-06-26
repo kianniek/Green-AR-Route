@@ -1,46 +1,46 @@
 using System.Collections.Generic;
-using Events.GameEvents.Typed;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
-using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
+using UnityEngine.XR.Interaction.Toolkit;
 
 //By Glenn
 [RequireComponent(typeof(ObjectSpawner))]
 public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IPointerUpHandler
 {
+    [SerializeField] private ARRaycastManager m_RaycastManager;
     public GameObject itemPrefab; // The actual item to place on the grid
     public Sprite dragSprite; // The sprite to display while dragging
+    
     private GameObject dragObject; // The temporary drag object (UI representation)
-    private Canvas canvas;
-    private Camera mainCamera;
+    private Canvas _canvas;
     private bool isDragging;
     private ObjectSpawner _objectSpawner;
-    [SerializeField] private ARRaycastManager m_RaycastManager;
-
     private GridManager _gridManager;
 
     // Input action references
-    [SerializeField] private InputActionReference touchAction;
-    
+    [SerializeField] private InputActionProperty dragDeltaAction;
 
     private void Start()
     {
-        mainCamera = Camera.main; // Ensure this is the correct camera for your setup
-        canvas = FindObjectOfType<Canvas>(); // Find the canvas in the scene
+        _canvas = FindObjectOfType<Canvas>(); // Find the _canvas in the scene
         _gridManager = FindObjectOfType<GridManager>();
         _objectSpawner = GetComponent<ObjectSpawner>();
 
-        if (canvas == null)
+        _objectSpawner.ObjectPrefabs.Add(itemPrefab);
+
+        if (!_canvas)
         {
             Debug.LogError("No Canvas found in the scene.");
         }
 
-        // Enable the touch input action
-        touchAction.action.Enable();
+        // Enable the drag delta input action if there is one
+        if (dragDeltaAction != null && dragDeltaAction.action != null)
+        {
+            dragDeltaAction.action.Enable();
+        }
     }
 
     private void Update()
@@ -50,39 +50,36 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         {
             m_RaycastManager = FindObjectOfType<ARRaycastManager>();
         }
-        
-        // Handle touch input
-        if (touchAction.action.triggered)
+
+        // Handle drag delta input action
+        if (dragDeltaAction.action != null && dragDeltaAction.action.triggered)
         {
-            var touchscreen = Touchscreen.current;
-            if (touchscreen != null)
+            Vector2 touchPosition = dragDeltaAction.action.ReadValue<Vector2>();
+
+            if (Touchscreen.current.primaryTouch.press.isPressed)
             {
-                var touch = touchscreen.primaryTouch;
-                if (touch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Began)
+                var eventData = new PointerEventData(EventSystem.current)
                 {
-                    var eventData = new PointerEventData(EventSystem.current)
-                    {
-                        position = touch.position.ReadValue()
-                    };
-                    OnPointerDown(eventData);
-                }
-                else if (touch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Moved)
+                    position = touchPosition
+                };
+                OnPointerDown(eventData);
+            }
+            else if (Touchscreen.current.primaryTouch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Moved)
+            {
+                var eventData = new PointerEventData(EventSystem.current)
                 {
-                    var eventData = new PointerEventData(EventSystem.current)
-                    {
-                        position = touch.position.ReadValue()
-                    };
-                    OnDrag(eventData);
-                }
-                else if (touch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Ended)
+                    position = touchPosition
+                };
+                OnDrag(eventData);
+            }
+            else if (Touchscreen.current.primaryTouch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Ended)
+            {
+                var eventData = new PointerEventData(EventSystem.current)
                 {
-                    var eventData = new PointerEventData(EventSystem.current)
-                    {
-                        position = touch.position.ReadValue()
-                    };
-                    OnEndDrag(eventData);
-                    OnPointerUp(eventData);
-                }
+                    position = touchPosition
+                };
+                OnEndDrag(eventData);
+                OnPointerUp(eventData);
             }
         }
     }
@@ -129,7 +126,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     private void CreateDragImage(PointerEventData eventData)
     {
         dragObject = new GameObject("DragImage");
-        dragObject.transform.SetParent(canvas.transform, false); // Make it a child of the canvas
+        dragObject.transform.SetParent(_canvas.transform, false); // Make it a child of the _canvas
         dragObject.transform.position = eventData.position;
 
         var image = dragObject.AddComponent<Image>();

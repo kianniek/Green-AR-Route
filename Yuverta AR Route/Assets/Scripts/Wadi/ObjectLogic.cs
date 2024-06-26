@@ -4,10 +4,7 @@ using UnityEngine.Serialization;
 
 public class ObjectLogic : MonoBehaviour
 {
-    [SerializeField] private GridManager gridManager;
-    //Values are set on spawn through the gridmanager
-    public int layerObj;
-    [FormerlySerializedAs("objectPosition")] public GridManager.ObjectGridLocation objectGridLocation;
+    public GridManager.ObjectGridLocation objectGridLocation;
     
     private GameObject _snappedObject;
     public GameObject SnappedObject
@@ -35,14 +32,6 @@ public class ObjectLogic : MonoBehaviour
     {
         var uiMenuLogic = FindObjectOfType<UIMenuLogic>();
         uiMenuLogic.OnObjectDelete(gameObject);
-    }
-
-    public void SetObjectLayerID(int layerIdOfObject)
-    {
-        layerObj = layerIdOfObject;
-
-        /*targetMaterial.SetFloat(ObjectLayerId, layerIdOfObject);
-        targetMaterial.SetFloat(CurrentLayerId, GridManager.Instance.gridCurrentLayer);*/
     }
     
     public bool IsCorrectlyPlaced()
