@@ -14,15 +14,14 @@ GameObject:
   - component: {fileID: 7792781324528804128}
   - component: {fileID: 2835373007744002376}
   - component: {fileID: -6557106663029813121}
-  - component: {fileID: 6835012145858114134}
-  - component: {fileID: 6473913757284096684}
+  - component: {fileID: 5957589304756098504}
   m_Layer: 0
   m_Name: BottomLeft
   m_TagString: MoveableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1394592850999978948
 Transform:
   m_ObjectHideFlags: 0
@@ -137,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lerpSpeed: 0.5
   snapDistance: 0.01
---- !u!114 &6835012145858114134
+--- !u!114 &5957589304756098504
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,45 +145,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5859861886021885041}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72abe521d82809342b5c017f0112e354, type: 3}
+  m_Script: {fileID: 11500000, guid: 910edc26da24aa54d8adc0fbe5aa4b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CameraToFace: {fileID: 0}
-  m_ObjectPrefabs: []
-  m_OnlySpawnInView: 1
-  m_ViewportPeriphery: 0.15
-  m_ApplyRandomAngleAtSpawn: 1
-  m_SpawnAngleRange: 45
-  m_SpawnHeightOffset: 1.5
-  mSpawnAsChild: 0
-  ObjectSpawned:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &6473913757284096684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5859861886021885041}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19db367333b75334dab523d43de05056, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RaycastManager: {fileID: 0}
-  itemPrefab: {fileID: 5859861886021885041}
-  dragSprite: {fileID: 21300000, guid: d80cabb7f46004842b09173491e74cc6, type: 3}
-  dragDeltaAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Drag Delta
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 0163b1b2-292a-457b-88c8-779ceea49c0f
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -3603844561257126198, guid: c348712bda248c246b8c49b3db54643f,
-      type: 3}
+  raycastManager: {fileID: 0}
+  touchInputAction: {fileID: -7530398834462728267, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  dragSprite: {fileID: 0}
