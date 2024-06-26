@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class CropScript : MonoBehaviour
 {
@@ -9,8 +8,6 @@ public class CropScript : MonoBehaviour
     private Transform parent;
     private GameObject currentChild;
     public int growthStage = 0;
-
-    public UnityEvent fullyGrown;
     
     // Start is called before the first frame update
     void Start()
@@ -23,8 +20,6 @@ public class CropScript : MonoBehaviour
         Destroy(currentChild);
         currentChild = Instantiate(cropObject.growthStages[growthStage], parent);
         growthStage++;
-        
-        if (growthStage == cropObject.growthStages.Count) fullyGrown.Invoke();
     }
     
     public void HarvestCrop()
