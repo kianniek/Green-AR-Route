@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using ShellanderGames.WeaponWheel;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class VerticaalGroenManager : BaseManager
 {
