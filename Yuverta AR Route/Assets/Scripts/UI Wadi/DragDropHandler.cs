@@ -14,6 +14,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     [SerializeField] private ARRaycastManager m_RaycastManager;
     public GameObject itemPrefab; // The actual item to place on the grid
     public Sprite dragSprite; // The sprite to display while dragging
+    [SerializeField] private GameObject visuals;
 
     private GameObject dragObject; // The temporary drag object (UI representation)
     private Canvas _canvas;
@@ -137,6 +138,12 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
         var rectTransform = image.GetComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(100, 100); // Set size, adjust as needed
+        
+        // Disable the visuals of the object
+        visuals.SetActive(false);
+        
+        //move this object to the end of the children
+        dragObject.transform.SetAsLastSibling();
     }
 
     private void SpawnObject(Vector2 screenPosition)
@@ -148,7 +155,9 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
             if (!hit.transform.CompareTag(tagToRaycast))
                 return;
             
-            _objectSpawner.TrySpawnObject(hit.point, hit.normal, out var spawnedObject);
+            var deleteObj = _objectSpawner.TrySpawnObject(hit.point, hit.normal, out var spawnedObject);
+            
+            gameObject.SetActive(!deleteObj);
             return;
         }
     }
