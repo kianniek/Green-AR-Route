@@ -85,7 +85,16 @@ public class GridManager : MonoBehaviour
 
     private GameObject ClosestGridPoint(GameObject objToSnap)
     {
-        var availablePositions = occupiedPositions.Where(x => !x.Value).ToList();
+        var availablePositions = new Dictionary<GameObject, bool>();
+
+        foreach (var VARIABLE in occupiedPositions)
+        {
+            if (VARIABLE.Value == false)
+            {
+                availablePositions.Add(VARIABLE.Key, VARIABLE.Value);
+            }
+        }
+        
         if (availablePositions.Count == 0)
         {
             Debug.LogWarning("No available positions found");
@@ -96,13 +105,18 @@ public class GridManager : MonoBehaviour
             .OrderBy(x => Vector3.Distance(x.Key.transform.position, objToSnap.transform.position))
             .FirstOrDefault().Key;
 
+        // Mark the closest grid point as occupied
+        occupiedPositions[closestGridPoint] = true;
+        
         return closestGridPoint;
     }
 
-    public GameObject MoveObjectToNewGridPoint(GameObject objToMove)
+    public GameObject MoveObjectToNewGridPoint(GameObject objToMove, GameObject objGridPoint)
     {
         // Find the current grid point occupied by the object
-        var currentGridPoint = occupiedPositions.FirstOrDefault(x => x.Value && x.Key == objToMove).Key;
+        var currentGridPoint = occupiedPositions.FirstOrDefault(x => x.Key == objGridPoint).Key;
+        
+        Debug.Log($"Current grid point is {currentGridPoint.name}");
         
         // If the object is already occupying a grid point, mark that position as available
         if (currentGridPoint != null)

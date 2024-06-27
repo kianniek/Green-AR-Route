@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
@@ -8,18 +9,25 @@ using UnityEngine.XR.ARSubsystems;
 
 public class MoveObjectWithTouch : MonoBehaviour
 {
+    [SerializeField] private string tagToRaycast = "GridPoint";
     public ARRaycastManager raycastManager;
     private ObjectLogic _objectLogic;
     private Camera arCamera;
     public InputActionReference touchInputAction;
     private UIMenuLogic _uiMenuLogic;
     public Sprite dragSprite; // The sprite to display while dragging
+    private LerpedObjectMovement _lerpedObjectMovement;
 
     private Canvas _canvas;
     private GameObject _dragObject;
     private MeshRenderer _ObjectVisuals;
+    private GameObject _selectedObject;
 
     private bool _startDrag;
+
+    public UnityEvent onDragStart = new();
+    public UnityEvent onDrag = new();
+    public UnityEvent onDragEnd = new();
 
     private void Awake()
     {
@@ -29,6 +37,8 @@ public class MoveObjectWithTouch : MonoBehaviour
         touchInputAction.action.Enable();
 
         _ObjectVisuals = GetComponent<MeshRenderer>();
+
+        _lerpedObjectMovement = GetComponent<LerpedObjectMovement>();
     }
 
     private void Start()
@@ -49,7 +59,7 @@ public class MoveObjectWithTouch : MonoBehaviour
     private void OnDisable()
     {
         touchInputAction.action.performed -= OnTouchPerformed;
-        touchInputAction.action.canceled += OnEndDrag;
+        touchInputAction.action.canceled -= OnEndDrag;
     }
 
     private void OnPointerDown(Vector2 touchPosition, List<ARRaycastHit> hits)
@@ -61,6 +71,8 @@ public class MoveObjectWithTouch : MonoBehaviour
 
         CreateDragImage(touchPosition);
         _startDrag = true;
+        _lerpedObjectMovement.enabled = false;
+        onDragStart.Invoke();
     }
 
     private void OnDrag(Vector2 touchPosition)
@@ -69,6 +81,24 @@ public class MoveObjectWithTouch : MonoBehaviour
             return;
 
         _dragObject.transform.position = touchPosition;
+
+        if (arCamera == null)
+            return;
+
+        var ray = arCamera.ScreenPointToRay(touchPosition);
+
+        if (Physics.Raycast(ray, out var hit))
+        {
+            if (hit.collider.gameObject != _selectedObject)
+                return;
+
+            if (hit.collider.gameObject.CompareTag(tagToRaycast))
+            {
+                _selectedObject.transform.position = hit.point;
+            }
+        }
+
+        onDrag.Invoke();
     }
 
     private void OnEndDrag(InputAction.CallbackContext context)
@@ -80,29 +110,35 @@ public class MoveObjectWithTouch : MonoBehaviour
             // Show the selected object
             _ObjectVisuals.enabled = true;
         }
-        
+
         _startDrag = false;
-        
-        var touchPosition = context.ReadValue<Vector2>();
-        if (arCamera == null)
-            return;
 
-        var ray = arCamera.ScreenPointToRay(touchPosition);
-        var hits = new List<ARRaycastHit>();
+        if (_selectedObject != null)
+        {
+            _selectedObject.GetComponent<ObjectLogic>().SnapToNewGridPoint();
+        }
 
-        if (!raycastManager.Raycast(ray, hits, TrackableType.Planes))
-            return;
-
-        if (hits.Count <= 0) return;
-        
-        transform.position = hits[0].pose.position;
-        _objectLogic.SnapToNewGridPoint();
+        _lerpedObjectMovement.enabled = true;
+        onDragEnd.Invoke();
     }
 
     private void OnTouchPerformed(InputAction.CallbackContext context)
     {
         var touchPosition = context.ReadValue<Vector2>();
+        
         if (arCamera == null)
+            return;
+
+        var rayC = arCamera.ScreenPointToRay(touchPosition);
+        if (Physics.Raycast(rayC, out var hit) && !_startDrag)
+        {
+            if (hit.collider.gameObject != gameObject)
+                return;
+
+            _selectedObject = hit.collider.gameObject;
+        }
+        
+        if (_selectedObject == null)
             return;
 
         var ray = arCamera.ScreenPointToRay(touchPosition);
@@ -131,7 +167,7 @@ public class MoveObjectWithTouch : MonoBehaviour
         rectTransform.sizeDelta = new Vector2(100, 100); // Set size, adjust as needed
 
         // Hide the selected object
-        _ObjectVisuals.enabled = false;
+        //_ObjectVisuals.enabled = false;
 
         // Move this object to the end of the children
         _dragObject.transform.SetAsLastSibling();

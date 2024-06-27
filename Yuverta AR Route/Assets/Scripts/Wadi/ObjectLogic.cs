@@ -32,7 +32,7 @@ public class ObjectLogic : MonoBehaviour
     
     public void SnapToNewGridPoint()
     {
-        SnappedGridPoint = gridManager.MoveObjectToNewGridPoint(gameObject);
+        SnappedGridPoint = gridManager.MoveObjectToNewGridPoint(gameObject, SnappedGridPoint);
     }
     
     public void ShakeObject()
