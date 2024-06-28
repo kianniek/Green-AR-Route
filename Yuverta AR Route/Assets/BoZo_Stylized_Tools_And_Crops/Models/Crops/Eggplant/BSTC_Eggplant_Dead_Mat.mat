@@ -1,0 +1,187 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2411591398979187587
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
+--- !u!114 &-2176611503857839959
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BSTC_Eggplant_Dead_Mat
+  m_Shader: {fileID: -6465566751694194690, guid: 8d3e63edf8d8f1747bfe1f5e7ba0de79, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMap:
+        m_Texture: {fileID: 2800000, guid: 06ce5ec85e66c6c4abaf9934bed3fead, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: 6d0359540c3e4154ca6e055799753dc6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AddPrecomputedVelocity: 0
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _Blend: 0
+    - _BlendModePreserveSpecular: 1
+    - _BumpScale: 1
+    - _ClearCoatMask: 0
+    - _ClearCoatSmoothness: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DetailAlbedoMapScale: 1
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _DstBlendAlpha: 0
+    - _EnvironmentReflections: 1
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
+    - _Metallic: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.005
+    - _ProductFresnelColorSharpness: 0
+    - _ProductFresnelColorWidth: 1.58
+    - _ProductFresnelWidth: 0.26
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _Roughness: 0
+    - _Smoothness: 0.5
+    - _SmoothnessTextureChannel: 0
+    - _SpecularDot_UseDirectionalLight: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _SrcBlendAlpha: 1
+    - _Surface: 0
+    - _WindPower: 0.0042
+    - _WindSpeed: 5
+    - _WorkflowMode: 1
+    - _ZWrite: 1
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FlowerColor_1: {r: 0.4567876, g: 0, b: 1, a: 0}
+    - _FlowerColor_2: {r: 0.223286, g: 0.11144717, b: 0.72327036, a: 0}
+    - _FlowerColor_3: {r: 1, g: 0.5723522, b: 0, a: 0}
+    - _LeafColor_1: {r: 0.45911938, g: 0.14900063, b: 0, a: 0}
+    - _LeafColor_2: {r: 1, g: 0.6223842, b: 0.18553454, a: 0}
+    - _LeafColor_3: {r: 0.14465404, g: 0.04827514, b: 0.028657857, a: 0}
+    - _PreProductColor_1: {r: 0.61711144, g: 0.7484276, b: 0.20946555, a: 0}
+    - _PreProductColor_2: {r: 0, g: 1, b: 0, a: 0}
+    - _PreProductColor_3: {r: 0.24689679, g: 0.28930807, b: 0, a: 0}
+    - _PreProductFresnelInnerColor: {r: 0, g: 0, b: 0, a: 0}
+    - _PreProductFresnelOuterColor: {r: 0.2664803, g: 0.27672952, b: 0, a: 0}
+    - _ProductColor_1: {r: 0.63522005, g: 0, b: 0.5179664, a: 0}
+    - _ProductColor_2: {r: 0.59748423, g: 0, b: 0.44952202, a: 0}
+    - _ProductColor_3: {r: 0.20555097, g: 0, b: 0.30817598, a: 0}
+    - _ProductInnerFresnelColor: {r: 0, g: 0, b: 0, a: 0}
+    - _ProductOuterFresnelColor: {r: 0.3018868, g: 0, b: 0.19127741, a: 0}
+    - _ProductSpecularDotColor: {r: 1, g: 1, b: 1, a: 0}
+    - _SeedColor_1: {r: 0.76729554, g: 0.4700489, b: 0.27265528, a: 0}
+    - _SeedColor_2: {r: 0.4716981, g: 0.09709313, b: 0, a: 0}
+    - _SeedColor_3: {r: 0.6981132, g: 0.33334264, b: 0.068054944, a: 0}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _SpecularDotOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _SpecularDotSizeAndSharpness: {r: 0.95, g: 1.37, b: 0, a: 0}
+    - _StemColor_1: {r: 0.43529412, g: 0.19571169, b: 0.13725492, a: 0}
+    - _StemColor_2: {r: 0.64779866, g: 0.42771563, b: 0, a: 0}
+    - _StemColor_3: {r: 0.26415092, g: 0.159187, b: 0, a: 0}
+  m_BuildTextureStacks: []
