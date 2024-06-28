@@ -25,17 +25,19 @@ public class CropContainer : MonoBehaviour
     /// </summary>
     private bool rightCrop;
     
-    public UnityEvent onCropHarvested;
-    public UnityEvent onCropPlanted;
+    public UnityAction onCropHarvested;
+    public UnityAction onCropPlanted;
 
     public InputActionReference harvestTap;
-    
-    // Start is called before the first frame update
-    void Start()
+
+    public void Enable()
     {
-        onCropHarvested = new UnityEvent();
-        onCropPlanted = new UnityEvent();
-        harvestTap.action.performed += _ => HarvestCrop();
+        harvestTap.action.started += HarvestCrop;
+    }
+    
+    private void Disable()
+    {
+        harvestTap.action.started -= HarvestCrop;
     }
 
     public void NewCrop(CropScript newCropObject)
@@ -43,30 +45,30 @@ public class CropContainer : MonoBehaviour
         if (rightCrop) lastCorrectCropObject = currentCropObject;
         
         currentCropObject = newCropObject;
-        rightCrop = lastCorrectCropObject.cropObject.nextCrop == currentCropObject.cropObject.cropType;
+        if (lastCorrectCropObject) rightCrop = lastCorrectCropObject.cropObject.nextCrop == currentCropObject.cropObject.cropType;
+        else rightCrop = true;
         
         //Spawning the first stage of the crop
         newCropObject.GrowCrop();
         cropNameDisplay.text = currentCropObject.cropObject.cropName;
         onCropPlanted.Invoke();
         
-        onCropHarvested.AddListener(newCropObject.HarvestCrop);
-        newCropObject.fullyGrown.AddListener(harvestTap.action.Enable);
+        onCropHarvested += newCropObject.HarvestCrop;
     }
     
-    private void HarvestCrop()
+    private void HarvestCrop(InputAction.CallbackContext context)
     {
-        if (currentCropObject.growthStage != currentCropObject.cropObject.growthStages.Count - 1) return;
-        
+        if (currentCropObject.growthStage < currentCropObject.cropObject.growthStages.Count - 1) return;
+        Debug.Log("Harvesting crop");
         //Check with a rayCast if the touch actually hit the crop
-        var pointerReference = new PointerEventData(EventSystem.current);
-        var ray = Camera.main.ScreenPointToRay(pointerReference.position);
+        var ray = Camera.main!.ScreenPointToRay(context.ReadValue<Vector2>());
         if (Physics.Raycast(ray, out var hit, 1000f))
         {
-            if (hit.collider.gameObject != currentCropObject.gameObject) return;
+            if (hit.collider.gameObject.CompareTag("Crop"))
+            {
+                onCropHarvested.Invoke();
+                Disable();
+            }
         }
-        
-        onCropHarvested.Invoke();
-        harvestTap.action.Disable();
     }
 }

@@ -10,12 +10,14 @@ public class CropScript : MonoBehaviour
     private Transform parent;
     private GameObject currentChild;
     public int growthStage = 0;
-    public UnityEvent fullyGrown;
+    private UnityAction fullyGrown;
+    
+    [SerializeField] private CropContainer cropContainer;
     
     // Start is called before the first frame update
     void Start()
     {
-        fullyGrown = new UnityEvent();
+        fullyGrown = cropContainer.Enable;
         parent = transform;
     }
     
@@ -23,15 +25,20 @@ public class CropScript : MonoBehaviour
     {
         Destroy(currentChild);
         currentChild = Instantiate(cropObject.growthStages[growthStage], parent);
+        currentChild.tag = "Crop";
         growthStage++;
-        
-        if (growthStage == cropObject.growthStages.Count) fullyGrown.Invoke();
+        Debug.Log(fullyGrown);
+
+        if (growthStage >= cropObject.growthStages.Count)
+        {
+            fullyGrown.Invoke();
+            Debug.Log("Fully grown");
+        }
     }
     
     public void HarvestCrop()
     {
         FindObjectOfType<CropTracker>().NewRound();
         Destroy(currentChild);
-        Destroy(gameObject);
     }
 }

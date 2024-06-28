@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 41369191}
+  - component: {fileID: 41369192}
   m_Layer: 0
   m_Name: CropSpawn
   m_TagString: Untagged
@@ -154,6 +155,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1293513037}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &41369192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41369190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c719b997a78e5744be516705bd8cc2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cropObject: {fileID: 0}
+  growthStage: 0
+  cropContainer: {fileID: 1293513038}
 --- !u!1 &172732717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,7 +1319,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 648639104}
@@ -1332,12 +1348,6 @@ MonoBehaviour:
   cropSpawnLocation: {fileID: 41369191}
   cropNameDisplay: {fileID: 370770488}
   currentCropObject: {fileID: 0}
-  onCropHarvested:
-    m_PersistentCalls:
-      m_Calls: []
-  onCropPlanted:
-    m_PersistentCalls:
-      m_Calls: []
   harvestTap: {fileID: 2494954584338170553, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!114 &1293513039
@@ -1370,7 +1380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e195d6d0358114dafd7f4359c4e893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seedCount: 0
+  seedCount: 3
   rightCrops:
   - {fileID: 11400000, guid: 3f48a848d34e48449a59b4623fac3c9c, type: 2}
   - {fileID: 11400000, guid: 14d285190b5f0474f91b2055e8b32b67, type: 2}
@@ -2399,6 +2409,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995895225}
   m_CullTransparentMesh: 1
+--- !u!1 &2123465426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2123465429}
+  - component: {fileID: 2123465428}
+  - component: {fileID: 2123465427}
+  m_Layer: 0
+  m_Name: AR Session
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2123465427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123465426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa850fbd5b8aded44846f96e35f1a9f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2123465428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123465426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3859a92a05d4f5d418cb6ca605290e74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AttemptUpdate: 1
+  m_MatchFrameRate: 1
+  m_TrackingMode: 2
+--- !u!4 &2123465429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123465426}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2409,3 +2479,4 @@ SceneRoots:
   - {fileID: 1293513037}
   - {fileID: 1936790169}
   - {fileID: 1531502883}
+  - {fileID: 2123465429}

@@ -22,9 +22,9 @@ public class CropGrowthSystem : MonoBehaviour
         
         cropContainer = FindObjectOfType<CropContainer>();
         
-        cropContainer.onCropPlanted.AddListener(EnableButtons);
-        cropContainer.onCropPlanted.AddListener(() => NewCrop(cropContainer.currentCropObject));
-        cropContainer.onCropHarvested.AddListener(DisableButtons);
+        cropContainer.onCropPlanted += EnableButtons;
+        cropContainer.onCropPlanted += () => NewCrop(cropContainer.currentCropObject);
+        cropContainer.onCropHarvested += DisableButtons;
         
         growthAnimator = GetComponent<Animator>();
         
@@ -34,7 +34,7 @@ public class CropGrowthSystem : MonoBehaviour
     private void GrowCrop(Button button)
     {
         currentCrop.GrowCrop();
-        
+        button.interactable = false;
         //Temporarily use the name of the button as the animation name
         growthAnimator.Play(button.name);
     }

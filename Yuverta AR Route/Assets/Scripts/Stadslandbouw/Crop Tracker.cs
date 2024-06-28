@@ -1,80 +1,99 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
+
 // ReSharper disable InconsistentNaming
 // ReSharper disable CollectionNeverUpdated.Local
 
 public class CropTracker : MonoBehaviour
 {
-    [Header("Crops")]
-    [Tooltip("The amount of seeds that the user can choose from.")]
-    [SerializeField] private int seedCount;
-    [Tooltip("The list of crops that are actually used in Crop Rotation.")]
-    [SerializeField] private List<CropObject> rightCrops;
+    [Header("Crops")] [Tooltip("The amount of seeds that the user can choose from.")] [SerializeField]
+    private int seedCount;
+
+    [Tooltip("The list of crops that are actually used in Crop Rotation.")] [SerializeField]
+    private List<CropObject> rightCrops;
+
     [Tooltip("The list of crops that are not used in Crop Rotation and purely here to distract the user.")]
-    [SerializeField] private List<CropObject> wrongCrops;
-    
+    [SerializeField]
+    private List<CropObject> wrongCrops;
+
     /// <summary>
     /// The list of all crops that are used in Crop Rotation.
     /// </summary>
     private List<CropObject> allCrops;
-    
+
     /// <summary>
     /// The crops that are already used are saved here to prevent duplicates.
     /// </summary>
     private List<CropObject> usedCrops;
-    
+
     /// <summary>
     /// The last correct crop object that was planted is saved here to determine the next correct crop.
     /// </summary>
     private CropObject lastCorrectCropObject;
-    
+
     /// <summary>
     /// The last seeds that where spawned are saved here to make sure they can be found when the player hits a seed.
     /// </summary>
     private List<CropObject> lastSeedList;
-    
+    private List<GameObject> lastSeeds;
+
     /// <summary>
     /// The crop container that this script is attached to.
     /// </summary>
     private CropContainer cropContainer;
-    
-    [Tooltip("The input that will let the user pick a seed.")]
-    [SerializeField] private InputActionReference pickSeedTouch;
-    
+
+    [Tooltip("The input that will let the user pick a seed.")] [SerializeField]
+    private InputActionReference pickSeedTouch;
+
     private void Start()
     {
         //Initializing variables
         cropContainer = GetComponent<CropContainer>();
-        
+
         //Randomizing the list of crops
         allCrops = new List<CropObject>();
         allCrops.AddRange(rightCrops);
         allCrops.AddRange(wrongCrops);
         allCrops = RandomizeList(allCrops);
-        
+
         usedCrops = new List<CropObject>();
-        
+        lastSeedList = new List<CropObject>();
+        lastSeeds = new List<GameObject>();
+
         //Starting the first round
         NewRound();
-        
-        //Setting what should happen on the input action
-        pickSeedTouch.action.performed += ctx =>
-        {
-            var touch = ctx.ReadValue<Vector2>();
-            var ray = Camera.main.ScreenPointToRay(touch);
-            if (Physics.Raycast(ray, out var hit))
-            {
-                if (hit.collider.CompareTag("Seed"))
-                {
-                    PickedSeed(hit.collider.name);
-                    pickSeedTouch.action.Disable();
-                }
-            }
-        };
+
+        /*//Setting what should happen on the input action
+        pickSeedTouch.action.performed += OnPickedSeedTouch;*/
     }
 
-    private void PickedSeed(string cropName)
+    private void OnEnable()
+    {
+        pickSeedTouch.action.started += OnPickedSeedTouch;
+    }
+    
+    private void OnDisable()
+    {
+        pickSeedTouch.action.started -= OnPickedSeedTouch;
+    }
+
+    private void OnPickedSeedTouch(InputAction.CallbackContext ctx)
+    {
+        var touch = ctx.ReadValue<Vector2>();
+        var ray = Camera.main.ScreenPointToRay(touch);
+        if (Physics.Raycast(ray, out var hit))
+        {
+            if (hit.collider.CompareTag("Seed"))
+            {
+                PickedSeed(hit.collider.name);
+            }
+        }
+    }
+
+private void PickedSeed(string cropName)
     {
         //Find the picked seed
         var crop = lastSeedList.Find(crop => crop.cropName == cropName);
@@ -83,29 +102,33 @@ public class CropTracker : MonoBehaviour
         if (crop.cropType == lastCorrectCropObject.nextCrop) lastCorrectCropObject = crop;
         
         //Instantiating a new GameObject and adding a CropScript to it
-        var cropScript = Instantiate(new GameObject(), cropContainer.cropSpawnLocation).AddComponent<CropScript>();
+        var cropScript = cropContainer.cropSpawnLocation.gameObject.GetComponent<CropScript>();
         cropScript.cropObject = crop;
+        cropScript.growthStage = 0;
+        cropScript.gameObject.tag = "Crop";
         //Spawning the new Crop on the crop container
         cropContainer.NewCrop(cropScript);
 
+        var localList = new List<GameObject>(lastSeeds);
+        lastSeedList.Clear();
+        lastSeeds.Clear();
         //Clearing the seed list
-        foreach (var seeds in lastSeedList)
+        foreach (var seeds in localList)
         {
             Destroy(seeds);
         }
-        lastSeedList.Clear();
     }
     
     public void NewRound()
     {
-        List<CropObject> seeds = NewSeedList();
-        for (int i = 0; i < seeds.Count; i++)
+        lastSeedList = NewSeedList();
+        for (int i = 0; i < lastSeedList.Count; i++)
         {
-            var seed = Instantiate(seeds[i].seedPrefab, cropContainer.seedsSpawnLocations[i]);
-            seed.name = seeds[i].cropName;
+            var seed = Instantiate(lastSeedList[i].seedPrefab, cropContainer.seedsSpawnLocations[i]);
+            seed.name = lastSeedList[i].cropName;
+            seed.tag = "Seed";
+            lastSeeds.Add(seed);
         }
-        lastSeedList = seeds;
-        pickSeedTouch.action.Enable();
     }
 
     private List<CropObject> NewSeedList()
