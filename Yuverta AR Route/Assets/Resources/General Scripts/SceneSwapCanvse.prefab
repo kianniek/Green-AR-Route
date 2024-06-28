@@ -9,11 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3791446668921110149}
-  - component: {fileID: 5844674834686962958}
-  - component: {fileID: 7966075747387208109}
   - component: {fileID: 2190929030095967583}
   m_Layer: 0
-  m_Name: LogicHandler
+  m_Name: SceneSwapCanvse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,31 +33,6 @@ Transform:
   - {fileID: 7433103991303161609}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5844674834686962958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725267953559002403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2900c329793d0e4d852a6419e7ad7ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7966075747387208109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725267953559002403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34c99051a5fd7dd48b46cdfe0647b97f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  screenOrientation: 1
 --- !u!114 &2190929030095967583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,6 +49,7 @@ MonoBehaviour:
   - Wadi
   - Verticaal Groen
   - Daktuin
+  - StadsLandBouw
 --- !u!1 &5601149545221899093
 GameObject:
   m_ObjectHideFlags: 0
