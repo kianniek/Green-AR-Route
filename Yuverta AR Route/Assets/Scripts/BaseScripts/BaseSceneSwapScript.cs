@@ -19,12 +19,13 @@ public class BaseSceneSwapScript : MonoBehaviour
         {
             Debug.LogWarning("No scenes assigned in the SceneSwitcher script.");
             return;
-        }
+        }/*
 
         // Increment the scene index and loop back if necessary
         currentSceneIndex = (currentSceneIndex + 1) % scenes.Length;
+        */
 
         // Load the next scene
-        SceneManager.LoadScene(scenes[currentSceneIndex]);
+        SceneManager.LoadScene(scenes[0]);
     }
 }
