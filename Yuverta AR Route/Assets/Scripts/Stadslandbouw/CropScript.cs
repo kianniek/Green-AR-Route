@@ -67,6 +67,7 @@ public class CropScript : MonoBehaviour
         if (growthStage == ChildCount - 1 && !cropContainer.rightCrop)
         {
             deadCrop.SetActive(true);
+            deadCrop.tag = "Crop";
             growthStages[growthStage].SetActive(false);
         }
         
