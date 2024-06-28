@@ -32,6 +32,8 @@ public class UIMenuLogic : MonoBehaviour
     [SerializeField] private UnityEvent onWadiIncorrect;
 
     private Dictionary<string, Sprite> UIObjectImages = new();
+    
+    public Canvas Canvas => canvas;
 
     private void Start()
     {

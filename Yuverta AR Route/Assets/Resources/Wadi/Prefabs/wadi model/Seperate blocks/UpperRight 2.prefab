@@ -14,8 +14,7 @@ GameObject:
   - component: {fileID: 5291569068976729039}
   - component: {fileID: 2036590857044344623}
   - component: {fileID: -5086440257018489720}
-  - component: {fileID: 8758044546885387856}
-  - component: {fileID: 2126501811538084007}
+  - component: {fileID: -3882390537013073536}
   m_Layer: 0
   m_Name: UpperRight 2
   m_TagString: MoveableObject
@@ -137,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lerpSpeed: 0.5
   snapDistance: 0.01
---- !u!114 &8758044546885387856
+--- !u!114 &-3882390537013073536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,45 +145,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 8238186118108320106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72abe521d82809342b5c017f0112e354, type: 3}
+  m_Script: {fileID: 11500000, guid: 910edc26da24aa54d8adc0fbe5aa4b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CameraToFace: {fileID: 0}
-  m_ObjectPrefabs: []
-  m_OnlySpawnInView: 1
-  m_ViewportPeriphery: 0.15
-  m_ApplyRandomAngleAtSpawn: 1
-  m_SpawnAngleRange: 45
-  m_SpawnHeightOffset: 1.5
-  mSpawnAsChild: 0
-  ObjectSpawned:
+  tagToRaycast: GridPoint
+  raycastManager: {fileID: 0}
+  touchInputAction: {fileID: -7530398834462728267, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  dragSprite: {fileID: 21300000, guid: df3b17ab68da00343a77bebb0c295407, type: 3}
+  onDragStart:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2126501811538084007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8238186118108320106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19db367333b75334dab523d43de05056, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RaycastManager: {fileID: 0}
-  itemPrefab: {fileID: 8238186118108320106}
-  dragSprite: {fileID: 21300000, guid: d80cabb7f46004842b09173491e74cc6, type: 3}
-  dragDeltaAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Drag Delta
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 6c0a4af8-2465-4287-9308-094ed354ee63
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -3603844561257126198, guid: c348712bda248c246b8c49b3db54643f,
-      type: 3}
+  onDrag:
+    m_PersistentCalls:
+      m_Calls: []
+  onDragEnd:
+    m_PersistentCalls:
+      m_Calls: []

@@ -140,7 +140,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         rectTransform.sizeDelta = new Vector2(100, 100); // Set size, adjust as needed
         
         // Disable the visuals of the object
-        visuals.SetActive(false);
+        //visuals.SetActive(false);
         
         //move this object to the end of the children
         dragObject.transform.SetAsLastSibling();

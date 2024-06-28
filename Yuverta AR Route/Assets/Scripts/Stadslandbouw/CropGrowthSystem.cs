@@ -1,14 +1,17 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+// ReSharper disable CollectionNeverUpdated.Global
+// ReSharper disable UnassignedField.Global
+// ReSharper disable InconsistentNaming
 
 public class CropGrowthSystem : MonoBehaviour
 {
     public List<Button> cropGrowButtons;
     private CropScript currentCrop;
     private CropContainer cropContainer;
+    
+    private Animator growthAnimator;
     
     private void Start()
     {
@@ -18,16 +21,25 @@ public class CropGrowthSystem : MonoBehaviour
         }
         
         cropContainer = FindObjectOfType<CropContainer>();
-        cropContainer.onCropPlanted.AddListener(EnableButtons);
-        cropContainer.onCropHarvested.AddListener(DisableButtons);
+        
+        cropContainer.onCropPlanted += EnableButtons;
+        cropContainer.onCropPlanted += () => NewCrop(cropContainer.currentCropObject);
+        cropContainer.onCropHarvested += DisableButtons;
+        
+        growthAnimator = GetComponent<Animator>();
+        
+        DisableButtons();
     }
     
     private void GrowCrop(Button button)
     {
         currentCrop.GrowCrop();
+        button.interactable = false;
+        //Temporarily use the name of the button as the animation name
+        growthAnimator.Play(button.name);
     }
     
-    public void NewCrop(CropScript cropScript)
+    private void NewCrop(CropScript cropScript)
     {
         currentCrop = cropScript;
     }

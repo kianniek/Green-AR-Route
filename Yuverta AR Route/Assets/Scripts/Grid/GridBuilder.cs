@@ -15,7 +15,6 @@ public class GridBuilder : MonoBehaviour
     [SerializeField] private float blockSizeMultiplier = 1;
     [SerializeField] private GameObject gridPointPrefab;
     [SerializeField] private Vector3 stoppingDistance = new Vector3(0.47f, 1, 0.725f);
-    [SerializeField] private float blockSize;
 
     public List<GameObject> BuildGrid()
     {

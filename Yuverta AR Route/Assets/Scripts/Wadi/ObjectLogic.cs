@@ -21,18 +21,18 @@ public class ObjectLogic : MonoBehaviour
         gameObject.transform.localScale = newScale;
         gameObject.transform.rotation = Quaternion.Euler(0, -90, 0);
         
-        SnappedGridPoint = gridManager.SnapToGridPoint(gameObject);
-    }
-
-    public void OnDestroy()
-    {
-        var uiMenuLogic = FindObjectOfType<UIMenuLogic>();
-        uiMenuLogic.OnObjectDelete(gameObject);
+        if(gridManager != null)
+            SnappedGridPoint = gridManager.SnapToGridPoint(gameObject);
     }
     
     public bool IsCorrectlyPlaced()
     {
         return objectGridLocation == currentGridPoint.objectGridLocation;
+    }
+    
+    public void SnapToNewGridPoint()
+    {
+        SnappedGridPoint = gridManager.MoveObjectToNewGridPoint(gameObject, SnappedGridPoint);
     }
     
     public void ShakeObject()
