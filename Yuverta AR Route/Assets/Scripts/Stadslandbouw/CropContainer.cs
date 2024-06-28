@@ -17,13 +17,13 @@ public class CropContainer : MonoBehaviour
     public Transform cropSpawnLocation;
     [Tooltip("This is the text that will display the name of the crop.")]
     [SerializeField] private TextMeshPro cropNameDisplay;
-    public CropScript currentCropObject;
-    private CropScript lastCorrectCropObject;
+    public CropScript cropScript;
+    private CropObject.CropType? nextCorrectCropType;
     
     /// <summary>
     /// This bool is to store if the crop is correct or not.
     /// </summary>
-    private bool rightCrop;
+    public bool rightCrop;
     
     public UnityAction onCropHarvested;
     public UnityAction onCropPlanted;
@@ -42,15 +42,13 @@ public class CropContainer : MonoBehaviour
 
     public void NewCrop(CropScript newCropObject)
     {
-        if (rightCrop) lastCorrectCropObject = currentCropObject;
+        if (rightCrop) nextCorrectCropType = cropScript.cropObject.nextCrop;
+        nextCorrectCropType ??= newCropObject.cropObject.cropType;
         
-        currentCropObject = newCropObject;
-        if (lastCorrectCropObject) rightCrop = lastCorrectCropObject.cropObject.nextCrop == currentCropObject.cropObject.cropType;
-        else rightCrop = true;
+        cropScript = newCropObject;
+        rightCrop = nextCorrectCropType == cropScript.cropObject.cropType;
         
-        //Spawning the first stage of the crop
-        newCropObject.GrowCrop();
-        cropNameDisplay.text = currentCropObject.cropObject.cropName;
+        cropNameDisplay.text = cropScript.cropObject.cropName;
         onCropPlanted.Invoke();
         
         onCropHarvested += newCropObject.HarvestCrop;
@@ -58,7 +56,7 @@ public class CropContainer : MonoBehaviour
     
     private void HarvestCrop(InputAction.CallbackContext context)
     {
-        if (currentCropObject.growthStage < currentCropObject.cropObject.growthStages.Count - 1) return;
+        if (cropScript.growthStage < cropScript.growthStages.Count - 1) return;
         Debug.Log("Harvesting crop");
         //Check with a rayCast if the touch actually hit the crop
         var ray = Camera.main!.ScreenPointToRay(context.ReadValue<Vector2>());

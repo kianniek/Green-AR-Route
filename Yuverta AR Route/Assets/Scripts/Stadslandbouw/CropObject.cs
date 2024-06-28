@@ -10,15 +10,14 @@ public class CropObject : ScriptableObject
     public enum CropType
     {
         Legumes,
-        RootCrops,
-        LeafyGreens,
-        FruitsOrVegetables,
-        Grains,
-        FallowOrCoverCrops
+        Brassicas,
+        SolanaceousCrops,
+        Cucurbits,
+        GrainsOrCoverCrops
     }
     
     public GameObject seedPrefab;
-    public List<GameObject> growthStages;
+    public GameObject cropPrefab;
     public CropType cropType;
     public CropType nextCrop;
     public string cropName;

@@ -103,9 +103,7 @@ private void PickedSeed(string cropName)
         
         //Instantiating a new GameObject and adding a CropScript to it
         var cropScript = cropContainer.cropSpawnLocation.gameObject.GetComponent<CropScript>();
-        cropScript.cropObject = crop;
-        cropScript.growthStage = 0;
-        cropScript.gameObject.tag = "Crop";
+        cropScript.NewCrop(crop);
         //Spawning the new Crop on the crop container
         cropContainer.NewCrop(cropScript);
 
