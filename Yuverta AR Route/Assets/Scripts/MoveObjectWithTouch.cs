@@ -21,7 +21,6 @@ public class MoveObjectWithTouch : MonoBehaviour
     private Canvas _canvas;
     private GameObject _dragObject;
     private MeshRenderer _ObjectVisuals;
-    private GameObject _selectedObject;
 
     private bool _startDrag;
 
@@ -52,31 +51,39 @@ public class MoveObjectWithTouch : MonoBehaviour
 
     private void OnEnable()
     {
-        touchInputAction.action.performed += OnTouchPerformed;
+        touchInputAction.action.started += OnTouchPerformed;
+        touchInputAction.action.performed += OnDrag;
         touchInputAction.action.canceled += OnEndDrag;
     }
 
     private void OnDisable()
     {
-        touchInputAction.action.performed -= OnTouchPerformed;
+        touchInputAction.action.started -= OnTouchPerformed;
+        touchInputAction.action.performed -= OnDrag;
         touchInputAction.action.canceled -= OnEndDrag;
     }
 
-    private void OnPointerDown(Vector2 touchPosition, List<ARRaycastHit> hits)
+    private void OnPointerDown(Vector2 touchPosition)
     {
         if (arCamera == null)
             return;
 
-        var hitPose = hits[0].pose;
-
         CreateDragImage(touchPosition);
-        _startDrag = true;
-        _lerpedObjectMovement.enabled = false;
         onDragStart.Invoke();
+
+        _lerpedObjectMovement.enabled = false;
+
+
+        _startDrag = true;
     }
 
-    private void OnDrag(Vector2 touchPosition)
+    private void OnDrag(InputAction.CallbackContext context)
     {
+        if (!_startDrag)
+            return;
+
+        var touchPosition = context.ReadValue<Vector2>();
+
         if (_dragObject == null)
             return;
 
@@ -89,14 +96,13 @@ public class MoveObjectWithTouch : MonoBehaviour
 
         if (Physics.Raycast(ray, out var hit))
         {
-            if (hit.collider.gameObject != _selectedObject)
-                return;
-
             if (hit.collider.gameObject.CompareTag(tagToRaycast))
             {
-                _selectedObject.transform.position = hit.point;
+                transform.position = hit.point;
             }
         }
+
+        _objectLogic.SnapToNewGridPoint();
 
         onDrag.Invoke();
     }
@@ -113,11 +119,6 @@ public class MoveObjectWithTouch : MonoBehaviour
 
         _startDrag = false;
 
-        if (_selectedObject != null)
-        {
-            _selectedObject.GetComponent<ObjectLogic>().SnapToNewGridPoint();
-        }
-
         _lerpedObjectMovement.enabled = true;
         onDragEnd.Invoke();
     }
@@ -125,32 +126,22 @@ public class MoveObjectWithTouch : MonoBehaviour
     private void OnTouchPerformed(InputAction.CallbackContext context)
     {
         var touchPosition = context.ReadValue<Vector2>();
-        
+
         if (arCamera == null)
             return;
 
-        var rayC = arCamera.ScreenPointToRay(touchPosition);
-        if (Physics.Raycast(rayC, out var hit) && !_startDrag)
-        {
-            if (hit.collider.gameObject != gameObject)
-                return;
-
-            _selectedObject = hit.collider.gameObject;
-        }
-        
-        if (_selectedObject == null)
-            return;
-
         var ray = arCamera.ScreenPointToRay(touchPosition);
-        var hits = new List<ARRaycastHit>();
 
-        if (!raycastManager.Raycast(ray, hits, TrackableType.Planes))
+        if (!Physics.Raycast(ray, out var hit) && !_startDrag)
             return;
+
+        if (hit.collider.gameObject != gameObject)
+            return;
+
+        Debug.Log("Touch performed", gameObject);
 
         if (!_startDrag)
-            OnPointerDown(touchPosition, hits);
-
-        OnDrag(touchPosition);
+            OnPointerDown(touchPosition);
     }
 
     private void CreateDragImage(Vector2 touchPosition)
@@ -167,7 +158,7 @@ public class MoveObjectWithTouch : MonoBehaviour
         rectTransform.sizeDelta = new Vector2(100, 100); // Set size, adjust as needed
 
         // Hide the selected object
-        //_ObjectVisuals.enabled = false;
+        _ObjectVisuals.enabled = false;
 
         // Move this object to the end of the children
         _dragObject.transform.SetAsLastSibling();
