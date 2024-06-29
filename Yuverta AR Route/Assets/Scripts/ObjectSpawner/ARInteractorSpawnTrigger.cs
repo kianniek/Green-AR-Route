@@ -1,35 +1,21 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR.ARSubsystems;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
-using Object = UnityEngine.Object;
 
 /// <summary>
 /// Spawns an object at an <see cref="XRRayInteractor"/>'s raycast hit position when a trigger is activated.
 /// </summary>
 public class ARInteractorSpawnTrigger : MonoBehaviour
 {
-    private bool attemptSpawn = false;
     private Vector2 touchPosition;
     [SerializeField] private LayerMask m_LayerMask = -1;
 
     [SerializeField, Tooltip("The AR Interactor that determines where to spawn the object.")]
     ARRaycastManager m_RaycastManager;
-
-    /// <summary>
-    /// The <see cref="XRRayInteractor"/> that determines where to spawn the object.
-    /// </summary>
-    public ARRaycastManager arInteractorObject
-    {
-        get => m_RaycastManager;
-        set => m_RaycastManager = value;
-    }
 
     [SerializeField, Tooltip("The behavior to use to spawn objects.")]
     public ObjectSpawner m_ObjectSpawner;
@@ -97,8 +83,6 @@ public class ARInteractorSpawnTrigger : MonoBehaviour
         }
     }
 
-    bool m_EverHadSelection;
-
     /// <summary>
     /// See <see cref="MonoBehaviour"/>.
     /// </summary>
@@ -118,6 +102,8 @@ public class ARInteractorSpawnTrigger : MonoBehaviour
     {
         m_SpawnAction.EnableDirectAction();
         m_TouchPositionAction.EnableDirectAction();
+
+        m_SpawnAction.action.performed += OnSpawnActionPerformed;
     }
 
     /// <summary>
@@ -127,42 +113,36 @@ public class ARInteractorSpawnTrigger : MonoBehaviour
     {
         m_SpawnAction.DisableDirectAction();
         m_TouchPositionAction.DisableDirectAction();
+
+        m_SpawnAction.action.performed -= OnSpawnActionPerformed;
     }
 
-    /// <summary>
-    /// See <see cref="MonoBehaviour"/>.
-    /// </summary>
-    private void Update()
+    private void OnSpawnActionPerformed(InputAction.CallbackContext context)
     {
-        if (m_SpawnAction.action.WasPerformedThisFrame())
-        {
-            touchPosition = m_TouchPositionAction.action.ReadValue<Vector2>();
-            attemptSpawn = true;
-            Debug.Log("Spawning");
-        }
-
-        if (!attemptSpawn)
-            return;
-
-        attemptSpawn = SpawnObject();
+        touchPosition = m_TouchPositionAction.action.ReadValue<Vector2>();
+        Debug.Log($"Spawning at touch position: {touchPosition}");
+        SpawnObject();
     }
 
-    private bool SpawnObject()
+    private void SpawnObject()
     {
-        if (!m_ObjectSpawner) return true;
+        if (!m_ObjectSpawner) return;
 
         Debug.Log("Spawning object");
         var m_Hits = new List<ARRaycastHit>();
         if (m_RaycastManager.Raycast(touchPosition, m_Hits))
         {
-            if (m_Hits.Count == 0)
-                return true;
-            
+            Debug.Log("Raycast hit");
             var arRaycastHit = m_Hits[0];
-            
-            return !m_ObjectSpawner.TrySpawnObject(arRaycastHit.pose.position, arRaycastHit.pose.up, out var spawnedObject);
+            Debug.Log($"Raycast hit position: {arRaycastHit.pose.position}");
+            if (m_ObjectSpawner.TrySpawnObject(arRaycastHit.pose.position, arRaycastHit.pose.up, out var spawnedObject))
+            {
+                Debug.Log("Object spawned successfully");
+            }
+            else
+            {
+                Debug.Log("Failed to spawn object");
+            }
         }
-
-        return true;
     }
 }
