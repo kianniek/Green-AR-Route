@@ -35,6 +35,11 @@ public class ObjectLogic : MonoBehaviour
         SnappedGridPoint = gridManager.MoveObjectToNewGridPoint(gameObject, SnappedGridPoint);
     }
     
+    public void RemoveObjectFromGrid()
+    {
+        gridManager.RemoveObjectFromGrid(gameObject, SnappedGridPoint);
+    }
+    
     public void ShakeObject()
     {
         StartCoroutine(Shake());

@@ -23,6 +23,10 @@ public class MoveObjectWithTouch : MonoBehaviour
     private MeshRenderer _ObjectVisuals;
 
     private bool _startDrag;
+    private bool _canDrag;
+    
+    private Vector2 _touchStartPosition;
+    public float dragSensitive = 1;
 
     public UnityEvent onDragStart = new();
     public UnityEvent onDrag = new();
@@ -79,10 +83,19 @@ public class MoveObjectWithTouch : MonoBehaviour
 
     private void OnDrag(InputAction.CallbackContext context)
     {
-        if (!_startDrag)
+        if(!_canDrag)
             return;
-
+        
         var touchPosition = context.ReadValue<Vector2>();
+
+        var distance = Vector2.Distance(touchPosition, _touchStartPosition);
+        
+        //check if the touch is a drag
+        if (distance < dragSensitive && !_startDrag)
+            return;
+        
+        if (!_startDrag)
+            OnPointerDown(touchPosition);
 
         if (_dragObject == null)
             return;
@@ -118,6 +131,7 @@ public class MoveObjectWithTouch : MonoBehaviour
         }
 
         _startDrag = false;
+        _canDrag = false;
 
         _lerpedObjectMovement.enabled = true;
         onDragEnd.Invoke();
@@ -138,10 +152,10 @@ public class MoveObjectWithTouch : MonoBehaviour
         if (hit.collider.gameObject != gameObject)
             return;
 
+        _canDrag = true;
         Debug.Log("Touch performed", gameObject);
-
-        if (!_startDrag)
-            OnPointerDown(touchPosition);
+        
+        _touchStartPosition = touchPosition;
     }
 
     private void CreateDragImage(Vector2 touchPosition)

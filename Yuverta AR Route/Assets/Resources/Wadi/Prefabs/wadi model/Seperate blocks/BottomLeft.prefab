@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2835373007744002376}
   - component: {fileID: -6557106663029813121}
   - component: {fileID: 5957589304756098504}
+  - component: {fileID: -6192130150565319322}
   m_Layer: 0
   m_Name: BottomLeft
   m_TagString: MoveableObject
@@ -153,6 +154,7 @@ MonoBehaviour:
   touchInputAction: {fileID: -7530398834462728267, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
   dragSprite: {fileID: 0}
+  dragSensitive: 100
   onDragStart:
     m_PersistentCalls:
       m_Calls: []
@@ -162,3 +164,20 @@ MonoBehaviour:
   onDragEnd:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-6192130150565319322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5859861886021885041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52df905012acd548a600b2edfdab2a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiTapClickAction: {fileID: 6575161443312779450, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  tapPositionAction: {fileID: 2494954584338170553, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  tagToRaycast: GridPoint

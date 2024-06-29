@@ -21,12 +21,24 @@ public class GridManager : MonoBehaviour
 
     public enum ObjectGridLocation
     {
-        BottomLeft, BottomMiddle, BottomRight, 
-        MiddleLeft, Middle, MiddleRight, 
-        UpperLeft, UpperMiddle, UpperRight, 
-        BottomLeft2, BottomMiddle2, BottomRight2, 
-        MiddleLeft2, Middle2, MiddleRight2, 
-        UpperLeft2, UpperMiddle2, UpperRight2
+        BottomLeft,
+        BottomMiddle,
+        BottomRight,
+        MiddleLeft,
+        Middle,
+        MiddleRight,
+        UpperLeft,
+        UpperMiddle,
+        UpperRight,
+        BottomLeft2,
+        BottomMiddle2,
+        BottomRight2,
+        MiddleLeft2,
+        Middle2,
+        MiddleRight2,
+        UpperLeft2,
+        UpperMiddle2,
+        UpperRight2
     }
 
     public bool WadiCompleted => _wadiCompleted;
@@ -80,6 +92,7 @@ public class GridManager : MonoBehaviour
         {
             Debug.LogWarning("No available grid point found");
         }
+
         return closestGridPoint;
     }
 
@@ -94,7 +107,7 @@ public class GridManager : MonoBehaviour
                 availablePositions.Add(VARIABLE.Key, VARIABLE.Value);
             }
         }
-        
+
         if (availablePositions.Count == 0)
         {
             Debug.LogWarning("No available positions found");
@@ -107,7 +120,7 @@ public class GridManager : MonoBehaviour
 
         // Mark the closest grid point as occupied
         occupiedPositions[closestGridPoint] = true;
-        
+
         return closestGridPoint;
     }
 
@@ -115,9 +128,9 @@ public class GridManager : MonoBehaviour
     {
         // Find the current grid point occupied by the object
         var currentGridPoint = occupiedPositions.FirstOrDefault(x => x.Key == objGridPoint).Key;
-        
+
         Debug.Log($"Current grid point is {currentGridPoint.name}");
-        
+
         // If the object is already occupying a grid point, mark that position as available
         if (currentGridPoint != null)
         {
@@ -137,7 +150,7 @@ public class GridManager : MonoBehaviour
         else
         {
             Debug.LogWarning("No available grid point found for moving the object");
-            
+
             return null;
         }
     }
@@ -152,11 +165,27 @@ public class GridManager : MonoBehaviour
             {
                 continue;
             }
+
             wrongPlaces.Add(obj);
             Debug.Log($"Object {obj.name} is not correctly placed.");
         }
 
         return wrongPlaces.Count == 0;
+    }
+
+    public void RemoveObjectFromGrid(GameObject obj, GameObject gridPoint)
+    {
+        if (!occupiedPositions[gridPoint])
+            return;
+
+        occupiedPositions[gridPoint] = false;
+        Debug.Log($"Object {obj.name} removed from grid point {gridPoint.name}");
+
+        //reenable the object in the UI
+        if (uiMenuLogic.OnObjectDelete(gridPoint))
+        {
+            Destroy(obj);
+        }
     }
 
     public bool CheckIfAllPlaced()

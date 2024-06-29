@@ -27,7 +27,7 @@
                     "name": "Is Tracked",
                     "type": "Button",
                     "id": "6bb4e248-e42b-47c3-b66c-79566508ca74",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -2471,7 +2471,16 @@
                     "id": "ada7078c-a2e9-48d1-b4ac-7c657383d71d",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "MultiTap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Double Tap Click",
+                    "type": "Button",
+                    "id": "51dfe1cd-3619-4c84-a869-f1779b80fcb8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "MultiTap",
                     "initialStateCheck": false
                 }
             ],
@@ -2638,6 +2647,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Tap Start Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "03aaf722-df29-4dcf-afe9-21c474766ec8",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Double Tap Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "726aaf0b-d33e-4cbe-a670-d7bd57b449d5",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Double Tap Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
