@@ -1,89 +1,116 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour
 {
-    public UnityEvent onQuizFinished;
-    public UnityEvent onQuestionAnsweredCorrectly;
+    [SerializeField] private UnityEvent onQuizFinished = new();
+    [SerializeField] private UnityEvent onQuestionAnsweredCorrectly = new();
 
-    [Header("Quiz UI Elements")] 
+    [Header("Quiz UI Elements")]
     [Tooltip("The parent object containing all other objects")]
-    public GameObject parentObject;
-    
+    [SerializeField] private GameObject parentObject;
+
     [Tooltip("The text element that will display the quiz question")]
-    public TextMeshPro questionText;
-    
+    [SerializeField] private TextMeshPro questionText;
+
     [Tooltip("All the buttons that will be used to answer the quiz questions")]
-    private QuizButton[] choiceButtons;
-    
+    [SerializeField] private QuizButton[] choiceButtons;
+    [SerializeField] private string buttonTag = "QuizButton";
+
     [Tooltip("The scriptable object containing the quiz questions")]
-    public QuizQuestions quizQuestions;
-    
+    [SerializeField] private QuizQuestions quizQuestions;
+
     [Tooltip("The distance the quiz elements should be from the camera")]
-    public float distanceFromCamera;
+    [SerializeField] private float distanceFromCamera;
+
+    [SerializeField] private bool keepInFrontOfCamera = true;
+
+    [Header("Lerp Settings")]
+    public float lerpSpeed = 5f;
+    [SerializeField] private float lerpThreshold = 0.1f;
+
+    [SerializeField] private InputActionReference tapStartClick;
+    [SerializeField] private InputActionReference tapStartPosition;
+
     private List<Question> questions;
     private int currentQuestionIndex;
     private int correctQuestions;
     private int totalQuestions;
-    
+
     private Camera mainCamera;
 
-    void Start()
+    private void Awake()
     {
         mainCamera = Camera.main;
-        // Calculate the position in front of the camera
-        Vector3 newPosition = mainCamera.transform.position + mainCamera.transform.forward * distanceFromCamera;
+    }
 
-        // Set the position of the object
+    private void OnEnable()
+    {
+        tapStartClick.action.Enable();
+        tapStartPosition.action.Enable();
+        
+        tapStartClick.action.started += OnTouchPerformed;
+    }
+
+    private void Start()
+    {
+        InitializeQuiz();
+        StartCoroutine(KeepObjectInfrontOfCamera());
+        DisplayQuestion();
+    }
+
+    private void InitializeQuiz()
+    {
+        PositionAndRotateParentObject();
+        questions = new List<Question>(quizQuestions.questions);
+        SetupChoiceButtons();
+    }
+
+    private void PositionAndRotateParentObject()
+    {
+        var newPosition = mainCamera.transform.position + mainCamera.transform.forward * distanceFromCamera;
         parentObject.transform.position = newPosition;
+        parentObject.transform.LookAt(mainCamera.transform);
+    }
 
-        // Make the camera the parent of the object
-        parentObject.transform.SetParent(mainCamera.transform);
-        
-        questions = new List<Question>();
-        foreach (var quiz in quizQuestions.questions)
-        {
-            questions.Add(quiz);
-        }
-        
+    private void SetupChoiceButtons()
+    {
         if (choiceButtons == null || choiceButtons.Length == 0)
         {
             choiceButtons = new QuizButton[4];
-            var buttons = FindObjectsOfType<QuizButton>();
+            var buttons = GetComponentsInChildren<QuizButton>();
             foreach (var button in buttons)
             {
                 choiceButtons[button.buttonIndex] = button;
             }
         }
-        
-        foreach (var buttons in choiceButtons)
-        {
-            buttons.gameObject.SetActive(false);
-        }
 
-        foreach (var buttons in choiceButtons)
+        foreach (var button in choiceButtons)
         {
-            buttons.onRaycastHit.AddListener(OnOptionSelected);
+            button.gameObject.SetActive(false);
+            button.onRaycastHit.AddListener(OnOptionSelected);
         }
-        DisplayQuestion();
     }
 
-    void DisplayQuestion()
+    private void DisplayQuestion()
     {
-        if (currentQuestionIndex < questions.Count)
+        if (currentQuestionIndex < questions.Count - 1)
         {
             Question question = questions[currentQuestionIndex];
-            questionText.text = question.questionText;;
+            questionText.text = question.questionText;
             for (int i = 0; i < choiceButtons.Length; i++)
             {
                 if (i < question.options.Count)
                 {
                     choiceButtons[i].GetComponentInChildren<TextMeshPro>().text = question.options[i].answer;
-                    //AdjustFontSize(choiceButtons[i].GetComponentInChildren<TextMeshPro>(), choiceButtons[i].gameObject, int.MaxValue, int.MinValue, 1);
                     choiceButtons[i].gameObject.SetActive(true);
                 }
                 else
@@ -94,27 +121,26 @@ public class QuizManager : MonoBehaviour
         }
         else
         {
+            foreach (var button in choiceButtons)
+            {
+                button.gameObject.SetActive(false);
+            }
+            Debug.Log($"Quiz finished. Correct answers: {correctQuestions}/{totalQuestions}");
             onQuizFinished.Invoke();
-            Debug.Log("Quiz Finished");
         }
     }
 
     public void OnOptionSelected(int index)
     {
-        if (index == questions[currentQuestionIndex].options.FindIndex(option => option.isCorrect))
+        if (questions[currentQuestionIndex].options[index].isCorrect)
         {
             correctQuestions++;
-            totalQuestions++;
-            currentQuestionIndex++;
             onQuestionAnsweredCorrectly.Invoke();
-            DisplayQuestion();
-            Debug.Log("Correct Answer");
         }
-        else
-        {
-            totalQuestions++;
-            Debug.Log("Wrong Answer");
-        }
+        
+        totalQuestions++;
+        currentQuestionIndex++;
+        DisplayQuestion();
     }
 
     public void ResetQuiz()
@@ -123,5 +149,44 @@ public class QuizManager : MonoBehaviour
         correctQuestions = 0;
         totalQuestions = 0;
         DisplayQuestion();
+    }
+
+    private IEnumerator KeepObjectInfrontOfCamera()
+    {
+        while (keepInFrontOfCamera)
+        {
+            var newPosition = mainCamera.transform.position + mainCamera.transform.forward * distanceFromCamera;
+            if (Vector3.Distance(parentObject.transform.position, newPosition) > lerpThreshold)
+            {
+                parentObject.transform.position = Vector3.Slerp(parentObject.transform.position, newPosition, lerpSpeed * Time.deltaTime);
+            }
+            parentObject.transform.LookAt(mainCamera.transform);
+            yield return null;
+        }
+    }
+
+    private void OnTouchPerformed(InputAction.CallbackContext context)
+    {
+        var screenPosition = tapStartPosition.action.ReadValue<Vector2>();
+        var ray = mainCamera.ScreenPointToRay(screenPosition);
+
+        if (Physics.Raycast(ray, out var hit))
+        {
+            if (hit.collider.CompareTag(buttonTag))
+            {
+                SelectedObject(hit.collider.gameObject);
+            }
+        }
+    }
+
+    public void SelectedObject(GameObject obj)
+    {
+        obj.GetComponent<QuizButton>().OnClick();
+    }
+
+    private void OnDestroy()
+    {
+        tapStartClick.action.started -= OnTouchPerformed;
+        tapStartClick.action.Disable();
     }
 }

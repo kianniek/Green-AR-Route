@@ -475,7 +475,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8602659611205564086}
   - component: {fileID: 5165248859174774745}
-  - component: {fileID: 7085260097756174399}
   m_Layer: 0
   m_Name: QuizManager
   m_TagString: Untagged
@@ -523,20 +522,17 @@ MonoBehaviour:
       m_Calls: []
   parentObject: {fileID: 2945578604990923069}
   questionText: {fileID: 3173124183826091270}
+  choiceButtons: []
+  buttonTag: WorldUI
   quizQuestions: {fileID: 11400000, guid: 8053804cfb45b7149993063e5a200071, type: 2}
   distanceFromCamera: 1
---- !u!114 &7085260097756174399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2945578604990923069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2d45fa3a71d714458e3a9453bfd0f8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  keepInFrontOfCamera: 1
+  lerpSpeed: 2
+  lerpThreshold: 0
+  tapStartClick: {fileID: -243286475773516173, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
+  tapStartPosition: {fileID: 2494954584338170553, guid: c348712bda248c246b8c49b3db54643f,
+    type: 3}
 --- !u!1 &3053761070205216493
 GameObject:
   m_ObjectHideFlags: 0

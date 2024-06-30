@@ -32,20 +32,4 @@ public class DaktuinManager : BaseManager
         leafScript = FindObjectOfType<LeafCollectionScript>();
         QrCodeManager = FindObjectOfType<QRCodeManager>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public override void SelectedObject(GameObject obj)
-    {
-        obj.GetComponent<QuizButton>().OnClick();
-    }
-    
-    public override void UpdateObject()
-    {
-        
-    }
 }

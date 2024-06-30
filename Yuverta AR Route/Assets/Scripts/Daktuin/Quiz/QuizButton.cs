@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Events;
+using Events.GameEvents.Typed;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,10 +9,6 @@ using UnityEngine.Events;
 public class QuizButton : MonoBehaviour
 {
     public int buttonIndex;
-    
-    // Define a new UnityEvent that takes an int as a parameter
-    [System.Serializable]
-    public class IntEvent : UnityEvent<int> { }
 
     public IntEvent onRaycastHit;
 
