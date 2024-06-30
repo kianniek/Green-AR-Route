@@ -23,7 +23,7 @@ public class CropGrowthSystem : MonoBehaviour
         cropContainer = FindObjectOfType<CropContainer>();
         
         cropContainer.onCropPlanted += EnableButtons;
-        cropContainer.onCropPlanted += () => NewCrop(cropContainer.cropScript);
+        cropContainer.onCropPlanted += () => NewCrop(cropContainer.CropScript);
         cropContainer.onCropHarvested += DisableButtons;
         
         growthAnimator = GetComponent<Animator>();
