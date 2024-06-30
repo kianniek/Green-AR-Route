@@ -12,7 +12,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPlace3
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -24,13 +24,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646298147194615493}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.00011979932, y: -0.9227544, z: -0.38538855, w: 0.00028684133}
   m_LocalPosition: {x: 0.33333334, y: 0.6666667, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4215367337043957711}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -45.336, y: -179.949, z: -0.036}
 --- !u!1 &4729545164029533872
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +282,7 @@ MonoBehaviour:
   growthStage: 0
   growthStages: []
   cropContainer: {fileID: 4578002961307527297}
+  cropTracker: {fileID: 0}
 --- !u!1 &6337995851297448940
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +295,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPlace2
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -306,13 +307,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6337995851297448940}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.00011979932, y: -0.9227544, z: -0.38538855, w: 0.00028684133}
   m_LocalPosition: {x: 0, y: 0.6666667, z: -1.3333334}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4215367337043957711}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -45.336, y: -179.949, z: -0.036}
 --- !u!1 &7670408456819942057
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +364,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e195d6d0358114dafd7f4359c4e893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seedCount: 3
+  seedsSpawnLocations:
+  - {fileID: 6702220064261374997}
+  - {fileID: 5598103297132047302}
+  - {fileID: 1134653720668840486}
   rightCrops:
   - {fileID: 11400000, guid: aef253a79e046444484d594fa9c5522a, type: 2}
   - {fileID: 11400000, guid: 647fef0481eebcc4594899b7231d19bd, type: 2}
@@ -406,14 +410,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 302997bbcd071fd459fb2c26c2be5263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seedsSpawnLocations:
-  - {fileID: 6702220064261374997}
-  - {fileID: 5598103297132047302}
-  - {fileID: 1134653720668840486}
   cropSpawnLocation: {fileID: 2884393518099613112}
   cropNameDisplay: {fileID: 4255504628586979746}
-  cropScript: {fileID: 0}
-  rightCrop: 0
+  cropScript: {fileID: 1740221646154902497}
   harvestTap: {fileID: 2494954584338170553, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!95 &1804773420922522596
@@ -449,7 +448,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPlace1
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -461,13 +460,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7703617332894596378}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.00011979932, y: -0.9227544, z: -0.38538855, w: 0.00028684133}
   m_LocalPosition: {x: -0.33333334, y: 0.6666667, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4215367337043957711}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -45.336, y: -179.949, z: -0.036}
 --- !u!1 &8290543418594704799
 GameObject:
   m_ObjectHideFlags: 0

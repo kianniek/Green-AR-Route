@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -11,6 +12,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactors;
 /// </summary>
 public class ARInteractorSpawnTrigger : MonoBehaviour
 {
+    [SerializeField] private bool setActiveInsteadOfInstantiate = false;
     private Vector2 touchPosition;
     [SerializeField] private LayerMask m_LayerMask = -1;
 
@@ -82,6 +84,8 @@ public class ARInteractorSpawnTrigger : MonoBehaviour
                 m_TouchPositionAction.EnableDirectAction();
         }
     }
+    
+    [SerializeField] private UnityEvent m_OnObjectSpawned = new UnityEvent();
 
     /// <summary>
     /// See <see cref="MonoBehaviour"/>.
@@ -135,9 +139,22 @@ public class ARInteractorSpawnTrigger : MonoBehaviour
             Debug.Log("Raycast hit");
             var arRaycastHit = m_Hits[0];
             Debug.Log($"Raycast hit position: {arRaycastHit.pose.position}");
+
+            if (setActiveInsteadOfInstantiate)
+            {
+                foreach (var VARIABLE in objectSpawner.ObjectPrefabs)
+                {
+                    VARIABLE.SetActive(true);
+                    VARIABLE.transform.position = arRaycastHit.pose.position;
+                    m_OnObjectSpawned.Invoke();
+                }
+                return;
+            }
+            
             if (m_ObjectSpawner.TrySpawnObject(arRaycastHit.pose.position, arRaycastHit.pose.up, out var spawnedObject))
             {
                 Debug.Log("Object spawned successfully");
+                m_OnObjectSpawned.Invoke();
             }
             else
             {
