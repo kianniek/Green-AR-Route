@@ -79,6 +79,33 @@ public class UIMenuLogic : MonoBehaviour
         
         return true;
     }
+    
+    public void CheckAnimation()
+    {
+        var gridManager = FindObjectOfType<GridManager>();
+
+        if (gridManager == null)
+        {
+            startAnimationsButton.gameObject.SetActive(false);
+            return;
+        }
+        
+        startAnimationsButton.gameObject.SetActive(true);
+
+        var correct = gridManager.CheckPosition(out var wrongPlaces);
+        
+        
+        gridManager.GridBuilder.MoveGridPointsToConvergedPosition();
+
+        if (correct)
+        {
+            onWadiCorrect.Invoke();
+        }
+        else
+        {
+            onWadiIncorrect.Invoke();
+        }
+    }
 
     /// <summary>
     /// Enables the canvas. used for the start of the game when grid is spawned

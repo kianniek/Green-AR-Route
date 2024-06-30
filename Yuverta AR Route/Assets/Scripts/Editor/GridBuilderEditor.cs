@@ -22,5 +22,17 @@ public class GridBuilderEditor : Editor
             // Optionally add a clear button to remove the grid
             gridBuilder.ClearGrid();
         }
+        
+        if (GUILayout.Button("Converge Grid"))
+        {
+            // Optionally add a clear button to remove the grid
+            gridBuilder.MoveGridPointsToConvergedPosition();
+        }
+        
+        if (GUILayout.Button("Unconverge Grid"))
+        {
+            // Optionally add a clear button to remove the grid
+            gridBuilder.MoveGridPointsToOriginalPosition();
+        }
     }
 }

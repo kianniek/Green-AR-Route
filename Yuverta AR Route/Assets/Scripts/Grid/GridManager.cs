@@ -45,6 +45,8 @@ public class GridManager : MonoBehaviour
 
     public SerializableDictionary<GameObject, ObjectGridLocation> ObjsToSpawn => objsToSpawn;
 
+    public GridBuilder GridBuilder => gridBuilder;
+
     private void Awake()
     {
         gridBuilder = gameObject.GetComponent<GridBuilder>(); // Ensure GridBuilder is initialized
@@ -91,6 +93,11 @@ public class GridManager : MonoBehaviour
         else
         {
             Debug.LogWarning("No available grid point found");
+        }
+
+        if (!placedObjects.Contains(objToSnap))
+        {
+            placedObjects.Add(objToSnap);
         }
 
         return closestGridPoint;
