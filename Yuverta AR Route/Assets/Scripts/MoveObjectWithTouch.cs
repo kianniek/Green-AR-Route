@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -13,7 +12,6 @@ public class MoveObjectWithTouch : MonoBehaviour
     public ARRaycastManager raycastManager;
     private ObjectLogic _objectLogic;
     private Camera arCamera;
-    public InputActionReference touchInputAction;
     private UIMenuLogic _uiMenuLogic;
     public Sprite dragSprite; // The sprite to display while dragging
     private LerpedObjectMovement _lerpedObjectMovement;
@@ -24,7 +22,7 @@ public class MoveObjectWithTouch : MonoBehaviour
 
     private bool _startDrag;
     private bool _canDrag;
-    
+
     private Vector2 _touchStartPosition;
     public float dragSensitive = 1;
 
@@ -32,12 +30,12 @@ public class MoveObjectWithTouch : MonoBehaviour
     public UnityEvent onDrag = new();
     public UnityEvent onDragEnd = new();
 
+    private bool _isInFocus;
+
     private void Awake()
     {
         // Find the AR Camera
         arCamera = Camera.main;
-
-        touchInputAction.action.Enable();
 
         _ObjectVisuals = GetComponent<MeshRenderer>();
 
@@ -53,18 +51,26 @@ public class MoveObjectWithTouch : MonoBehaviour
         _canvas = _uiMenuLogic ? _uiMenuLogic.Canvas : FindObjectOfType<Canvas>();
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        touchInputAction.action.started += OnTouchPerformed;
-        touchInputAction.action.performed += OnDrag;
-        touchInputAction.action.canceled += OnEndDrag;
-    }
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
 
-    private void OnDisable()
-    {
-        touchInputAction.action.started -= OnTouchPerformed;
-        touchInputAction.action.performed -= OnDrag;
-        touchInputAction.action.canceled -= OnEndDrag;
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    OnTouchPerformed(touch.position);
+                    break;
+                case TouchPhase.Moved:
+                    OnDrag(touch.position);
+                    break;
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
+                    OnEndDrag();
+                    break;
+            }
+        }
     }
 
     private void OnPointerDown(Vector2 touchPosition)
@@ -72,28 +78,28 @@ public class MoveObjectWithTouch : MonoBehaviour
         if (arCamera == null)
             return;
 
+        Debug.Log($"Pointer down at position: {touchPosition}", gameObject);
         CreateDragImage(touchPosition);
         onDragStart.Invoke();
 
         _lerpedObjectMovement.enabled = false;
 
-
         _startDrag = true;
     }
 
-    private void OnDrag(InputAction.CallbackContext context)
+    private void OnDrag(Vector2 touchPosition)
     {
-        if(!_canDrag)
+        if (!_canDrag || !_isInFocus)
             return;
-        
-        var touchPosition = context.ReadValue<Vector2>();
+
+        Debug.Log($"Dragging at position: {touchPosition}", gameObject);
 
         var distance = Vector2.Distance(touchPosition, _touchStartPosition);
-        
+
         //check if the touch is a drag
         if (distance < dragSensitive && !_startDrag)
             return;
-        
+
         if (!_startDrag)
             OnPointerDown(touchPosition);
 
@@ -106,25 +112,29 @@ public class MoveObjectWithTouch : MonoBehaviour
             return;
 
         var ray = arCamera.ScreenPointToRay(touchPosition);
+        Debug.Log($"Raycast from position: {touchPosition}", gameObject);
 
         if (Physics.Raycast(ray, out var hit))
         {
+            Debug.Log($"Raycast hit: {hit.collider.gameObject.name}", gameObject);
+
             if (hit.collider.gameObject.CompareTag(tagToRaycast))
             {
+                Debug.Log($"Raycast hit object with tag: {tagToRaycast} at position: {hit.point}", gameObject);
                 transform.position = hit.point;
             }
         }
 
         _objectLogic.SnapToNewGridPoint();
-
         onDrag.Invoke();
     }
 
-    private void OnEndDrag(InputAction.CallbackContext context)
+    private void OnEndDrag()
     {
         if (_dragObject != null)
         {
             Destroy(_dragObject);
+            Debug.Log("Drag ended, drag object destroyed", gameObject);
 
             // Show the selected object
             _ObjectVisuals.enabled = true;
@@ -133,28 +143,37 @@ public class MoveObjectWithTouch : MonoBehaviour
         _startDrag = false;
         _canDrag = false;
 
+        _isInFocus = false;
+
         _lerpedObjectMovement.enabled = true;
         onDragEnd.Invoke();
     }
 
-    private void OnTouchPerformed(InputAction.CallbackContext context)
+    private void OnTouchPerformed(Vector2 touchPosition)
     {
-        var touchPosition = context.ReadValue<Vector2>();
+        Debug.Log($"Touch performed at position: {touchPosition}", gameObject);
 
         if (arCamera == null)
             return;
 
         var ray = arCamera.ScreenPointToRay(touchPosition);
+        Debug.Log($"Raycast from touch performed at position: {touchPosition}", gameObject);
 
         if (!Physics.Raycast(ray, out var hit) && !_startDrag)
             return;
 
         if (hit.collider.gameObject != gameObject)
+        {
+            _isInFocus = false;
             return;
 
+        }
+
+        _isInFocus = true;
+
         _canDrag = true;
-        Debug.Log("Touch performed", gameObject);
-        
+        Debug.Log("Object can be dragged", gameObject);
+
         _touchStartPosition = touchPosition;
     }
 
@@ -173,6 +192,7 @@ public class MoveObjectWithTouch : MonoBehaviour
 
         // Hide the selected object
         _ObjectVisuals.enabled = false;
+        Debug.Log("Drag image created and object visuals hidden", gameObject);
 
         // Move this object to the end of the children
         _dragObject.transform.SetAsLastSibling();
