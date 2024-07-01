@@ -1,17 +1,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
-
-// ReSharper disable InconsistentNaming
-// ReSharper disable CollectionNeverUpdated.Local
 
 public class CropTracker : MonoBehaviour
 {
     [Tooltip("This list contains the spawn locations for the seeds the crop tracker spawns")]
-    public List<Transform> seedsSpawnLocations; 
+    public List<Transform> seedsSpawnLocations;
 
     [Tooltip("The list of crops that are actually used in Crop Rotation.")] [SerializeField]
     private List<CropObject> rightCrops;
@@ -34,66 +30,55 @@ public class CropTracker : MonoBehaviour
     /// </summary>
     private CropContainer cropContainer;
 
-    [Tooltip("The input that will let the user pick a seed.")] [SerializeField]
-    private InputActionReference pickSeedTouch;
-
     private void Start()
     {
-        //Initializing variables
+        // Initializing variables
         cropContainer = GetComponent<CropContainer>();
 
-        //Adding right crops and distract crops to the all crops list
+        // Adding right crops and distract crops to the all crops list
         allCrops = new List<CropObject>();
         allCrops.AddRange(rightCrops);
         allCrops.AddRange(distractCrops);
-        //Randomizing the list of all crops
+        // Randomizing the list of all crops
         allCrops = RandomizeList(allCrops);
 
-        //Starting the first round
+        // Starting the first round
         NewRound();
-
-        /*//Setting what should happen on the input action
-        pickSeedTouch.action.performed += OnPickedSeedTouch;*/
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        pickSeedTouch.action.Enable();
-        pickSeedTouch.action.started += OnPickedSeedTouch;
-    }
-
-    private void OnDisable()
-    {
-        pickSeedTouch.action.started -= OnPickedSeedTouch;
-        pickSeedTouch.action.Disable();
-    }
-
-    private void OnPickedSeedTouch(InputAction.CallbackContext ctx)
-    {
-        var touch = ctx.ReadValue<Vector2>();
-        var ray = Camera.main.ScreenPointToRay(touch);
-        if (Physics.Raycast(ray, out var hit))
+        if (Input.touchCount > 0)
         {
-            if (hit.collider.CompareTag("Seed"))
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began)
             {
-                PickedSeed(hit.collider.name);
+                var ray = Camera.main.ScreenPointToRay(touch.position);
+                if (Physics.Raycast(ray, out var hit))
+                {
+                    if (hit.collider.CompareTag("Seed"))
+                    {
+                        PickedSeed(hit.collider.name);
+                    }
+                }
             }
         }
     }
 
     private void PickedSeed(string cropName)
     {
-        //Find the picked seed
+        // Find the picked seed
         var crop = allCrops.Find(crop => crop.cropName == cropName);
         Debug.Log("Picked seed: " + cropName);
 
         var cropScript = cropContainer.CropSpawnLocation.gameObject.GetComponent<CropScript>();
         cropScript.NewCrop(crop);
 
-        //Spawning the new Crop on the crop container
+        // Spawning the new Crop on the crop container
         cropContainer.NewCrop(cropScript, nextCorrectCropType);
 
-        //Clearing the seed list from seedsSpawnLocations children
+        // Clearing the seed list from seedsSpawnLocations children
         foreach (var seeds in seedsSpawnLocations)
         {
             foreach (Transform seed in seeds)
@@ -101,14 +86,14 @@ public class CropTracker : MonoBehaviour
                 Destroy(seed.gameObject);
             }
         }
-        
+
         lastPlacedCrop = crop;
         nextCorrectCropType = crop.nextCrop;
     }
 
     public void NewRound()
     {
-        //Getting the new seed list
+        // Getting the new seed list
         var seedList = NewSeedList();
 
         for (var i = 0; i < seedList.Count; i++)
@@ -123,12 +108,12 @@ public class CropTracker : MonoBehaviour
 
     private List<CropObject> NewSeedList()
     {
-        //Getting new seeds minus one
+        // Getting new seeds minus one
         var newCrops = new List<CropObject>();
 
         if (lastPlacedCrop == null)
         {
-            //Adding the wrong seeds to all except one correct seed
+            // Adding the wrong seeds to all except one correct seed
             for (var i = 0; i < seedsSpawnLocations.Count; i++)
             {
                 newCrops.Add(GetRandomCrop(newCrops.ToArray()));
@@ -137,7 +122,7 @@ public class CropTracker : MonoBehaviour
             return RandomizeList(newCrops);
         }
 
-        //The last one is added her to make sure there is always one correct seed
+        // The last one is added here to make sure there is always one correct seed
         CropObject nextCorrectCrop;
 
         do
@@ -147,17 +132,15 @@ public class CropTracker : MonoBehaviour
 
         newCrops.Add(nextCorrectCrop);
 
-        //Adding the wrong seeds to all except one correct seed
+        // Adding the wrong seeds to all except one correct seed
         for (var i = 0; i < seedsSpawnLocations.Count - 1; i++)
         {
             newCrops.Add(GetRandomCrop(nextCorrectCrop));
         }
-        
 
-        //Randomizing the list of seeds before returning it
+        // Randomizing the list of seeds before returning it
         return RandomizeList(newCrops);
     }
-
 
     private CropObject GetRandomCrop(CropObject cropToExclude = null)
     {
@@ -205,7 +188,6 @@ public class CropTracker : MonoBehaviour
 
         return availableCrops[randomIndex];
     }
-
 
     private static List<T> RandomizeList<T>(List<T> inputList)
     {

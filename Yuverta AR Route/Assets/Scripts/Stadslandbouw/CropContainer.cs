@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CropTracker), typeof(CropGrowthSystem))]
 public class CropContainer : MonoBehaviour
@@ -25,16 +24,17 @@ public class CropContainer : MonoBehaviour
     public UnityAction onCropHarvested;
     public UnityAction onCropPlanted;
 
-    public InputActionReference harvestTap;
+    private void Update()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
 
-    public void Enable()
-    {
-        harvestTap.action.started += HarvestCrop;
-    }
-    
-    private void Disable()
-    {
-        harvestTap.action.started -= HarvestCrop;
+            if (touch.phase == TouchPhase.Began)
+            {
+                HarvestCrop(touch.position);
+            }
+        }
     }
 
     public void NewCrop(CropScript newCropObject, CropObject.CropType nextCorrectCropType)
@@ -44,7 +44,7 @@ public class CropContainer : MonoBehaviour
     
         // Determine if the new crop is the correct one
         rightCrop = nextCorrectCropType == cropScript.cropObject.currentCropType || nextCorrectCropType == CropObject.CropType.none;
-        Debug.Log("correct crop: " + cropScript.cropObject.currentCropType);
+        Debug.Log("Correct crop: " + cropScript.cropObject.currentCropType);
         
         // Update the display with the new crop's name
         cropNameDisplay.text = cropScript.cropObject.cropName;
@@ -56,21 +56,19 @@ public class CropContainer : MonoBehaviour
         onCropHarvested += newCropObject.HarvestCrop;
     }
 
-    
-    private void HarvestCrop(InputAction.CallbackContext context)
+    private void HarvestCrop(Vector2 touchPosition)
     {
         // Check if the crop is fully grown
         if (cropScript.growthStage < cropScript.growthStages.Count - 1) 
             return;
         
-        //Check with a rayCast if the touch actually hit the crop
-        var ray = Camera.main!.ScreenPointToRay(context.ReadValue<Vector2>());
+        // Check with a raycast if the touch actually hit the crop
+        var ray = Camera.main!.ScreenPointToRay(touchPosition);
         if (Physics.Raycast(ray, out var hit, 1000f))
         {
             if (hit.collider.gameObject.CompareTag("Crop"))
             {
                 onCropHarvested.Invoke();
-                Disable();
             }
         }
     }

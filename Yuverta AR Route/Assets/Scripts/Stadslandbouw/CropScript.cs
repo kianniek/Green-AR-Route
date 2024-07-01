@@ -31,7 +31,6 @@ public class CropScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fullyGrown = cropContainer.Enable;
         parent = transform;
     }
 

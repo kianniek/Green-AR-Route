@@ -1,15 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
-/// <summary>
-/// Spawns an object at an <see cref="XRRayInteractor"/>'s raycast hit position when a trigger is activated.
-/// </summary>
 public class ARInteractorSpawnTrigger : MonoBehaviour
 {
     [SerializeField] private bool setActiveInsteadOfInstantiate = false;
@@ -46,45 +42,6 @@ public class ARInteractorSpawnTrigger : MonoBehaviour
         set => m_RequireHorizontalUpSurface = value;
     }
 
-    [SerializeField, Tooltip("The action to use to trigger spawn. (Button Control)")]
-    InputActionProperty m_SpawnAction = new(new InputAction(type: InputActionType.Button));
-
-    [SerializeField, Tooltip("The action to get touch position.")]
-    InputActionProperty m_TouchPositionAction = new(new InputAction(type: InputActionType.Value));
-
-    /// <summary>
-    /// The Input System action to use to trigger spawn.
-    /// </summary>
-    public InputActionProperty spawnAction
-    {
-        get => m_SpawnAction;
-        set
-        {
-            if (Application.isPlaying)
-                m_SpawnAction.DisableDirectAction();
-
-            m_SpawnAction = value;
-
-            if (Application.isPlaying && isActiveAndEnabled)
-                m_SpawnAction.EnableDirectAction();
-        }
-    }
-
-    public InputActionProperty touchPositionAction
-    {
-        get => m_TouchPositionAction;
-        set
-        {
-            if (Application.isPlaying)
-                m_TouchPositionAction.DisableDirectAction();
-
-            m_TouchPositionAction = value;
-
-            if (Application.isPlaying && isActiveAndEnabled)
-                m_TouchPositionAction.EnableDirectAction();
-        }
-    }
-    
     [SerializeField] private UnityEvent m_OnObjectSpawned = new UnityEvent();
 
     /// <summary>
@@ -104,10 +61,8 @@ public class ARInteractorSpawnTrigger : MonoBehaviour
     /// </summary>
     void OnEnable()
     {
-        m_SpawnAction.EnableDirectAction();
-        m_TouchPositionAction.EnableDirectAction();
-
-        m_SpawnAction.action.performed += OnSpawnActionPerformed;
+        // Enable touch input
+        // No direct equivalent to InputActionProperty.EnableDirectAction() needed
     }
 
     /// <summary>
@@ -115,15 +70,31 @@ public class ARInteractorSpawnTrigger : MonoBehaviour
     /// </summary>
     void OnDisable()
     {
-        m_SpawnAction.DisableDirectAction();
-        m_TouchPositionAction.DisableDirectAction();
-
-        m_SpawnAction.action.performed -= OnSpawnActionPerformed;
+        // Disable touch input
+        // No direct equivalent to InputActionProperty.DisableDirectAction() needed
     }
 
-    private void OnSpawnActionPerformed(InputAction.CallbackContext context)
+    void Update()
     {
-        touchPosition = m_TouchPositionAction.action.ReadValue<Vector2>();
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                case TouchPhase.Moved:
+                    touchPosition = touch.position;
+                    break;
+                case TouchPhase.Ended:
+                    OnSpawnActionPerformed();
+                    break;
+            }
+        }
+    }
+
+    private void OnSpawnActionPerformed()
+    {
         Debug.Log($"Spawning at touch position: {touchPosition}");
         SpawnObject();
     }
@@ -150,7 +121,7 @@ public class ARInteractorSpawnTrigger : MonoBehaviour
                 }
                 return;
             }
-            
+
             if (m_ObjectSpawner.TrySpawnObject(arRaycastHit.pose.position, arRaycastHit.pose.up, out var spawnedObject))
             {
                 Debug.Log("Object spawned successfully");

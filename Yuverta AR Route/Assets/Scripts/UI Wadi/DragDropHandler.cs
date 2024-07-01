@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.Interaction.Toolkit;
 
-//By Glenn
 [RequireComponent(typeof(ObjectSpawner))]
 public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IPointerUpHandler
 {
@@ -22,9 +20,6 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     private ObjectSpawner _objectSpawner;
     private GridManager _gridManager;
 
-    // Input action references
-    [SerializeField] private InputActionProperty dragDeltaAction;
-
     private void Start()
     {
         _canvas = FindObjectOfType<Canvas>(); // Find the _canvas in the scene
@@ -38,51 +33,39 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         {
             Debug.LogError("No Canvas found in the scene.");
         }
-
-        // Enable the drag delta input action if there is one
-        if (dragDeltaAction != null && dragDeltaAction.action != null)
-        {
-            dragDeltaAction.action.Enable();
-        }
     }
 
     private void Update()
     {
-        //if ARRaycastManager is not set, find it
+        // If ARRaycastManager is not set, find it
         if (!m_RaycastManager)
         {
             m_RaycastManager = FindObjectOfType<ARRaycastManager>();
         }
 
-        // Handle drag delta input action
-        if (dragDeltaAction.action != null && dragDeltaAction.action.triggered)
+        // Handle touch input
+        if (Input.touchCount > 0)
         {
-            Vector2 touchPosition = dragDeltaAction.action.ReadValue<Vector2>();
+            Touch touch = Input.GetTouch(0);
 
-            if (Touchscreen.current.primaryTouch.press.isPressed)
+            var eventData = new PointerEventData(EventSystem.current)
             {
-                var eventData = new PointerEventData(EventSystem.current)
-                {
-                    position = touchPosition
-                };
-                OnPointerDown(eventData);
-            }
-            else if (Touchscreen.current.primaryTouch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Moved)
+                position = touch.position
+            };
+
+            switch (touch.phase)
             {
-                var eventData = new PointerEventData(EventSystem.current)
-                {
-                    position = touchPosition
-                };
-                OnDrag(eventData);
-            }
-            else if (Touchscreen.current.primaryTouch.phase.ReadValue() == UnityEngine.InputSystem.TouchPhase.Ended)
-            {
-                var eventData = new PointerEventData(EventSystem.current)
-                {
-                    position = touchPosition
-                };
-                OnEndDrag(eventData);
-                OnPointerUp(eventData);
+                case TouchPhase.Began:
+                    OnPointerDown(eventData);
+                    break;
+                case TouchPhase.Moved:
+                    OnDrag(eventData);
+                    break;
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
+                    OnEndDrag(eventData);
+                    OnPointerUp(eventData);
+                    break;
             }
         }
     }
@@ -138,25 +121,25 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
         var rectTransform = image.GetComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(100, 100); // Set size, adjust as needed
-        
+
         // Disable the visuals of the object
         //visuals.SetActive(false);
-        
-        //move this object to the end of the children
+
+        // Move this object to the end of the children
         dragObject.transform.SetAsLastSibling();
     }
 
     private void SpawnObject(Vector2 screenPosition)
     {
         var RayFromScreen = Camera.main.ScreenPointToRay(screenPosition);
-        //raycast to find the position to spawn the object
+        // Raycast to find the position to spawn the object
         if (Physics.Raycast(RayFromScreen, out var hit, 100f))
         {
             if (!hit.transform.CompareTag(tagToRaycast))
                 return;
-            
+
             var deleteObj = _objectSpawner.TrySpawnObject(hit.point, hit.normal, out var spawnedObject);
-            
+
             gameObject.SetActive(!deleteObj);
             return;
         }
