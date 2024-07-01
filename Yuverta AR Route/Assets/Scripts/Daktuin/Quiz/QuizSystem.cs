@@ -1,11 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -37,9 +34,6 @@ public class QuizManager : MonoBehaviour
     public float lerpSpeed = 5f;
     [SerializeField] private float lerpThreshold = 0.1f;
 
-    [SerializeField] private InputActionReference tapStartClick;
-    [SerializeField] private InputActionReference tapStartPosition;
-
     private List<Question> questions;
     private int currentQuestionIndex;
     private int correctQuestions;
@@ -54,10 +48,12 @@ public class QuizManager : MonoBehaviour
 
     private void OnEnable()
     {
-        tapStartClick.action.Enable();
-        tapStartPosition.action.Enable();
-        
-        tapStartClick.action.started += OnTouchPerformed;
+        // Enable touch input handling in OnEnable
+    }
+
+    private void OnDisable()
+    {
+        // Disable touch input handling in OnDisable
     }
 
     private void Start()
@@ -102,7 +98,7 @@ public class QuizManager : MonoBehaviour
 
     private void DisplayQuestion()
     {
-        if (currentQuestionIndex < questions.Count - 1)
+        if (currentQuestionIndex < questions.Count)
         {
             Question question = questions[currentQuestionIndex];
             questionText.text = question.questionText;
@@ -165,16 +161,35 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    private void OnTouchPerformed(InputAction.CallbackContext context)
+    private void Update()
     {
-        var screenPosition = tapStartPosition.action.ReadValue<Vector2>();
-        var ray = mainCamera.ScreenPointToRay(screenPosition);
-
-        if (Physics.Raycast(ray, out var hit))
+        if (Input.touchCount > 0)
         {
-            if (hit.collider.CompareTag(buttonTag))
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began)
             {
-                SelectedObject(hit.collider.gameObject);
+                var ray = mainCamera.ScreenPointToRay(touch.position);
+
+                if (Physics.Raycast(ray, out var hit))
+                {
+                    if (hit.collider.CompareTag(buttonTag))
+                    {
+                        SelectedObject(hit.collider.gameObject);
+                    }
+                }
+            }
+        }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out var hit))
+            {
+                if (hit.collider.CompareTag(buttonTag))
+                {
+                    SelectedObject(hit.collider.gameObject);
+                }
             }
         }
     }
@@ -182,11 +197,5 @@ public class QuizManager : MonoBehaviour
     public void SelectedObject(GameObject obj)
     {
         obj.GetComponent<QuizButton>().OnClick();
-    }
-
-    private void OnDestroy()
-    {
-        tapStartClick.action.started -= OnTouchPerformed;
-        tapStartClick.action.Disable();
     }
 }
