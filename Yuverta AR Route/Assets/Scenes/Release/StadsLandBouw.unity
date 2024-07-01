@@ -2034,6 +2034,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1184574194176522542, guid: 75441b2aeee57534bad37bc95691abea,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184574194176522542, guid: 75441b2aeee57534bad37bc95691abea,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ab83df1e24fa49a88052e637a034c37, type: 2}
     - target: {fileID: 3212050168391733627, guid: 75441b2aeee57534bad37bc95691abea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2117,12 +2127,16 @@ PrefabInstance:
     - target: {fileID: 4729545164029533872, guid: 75441b2aeee57534bad37bc95691abea,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5411560377330492357, guid: 75441b2aeee57534bad37bc95691abea,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 75441b2aeee57534bad37bc95691abea, type: 3}
 --- !u!1 &2399409919121237793
 GameObject:
@@ -2548,40 +2562,6 @@ MonoBehaviour:
   m_RaycastManager: {fileID: 2512387470832126959}
   m_ObjectSpawner: {fileID: 1067806373919263555}
   m_RequireHorizontalUpSurface: 0
-  m_SpawnAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Spawn
-      m_Type: 1
-      m_ExpectedControlType: 
-      m_Id: 41d46ea6-b76c-4191-998a-bf4aee471c78
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -243286475773516173, guid: c348712bda248c246b8c49b3db54643f,
-      type: 3}
-  m_TouchPositionAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Touch Position
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 949b1e2e-405a-4e9c-a7e7-27e265ceedbe
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings:
-      - m_Name: 
-        m_Id: 14314cd3-fe6b-45b3-beb1-9b71e924b6f1
-        m_Path: <Touchscreen>/primaryTouch/position
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Touch Position
-        m_Flags: 0
-      m_Flags: 0
-    m_Reference: {fileID: 2494954584338170553, guid: c348712bda248c246b8c49b3db54643f,
-      type: 3}
   m_OnObjectSpawned:
     m_PersistentCalls:
       m_Calls:
