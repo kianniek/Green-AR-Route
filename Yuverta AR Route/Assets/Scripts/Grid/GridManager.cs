@@ -59,6 +59,7 @@ public class GridManager : MonoBehaviour
         if (uiMenuLogic != null)
         {
             uiMenuLogic.EnableCanvas(true);
+            uiMenuLogic.FillUIObjects(this);
         }
         else
         {

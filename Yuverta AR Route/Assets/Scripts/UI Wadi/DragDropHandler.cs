@@ -6,26 +6,34 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(ObjectSpawner))]
-public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IEndDragHandler, IPointerUpHandler
+public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     [SerializeField] private string tagToRaycast;
     [SerializeField] private ARRaycastManager m_RaycastManager;
     public GameObject itemPrefab; // The actual item to place on the grid
     public Sprite dragSprite; // The sprite to display while dragging
     [SerializeField] private GameObject visuals;
+    [SerializeField] private float holdTimeThreshold = 0.5f; // Time to hold before it counts as a drag
 
     private GameObject dragObject; // The temporary drag object (UI representation)
     private Canvas _canvas;
     private bool isDragging;
+    private bool isPointerOverUI;
     private ObjectSpawner _objectSpawner;
     private GridManager _gridManager;
+    private Camera _mainCamera;
+    private bool isDraggableObjectSelected;
+    
+    private Button _button;
 
     private void Start()
     {
         _canvas = FindObjectOfType<Canvas>(); // Find the _canvas in the scene
         _gridManager = FindObjectOfType<GridManager>();
         _objectSpawner = GetComponent<ObjectSpawner>();
-
+        _button = GetComponent<Button>();
+        _mainCamera = Camera.main;
+        
         _objectSpawner.ObjectPrefabs.Clear();
         _objectSpawner.ObjectPrefabs.Add(itemPrefab);
 
@@ -43,7 +51,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
             m_RaycastManager = FindObjectOfType<ARRaycastManager>();
         }
 
-        // Handle touch input
+        // Handle touch input and convert to pointer events
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -63,7 +71,6 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
                     break;
                 case TouchPhase.Ended:
                 case TouchPhase.Canceled:
-                    OnEndDrag(eventData);
                     OnPointerUp(eventData);
                     break;
             }
@@ -72,41 +79,36 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        gameObject.GetComponent<Button>().onClick.Invoke();
-        CreateDragImage(eventData);
-        isDragging = false; // Reset dragging state
+        isPointerOverUI = EventSystem.current.IsPointerOverGameObject(eventData.pointerId);
+
+        isDraggableObjectSelected = EventSystem.current.currentSelectedGameObject == gameObject;
+        
+        if (!isPointerOverUI && isDraggableObjectSelected)
+        {
+            CreateDragImage(eventData);
+            isDragging = true;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (dragObject != null)
+        if (dragObject != null && isDragging)
         {
             dragObject.transform.position = eventData.position; // Follow the mouse or finger
-            isDragging = true; // Set dragging state to true
         }
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public void OnPointerUp(PointerEventData eventData)
     {
         if (isDragging)
         {
             SpawnObject(eventData.position);
-
             Destroy(dragObject);
         }
 
         dragObject = null; // Clear the reference
         isDragging = false; // Reset dragging state
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        // If the drag never started, destroy the drag object on pointer up
-        if (!isDragging && dragObject != null)
-        {
-            Destroy(dragObject);
-            dragObject = null;
-        }
+        isDraggableObjectSelected = false; // Reset draggable object selection state
     }
 
     private void CreateDragImage(PointerEventData eventData)
@@ -122,16 +124,14 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         var rectTransform = image.GetComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(100, 100); // Set size, adjust as needed
 
-        // Disable the visuals of the object
-        //visuals.SetActive(false);
-
         // Move this object to the end of the children
         dragObject.transform.SetAsLastSibling();
     }
 
     private void SpawnObject(Vector2 screenPosition)
     {
-        var RayFromScreen = Camera.main.ScreenPointToRay(screenPosition);
+        var RayFromScreen = _mainCamera.ScreenPointToRay(screenPosition);
+        
         // Raycast to find the position to spawn the object
         if (Physics.Raycast(RayFromScreen, out var hit, 100f))
         {

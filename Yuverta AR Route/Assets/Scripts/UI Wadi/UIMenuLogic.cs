@@ -18,7 +18,6 @@ public class UIMenuLogic : MonoBehaviour
     private Transform uiObjectParentTransform;
 
     [SerializeField] private GameObject uiButtonPrefab;
-    [SerializeField] private GameObject gridmanagerPrefab;
 
     [SerializeField] private Button startAnimationsButton;
     [SerializeField] private Button clearGridButton;
@@ -31,7 +30,7 @@ public class UIMenuLogic : MonoBehaviour
     [SerializeField] private UnityEvent onWadiCorrect;
     [SerializeField] private UnityEvent onWadiIncorrect;
 
-    private Dictionary<string, Sprite> UIObjectImages = new();
+    private GridManager _gridManager;
     
     public Canvas Canvas => canvas;
 
@@ -39,23 +38,6 @@ public class UIMenuLogic : MonoBehaviour
     {
         startAnimationsButton.gameObject.SetActive(false);
         clearGridButton.gameObject.SetActive(false);
-
-        var objectsToSpawn = gridmanagerPrefab.GetComponent<GridManager>().ObjsToSpawn;
-        foreach (var obj in objectsToSpawn.keys)
-        {
-            var dragDropHandler = obj.GetComponent<DragDropHandler>();
-
-            var objName = dragDropHandler.itemPrefab.name;
-            var objSprite = dragDropHandler.dragSprite;
-
-            if (objSprite == null)
-            {
-                objSprite = null;
-            }
-
-            UIObjectImages.Add(objName, objSprite);
-            uiObjects.Add(obj, dragDropHandler);
-        }
 
         EnableCanvas(false);
     }
@@ -92,7 +74,7 @@ public class UIMenuLogic : MonoBehaviour
         
         startAnimationsButton.gameObject.SetActive(true);
 
-        var correct = gridManager.CheckPosition(out var wrongPlaces);
+        var correct = gridManager.CheckPosition(out _);
         
         
         gridManager.GridBuilder.MoveGridPointsToConvergedPosition();
@@ -113,5 +95,16 @@ public class UIMenuLogic : MonoBehaviour
     public void EnableCanvas(bool enable)
     {
         swipeCanvas.gameObject.SetActive(enable);
+    }
+    
+    public void FillUIObjects(GridManager gridManager)
+    {
+        _gridManager = gridManager;
+        var objectsToSpawn = _gridManager.ObjsToSpawn;
+        foreach (var obj in objectsToSpawn.keys)
+        {
+            var dragDropHandler = obj.GetComponent<DragDropHandler>();
+            uiObjects.Add(obj, dragDropHandler);
+        }
     }
 }
