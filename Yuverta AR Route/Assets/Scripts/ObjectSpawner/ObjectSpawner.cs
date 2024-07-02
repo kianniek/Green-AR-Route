@@ -25,6 +25,9 @@ public class ObjectSpawner : MonoBehaviour
         }
         set => m_CameraToFace = value;
     }
+    
+    [Tooltip("Object Spawns with its rotation set to Quaternion.identity")]
+    [SerializeField] private bool m_SpawnWithIdentityRotation = false;
 
     [FormerlySerializedAs("m_ObjectPrefab")] [SerializeField] [Tooltip("The list of prefabs available to spawn.")]
     public List<GameObject> m_ObjectPrefabs = new ();
@@ -194,7 +197,9 @@ public class ObjectSpawner : MonoBehaviour
         var forward = facePosition - spawnPoint;
 
         BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
-        newObject.transform.rotation = Quaternion.LookRotation(projectedForward, spawnNormal);
+        
+        
+        newObject.transform.rotation = m_SpawnWithIdentityRotation ? Quaternion.identity : Quaternion.LookRotation(projectedForward, spawnNormal);
 
         newObject.transform.position += spawnNormal * m_SpawnHeightOffset;
 

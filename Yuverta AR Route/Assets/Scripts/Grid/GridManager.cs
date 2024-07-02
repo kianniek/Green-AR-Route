@@ -22,22 +22,22 @@ public class GridManager : MonoBehaviour
     public enum ObjectGridLocation
     {
         BottomLeft,
-        BottomMiddle,
-        BottomRight,
         MiddleLeft,
-        Middle,
-        MiddleRight,
         UpperLeft,
+        BottomMiddle,
+        Middle,
         UpperMiddle,
+        BottomRight,
+        MiddleRight,
         UpperRight,
         BottomLeft2,
-        BottomMiddle2,
-        BottomRight2,
         MiddleLeft2,
-        Middle2,
-        MiddleRight2,
         UpperLeft2,
+        BottomMiddle2,
+        Middle2,
         UpperMiddle2,
+        BottomRight2,
+        MiddleRight2,
         UpperRight2
     }
 

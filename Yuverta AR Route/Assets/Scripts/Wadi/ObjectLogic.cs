@@ -30,6 +30,8 @@ public class ObjectLogic : MonoBehaviour
 
         gameObject.transform.localScale = newScale;
         gameObject.transform.rotation = Quaternion.Euler(0, -90, 0);
+        
+        gameObject.name = objectGridLocation.ToString();
 
         if (gridManager != null)
             SnappedGridPoint = gridManager.SnapToGridPoint(gameObject);

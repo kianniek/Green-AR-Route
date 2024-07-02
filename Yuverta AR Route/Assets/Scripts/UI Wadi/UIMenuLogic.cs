@@ -94,16 +94,19 @@ public class UIMenuLogic : MonoBehaviour, IDragHandler, IEndDragHandler
 
         var correct = gridManager.CheckPosition(out _);
         
-        
+        Debug.Log(correct);
         gridManager.GridBuilder.MoveGridPointsToConvergedPosition();
+        Debug.Log("Checking animation");
 
         if (correct)
         {
             onWadiCorrect.Invoke();
+            Debug.Log("Wadi Correct");
         }
         else
         {
             onWadiIncorrect.Invoke();
+            Debug.Log("Wadi Incorrect");
         }
     }
 
