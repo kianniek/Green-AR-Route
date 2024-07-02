@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Kamgam.UGUIWorldImage;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,7 +12,6 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     [SerializeField] private string tagToRaycast;
     [SerializeField] private ARRaycastManager m_RaycastManager;
     public GameObject itemPrefab; // The actual item to place on the grid
-    public Sprite dragSprite; // The sprite to display while dragging
     [SerializeField] private GameObject visuals;
     [SerializeField] private float holdTimeThreshold = 0.5f; // Time to hold before it counts as a drag
     
@@ -23,6 +23,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     private GridManager _gridManager;
     private Camera _mainCamera;
     private bool isDraggableObjectSelected;
+    private WorldImage _dragSprite; // The sprite to display while dragging
     
     private Button _button;
 
@@ -36,6 +37,8 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         
         _objectSpawner.ObjectPrefabs.Clear();
         _objectSpawner.ObjectPrefabs.Add(itemPrefab);
+        
+        _dragSprite = GetComponentInChildren<WorldImage>();
 
         if (!_canvas)
         {
@@ -124,8 +127,9 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         dragObject.transform.SetParent(_canvas.transform, false); // Make it a child of the _canvas
         dragObject.transform.position = eventData.position;
 
-        var image = dragObject.AddComponent<Image>();
-        image.sprite = dragSprite;
+        var image = dragObject.AddComponent<RawImage>();
+        
+        image.texture = _dragSprite.RenderTexture; // Set the sprite
         image.raycastTarget = false; // Make sure it does not block any events
 
         var rectTransform = image.GetComponent<RectTransform>();
