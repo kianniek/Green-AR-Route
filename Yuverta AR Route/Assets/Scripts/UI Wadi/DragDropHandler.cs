@@ -14,7 +14,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     public Sprite dragSprite; // The sprite to display while dragging
     [SerializeField] private GameObject visuals;
     [SerializeField] private float holdTimeThreshold = 0.5f; // Time to hold before it counts as a drag
-
+    
     private GameObject dragObject; // The temporary drag object (UI representation)
     private Canvas _canvas;
     private bool isDragging;
@@ -85,13 +85,19 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         
         if (!isPointerOverUI && isDraggableObjectSelected)
         {
-            CreateDragImage(eventData);
             isDragging = true;
         }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        isPointerOverUI = EventSystem.current.IsPointerOverGameObject(eventData.pointerId);
+        
+        if(dragObject == null && isDragging)
+        {
+            CreateDragImage(eventData);
+        }
+        
         if (dragObject != null && isDragging)
         {
             dragObject.transform.position = eventData.position; // Follow the mouse or finger
@@ -100,6 +106,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        isPointerOverUI = EventSystem.current.IsPointerOverGameObject(eventData.pointerId);
         if (isDragging)
         {
             SpawnObject(eventData.position);

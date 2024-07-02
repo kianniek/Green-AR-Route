@@ -2808,6 +2808,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 294799147233873718, guid: bc285eb939703134badf84a4111ccccb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 362877610610333196, guid: bc285eb939703134badf84a4111ccccb,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2978,10 +2983,20 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4697943244277263685, guid: bc285eb939703134badf84a4111ccccb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2140
+      objectReference: {fileID: 0}
     - target: {fileID: 5131177712658535168, guid: bc285eb939703134badf84a4111ccccb,
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282546267386279898, guid: bc285eb939703134badf84a4111ccccb,
+        type: 3}
+      propertyPath: m_ScrollSensitivity
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 5304021645632975964, guid: bc285eb939703134badf84a4111ccccb,
         type: 3}
@@ -3123,6 +3138,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6467959575501982239, guid: bc285eb939703134badf84a4111ccccb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6817822352100563401, guid: bc285eb939703134badf84a4111ccccb,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -3251,6 +3271,16 @@ PrefabInstance:
     - target: {fileID: 8028865652369213995, guid: bc285eb939703134badf84a4111ccccb,
         type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8234116771603300621, guid: bc285eb939703134badf84a4111ccccb,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8234116771603300621, guid: bc285eb939703134badf84a4111ccccb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8444997823362992388, guid: bc285eb939703134badf84a4111ccccb,
@@ -3765,46 +3795,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d756147d770498c45ab3e5b3267ba09c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setActiveInsteadOfInstantiate: 0
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastManager: {fileID: 2512387470231460731}
   m_ObjectSpawner: {fileID: 1902923110}
   m_RequireHorizontalUpSurface: 0
-  m_SpawnAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Spawn
-      m_Type: 1
-      m_ExpectedControlType: 
-      m_Id: 41d46ea6-b76c-4191-998a-bf4aee471c78
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings: []
-      m_Flags: 0
-    m_Reference: {fileID: -243286475773516173, guid: c348712bda248c246b8c49b3db54643f,
-      type: 3}
-  m_TouchPositionAction:
-    m_UseReference: 1
-    m_Action:
-      m_Name: Touch Position
-      m_Type: 0
-      m_ExpectedControlType: 
-      m_Id: 949b1e2e-405a-4e9c-a7e7-27e265ceedbe
-      m_Processors: 
-      m_Interactions: 
-      m_SingletonActionBindings:
-      - m_Name: 
-        m_Id: 14314cd3-fe6b-45b3-beb1-9b71e924b6f1
-        m_Path: <Touchscreen>/primaryTouch/position
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Touch Position
-        m_Flags: 0
-      m_Flags: 0
-    m_Reference: {fileID: 2494954584338170553, guid: c348712bda248c246b8c49b3db54643f,
-      type: 3}
+  m_OnObjectSpawned:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1912258334
 GameObject:
   m_ObjectHideFlags: 0
