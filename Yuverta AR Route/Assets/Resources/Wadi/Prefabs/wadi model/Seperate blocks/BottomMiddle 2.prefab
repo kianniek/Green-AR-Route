@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: -7171073390007582979}
   - component: {fileID: 3246443486753227988}
   - component: {fileID: -6817933349775100918}
+  - component: {fileID: -7476564479690856482}
   m_Layer: 0
   m_Name: BottomMiddle 2
   m_TagString: MoveableObject
@@ -195,7 +196,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 8401041480911510979, guid: 0f3200959f31540a58bc57dd3540e4a5, type: 3}
+  m_Mesh: {fileID: -319603278499547046, guid: 0f3200959f31540a58bc57dd3540e4a5, type: 3}
 --- !u!114 &-7171073390007582979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,8 +238,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagToRaycast: GridPoint
   raycastManager: {fileID: 0}
-  touchInputAction: {fileID: -7530398834462728267, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
   dragSprite: {fileID: 21300000, guid: df3b17ab68da00343a77bebb0c295407, type: 3}
   dragSensitive: 1
   onDragStart:
@@ -250,6 +249,19 @@ MonoBehaviour:
   onDragEnd:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-7476564479690856482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3385626739459799042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52df905012acd548a600b2edfdab2a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagToRaycast: GridPoint
 --- !u!1 &5330449551350903660
 GameObject:
   m_ObjectHideFlags: 0

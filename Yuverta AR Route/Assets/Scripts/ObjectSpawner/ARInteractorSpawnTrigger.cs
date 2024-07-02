@@ -95,7 +95,6 @@ public class ARInteractorSpawnTrigger : MonoBehaviour
 
     private void OnSpawnActionPerformed()
     {
-        Debug.Log($"Spawning at touch position: {touchPosition}");
         SpawnObject();
     }
 
@@ -103,13 +102,10 @@ public class ARInteractorSpawnTrigger : MonoBehaviour
     {
         if (!m_ObjectSpawner) return;
 
-        Debug.Log("Spawning object");
         var m_Hits = new List<ARRaycastHit>();
         if (m_RaycastManager.Raycast(touchPosition, m_Hits))
         {
-            Debug.Log("Raycast hit");
             var arRaycastHit = m_Hits[0];
-            Debug.Log($"Raycast hit position: {arRaycastHit.pose.position}");
 
             if (setActiveInsteadOfInstantiate)
             {
@@ -124,7 +120,6 @@ public class ARInteractorSpawnTrigger : MonoBehaviour
 
             if (m_ObjectSpawner.TrySpawnObject(arRaycastHit.pose.position, arRaycastHit.pose.up, out var spawnedObject))
             {
-                Debug.Log("Object spawned successfully");
                 m_OnObjectSpawned.Invoke();
             }
             else

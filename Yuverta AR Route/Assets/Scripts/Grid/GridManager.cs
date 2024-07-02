@@ -59,7 +59,6 @@ public class GridManager : MonoBehaviour
         if (uiMenuLogic != null)
         {
             uiMenuLogic.EnableCanvas(true);
-            uiMenuLogic.FillUIObjects(this);
         }
         else
         {
@@ -187,16 +186,16 @@ public class GridManager : MonoBehaviour
             return;
 
         occupiedPositions[gridPoint] = false;
-        Debug.Log($"Object {obj.name} removed from grid point {gridPoint.name}");
 
         //reenable the object in the UI
-        if (uiMenuLogic.OnObjectDelete(gridPoint))
+        if (uiMenuLogic.OnObjectDelete(obj))
         {
             Destroy(obj);
+            Debug.Log($"Object {obj.name} removed from grid point {gridPoint.name}");
         }
     }
 
-    public bool CheckIfAllPlaced()
+    private bool CheckIfAllPlaced()
     {
         return placedObjects.Count == objsToSpawn.keys.Count;
     }

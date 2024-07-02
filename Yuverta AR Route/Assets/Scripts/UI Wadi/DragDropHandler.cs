@@ -14,7 +14,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     public GameObject itemPrefab; // The actual item to place on the grid
     [SerializeField] private GameObject visuals;
     [SerializeField] private float holdTimeThreshold = 0.5f; // Time to hold before it counts as a drag
-    
+
     private GameObject dragObject; // The temporary drag object (UI representation)
     private Canvas _canvas;
     private bool isDragging;
@@ -24,7 +24,8 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     private Camera _mainCamera;
     private bool isDraggableObjectSelected;
     private WorldImage _dragSprite; // The sprite to display while dragging
-    
+    private UIMenuLogic _uiMenuLogic;
+
     private Button _button;
 
     private void Start()
@@ -34,11 +35,13 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         _objectSpawner = GetComponent<ObjectSpawner>();
         _button = GetComponent<Button>();
         _mainCamera = Camera.main;
-        
+
         _objectSpawner.ObjectPrefabs.Clear();
         _objectSpawner.ObjectPrefabs.Add(itemPrefab);
-        
+
         _dragSprite = GetComponentInChildren<WorldImage>();
+
+        _uiMenuLogic = GetComponentInParent<UIMenuLogic>();
 
         if (!_canvas)
         {
@@ -85,7 +88,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         isPointerOverUI = EventSystem.current.IsPointerOverGameObject(eventData.pointerId);
 
         isDraggableObjectSelected = EventSystem.current.currentSelectedGameObject == gameObject;
-        
+
         if (!isPointerOverUI && isDraggableObjectSelected)
         {
             isDragging = true;
@@ -95,12 +98,12 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     public void OnDrag(PointerEventData eventData)
     {
         isPointerOverUI = EventSystem.current.IsPointerOverGameObject(eventData.pointerId);
-        
-        if(dragObject == null && isDragging)
+
+        if (dragObject == null && isDragging)
         {
             CreateDragImage(eventData);
         }
-        
+
         if (dragObject != null && isDragging)
         {
             dragObject.transform.position = eventData.position; // Follow the mouse or finger
@@ -128,7 +131,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         dragObject.transform.position = eventData.position;
 
         var image = dragObject.AddComponent<RawImage>();
-        
+
         image.texture = _dragSprite.RenderTexture; // Set the sprite
         image.raycastTarget = false; // Make sure it does not block any events
 
@@ -142,16 +145,26 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     private void SpawnObject(Vector2 screenPosition)
     {
         var RayFromScreen = _mainCamera.ScreenPointToRay(screenPosition);
-        
+
         // Raycast to find the position to spawn the object
         if (Physics.Raycast(RayFromScreen, out var hit, 100f))
         {
             if (!hit.transform.CompareTag(tagToRaycast))
                 return;
 
-            var deleteObj = _objectSpawner.TrySpawnObject(hit.point, hit.normal, out var spawnedObject);
+            var spawnedObject = _objectSpawner.TrySpawnObject(hit.point, hit.normal, out var spawnObject);
 
-            gameObject.SetActive(!deleteObj);
+            if (spawnedObject)
+            {
+                _uiMenuLogic.UIObjectDictionary.Add(spawnObject, this);
+                //debug UIObjectDictionary
+                foreach (var item in _uiMenuLogic.UIObjectDictionary)
+                {
+                    Debug.Log(item.Key.name + " | " + item.Value.name);
+                }
+            }
+
+            gameObject.SetActive(!spawnedObject);
             return;
         }
     }

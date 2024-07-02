@@ -78,7 +78,6 @@ public class MoveObjectWithTouch : MonoBehaviour
         if (arCamera == null)
             return;
 
-        Debug.Log($"Pointer down at position: {touchPosition}", gameObject);
         CreateDragImage(touchPosition);
         onDragStart.Invoke();
 
@@ -91,8 +90,6 @@ public class MoveObjectWithTouch : MonoBehaviour
     {
         if (!_canDrag || !_isInFocus)
             return;
-
-        Debug.Log($"Dragging at position: {touchPosition}", gameObject);
 
         var distance = Vector2.Distance(touchPosition, _touchStartPosition);
 
@@ -112,15 +109,12 @@ public class MoveObjectWithTouch : MonoBehaviour
             return;
 
         var ray = arCamera.ScreenPointToRay(touchPosition);
-        Debug.Log($"Raycast from position: {touchPosition}", gameObject);
 
         if (Physics.Raycast(ray, out var hit))
         {
-            Debug.Log($"Raycast hit: {hit.collider.gameObject.name}", gameObject);
 
             if (hit.collider.gameObject.CompareTag(tagToRaycast))
             {
-                Debug.Log($"Raycast hit object with tag: {tagToRaycast} at position: {hit.point}", gameObject);
                 transform.position = hit.point;
             }
         }
@@ -134,7 +128,6 @@ public class MoveObjectWithTouch : MonoBehaviour
         if (_dragObject != null)
         {
             Destroy(_dragObject);
-            Debug.Log("Drag ended, drag object destroyed", gameObject);
 
             // Show the selected object
             _ObjectVisuals.enabled = true;
@@ -151,13 +144,11 @@ public class MoveObjectWithTouch : MonoBehaviour
 
     private void OnTouchPerformed(Vector2 touchPosition)
     {
-        Debug.Log($"Touch performed at position: {touchPosition}", gameObject);
 
         if (arCamera == null)
             return;
 
         var ray = arCamera.ScreenPointToRay(touchPosition);
-        Debug.Log($"Raycast from touch performed at position: {touchPosition}", gameObject);
 
         if (!Physics.Raycast(ray, out var hit) && !_startDrag)
             return;
@@ -172,7 +163,6 @@ public class MoveObjectWithTouch : MonoBehaviour
         _isInFocus = true;
 
         _canDrag = true;
-        Debug.Log("Object can be dragged", gameObject);
 
         _touchStartPosition = touchPosition;
     }
@@ -192,7 +182,6 @@ public class MoveObjectWithTouch : MonoBehaviour
 
         // Hide the selected object
         _ObjectVisuals.enabled = false;
-        Debug.Log("Drag image created and object visuals hidden", gameObject);
 
         // Move this object to the end of the children
         _dragObject.transform.SetAsLastSibling();

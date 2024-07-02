@@ -4,17 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using TouchPhase = UnityEngine.TouchPhase;
 
 public class RemoveObjectOnTap : MonoBehaviour
 {
-    [SerializeField] private InputActionReference multiTapClickAction;
     [SerializeField] private string tagToRaycast = "GridPoint";
-
     private ObjectLogic _objectLogic;
+
+    // Double tap detection
+    private float _lastTapTime = 0;
+    private const float DoubleTapTime = 0.3f; // Time in seconds to consider it a double tap
+
+    private Camera _mainCamera;
 
     private void Start()
     {
         _objectLogic = GetComponent<ObjectLogic>();
+        _mainCamera = Camera.main;
 
         if (_objectLogic == null)
         {
@@ -22,38 +28,36 @@ public class RemoveObjectOnTap : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        if (multiTapClickAction != null)
+        if (Input.touchCount > 0)
         {
-            multiTapClickAction.action.Enable();
-            multiTapClickAction.action.performed += OnMultiTap;
-        }
-        else
-        {
-            Debug.LogError("multiTapClickAction is not assigned.");
-        }
-    }
+            Touch touch = Input.GetTouch(0);
 
-    private void OnDisable()
-    {
-        if (multiTapClickAction != null)
-        {
-            multiTapClickAction.action.performed -= OnMultiTap;
+            if (touch.phase == TouchPhase.Ended)
+            {
+                float currentTime = Time.time;
+                if (currentTime - _lastTapTime < DoubleTapTime)
+                {
+                    OnDoubleTap(touch.position);
+                }
+
+                _lastTapTime = currentTime;
+            }
         }
     }
 
-    private void OnMultiTap(InputAction.CallbackContext context)
+    private void OnDoubleTap(Vector2 touchPosition)
     {
-        Debug.Log("OnMultiTap");
+        Debug.Log("OnDoubleTap");
 
-        if (Camera.main == null)
+        if (_mainCamera == null)
         {
             Debug.LogError("Main camera not found.");
             return;
         }
 
-        var ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        var ray = _mainCamera.ScreenPointToRay(touchPosition);
 
         if (Physics.Raycast(ray, out var hit))
         {

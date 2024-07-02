@@ -155,7 +155,6 @@ public class ObjectSpawner : MonoBehaviour
     /// <seealso cref="objectSpawned"/>
     public bool TrySpawnObject(Vector3 spawnPoint, Vector3 spawnNormal, out GameObject objectSpawned)
 {
-    Debug.Log("TrySpawnObject called with spawnPoint: " + spawnPoint + " and spawnNormal: " + spawnNormal);
 
     if (m_OnlySpawnInView)
     {
@@ -163,8 +162,6 @@ public class ObjectSpawner : MonoBehaviour
         var inViewMax = 1f - m_ViewportPeriphery;
         var pointInViewportSpace = cameraToFace.WorldToViewportPoint(spawnPoint);
 
-        Debug.Log("Viewport bounds: inViewMin = " + inViewMin + ", inViewMax = " + inViewMax);
-        Debug.Log("Point in viewport space: " + pointInViewportSpace);
 
         if (pointInViewportSpace.z < 0f || pointInViewportSpace.x > inViewMax ||
             pointInViewportSpace.x < inViewMin ||
@@ -180,50 +177,38 @@ public class ObjectSpawner : MonoBehaviour
 
     foreach (var objPrefab in m_ObjectPrefabs)
     {
-        Debug.Log("Spawning object from prefab: " + objPrefab.name);
 
         var newObject = Instantiate(objPrefab);
 
         if (mSpawnAsChild)
         {
             newObject.transform.parent = transform;
-            Debug.Log("New object set as child of: " + transform.name);
         }
 
         // Set the initial position and add the GridSnapper component
         newObject.transform.position = spawnPoint;
-        Debug.Log("New object position set to: " + spawnPoint);
 
         EnsureFacingCamera();
-        Debug.Log("Ensured the object is facing the camera.");
 
         var facePosition = m_CameraToFace.transform.position;
         var forward = facePosition - spawnPoint;
 
-        Debug.Log("Face position: " + facePosition);
-        Debug.Log("Forward vector: " + forward);
-
         BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
         newObject.transform.rotation = Quaternion.LookRotation(projectedForward, spawnNormal);
-        Debug.Log("New object rotation set to look at camera with forward vector: " + projectedForward + " and up vector: " + spawnNormal);
 
         newObject.transform.position += spawnNormal * m_SpawnHeightOffset;
-        Debug.Log("New object position adjusted by spawn height offset: " + (spawnNormal * m_SpawnHeightOffset));
 
         if (m_ApplyRandomAngleAtSpawn)
         {
             var randomRotation = Random.Range(-m_SpawnAngleRange, m_SpawnAngleRange);
             newObject.transform.Rotate(Vector3.up, randomRotation);
-            Debug.Log("New object rotated by random angle: " + randomRotation);
         }
 
         ObjectSpawned.Invoke(newObject);
-        Debug.Log("ObjectSpawned event invoked for: " + newObject.name);
 
         objectSpawned = newObject;
     }
 
-    Debug.Log("TrySpawnObject completed successfully.");
     return true;
 }
 

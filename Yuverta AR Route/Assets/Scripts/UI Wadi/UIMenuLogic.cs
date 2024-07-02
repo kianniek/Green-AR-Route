@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using TouchPhase = UnityEngine.TouchPhase;
@@ -28,9 +29,9 @@ public class UIMenuLogic : MonoBehaviour, IDragHandler, IEndDragHandler
     [SerializeField] private GameObject uiButtonPrefab;
 
     [SerializeField] private Button startAnimationsButton;
-    [SerializeField] private Button clearGridButton;
-
-    private Dictionary<GameObject, DragDropHandler> uiObjects = new();
+    private Dictionary<GameObject, DragDropHandler> _UIObjectDictionary = new();
+    
+    public Dictionary<GameObject, DragDropHandler> UIObjectDictionary => _UIObjectDictionary;
 
     [Header("Moving Objects To Scroll Area")] [SerializeField]
     private float speedModifier;
@@ -45,12 +46,9 @@ public class UIMenuLogic : MonoBehaviour, IDragHandler, IEndDragHandler
     private void Start()
     {
         startAnimationsButton.gameObject.SetActive(false);
-        clearGridButton.gameObject.SetActive(false);
 
-        if (scrollView)
-        {
-            scrollRect = scrollView.GetComponent<ScrollRect>();
-        }
+        if (!scrollView)
+            scrollRect = scrollView.GetComponentInChildren<ScrollRect>();
 
         EnableCanvas(false);
     }
@@ -61,7 +59,8 @@ public class UIMenuLogic : MonoBehaviour, IDragHandler, IEndDragHandler
             return false;
 
         //find object in dictionary
-        var obj = uiObjects.FirstOrDefault(x => x.Value.itemPrefab.GetComponent<ObjectLogic>().objectGridLocation == go.GetComponent<ObjectLogic>().objectGridLocation).Key;
+        var obj = _UIObjectDictionary.ContainsKey(go) ? go : null;
+        
         //if the object is found, enable the object
         if (!obj)
         {
@@ -70,7 +69,13 @@ public class UIMenuLogic : MonoBehaviour, IDragHandler, IEndDragHandler
         }
         Debug.Log(obj);
         
-        obj.SetActive(true);
+        var uiObject = _UIObjectDictionary[obj].gameObject;
+        
+        //Remove object from dictionary
+        _UIObjectDictionary.Remove(obj);
+        
+        //move object to scroll area
+        uiObject.SetActive(true);
         
         return true;
     }
@@ -135,7 +140,6 @@ public class UIMenuLogic : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("Dragging");
         var touchDelta = eventData.position - previousTouchPosition;
 
         var distanceX = Mathf.Abs(dragStartPos.x - eventData.position.x);
@@ -143,7 +147,6 @@ public class UIMenuLogic : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             return;
         }
-        Debug.Log(touchDelta);
         
         touchDelta *= scrollRect.scrollSensitivity;
 
@@ -176,16 +179,7 @@ public class UIMenuLogic : MonoBehaviour, IDragHandler, IEndDragHandler
     public void EnableCanvas(bool enable)
     {
         swipeCanvas.gameObject.SetActive(enable);
-    }
-    
-    public void FillUIObjects(GridManager gridManager)
-    {
-        _gridManager = gridManager;
-        var objectsToSpawn = _gridManager.ObjsToSpawn;
-        foreach (var obj in objectsToSpawn.keys)
-        {
-            var dragDropHandler = obj.GetComponent<DragDropHandler>();
-            uiObjects.Add(obj, dragDropHandler);
-        }
+        
+        startAnimationsButton.gameObject.SetActive(enable);
     }
 }
