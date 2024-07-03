@@ -18,6 +18,8 @@ public class GridBuilder : MonoBehaviour
     [SerializeField] private float blockSizeMultiplier = 1;
     [SerializeField] private GameObject gridPointPrefab;
     [SerializeField] private GameObject[] gridPrefabs;
+    [SerializeField] private GameObject slopKop;
+    [SerializeField] private Vector3 slopKopOffset;
 
     private List<GameObject> gridPoints = new List<GameObject>();
 
@@ -78,6 +80,22 @@ public class GridBuilder : MonoBehaviour
                         // Set the object position of the grid point based on the indexOfGridPoint
                         gridPointScript.objectGridLocation = (GridManager.ObjectGridLocation)indexOfGridPoint;
                     }
+                    
+                    
+                    if(gridPointScript.objectGridLocation == GridManager.ObjectGridLocation.UpperMiddle)
+                    {
+                        // Instantiate the slopKop
+                        if (slopKop != null)
+                        {
+                            var slopKopPosition = gridPoint.transform.position + slopKopOffset;
+                            var slopKopRotation = Quaternion.Euler(gridCellRotationDeg);
+                            var slopKopObject = Instantiate(slopKop, slopKopPosition, slopKopRotation, transform);
+            
+                            gridPoints.Add(slopKopObject);
+                            convertedGridPositions.Add(slopKopObject, positionConverged + slopKopOffset);
+
+                        }
+                    }
 
                     // Inputting rotation here later
                     gridPoint.name = $"{gridPointScript.objectGridLocation} {x} {y} {z}";
@@ -92,6 +110,8 @@ public class GridBuilder : MonoBehaviour
                 }
             }
         }
+        
+        
 
 
         // Add all grid points to the list of current grid positions
@@ -115,7 +135,7 @@ public class GridBuilder : MonoBehaviour
         }
     }
 
-    private Vector3 CalculateGridpointConvergePositions(int x, int y, int z)
+    private Vector3 CalculateGridpointConvergePositions(float x, float y, float z)
     {
         var position = new Vector3(x, y, z);
         position.x += gridCellPaddingConverged.x;
