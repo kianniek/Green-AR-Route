@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -7,14 +8,18 @@ public class DOTweenAnimations : MonoBehaviour
     private Tween shakeTween;
 
     // Exposed parameters for the shake effect
-    [Header("Shake Parameters")]
-    [Tooltip("If shakeDuration is 0, the shake will be infinite")]
+    [Header("Shake Parameters")] [Tooltip("If shakeDuration is 0, the shake will be infinite")]
     public float shakeDuration = 0.5f;
+
     public float shakeStrength = 0.1f;
     public int shakeVibrato = 10;
     public float shakeRandomness = 90f;
     public bool shakeSnapping = false;
     public bool shakeFadeOut = true;
+
+    //dictionaty that stores a transform and its initial position
+    private Dictionary<Transform, Vector3> initialPositions = new Dictionary<Transform, Vector3>();
+    private Dictionary<Transform, Tween> Tweens = new Dictionary<Transform, Tween>();
 
     // Function to create a bounce effect when an object spawns
     public void SpawnBounce(Transform objectToAnimate)
@@ -34,7 +39,8 @@ public class DOTweenAnimations : MonoBehaviour
         initialPosition = objectToAnimate.position;
 
         // Shake the position of the object
-        objectToAnimate.DOShakePosition(shakeDuration, new Vector3(shakeStrength, shakeStrength, shakeStrength), shakeVibrato, shakeRandomness, shakeSnapping, shakeFadeOut)
+        objectToAnimate.DOShakePosition(shakeDuration, new Vector3(shakeStrength, shakeStrength, shakeStrength),
+                shakeVibrato, shakeRandomness, shakeSnapping, shakeFadeOut)
             .OnComplete(() => objectToAnimate.position = initialPosition); // Reset position after shake
     }
 
@@ -49,25 +55,46 @@ public class DOTweenAnimations : MonoBehaviour
             .SetLoops(2, LoopType.Yoyo);
     }
 
-    // Function to start an infinite shake
-    public void StartInfiniteShake(Transform objectToAnimate)
+    // Function to create an infinite shake effect
+    public void InfiniteShake(Transform objectToAnimate)
     {
-        // Create an infinite shake
-        shakeTween = objectToAnimate.DOShakePosition(
-            shakeDuration == 0 ? float.MaxValue : shakeDuration, 
-            new Vector3(shakeStrength, shakeStrength, shakeStrength),
-            shakeVibrato, shakeRandomness, shakeSnapping, shakeFadeOut)
-            .OnComplete(() => objectToAnimate.position = initialPosition); // Reset position after shake;
+        //if the object is not in the dictionary, add it
+        if (!initialPositions.ContainsKey(objectToAnimate))
+        {
+            initialPositions.Add(objectToAnimate, objectToAnimate.position);
+        }
+
+        //if the object is not in the dictionary, add it
+        if (!Tweens.ContainsKey(objectToAnimate))
+        {
+            Tween currentShakeTween;
+
+            // Shake the position of the object infinitely
+            currentShakeTween = objectToAnimate.DOShakePosition(shakeDuration, new
+                        Vector3(shakeStrength, shakeStrength, 0), shakeVibrato, shakeRandomness, shakeSnapping,
+                    shakeFadeOut)
+                .SetLoops(-1, LoopType.Restart).OnComplete(() => objectToAnimate.position = initialPositions[objectToAnimate]);
+
+            Tweens.Add(objectToAnimate, currentShakeTween);
+        }
     }
 
-    // Function to stop the infinite shake
     public void StopInfiniteShake(Transform objectToAnimate)
     {
-        // Kill the shake tween if it exists
-        if (shakeTween != null && shakeTween.IsActive())
+        //if the object is in the dictionary, stop the shake
+        if (Tweens.ContainsKey(objectToAnimate))
         {
-            shakeTween.Kill();
-            shakeTween = null;
+            Tweens[objectToAnimate].Kill();
+            Tweens.Remove(objectToAnimate);
         }
+
+        //if the object is in the dictionary, set its position to the initial position
+        if (!initialPositions.ContainsKey(objectToAnimate))
+            return;
+
+        objectToAnimate.position = initialPositions[objectToAnimate];
+
+        //remove the object from the dictionary
+        initialPositions.Remove(objectToAnimate);
     }
 }

@@ -174,8 +174,12 @@ public class GridManager : MonoBehaviour
             if (script != null && script.IsCorrectlyPlaced())
                 continue;
 
+            // Add the object to the list of wrongly placed objects
             wrongPlaces.Add(obj);
             Debug.Log($"Object {obj.name} is not correctly placed.");
+            
+            //make the wrong objects shake
+            script.ShakeObject();
         }
 
         return wrongPlaces.Count == 0 && CheckIfAllPlaced();
