@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class ObjectLogic : MonoBehaviour
@@ -23,6 +24,7 @@ public class ObjectLogic : MonoBehaviour
     private GridManager gridManager;
 
     private static readonly Vector3 newScale = new Vector3(0.2f, 0.2f, 0.2f);
+    
 
     private void Start()
     {
@@ -39,38 +41,25 @@ public class ObjectLogic : MonoBehaviour
 
     public bool IsCorrectlyPlaced()
     {
-        return objectGridLocation == currentGridPoint.objectGridLocation;
+        var isCorrectlyPlaced = objectGridLocation == currentGridPoint.objectGridLocation;
+        Debug.Log("IsCorrectlyPlaced: " + isCorrectlyPlaced);
+        if(!isCorrectlyPlaced)
+        {
+            Debug.Log("Incorrectly placed");
+        }
+        
+        return isCorrectlyPlaced;
     }
 
     public void SnapToNewGridPoint()
     {
+        Debug.Log("Snapping to new grid point");
         SnappedGridPoint = gridManager.MoveObjectToNewGridPoint(gameObject, SnappedGridPoint);
     }
 
     public void RemoveObjectFromGrid()
     {
+        Debug.Log("Removing object from grid");
         gridManager.RemoveObjectFromGrid(gameObject, SnappedGridPoint);
-    }
-
-    public void ShakeObject()
-    {
-        StartCoroutine(Shake());
-    }
-
-    private IEnumerator Shake()
-    {
-        var originalPos = gameObject.transform.position;
-        var shakeAmount = 0.1f;
-        var shakeTime = 0.1f;
-        var shakeSpeed = 0.1f;
-        var shakeTimer = 0.0f;
-        while (shakeTimer < shakeTime)
-        {
-            shakeTimer += Time.deltaTime;
-            gameObject.transform.position = originalPos + UnityEngine.Random.insideUnitSphere * shakeAmount;
-            yield return new WaitForEndOfFrame();
-        }
-
-        gameObject.transform.position = originalPos;
     }
 }

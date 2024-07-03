@@ -222,6 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lerpSpeed: 0.5
   snapDistance: 0.01
+  shakeDuration: 0.1
 --- !u!114 &5957589304756098504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,9 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagToRaycast: GridPoint
   raycastManager: {fileID: 0}
-  touchInputAction: {fileID: -7530398834462728267, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  dragSprite: {fileID: 0}
+  dragSprite: {fileID: 8400000, guid: ea821b111a2a0d34ab4bb6030b53cd0e, type: 2}
   dragSensitive: 25
   onDragStart:
     m_PersistentCalls:
@@ -261,6 +260,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52df905012acd548a600b2edfdab2a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiTapClickAction: {fileID: 6575161443312779450, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
   tagToRaycast: GridPoint

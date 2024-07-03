@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Kamgam.UGUIWorldImage;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -13,12 +14,12 @@ public class MoveObjectWithTouch : MonoBehaviour
     private ObjectLogic _objectLogic;
     private Camera arCamera;
     private UIMenuLogic _uiMenuLogic;
-    public Sprite dragSprite; // The sprite to display while dragging
+    public RenderTexture dragSprite; // The sprite to display while dragging
     private LerpedObjectMovement _lerpedObjectMovement;
 
     private Canvas _canvas;
     private GameObject _dragObject;
-    private MeshRenderer _ObjectVisuals;
+    private List<MeshRenderer> _ObjectVisuals;
 
     private bool _startDrag;
     private bool _canDrag;
@@ -36,8 +37,9 @@ public class MoveObjectWithTouch : MonoBehaviour
     {
         // Find the AR Camera
         arCamera = Camera.main;
-
-        _ObjectVisuals = GetComponent<MeshRenderer>();
+        _ObjectVisuals = new List<MeshRenderer>();
+        _ObjectVisuals.Add(GetComponent<MeshRenderer>());
+        _ObjectVisuals.AddRange(GetComponentsInChildren<MeshRenderer>());
 
         _lerpedObjectMovement = GetComponent<LerpedObjectMovement>();
     }
@@ -112,7 +114,6 @@ public class MoveObjectWithTouch : MonoBehaviour
 
         if (Physics.Raycast(ray, out var hit))
         {
-
             if (hit.collider.gameObject.CompareTag(tagToRaycast))
             {
                 transform.position = hit.point;
@@ -130,7 +131,10 @@ public class MoveObjectWithTouch : MonoBehaviour
             Destroy(_dragObject);
 
             // Show the selected object
-            _ObjectVisuals.enabled = true;
+            foreach (var mr in _ObjectVisuals)
+            {
+                mr.enabled = true;
+            }
         }
 
         _startDrag = false;
@@ -144,7 +148,6 @@ public class MoveObjectWithTouch : MonoBehaviour
 
     private void OnTouchPerformed(Vector2 touchPosition)
     {
-
         if (arCamera == null)
             return;
 
@@ -157,7 +160,6 @@ public class MoveObjectWithTouch : MonoBehaviour
         {
             _isInFocus = false;
             return;
-
         }
 
         _isInFocus = true;
@@ -173,15 +175,18 @@ public class MoveObjectWithTouch : MonoBehaviour
         _dragObject.transform.SetParent(_canvas.transform, false); // Make it a child of the _canvas
         _dragObject.transform.position = touchPosition;
 
-        var image = _dragObject.AddComponent<Image>();
-        image.sprite = dragSprite;
+        var image = _dragObject.AddComponent<RawImage>();
+        image.texture = dragSprite; // Set the sprite;
         image.raycastTarget = false; // Make sure it does not block any events
 
         var rectTransform = image.GetComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(100, 100); // Set size, adjust as needed
 
         // Hide the selected object
-        _ObjectVisuals.enabled = false;
+        foreach (var mr in _ObjectVisuals)
+        {
+            mr.enabled = false;
+        }
 
         // Move this object to the end of the children
         _dragObject.transform.SetAsLastSibling();

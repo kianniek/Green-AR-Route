@@ -158,10 +158,10 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
             {
                 _uiMenuLogic.UIObjectDictionary.Add(spawnObject, this);
                 //debug UIObjectDictionary
-                foreach (var item in _uiMenuLogic.UIObjectDictionary)
-                {
-                    Debug.Log(item.Key.name + " | " + item.Value.name);
-                }
+                // foreach (var item in _uiMenuLogic.UIObjectDictionary)
+                // {
+                //     Debug.Log(item.Key.name + " | " + item.Value.name);
+                // }
             }
 
             gameObject.SetActive(!spawnedObject);

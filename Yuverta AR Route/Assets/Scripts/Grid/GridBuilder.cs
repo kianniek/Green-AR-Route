@@ -9,17 +9,15 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(GridManager))]
 public class GridBuilder : MonoBehaviour
 {
+    [Header("Grid Spawn Settings")]
     [SerializeField] private Vector2Int gridSize = new Vector2Int(10, 10);
-
     [SerializeField] [Range(1, 2)] private int gridHeight = 1;
-    [SerializeField] private Vector3 gridCellRotationDeg = Vector3.zero;
+    [SerializeField] private Vector3 gridCellRotationDeg;
     [SerializeField] private Vector3 gridCellPadding = Vector3.one;
     [SerializeField] private Vector3 gridCellPaddingConverged = Vector3.one;
     [SerializeField] private float blockSizeMultiplier = 1;
     [SerializeField] private GameObject gridPointPrefab;
     [SerializeField] private GameObject[] gridPrefabs;
-
-    [SerializeField] private Vector3 stoppingDistance = new Vector3(0.47f, 1, 0.725f);
 
     private List<GameObject> gridPoints = new List<GameObject>();
 
@@ -173,6 +171,19 @@ public class GridBuilder : MonoBehaviour
         {
             gridPoint.transform.position = currentGridPositions[gridPoint];
         }
+    }
+    
+    public Vector3 GetCenterPoint()
+    {
+        var center = Vector3.zero;
+        foreach (var gridPoint in gridPoints)
+        {
+            center += gridPoint.transform.position;
+        }
+
+        center /= gridPoints.Count;
+        Debug.DrawLine(center, center + Vector3.up * 10, Color.red, 10);
+        return center;
     }
 
     private void OnDrawGizmos()

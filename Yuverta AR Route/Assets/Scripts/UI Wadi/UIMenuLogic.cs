@@ -29,6 +29,8 @@ public class UIMenuLogic : MonoBehaviour, IDragHandler, IEndDragHandler
     [SerializeField] private GameObject uiButtonPrefab;
 
     [SerializeField] private Button startAnimationsButton;
+    [Tooltip("Time the wadi is held in position before checking if it is correct")]
+    [SerializeField] private float timeToHoldPosition = 0.5f;
     private Dictionary<GameObject, DragDropHandler> _UIObjectDictionary = new();
     
     public Dictionary<GameObject, DragDropHandler> UIObjectDictionary => _UIObjectDictionary;
@@ -79,35 +81,46 @@ public class UIMenuLogic : MonoBehaviour, IDragHandler, IEndDragHandler
         
         return true;
     }
-    
+
     public void CheckAnimation()
     {
-        var gridManager = FindObjectOfType<GridManager>();
+        StartCoroutine(CheckAnimationCoroutine());
+    }
+    
+    private IEnumerator CheckAnimationCoroutine()
+    {
+        _gridManager = FindObjectOfType<GridManager>();
 
-        if (gridManager == null)
+        if (_gridManager == null)
         {
             startAnimationsButton.gameObject.SetActive(false);
-            return;
+            yield return null;
         }
         
         startAnimationsButton.gameObject.SetActive(true);
 
-        var correct = gridManager.CheckPosition(out _);
+        var correct = _gridManager.CheckPosition(out _);
         
         Debug.Log(correct);
-        gridManager.GridBuilder.MoveGridPointsToConvergedPosition();
+        _gridManager.GridBuilder.MoveGridPointsToConvergedPosition();
         Debug.Log("Checking animation");
 
+        yield return new WaitForSeconds(timeToHoldPosition);
+        
         if (correct)
         {
             onWadiCorrect.Invoke();
+            _gridManager.OnWadiCompleted();
             Debug.Log("Wadi Correct");
         }
         else
         {
             onWadiIncorrect.Invoke();
+            _gridManager.GridBuilder.MoveGridPointsToOriginalPosition();
             Debug.Log("Wadi Incorrect");
         }
+        
+        yield return null;
     }
 
     private void Update()

@@ -7,17 +7,19 @@ using UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets;
 [RequireComponent(typeof(GridBuilder))]
 public class GridManager : MonoBehaviour
 {
-    [SerializeField] private bool _wadiCompleted;
-
     [SerializeField] private GridBuilder gridBuilder;
-    [SerializeField] private UIMenuLogic uiMenuLogic;
-
     [SerializeField] private SerializableDictionary<GameObject, ObjectGridLocation> objsToSpawn = new();
+    [SerializeField] private GameObject wadiTopLayerPrefab;
+    [SerializeField] private GameObject wadiBottomLayerPrefab;
+    
+    private GameObject _wadiTopLayer;
+    private GameObject _wadiBottomLayer;
 
-    [SerializeField] private List<GameObject> placedObjects = new();
-    [SerializeField] private int selectedObjectIndex;
-
-    private Dictionary<GameObject, bool> occupiedPositions = new(); // Changed value type to bool
+    private List<GameObject> _placedObjects = new();
+    private int _selectedObjectIndex;
+    private Dictionary<GameObject, bool> _occupiedPositions = new(); // Changed value type to bool
+    private UIMenuLogic _uiMenuLogic;
+    private bool _wadiCompleted;
 
     public enum ObjectGridLocation
     {
@@ -55,10 +57,10 @@ public class GridManager : MonoBehaviour
     private void Start()
     {
         // Find and enable UI Menu Logic
-        uiMenuLogic = FindObjectOfType<UIMenuLogic>();
-        if (uiMenuLogic != null)
+        _uiMenuLogic = FindObjectOfType<UIMenuLogic>();
+        if (_uiMenuLogic != null)
         {
-            uiMenuLogic.EnableCanvas(true);
+            _uiMenuLogic.EnableCanvas(true);
         }
         else
         {
@@ -69,7 +71,7 @@ public class GridManager : MonoBehaviour
         var gameObjectList = gridBuilder.BuildGrid();
         foreach (var obj in gameObjectList)
         {
-            occupiedPositions.Add(obj, false);
+            _occupiedPositions.Add(obj, false);
         }
 
         // Ensure ARInteractorSpawnTrigger is destroyed if found
@@ -88,16 +90,16 @@ public class GridManager : MonoBehaviour
         var closestGridPoint = ClosestGridPoint(objToSnap);
         if (closestGridPoint != null)
         {
-            Debug.Log($"Closest grid point is {closestGridPoint.name}");
+            //Debug.Log($"Closest grid point is {closestGridPoint.name}");
         }
         else
         {
             Debug.LogWarning("No available grid point found");
         }
 
-        if (!placedObjects.Contains(objToSnap))
+        if (!_placedObjects.Contains(objToSnap))
         {
-            placedObjects.Add(objToSnap);
+            _placedObjects.Add(objToSnap);
         }
 
         return closestGridPoint;
@@ -107,11 +109,11 @@ public class GridManager : MonoBehaviour
     {
         var availablePositions = new Dictionary<GameObject, bool>();
 
-        foreach (var VARIABLE in occupiedPositions)
+        foreach (var occupiedPosition in _occupiedPositions)
         {
-            if (VARIABLE.Value == false)
+            if (occupiedPosition.Value == false)
             {
-                availablePositions.Add(VARIABLE.Key, VARIABLE.Value);
+                availablePositions.Add(occupiedPosition.Key, occupiedPosition.Value);
             }
         }
 
@@ -126,7 +128,7 @@ public class GridManager : MonoBehaviour
             .FirstOrDefault().Key;
 
         // Mark the closest grid point as occupied
-        occupiedPositions[closestGridPoint] = true;
+        _occupiedPositions[closestGridPoint] = true;
 
         return closestGridPoint;
     }
@@ -134,14 +136,14 @@ public class GridManager : MonoBehaviour
     public GameObject MoveObjectToNewGridPoint(GameObject objToMove, GameObject objGridPoint)
     {
         // Find the current grid point occupied by the object
-        var currentGridPoint = occupiedPositions.FirstOrDefault(x => x.Key == objGridPoint).Key;
+        var currentGridPoint = _occupiedPositions.FirstOrDefault(x => x.Key == objGridPoint).Key;
 
-        Debug.Log($"Current grid point is {currentGridPoint.name}");
+        //Debug.Log($"Current grid point is {currentGridPoint.name}");
 
         // If the object is already occupying a grid point, mark that position as available
         if (currentGridPoint != null)
         {
-            occupiedPositions[currentGridPoint] = false;
+            _occupiedPositions[currentGridPoint] = false;
         }
 
         // Find the closest new grid point
@@ -150,7 +152,7 @@ public class GridManager : MonoBehaviour
         // If a new grid point is found, snap the object to that point and update the dictionary
         if (newGridPoint != null)
         {
-            occupiedPositions[newGridPoint] = true;
+            _occupiedPositions[newGridPoint] = true;
 
             return newGridPoint;
         }
@@ -165,31 +167,32 @@ public class GridManager : MonoBehaviour
     public bool CheckPosition(out List<GameObject> wrongPlaces)
     {
         wrongPlaces = new List<GameObject>();
-        foreach (var obj in placedObjects)
+        foreach (var obj in _placedObjects)
         {
             var script = obj.GetComponent<ObjectLogic>();
+
             if (script != null && script.IsCorrectlyPlaced())
-            {
                 continue;
-            }
 
             wrongPlaces.Add(obj);
             Debug.Log($"Object {obj.name} is not correctly placed.");
         }
 
-        return wrongPlaces.Count == 0;
+        return wrongPlaces.Count == 0 && CheckIfAllPlaced();
     }
 
     public void RemoveObjectFromGrid(GameObject obj, GameObject gridPoint)
     {
-        if (!occupiedPositions[gridPoint])
+        if (!_occupiedPositions[gridPoint])
             return;
 
-        occupiedPositions[gridPoint] = false;
+        _occupiedPositions[gridPoint] = false;
 
         //reenable the object in the UI
-        if (uiMenuLogic.OnObjectDelete(obj))
+        if (_uiMenuLogic.OnObjectDelete(obj))
         {
+            //remove the object from the list of placed objects
+            _placedObjects.Remove(obj);
             Destroy(obj);
             Debug.Log($"Object {obj.name} removed from grid point {gridPoint.name}");
         }
@@ -197,6 +200,31 @@ public class GridManager : MonoBehaviour
 
     private bool CheckIfAllPlaced()
     {
-        return placedObjects.Count == objsToSpawn.keys.Count;
+        return _placedObjects.Count == objsToSpawn.keys.Count;
+    }
+
+    public void OnWadiCompleted()
+    {
+        //Remove all objects from the grid and don't place them back into UI
+        foreach (var obj in _placedObjects)
+        {
+            Destroy(obj);
+        }
+
+        _placedObjects.Clear();
+
+        //Remove wadi gridpoints through GridBuilder
+        gridBuilder.ClearGrid();
+
+        //Instantiate the top and bottom layers of the wadi
+        _wadiTopLayer = Instantiate(wadiTopLayerPrefab);
+        _wadiBottomLayer = Instantiate(wadiBottomLayerPrefab);
+        
+        var centerPoint = gridBuilder.GetCenterPoint();
+
+        _wadiTopLayer.transform.position = _wadiBottomLayer.transform.position = centerPoint;
+
+        //Set the wadi completed flag to true
+        _wadiCompleted = true;
     }
 }
