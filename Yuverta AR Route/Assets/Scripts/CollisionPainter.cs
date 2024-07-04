@@ -1,5 +1,8 @@
 using UnityEngine;
 
+// this script requires a collider to work
+[RequireComponent(typeof(Collider))]
+
 public class CollisionPainter : MonoBehaviour{
     public Color paintColor;
     

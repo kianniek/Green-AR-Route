@@ -1,34 +1,25 @@
 using ShellanderGames.WeaponWheel;
 using UnityEngine;
 
-public class VerticaalGroenManager : BaseManager
+public class VerticaalGroenManager : Singleton<VerticaalGroenManager>
 {
-    public static VerticaalGroenManager Instance;
     [SerializeField] private SgWeaponWheel wheel;
     [SerializeField] private GameObject gunController;
     public ScoreManager scoreManager;
     private int currentWeaponIndex = 0;
-    private BaseGunScript currentWeapon;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    private GunController currentWeapon;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (!scoreManager) scoreManager = FindObjectOfType<ScoreManager>();
+        if (!scoreManager) 
+            scoreManager = FindObjectOfType<ScoreManager>();
+        
         var gunControllerInstance = gunController;
-        currentWeapon = gunControllerInstance.GetComponent<BaseGunScript>();
+        
+        currentWeapon = gunControllerInstance.GetComponent<GunController>();
         currentWeapon.ChangeWeapon(currentWeaponIndex);
+        
         wheel.OnSliceSelected.AddListener(OnSliceSelected);
         wheel.OnSliceSelected.Invoke(wheel.sliceContents[currentWeaponIndex]);
     }
