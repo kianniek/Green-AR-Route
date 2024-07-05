@@ -33,11 +33,17 @@ public class BulletLogic : MonoBehaviour
         
         // Set inpulse force to the bullet
         rb.AddForce(transform.forward * ammo.projectileSpeed, ForceMode.Impulse);
+        
     }
     
     // Update is called once per frame
     void Update()
     {
+        //add a constant force in the -grafity direction
+        rb.AddForce(-Physics.gravity, ForceMode.Force);
+        
+        rb.AddForce(Vector3.down * ammo.bulletDrop, ForceMode.Force);
+        
         spawnTimer += Time.deltaTime;
         if (spawnTimer > 5f)
         {

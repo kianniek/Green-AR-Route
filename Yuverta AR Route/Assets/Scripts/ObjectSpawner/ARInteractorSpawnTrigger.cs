@@ -109,11 +109,13 @@ public class ARInteractorSpawnTrigger : MonoBehaviour
 
             if (setActiveInsteadOfInstantiate)
             {
-                foreach (var VARIABLE in objectSpawner.ObjectPrefabs)
+                if (m_ObjectSpawner.TryEnableObject(arRaycastHit.pose.position, arRaycastHit.pose.up))
                 {
-                    VARIABLE.SetActive(true);
-                    VARIABLE.transform.position = arRaycastHit.pose.position;
                     m_OnObjectSpawned.Invoke();
+                }
+                else
+                {
+                    Debug.Log("Failed to enable object");
                 }
                 return;
             }

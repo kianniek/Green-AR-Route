@@ -50,7 +50,7 @@ public class CropContainer : MonoBehaviour
         cropNameDisplay.text = cropScript.cropObject.cropName;
     
         // Invoke the crop planted event
-        onCropPlanted.Invoke();
+        onCropPlanted.Invoke(); 
     
         // Add the new crop's HarvestCrop method to the onCropHarvested event
         onCropHarvested += newCropObject.HarvestCrop;

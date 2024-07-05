@@ -216,5 +216,39 @@ public class ObjectSpawner : MonoBehaviour
 
     return true;
 }
+    public bool TryEnableObject(Vector3 spawnPoint, Vector3 spawnNormal)
+    {
+        foreach (var objPrefab in m_ObjectPrefabs)
+        {
+            if (mSpawnAsChild)
+            {
+                objPrefab.transform.parent = transform;
+            }
 
+            // Set the initial position and add the GridSnapper component
+            objPrefab.transform.position = spawnPoint;
+
+            EnsureFacingCamera();
+
+            var facePosition = m_CameraToFace.transform.position;
+            var forward = facePosition - spawnPoint;
+
+            BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
+        
+        
+            objPrefab.transform.rotation = m_SpawnWithIdentityRotation ? Quaternion.identity : Quaternion.LookRotation(projectedForward, spawnNormal);
+
+            objPrefab.transform.position += spawnNormal * m_SpawnHeightOffset;
+
+            if (m_ApplyRandomAngleAtSpawn)
+            {
+                var randomRotation = Random.Range(-m_SpawnAngleRange, m_SpawnAngleRange);
+                objPrefab.transform.Rotate(Vector3.up, randomRotation);
+            }
+            
+            objPrefab.SetActive(true);
+        }
+
+        return true;
+    }
 }

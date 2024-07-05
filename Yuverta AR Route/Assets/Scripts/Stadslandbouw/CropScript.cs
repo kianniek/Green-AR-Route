@@ -70,6 +70,46 @@ public class CropScript : MonoBehaviour
         
         hasCrop = true;
     }
+
+    public void FullyGrowCrop(CropObject newCrop)
+    {
+        //If there is already a crop return
+        if (hasCrop) 
+            return;
+        
+        //Setting the new crop object
+        cropObject = newCrop;
+        
+        //Creating the new crop
+        Instantiate(cropObject.cropPrefab, parent);
+        
+        //Adding the growth stages to the list
+        for (int i = 0; i < ChildCount; i++)
+        {
+            growthStages.Add(transform.GetChild(0).GetChild(i).gameObject);
+            growthStages[i].SetActive(false);
+        }
+        
+        growthStage = 0;
+        //Upgrading the growth stage for the next round
+        growthStage = growthStages.Count - 2;
+        
+        if (currentChild) 
+            currentChild.SetActive(false);
+        
+        currentChild = growthStages[growthStage];
+        currentChild.SetActive(true);
+        currentChild.tag = "Crop";
+        
+
+        if (growthStage < growthStages.Count) 
+            return;
+        
+        fullyGrown.Invoke();
+        Debug.Log("Fully grown");
+        
+        hasCrop = true;
+    }
     
     public void GrowCrop()
     {

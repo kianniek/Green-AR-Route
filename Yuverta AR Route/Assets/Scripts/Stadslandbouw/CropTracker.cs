@@ -42,8 +42,9 @@ public class CropTracker : MonoBehaviour
         // Randomizing the list of all crops
         allCrops = RandomizeList(allCrops);
 
-        // Starting the first round
-        NewRound();
+        // Initialize a fully grown crop the first time
+        InitializeFullyGrownCrop();
+        
     }
 
     private void Update()
@@ -65,6 +66,27 @@ public class CropTracker : MonoBehaviour
             }
         }
     }
+    
+    public void InitializeFullyGrownCrop()
+    {
+        // Pick a random crop from the right crops list
+        var randomCrop = rightCrops[Random.Range(0, rightCrops.Count)];
+
+        var cropScript = cropContainer.CropSpawnLocation.gameObject.GetComponent<CropScript>();
+        cropScript.FullyGrowCrop(randomCrop);
+
+        Debug.Log("Fully grown crop initialized");
+
+        // Spawning the new Crop on the crop container
+        cropContainer.NewCrop(cropScript, CropObject.CropType.none);
+
+        lastPlacedCrop = randomCrop;
+        nextCorrectCropType = randomCrop.nextCrop;
+        
+        // Starting the first round
+        NewRound();
+    }
+
 
     private void PickedSeed(string cropName)
     {

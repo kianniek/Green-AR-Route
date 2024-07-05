@@ -40,6 +40,8 @@ public class MaterialController : MonoBehaviour
     [Header("Rain Material Properties")]
     [SerializeField] private string rainNormalThresholdProperty = "_NormalThreshold_rain";
     [SerializeField] private string rainContrastProperty = "_contrast_rain";
+    [SerializeField] private string rainFresnelMinProperty = "_contrast_rain";
+    [SerializeField] private string rainFresnelMaxProperty = "_contrast_rain";
 
     [Header("Snow Settings")]
     public float normalThreshold;
@@ -50,6 +52,10 @@ public class MaterialController : MonoBehaviour
     [Header("Rain Settings")]
     public float normalThresholdRain;
     public float contrastRain;
+    [Range(0,2)]
+    public float fresnelMinRain;
+    [Range(0,2)]
+    public float fresnelMaxRain;
     
     [Header("Snow Animator")]
     [SerializeField] private Animator snowAnimator;
@@ -73,9 +79,11 @@ public class MaterialController : MonoBehaviour
         
         normalThresholdRain = snowMaterial.GetFloat(rainNormalThresholdProperty);
         contrastRain = snowMaterial.GetFloat(rainContrastProperty);
+        fresnelMinRain = snowMaterial.GetFloat(rainFresnelMinProperty);
+        fresnelMaxRain = snowMaterial.GetFloat(rainFresnelMaxProperty);
     }
 
-    void Update()
+    private void LateUpdate()
     {
         snowMaterial.SetFloat(normalThresholdProperty, normalThreshold);
         snowMaterial.SetFloat(contrastProperty, contrast);
@@ -84,6 +92,8 @@ public class MaterialController : MonoBehaviour
         
         snowMaterial.SetFloat(rainNormalThresholdProperty, normalThresholdRain);
         snowMaterial.SetFloat(rainContrastProperty, contrastRain);
+        snowMaterial.SetFloat(rainFresnelMinProperty, fresnelMinRain);
+        snowMaterial.SetFloat(rainFresnelMaxProperty, fresnelMaxRain);
     }
     
     public void ToggleSnowing()
