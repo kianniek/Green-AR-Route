@@ -52,9 +52,7 @@ public class CatapultProjectile : MonoBehaviour
                 ammo.projectileSpeed * Time.deltaTime) && !hit.collider.gameObject.CompareTag("Bullet"))
         {
             gameObject.GetComponent<MeshRenderer>().enabled = false;
-            FindObjectOfType<SplatMakerExample>().OnHit(hit);
             
-            VerticaalGroenManager.instance.scoreManager.AddScore();
             // Destroy the bullet
             Destroy(gameObject, 1f);
             Destroy(this);

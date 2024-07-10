@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
+using UnityEngine.Serialization;
 
 public class Paintable : MonoBehaviour
 {
@@ -6,6 +8,18 @@ public class Paintable : MonoBehaviour
 
     public float extendsIslandOffset = 1;
 
+    private float _coverage;
+    public float coverage
+    {
+        get => _coverage;
+        set
+        {
+            _coverage = value;
+            CheckCoverage();
+        }
+    }
+
+    public float coverageThreshold = 0.5f;
     RenderTexture extendIslandsRenderTexture;
     RenderTexture uvIslandsRenderTexture;
     RenderTexture maskRenderTexture;
@@ -23,7 +37,13 @@ public class Paintable : MonoBehaviour
 
     void Start()
     {
-        maskRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0);
+        maskRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0, RenderTextureFormat.ARGB32, 10)
+        {
+            name = "MaskTexture",
+            filterMode = FilterMode.Bilinear,
+            useMipMap = true,
+            autoGenerateMips = true
+        };
         maskRenderTexture.name = "MaskTexture";
         maskRenderTexture.filterMode = FilterMode.Bilinear;
 
@@ -45,7 +65,7 @@ public class Paintable : MonoBehaviour
         {
             foreach (var material in rend.materials)
             {
-                material.SetTexture(maskTextureID, extendIslandsRenderTexture);
+                material.SetTexture(maskTextureID, maskRenderTexture);
             }
         }
         else
@@ -53,7 +73,23 @@ public class Paintable : MonoBehaviour
             rend.material.SetTexture(maskTextureID, extendIslandsRenderTexture);
         }
 
+
         PaintManager.instance.initTextures(this);
+    }
+
+    public bool CheckCoverage()
+    {
+        if (_coverage > coverageThreshold)
+        {
+            Debug.Log("Painted");
+            return true;
+        }
+        return false;
+    }
+    
+    public void SetMaskToColor(Paintable p, Color color)
+    {
+        PaintManager.instance.SetMaskToColor(p, color);
     }
 
     void OnDisable()

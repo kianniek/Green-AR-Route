@@ -1,8 +1,10 @@
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
 
-public class PaintManager : Singleton<PaintManager>{
-
+public class PaintManager : Singleton<PaintManager>
+{
     public Shader texturePaint;
     public Shader extendIslands;
 
@@ -22,16 +24,18 @@ public class PaintManager : Singleton<PaintManager>{
 
     CommandBuffer command;
 
-    public override void Awake(){
+    public override void Awake()
+    {
         base.Awake();
-        
+
         paintMaterial = new Material(texturePaint);
         extendMaterial = new Material(extendIslands);
         command = new CommandBuffer();
         command.name = "CommmandBuffer - " + gameObject.name;
     }
 
-    public void initTextures(Paintable paintable){
+    public void initTextures(Paintable paintable)
+    {
         RenderTexture mask = paintable.getMask();
         RenderTexture uvIslands = paintable.getUVIslands();
         RenderTexture extend = paintable.getExtend();
@@ -51,13 +55,15 @@ public class PaintManager : Singleton<PaintManager>{
     }
 
 
-    public void paint(Paintable paintable, Vector3 pos, float radius = 1f, float hardness = .5f, float strength = .5f, Color? color = null){
+    public void paint(Paintable paintable, Vector3 pos, float radius = 1f, float hardness = .5f, float strength = .5f,
+        Color? color = null)
+    {
         RenderTexture mask = paintable.getMask();
         RenderTexture uvIslands = paintable.getUVIslands();
         RenderTexture extend = paintable.getExtend();
         RenderTexture support = paintable.getSupport();
         Renderer rend = paintable.getRenderer();
-
+        
         paintMaterial.SetFloat(prepareUVID, 0);
         paintMaterial.SetVector(positionID, pos);
         paintMaterial.SetFloat(hardnessID, hardness);
@@ -79,6 +85,45 @@ public class PaintManager : Singleton<PaintManager>{
 
         Graphics.ExecuteCommandBuffer(command);
         command.Clear();
+        
+        // Generate mipmaps
+        //mask.GenerateMips();
     }
 
+    public float CalculateCoverage(Paintable paintable)
+    {
+        RenderTexture mask = paintable.getMask();
+
+        RenderTexture.active = mask;
+
+        var asyncAction = AsyncGPUReadback.Request(mask, mask.mipmapCount - 1);
+        asyncAction.WaitForCompletion();
+
+        // Extract average color
+        Color32 Average = asyncAction.GetData<Color32>()[0];
+
+        RenderTexture.active = null;
+
+        Debug.Log(Average);
+        //calculate how close the color is to red
+        var coveredPixels = Average.r / 255f;
+
+        return coveredPixels;
+    }
+
+    public void SetMaskToColor(Paintable paintable, Color color)
+    {
+        RenderTexture mask = paintable.getMask();
+        RenderTexture support = paintable.getSupport();
+
+        command.SetRenderTarget(mask);
+        command.ClearRenderTarget(true, true, color);
+        command.SetRenderTarget(support);
+        command.ClearRenderTarget(true, true, color);
+
+        Graphics.ExecuteCommandBuffer(command);
+        command.Clear();
+
+        paintable.coverage = 0;
+    }
 }
