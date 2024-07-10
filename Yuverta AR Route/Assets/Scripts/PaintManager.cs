@@ -7,6 +7,7 @@ public class PaintManager : Singleton<PaintManager>
 {
     public Shader texturePaint;
     public Shader extendIslands;
+    public Shader zoomToBounds;
 
     int prepareUVID = Shader.PropertyToID("_PrepareUV");
     int positionID = Shader.PropertyToID("_PainterPosition");
@@ -21,6 +22,7 @@ public class PaintManager : Singleton<PaintManager>
 
     Material paintMaterial;
     Material extendMaterial;
+    Material zoomMaterial;
 
     CommandBuffer command;
 
@@ -30,6 +32,7 @@ public class PaintManager : Singleton<PaintManager>
 
         paintMaterial = new Material(texturePaint);
         extendMaterial = new Material(extendIslands);
+        zoomMaterial = new Material(zoomToBounds);
         command = new CommandBuffer();
         command.name = "CommmandBuffer - " + gameObject.name;
     }
@@ -90,13 +93,26 @@ public class PaintManager : Singleton<PaintManager>
         //mask.GenerateMips();
     }
 
-    public float CalculateCoverage(Paintable paintable)
+    public float CalculateCoverage(Paintable paintable, Vector2 uvBoundsMin, Vector2 uvBoundsMax)
     {
         RenderTexture mask = paintable.getMask();
+        RenderTexture islands = paintable.getIslands();
+        Renderer rend = paintable.getRenderer();
+        
+        // Set the bounds on the material
+        zoomMaterial.SetVector("_MinBound", new Vector4(uvBoundsMin.x, uvBoundsMin.y, 0, 0));
+        zoomMaterial.SetVector("_MaxBound", new Vector4(uvBoundsMax.x, uvBoundsMax.y, 0, 0));
+        
+        command.SetRenderTarget(islands);
+        command.DrawRenderer(rend, zoomMaterial, 0);
+        command.Blit(mask, islands, zoomMaterial);
 
-        RenderTexture.active = mask;
+        Graphics.ExecuteCommandBuffer(command);
+        command.Clear();
+        
+        RenderTexture.active = islands;
 
-        var asyncAction = AsyncGPUReadback.Request(mask, mask.mipmapCount - 1);
+        var asyncAction = AsyncGPUReadback.Request(islands, islands.mipmapCount - 1);
         asyncAction.WaitForCompletion();
 
         // Extract average color

@@ -31,6 +31,6 @@ public class CollisionPainter : MonoBehaviour{
     
     public float GetCoverage(Paintable p)
     {
-        return PaintManager.instance.CalculateCoverage(p);
+        return PaintManager.instance.CalculateCoverage(p, p.uvMin, p.uvMax);
     }
 }

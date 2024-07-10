@@ -624,10 +624,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34dd7a6bd13050d448fe95c2e8af1103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 0}
-  planeScore: 0
-  totalScore: 0
-  splatManager: {fileID: 0}
 --- !u!114 &342152453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1021,15 +1017,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4621661021461790817, guid: 30822b7380e3d8b40a7b155261927f7e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1528656310}
-    - targetCorrespondingSourceObject: {fileID: 4621661021461790817, guid: 30822b7380e3d8b40a7b155261927f7e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1528656309}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30822b7380e3d8b40a7b155261927f7e, type: 3}
 --- !u!1 &839253209
 GameObject:
@@ -1707,7 +1695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   texturePaint: {fileID: 4800000, guid: 9472ed3696ab33d4ab23fb2a11915e0c, type: 3}
   extendIslands: {fileID: 4800000, guid: 30512f6167fa0784ab310b688406279d, type: 3}
-  coverageCheckShader: {fileID: 4800000, guid: 736d397fd33b53c43a21d6ec81bbac11, type: 3}
+  zoomToBounds: {fileID: 4800000, guid: b5ff67737d3852f488f336683673d53f, type: 3}
 --- !u!4 &1474374150
 Transform:
   m_ObjectHideFlags: 0
@@ -1798,47 +1786,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1478587808}
   m_CullTransparentMesh: 1
---- !u!1 &1528656305 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4621661021461790817, guid: 30822b7380e3d8b40a7b155261927f7e,
-    type: 3}
-  m_PrefabInstance: {fileID: 776893388}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1528656309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1528656305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  extendsIslandOffset: 1
---- !u!64 &1528656310
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1528656305}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -462981019419857548, guid: 348d5a975952c44a485ed5b8f711954e, type: 3}
 --- !u!1 &1802737985
 GameObject:
   m_ObjectHideFlags: 0
@@ -2381,7 +2328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be8a48416f841d4fac024c4f1994147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintColor: {r: 1, g: 0, b: 0, a: 1}
+  paintColor: {r: 1, g: 1, b: 1, a: 1}
   radius: 2
   strength: 1
   hardness: 1
