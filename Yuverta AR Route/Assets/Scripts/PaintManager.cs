@@ -39,11 +39,11 @@ public class PaintManager : Singleton<PaintManager>
 
     public void initTextures(Paintable paintable)
     {
-        RenderTexture mask = paintable.getMask();
-        RenderTexture uvIslands = paintable.getUVIslands();
-        RenderTexture extend = paintable.getExtend();
-        RenderTexture support = paintable.getSupport();
-        Renderer rend = paintable.getRenderer();
+        var mask = paintable.getMask();
+        var uvIslands = paintable.getUVIslands();
+        var extend = paintable.getExtend();
+        var support = paintable.getSupport();
+        var rend = paintable.getRenderer();
 
         command.SetRenderTarget(mask);
         command.SetRenderTarget(extend);
@@ -59,21 +59,34 @@ public class PaintManager : Singleton<PaintManager>
 
 
     public void paint(Paintable paintable, Vector3 pos, float radius = 1f, float hardness = .5f, float strength = .5f,
-        Color? color = null)
+        Color[]? colors = null, int colorIndex = -1)
     {
-        RenderTexture mask = paintable.getMask();
-        RenderTexture uvIslands = paintable.getUVIslands();
-        RenderTexture extend = paintable.getExtend();
-        RenderTexture support = paintable.getSupport();
-        Renderer rend = paintable.getRenderer();
+        //if paintable previously filled, check if the color is the same or of an lower index
+        if (paintable.previouslyFilledColorIndex != -1)
+        {
+            if (colors.Length != 0)
+            {
+                if (paintable.previouslyFilledColorIndex > colorIndex)
+                {
+                    return;
+                }
+            }
+        }
         
+        
+        var mask = paintable.getMask();
+        var uvIslands = paintable.getUVIslands();
+        var extend = paintable.getExtend();
+        var support = paintable.getSupport();
+        var rend = paintable.getRenderer();
+    
         paintMaterial.SetFloat(prepareUVID, 0);
         paintMaterial.SetVector(positionID, pos);
         paintMaterial.SetFloat(hardnessID, hardness);
         paintMaterial.SetFloat(strengthID, strength);
         paintMaterial.SetFloat(radiusID, radius);
         paintMaterial.SetTexture(textureID, support);
-        paintMaterial.SetColor(colorID, color ?? Color.red);
+        paintMaterial.SetColor(colorID, colorIndex > -1 ? colors[colorIndex] : colors[0]);
         extendMaterial.SetFloat(uvOffsetID, paintable.extendsIslandOffset);
         extendMaterial.SetTexture(uvIslandsID, uvIslands);
 
@@ -88,16 +101,46 @@ public class PaintManager : Singleton<PaintManager>
 
         Graphics.ExecuteCommandBuffer(command);
         command.Clear();
-        
-        // Generate mipmaps
-        //mask.GenerateMips();
+    }
+    
+    public void paint(Paintable paintable, Vector3 pos, float radius = 1f, float hardness = .5f, float strength = .5f,
+        Color? color = null)
+    {
+        var mask = paintable.getMask();
+        var uvIslands = paintable.getUVIslands();
+        var extend = paintable.getExtend();
+        var support = paintable.getSupport();
+        var rend = paintable.getRenderer();
+    
+        paintMaterial.SetFloat(prepareUVID, 0);
+        paintMaterial.SetVector(positionID, pos);
+        paintMaterial.SetFloat(hardnessID, hardness);
+        paintMaterial.SetFloat(strengthID, strength);
+        paintMaterial.SetFloat(radiusID, radius);
+        paintMaterial.SetTexture(textureID, support);
+        paintMaterial.SetColor(colorID, color ?? Color.white);
+        extendMaterial.SetFloat(uvOffsetID, paintable.extendsIslandOffset);
+        extendMaterial.SetTexture(uvIslandsID, uvIslands);
+
+        command.SetRenderTarget(mask);
+        command.DrawRenderer(rend, paintMaterial, 0);
+
+        command.SetRenderTarget(support);
+        command.Blit(mask, support);
+
+        command.SetRenderTarget(extend);
+        command.Blit(mask, extend, extendMaterial);
+
+        Graphics.ExecuteCommandBuffer(command);
+        command.Clear();
     }
 
-    public float CalculateCoverage(Paintable paintable, Vector2 uvBoundsMin, Vector2 uvBoundsMax)
+
+    public Vector4 CalculateCoverage(Paintable paintable, Vector2 uvBoundsMin, Vector2 uvBoundsMax)
     {
-        RenderTexture mask = paintable.getMask();
-        RenderTexture islands = paintable.getIslands();
-        Renderer rend = paintable.getRenderer();
+        var mask = paintable.getMask();
+        var islands = paintable.getIslands();
+        var rend = paintable.getRenderer();
         
         // Set the bounds on the material
         zoomMaterial.SetVector("_MinBound", new Vector4(uvBoundsMin.x, uvBoundsMin.y, 0, 0));
@@ -116,21 +159,21 @@ public class PaintManager : Singleton<PaintManager>
         asyncAction.WaitForCompletion();
 
         // Extract average color
-        Color32 Average = asyncAction.GetData<Color32>()[0];
+        var Average = asyncAction.GetData<Color32>()[0];
 
         RenderTexture.active = null;
 
         Debug.Log(Average);
         //calculate how close the color is to red
-        var coveredPixels = Average.r / 255f;
+        var coveredPixels = new Vector4(Average.r / 255f, Average.g / 255f, Average.b / 255f, Average.a / 255f); 
 
         return coveredPixels;
     }
 
     public void SetMaskToColor(Paintable paintable, Color color)
     {
-        RenderTexture mask = paintable.getMask();
-        RenderTexture support = paintable.getSupport();
+        var mask = paintable.getMask();
+        var support = paintable.getSupport();
 
         command.SetRenderTarget(mask);
         command.ClearRenderTarget(true, true, color);
@@ -140,6 +183,8 @@ public class PaintManager : Singleton<PaintManager>
         Graphics.ExecuteCommandBuffer(command);
         command.Clear();
 
-        paintable.coverage = 0;
+        // Reset the coverage
+        paintable.coverage = Vector4.zero;
     }
+
 }

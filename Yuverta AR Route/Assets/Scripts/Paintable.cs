@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Serialization;
@@ -8,8 +9,15 @@ public class Paintable : MonoBehaviour
 
     public float extendsIslandOffset = 1;
 
-    public float _coverage;
-    public float coverage
+    public bool useHitTreshold = false;
+    public int hitTreshold = 1;
+    private int hitCount = 0;
+
+    [Range(0, 1)] public float coverageThreshold = 0.5f;
+    [SerializeField] private Vector4 _coverage;
+    public int previouslyFilledColorIndex { get; private set; } = -1;
+
+    public Vector4 coverage
     {
         get => _coverage;
         set
@@ -18,12 +26,10 @@ public class Paintable : MonoBehaviour
             CheckCoverage();
         }
     }
-    
+
     public Vector2 uvMin;
     public Vector2 uvMax;
 
-    [Range(0,1)]
-    public float coverageThreshold = 0.5f;
     RenderTexture extendIslandsRenderTexture;
     RenderTexture uvIslandsRenderTexture;
     RenderTexture islandsRenderTexture;
@@ -32,7 +38,7 @@ public class Paintable : MonoBehaviour
 
     Renderer rend;
 
-    int maskTextureID = Shader.PropertyToID("_MaskTexture");
+    int MaskTextureID = Shader.PropertyToID("_MaskTexture");
     int UVIslandID = Shader.PropertyToID("_UVTexture");
     int Extend = Shader.PropertyToID("_ExtendTexture");
     int Support = Shader.PropertyToID("_SupportTexture");
@@ -44,10 +50,15 @@ public class Paintable : MonoBehaviour
     public RenderTexture getSupport() => supportTexture;
     public Renderer getRenderer() => rend;
 
-    void Start()
+    private void Awake()
+    {
+        rend = GetComponent<Renderer>();
+    }
+
+    private void Start()
     {
         CalculateUVBounds();
-        
+
         maskRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0, RenderTextureFormat.ARGB32, 10)
         {
             name = "MaskTexture",
@@ -55,38 +66,40 @@ public class Paintable : MonoBehaviour
             useMipMap = true,
             autoGenerateMips = true
         };
-        maskRenderTexture.name = "MaskTexture";
-        maskRenderTexture.filterMode = FilterMode.Bilinear;
 
-        extendIslandsRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0);
-        extendIslandsRenderTexture.name = "ExtendIslandsTexture";
-        extendIslandsRenderTexture.filterMode = FilterMode.Bilinear;
+        extendIslandsRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0)
+        {
+            name = "ExtendIslandsTexture",
+            filterMode = FilterMode.Bilinear
+        };
 
-        uvIslandsRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0){
+        uvIslandsRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0)
+        {
             name = "UVIslandsTexture",
             filterMode = FilterMode.Bilinear,
             useMipMap = true,
             autoGenerateMips = true
         };
-        
-        islandsRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0){
+
+        islandsRenderTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0)
+        {
             name = "islandsTexture",
             filterMode = FilterMode.Bilinear,
             useMipMap = true,
             autoGenerateMips = true
         };
 
-        supportTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0);
-        supportTexture.name = "SupportTexture";
-        supportTexture.filterMode = FilterMode.Bilinear;
-
-        rend = GetComponent<Renderer>();
+        supportTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 0)
+        {
+            name = "SupportTexture",
+            filterMode = FilterMode.Bilinear
+        };
 
         if (rend.materials.Length > 1)
         {
             foreach (var material in rend.materials)
             {
-                material.SetTexture(maskTextureID, extendIslandsRenderTexture);
+                material.SetTexture(MaskTextureID, extendIslandsRenderTexture);
                 material.SetTexture(UVIslandID, islandsRenderTexture);
                 material.SetTexture(Extend, extendIslandsRenderTexture);
                 material.SetTexture(Support, supportTexture);
@@ -94,8 +107,7 @@ public class Paintable : MonoBehaviour
         }
         else
         {
-            rend.material.SetTexture(maskTextureID, extendIslandsRenderTexture);
-            rend.material.SetTexture(maskTextureID, maskRenderTexture);
+            rend.material.SetTexture(MaskTextureID, maskRenderTexture);
             rend.material.SetTexture(UVIslandID, islandsRenderTexture);
             rend.material.SetTexture(Extend, extendIslandsRenderTexture);
             rend.material.SetTexture(Support, supportTexture);
@@ -105,25 +117,42 @@ public class Paintable : MonoBehaviour
         PaintManager.instance.initTextures(this);
     }
 
-    public bool CheckCoverage()
+    public int CheckCoverage()
     {
-        if (_coverage > coverageThreshold)
+        // Check if the coverage is above the threshold for each color channel
+        if (coverage.z > coverageThreshold && previouslyFilledColorIndex != 2)
         {
-            Debug.Log("Painted");
-            return true;
+            return 2; // Color index for z
         }
-        return false;
+
+        if (coverage.y > coverageThreshold && previouslyFilledColorIndex != 1)
+        {
+            return 1; // Color index for y
+        }
+
+        if (coverage.x > coverageThreshold && previouslyFilledColorIndex != 0)
+        {
+            return 0; // Color index for x
+        }
+
+        return -1; // No color meets the threshold
     }
-    
-    public void SetMaskToColor(Paintable p, Color color)
+
+    public void SetPreviouslyFilledColorIndex(int index)
+    {
+        previouslyFilledColorIndex = index;
+    }
+
+
+    public static void SetMaskToColor(Paintable p, Color color)
     {
         PaintManager.instance.SetMaskToColor(p, color);
     }
-    
-    void CalculateUVBounds()
+
+    private void CalculateUVBounds()
     {
         // Get the mesh filter component
-        MeshFilter meshFilter = GetComponent<MeshFilter>();
+        var meshFilter = GetComponent<MeshFilter>();
         if (meshFilter == null)
         {
             Debug.LogError("MeshFilter component not found!");
@@ -131,7 +160,7 @@ public class Paintable : MonoBehaviour
         }
 
         // Get the mesh from the mesh filter
-        Mesh mesh = meshFilter.mesh;
+        var mesh = meshFilter.mesh;
 
         // Ensure the mesh has UVs
         if (mesh.uv.Length == 0)
@@ -141,14 +170,14 @@ public class Paintable : MonoBehaviour
         }
 
         // Extract UV coordinates
-        Vector2[] uvs = mesh.uv;
+        var uvs = mesh.uv;
 
         // Initialize min and max bounds
-        Vector2 uvMin = new Vector2(float.MaxValue, float.MaxValue);
-        Vector2 uvMax = new Vector2(float.MinValue, float.MinValue);
+        var uvMin = new Vector2(float.MaxValue, float.MaxValue);
+        var uvMax = new Vector2(float.MinValue, float.MinValue);
 
         // Iterate through UVs to find the bounds
-        foreach (Vector2 uv in uvs)
+        foreach (var uv in uvs)
         {
             if (uv.x < uvMin.x) uvMin.x = uv.x;
             if (uv.y < uvMin.y) uvMin.y = uv.y;
@@ -161,9 +190,22 @@ public class Paintable : MonoBehaviour
         this.uvMax = uvMax;
     }
 
-    void OnDisable()
+    public void OnHit(Color color)
+    {
+        if (!useHitTreshold)
+            return;
+
+        hitCount++;
+        if (hitCount >= hitTreshold)
+        {
+            SetMaskToColor(this, color);
+        }
+    }
+
+    private void OnDisable()
     {
         maskRenderTexture.Release();
+        islandsRenderTexture.Release();
         uvIslandsRenderTexture.Release();
         extendIslandsRenderTexture.Release();
         supportTexture.Release();

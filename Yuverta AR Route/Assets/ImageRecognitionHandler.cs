@@ -8,8 +8,8 @@ using TMPro;
 public struct ImageEvent
 {
     [SerializeField] internal string nameOfImage;
+    [SerializeField] internal int imageSceneIndex;
     [SerializeField] internal string promptText; // Text to display when image is recognized
-    [SerializeField] internal UnityEvent action;
 }
 
 public class ImageRecognitionHandler : MonoBehaviour
@@ -21,7 +21,9 @@ public class ImageRecognitionHandler : MonoBehaviour
 
     private string currentRecognizedImage = null;
     private string currentPromptText = null;
-
+    
+    [SerializeField] internal SceneSwap sceneSwap;
+    
     void OnEnable()
     {
         if (imageRecognitionEvent != null)
@@ -46,6 +48,7 @@ public class ImageRecognitionHandler : MonoBehaviour
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             HandleScreenTap();
+            Debug.Log("Tapped Screen in ImageRecognitionHandler.cs");
         }
     }
 
@@ -91,14 +94,22 @@ public class ImageRecognitionHandler : MonoBehaviour
 
     private void HandleScreenTap()
     {
-        if (currentRecognizedImage != null)
+        Debug.Log("Screen tapped");
+        Debug.Log("Current recognized image: " + currentRecognizedImage);
+        if (currentRecognizedImage == null)
+            return;
+        
+        Debug.Log("Screen tapped for image: " + currentRecognizedImage);
+        
+        foreach (var imageEvent in imageEvents)
         {
-            foreach (var imageEvent in imageEvents)
+            Debug.Log("Checking image event: " + imageEvent.nameOfImage);
+            if (imageEvent.nameOfImage == currentRecognizedImage)
             {
-                if (imageEvent.nameOfImage == currentRecognizedImage)
-                {
-                    imageEvent.action.Invoke(); // Invoke the action on screen tap
-                }
+                Debug.Log("Invoking action for image: " + currentRecognizedImage);
+                sceneSwap.SwitchToScene(imageEvent.imageSceneIndex);
+                //break out of the loop
+                break;
             }
         }
     }

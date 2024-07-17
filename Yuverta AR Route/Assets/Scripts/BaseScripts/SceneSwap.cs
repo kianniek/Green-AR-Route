@@ -9,9 +9,6 @@ public class SceneSwap : MonoBehaviour
     // Singleton instance
     public static SceneSwap Instance { get; private set; }
 
-    // List of scene indexes from build settings
-    private List<int> sceneIndexes = new List<int>();
-
     // UI Slider to display loading progress
     public Slider loadingSlider;
 
@@ -22,7 +19,6 @@ public class SceneSwap : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            InitializeSceneIndexes();
         }
         else
         {
@@ -30,37 +26,29 @@ public class SceneSwap : MonoBehaviour
         }
     }
 
-    // Function to initialize the scene indexes list from build settings
-    private void InitializeSceneIndexes()
-    {
-        int sceneCount = SceneManager.sceneCountInBuildSettings;
-        for (int i = 0; i < sceneCount; i++)
-        {
-            Debug.Log("Scene " + i + ": " + SceneUtility.GetScenePathByBuildIndex(i));
-            sceneIndexes.Add(i);
-        }
-    }
-
     // Function to switch to the next scene
     public void SwitchToNextScene()
     {
-        int nextSceneIndex = (SceneManager.GetActiveScene().buildIndex + 1) % sceneIndexes.Count;
+        int nextSceneIndex = (SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings;
         LoadScene(nextSceneIndex);
     }
 
     // Function to switch to the previous scene
     public void SwitchToPreviousScene()
     {
-        int prevSceneIndex = (SceneManager.GetActiveScene().buildIndex - 1 + sceneIndexes.Count) % sceneIndexes.Count;
+        int prevSceneIndex = (SceneManager.GetActiveScene().buildIndex - 1 + SceneManager.sceneCountInBuildSettings) % SceneManager.sceneCountInBuildSettings;
         LoadScene(prevSceneIndex);
     }
 
     // Function to switch to a specific scene
     public void SwitchToScene(int sceneIndex)
     {
-        if (sceneIndex >= 0 && sceneIndex < sceneIndexes.Count)
+        Debug.Log($"Switching to scene: {sceneIndex}, total scenes: {SceneManager.sceneCountInBuildSettings}");
+        if (sceneIndex >= 0 && sceneIndex < SceneManager.sceneCountInBuildSettings)
         {
-            LoadScene(sceneIndex);
+            //LoadScene(sceneIndex);
+            SceneManager.LoadScene(sceneIndex);
+            Debug.Log("loading scene name: " + SceneManager.GetSceneAt(sceneIndex).name);
         }
         else
         {
