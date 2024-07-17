@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets;
 
 [RequireComponent(typeof(GridBuilder))]
@@ -11,9 +12,11 @@ public class GridManager : MonoBehaviour
     [SerializeField] private SerializableDictionary<GameObject, ObjectGridLocation> objsToSpawn = new();
     [SerializeField] private GameObject wadiTopLayerPrefab;
     [SerializeField] private GameObject wadiBottomLayerPrefab;
+    [SerializeField] private GameObject wadiWeatherUIPrefab;
     
     private GameObject _wadiTopLayer;
     private GameObject _wadiBottomLayer;
+    private GameObject _wadiWeatherUI;
 
     private List<GameObject> _placedObjects = new();
     private int _selectedObjectIndex;
@@ -223,6 +226,21 @@ public class GridManager : MonoBehaviour
         //Instantiate the top and bottom layers of the wadi
         _wadiTopLayer = Instantiate(wadiTopLayerPrefab);
         _wadiBottomLayer = Instantiate(wadiBottomLayerPrefab);
+        _wadiWeatherUI = Instantiate(wadiWeatherUIPrefab);
+        
+        //Get the position constraints in the wadiWeatherUI
+        var weatherUIPositionConstraints = _wadiWeatherUI.GetComponentsInChildren<PositionConstraint>();
+
+        foreach (var positionConstraint in weatherUIPositionConstraints)
+        {
+            positionConstraint.constraintActive = true;
+
+            var constraintSources = new ConstraintSource();
+            constraintSources.sourceTransform = _wadiTopLayer.transform;
+            constraintSources.weight = 1;
+            
+            positionConstraint.AddSource(constraintSources);
+        }
         
         var centerPoint = gridBuilder.GetCenterPoint();
 

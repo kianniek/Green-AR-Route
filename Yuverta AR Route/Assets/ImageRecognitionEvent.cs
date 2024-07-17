@@ -43,11 +43,8 @@ public class ImageRecognitionEvent : MonoBehaviour
             {
                 OnImageRecognized?.Invoke(trackedImage);
             }
-        }
-
-        foreach (ARTrackedImage trackedImage in eventArgs.updated)
-        {
-            if(trackedImage.trackingState == TrackingState.Limited)
+            
+            if(trackedImage.trackingState == TrackingState.None)
             {
                 // Image tracking has been lost
                 OnImageRemoved?.Invoke(trackedImage);
