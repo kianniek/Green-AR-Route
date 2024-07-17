@@ -92,16 +92,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890679725041476591}
-  - component: {fileID: 636996734907021632}
   - component: {fileID: 6162446373426748052}
   - component: {fileID: 7900059891702406741}
+  - component: {fileID: 8700368052168188876}
   m_Layer: 0
   m_Name: VideoPlayerDragable
   m_TagString: WorldUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2890679725041476591
 Transform:
   m_ObjectHideFlags: 0
@@ -119,29 +119,6 @@ Transform:
   - {fileID: 3395293579783205408}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!136 &636996734907021632
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4329051031019158603}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6162446373426748052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,10 +150,31 @@ LookAtConstraint:
   m_WorldUpObject: {fileID: 0}
   m_UseUpObject: 0
   m_Active: 1
-  m_IsLocked: 0
+  m_IsLocked: 1
   m_Sources:
   - sourceTransform: {fileID: 0}
     weight: 1
+--- !u!65 &8700368052168188876
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4329051031019158603}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5169243, y: 0.14409249, z: 0.16181424}
+  m_Center: {x: -0, y: 0, z: -0}
 --- !u!1 &7615147892263414008
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +348,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 7615147892263414008}
+      - m_Target: {fileID: 4329051031019158603}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
