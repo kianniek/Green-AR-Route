@@ -159,7 +159,7 @@ public class UIMenuLogic : MonoBehaviour, IDragHandler, IEndDragHandler
         var touchDelta = eventData.position - previousTouchPosition;
 
         var distanceX = Mathf.Abs(dragStartPos.x - eventData.position.x);
-        if (distanceX > scrollView.rect.width / 2)
+        if (distanceX < scrollView.rect.width/2)
         {
             return;
         }
