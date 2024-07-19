@@ -12,16 +12,16 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 using TouchPhase = UnityEngine.TouchPhase;
 
-public class UIMenuLogic : MonoBehaviour, IDragHandler, IEndDragHandler
+public class UIMenuLogic : MonoBehaviour//, IDragHandler, IEndDragHandler
 {
     [Header("General")] [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject swipeCanvas;
     
-    private Vector2 dragStartPos;
-    private Vector2 dragEndPos;
-    [SerializeField] private RectTransform scrollView;
-    [SerializeField] private ScrollRect scrollRect;
-    private Vector2 previousTouchPosition;
+    // private Vector2 dragStartPos;
+    // private Vector2 dragEndPos;
+    // [SerializeField] private RectTransform scrollView;
+    // [SerializeField] private ScrollRect scrollRect;
+    // private Vector2 previousTouchPosition;
 
     [Header("Scroll Area")] [SerializeField]
     private Transform uiObjectParentTransform;
@@ -49,8 +49,8 @@ public class UIMenuLogic : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         startAnimationsButton.gameObject.SetActive(false);
 
-        if (!scrollView)
-            scrollRect = scrollView.GetComponentInChildren<ScrollRect>();
+        // if (!scrollView)
+        //     scrollRect = scrollView.GetComponentInChildren<ScrollRect>();
 
         EnableCanvas(false);
     }
@@ -123,66 +123,66 @@ public class UIMenuLogic : MonoBehaviour, IDragHandler, IEndDragHandler
         yield return null;
     }
 
-    private void Update()
-    {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            var eventData = new PointerEventData(EventSystem.current)
-            {
-                position = touch.position
-            };
-
-            switch (touch.phase)
-            {
-                case TouchPhase.Began:
-                    dragStartPos = touch.position;
-                    previousTouchPosition = touch.position;
-                    break;
-
-                case TouchPhase.Moved:
-                    OnDrag(eventData);
-                    previousTouchPosition = touch.position;
-                    break;
-
-                case TouchPhase.Ended:
-                    dragEndPos = touch.position;
-                    previousTouchPosition = Vector2.zero;
-                    break;
-            }
-        }
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        var touchDelta = eventData.position - previousTouchPosition;
-
-        var distanceX = Mathf.Abs(dragStartPos.x - eventData.position.x);
-        if (distanceX < scrollView.rect.width/2)
-        {
-            return;
-        }
-        
-        touchDelta *= scrollRect.scrollSensitivity;
-
-        switch(scrollRect.horizontal && scrollRect.vertical)
-        {
-            case true:
-                scrollRect.content.anchoredPosition += new Vector2(touchDelta.x, touchDelta.y);
-                break;
-            case false:
-                if (scrollRect.horizontal)
-                {
-                    scrollRect.content.anchoredPosition += new Vector2(touchDelta.x, 0);
-                }
-                else if (scrollRect.vertical)
-                {
-                    scrollRect.content.anchoredPosition += new Vector2(0, touchDelta.y);
-                }
-                break;
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Input.touchCount > 0)
+    //     {
+    //         Touch touch = Input.GetTouch(0);
+    //
+    //         var eventData = new PointerEventData(EventSystem.current)
+    //         {
+    //             position = touch.position
+    //         };
+    //
+    //         switch (touch.phase)
+    //         {
+    //             case TouchPhase.Began:
+    //                 dragStartPos = touch.position;
+    //                 previousTouchPosition = touch.position;
+    //                 break;
+    //
+    //             case TouchPhase.Moved:
+    //                 OnDrag(eventData);
+    //                 previousTouchPosition = touch.position;
+    //                 break;
+    //
+    //             case TouchPhase.Ended:
+    //                 dragEndPos = touch.position;
+    //                 previousTouchPosition = Vector2.zero;
+    //                 break;
+    //         }
+    //     }
+    // }
+    //
+    // public void OnDrag(PointerEventData eventData)
+    // {
+    //     var touchDelta = eventData.position - previousTouchPosition;
+    //
+    //     var distanceX = Mathf.Abs(dragStartPos.x - eventData.position.x);
+    //     if (distanceX > scrollView.rect.width/2)
+    //     {
+    //         return;
+    //     }
+    //     
+    //     touchDelta *= scrollRect.scrollSensitivity;
+    //
+    //     switch(scrollRect.horizontal && scrollRect.vertical)
+    //     {
+    //         case true:
+    //             scrollRect.content.anchoredPosition += new Vector2(touchDelta.x, touchDelta.y);
+    //             break;
+    //         case false:
+    //             if (scrollRect.horizontal)
+    //             {
+    //                 scrollRect.content.anchoredPosition += new Vector2(touchDelta.x, 0);
+    //             }
+    //             else if (scrollRect.vertical)
+    //             {
+    //                 scrollRect.content.anchoredPosition += new Vector2(0, touchDelta.y);
+    //             }
+    //             break;
+    //     }
+    // }
 
     public void OnEndDrag(PointerEventData eventData)
     {

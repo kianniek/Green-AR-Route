@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour
 {
@@ -12,9 +9,6 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private UnityEvent onQuestionAnsweredCorrectly = new();
 
     [Header("Quiz UI Elements")]
-    [Tooltip("The parent object containing all other objects")]
-    [SerializeField] private GameObject parentObject;
-
     [Tooltip("The text element that will display the quiz question")]
     [SerializeField] private TextMeshPro questionText;
 
@@ -25,56 +19,21 @@ public class QuizManager : MonoBehaviour
     [Tooltip("The scriptable object containing the quiz questions")]
     [SerializeField] private QuizQuestions quizQuestions;
 
-    [Tooltip("The distance the quiz elements should be from the camera")]
-    [SerializeField] private float distanceFromCamera;
-
-    [SerializeField] private bool keepInFrontOfCamera = true;
-
-    [Header("Lerp Settings")]
-    public float lerpSpeed = 5f;
-    [SerializeField] private float lerpThreshold = 0.1f;
-
     private List<Question> questions;
     private int currentQuestionIndex;
     private int correctQuestions;
     private int totalQuestions;
 
-    private Camera mainCamera;
-
-    private void Awake()
-    {
-        mainCamera = Camera.main;
-    }
-
-    private void OnEnable()
-    {
-        // Enable touch input handling in OnEnable
-    }
-
-    private void OnDisable()
-    {
-        // Disable touch input handling in OnDisable
-    }
-
     private void Start()
     {
         InitializeQuiz();
-        StartCoroutine(KeepObjectInfrontOfCamera());
         DisplayQuestion();
     }
 
     private void InitializeQuiz()
     {
-        PositionAndRotateParentObject();
         questions = new List<Question>(quizQuestions.questions);
         SetupChoiceButtons();
-    }
-
-    private void PositionAndRotateParentObject()
-    {
-        var newPosition = mainCamera.transform.position + mainCamera.transform.forward * distanceFromCamera;
-        parentObject.transform.position = newPosition;
-        parentObject.transform.LookAt(mainCamera.transform);
     }
 
     private void SetupChoiceButtons()
@@ -133,7 +92,7 @@ public class QuizManager : MonoBehaviour
             correctQuestions++;
             onQuestionAnsweredCorrectly.Invoke();
         }
-        
+
         totalQuestions++;
         currentQuestionIndex++;
         DisplayQuestion();
@@ -147,20 +106,6 @@ public class QuizManager : MonoBehaviour
         DisplayQuestion();
     }
 
-    private IEnumerator KeepObjectInfrontOfCamera()
-    {
-        while (keepInFrontOfCamera)
-        {
-            var newPosition = mainCamera.transform.position + mainCamera.transform.forward * distanceFromCamera;
-            if (Vector3.Distance(parentObject.transform.position, newPosition) > lerpThreshold)
-            {
-                parentObject.transform.position = Vector3.Slerp(parentObject.transform.position, newPosition, lerpSpeed * Time.deltaTime);
-            }
-            parentObject.transform.LookAt(mainCamera.transform);
-            yield return null;
-        }
-    }
-
     private void Update()
     {
         if (Input.touchCount > 0)
@@ -169,7 +114,7 @@ public class QuizManager : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                var ray = mainCamera.ScreenPointToRay(touch.position);
+                var ray = Camera.main.ScreenPointToRay(touch.position);
 
                 if (Physics.Raycast(ray, out var hit))
                 {
@@ -182,7 +127,7 @@ public class QuizManager : MonoBehaviour
         }
         else if (Input.GetMouseButtonDown(0))
         {
-            var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out var hit))
             {

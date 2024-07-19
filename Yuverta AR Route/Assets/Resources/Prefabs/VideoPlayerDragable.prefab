@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3395293579783205408
 Transform:
   m_ObjectHideFlags: 0
@@ -92,9 +92,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890679725041476591}
-  - component: {fileID: 6162446373426748052}
-  - component: {fileID: 7900059891702406741}
-  - component: {fileID: 8700368052168188876}
   m_Layer: 0
   m_Name: VideoPlayerDragable
   m_TagString: WorldUI
@@ -119,62 +116,6 @@ Transform:
   - {fileID: 3395293579783205408}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!114 &6162446373426748052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4329051031019158603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0de621c4397a624dae4252598e74b4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lerpSpeed: 10
-  fallBackDistance: 5
-  tagToDrag: WorldUI
---- !u!1183024399 &7900059891702406741
-LookAtConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4329051031019158603}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Weight: 1
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_RotationOffset: {x: 0, y: 0, z: 0}
-  m_Roll: 0
-  m_WorldUpObject: {fileID: 0}
-  m_UseUpObject: 0
-  m_Active: 1
-  m_IsLocked: 1
-  m_Sources:
-  - sourceTransform: {fileID: 0}
-    weight: 1
---- !u!65 &8700368052168188876
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4329051031019158603}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5169243, y: 0.14409249, z: 0.16181424}
-  m_Center: {x: -0, y: 0, z: -0}
 --- !u!1 &7615147892263414008
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,6 +130,7 @@ GameObject:
   - component: {fileID: 5572300773876541390}
   - component: {fileID: 7258392603730175133}
   - component: {fileID: 4235363171029712156}
+  - component: {fileID: 73389335876461956}
   m_Layer: 0
   m_Name: Curved Video Player
   m_TagString: VideoPlayer
@@ -360,3 +302,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &73389335876461956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7615147892263414008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e509420d784842649c518710946b069d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentObject: {fileID: 7615147892263414008}
+  distanceFromCamera: 1.5
+  keepInFrontOfCamera: 1
+  lerpSpeed: 5
+  lerpThreshold: 0

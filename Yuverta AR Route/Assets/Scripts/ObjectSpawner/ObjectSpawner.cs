@@ -97,6 +97,9 @@ public class ObjectSpawner : MonoBehaviour
         get => m_SpawnAngleRange;
         set => m_SpawnAngleRange = value;
     }
+    
+    [SerializeField][Tooltip("Rather or not to spawn the object at a fixed lerp between the camera Y position and the spawn point Y position /n Uses the spawn height offset as the lerp value.")]
+    private bool m_LerpToSpawnHeight = false;
 
     [SerializeField] [Tooltip("The height the object goes off the surface of the plane the raycast has hit")]
     float m_SpawnHeightOffset = 1.5f;
@@ -201,7 +204,7 @@ public class ObjectSpawner : MonoBehaviour
         
         newObject.transform.rotation = m_SpawnWithIdentityRotation ? Quaternion.identity : Quaternion.LookRotation(projectedForward, spawnNormal);
 
-        newObject.transform.position += spawnNormal * m_SpawnHeightOffset;
+        newObject.transform.position += spawnNormal * (m_LerpToSpawnHeight ? Mathf.Lerp(m_CameraToFace.transform.position.y, spawnPoint.y, m_SpawnHeightOffset) : m_SpawnHeightOffset);
 
         if (m_ApplyRandomAngleAtSpawn)
         {
