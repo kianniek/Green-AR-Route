@@ -17,13 +17,8 @@ public class GunController : MonoBehaviour
     [Header("Weapon Variables")] [SerializeField]
     private List<Weapon> weapons;
 
-    private float fireRate;
-    private float fireRateCooldown;
     private Weapon currentWeapon;
-    [SerializeField] private Vector3 weaponOffset = new Vector3(1, -0.8f, 1f);
     private WeaponType weaponType;
-    private int burstCount; // Visible only if weaponType is Burst
-    private float burstRate;
     private bool firing;
 
     [Header("Catapult Variables")] private float chargeRate;
@@ -36,19 +31,18 @@ public class GunController : MonoBehaviour
     protected virtual void Start()
     {
         currentAmmunition = magazineSize;
-        fireRateCooldown = 0;
         mainCamera = Camera.main;
-        transform.parent = mainCamera.transform;
 
         ChangeWeapon(0);
+        currentWeapon.fireRateCooldownTimer = 0;
     }
 
     void Update()
     {
         // Decrease the fire rate timer
-        if (fireRateCooldown > 0)
+        if (currentWeapon.fireRateCooldownTimer > 0)
         {
-            fireRateCooldown -= Time.deltaTime;
+            currentWeapon.fireRateCooldownTimer -= Time.deltaTime;
         }
 
         //if Touch started was over UI return
@@ -63,11 +57,8 @@ public class GunController : MonoBehaviour
         // Check for touch input
         if (Input.touchCount > 0)
         {
-            isTouchingUI = IsTouchOverUI(Input.GetTouch(0).fingerId);
-            
-            if (!isTouchingUI && Input.GetTouch(0).phase == TouchPhase.Ended)
+            if (Input.GetTouch(0).phase == TouchPhase.Ended)
             {
-                Debug.Log("Touch detected");
                 Shoot();
             }
         }
@@ -85,23 +76,16 @@ public class GunController : MonoBehaviour
 
         // Spawn the new gun
         currentWeapon = weapons[weaponIndex];
-        var weaponInstance = Instantiate(currentWeapon.prefab, transform);
+        var weaponInstance = Instantiate(currentWeapon.weaponModel, transform);
 
         // Set ammo and weapon variables
-        currentAmmo = currentWeapon.ammo;
+        currentAmmo = currentWeapon.weaponAmmo;
         bulletPrefab = currentAmmo.bulletPrefab;
 
         // Start with a full magazine
         currentAmmunition = magazineSize = currentWeapon.magazineSize;
 
-        fireRate = 60f / currentWeapon.roundsPerMinute;
         weaponType = currentWeapon.weaponType;
-
-        if (weaponType == WeaponType.Burst)
-        {
-            burstCount = currentWeapon.burstCount;
-            burstRate = fireRate / burstCount;
-        }
 
         // Find the bullet spawn point
         for (int i = 0; i < weaponInstance.transform.childCount; i++)
@@ -126,16 +110,6 @@ public class GunController : MonoBehaviour
         firing = false;
     }
 
-    void LateUpdate()
-    {
-        // Keep the position of the object in front of the camera
-        Vector3 targetPosition = mainCamera.transform.position + mainCamera.transform.rotation * weaponOffset;
-        transform.position = Vector3.Lerp(transform.position, targetPosition, 0.1f);
-
-        // Follow camera rotation
-        transform.rotation = mainCamera.transform.rotation;
-    }
-
     public void Shoot()
     {
         if (firing)
@@ -152,7 +126,7 @@ public class GunController : MonoBehaviour
             case WeaponType.Single:
                 yield return StartCoroutine(SingleShot());
                 break;
-            case WeaponType.Burst:
+            case WeaponType.Spread:
                 yield return StartCoroutine(BurstShot());
                 break;
             case WeaponType.Automatic:
@@ -167,7 +141,7 @@ public class GunController : MonoBehaviour
     private IEnumerator SingleShot()
     {
         ShootBullet();
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(currentWeapon.fireRate);
         firing = false;
 
         yield return null;
@@ -175,15 +149,14 @@ public class GunController : MonoBehaviour
 
     private IEnumerator BurstShot()
     {
-        var currentBurstCount = burstCount;
+        var currentBurstCount = currentWeapon.spreadCount;
         while (currentBurstCount > 0)
         {
-            ShootBullet();
-            yield return new WaitForSeconds(burstRate);
+            ShootBullet(true);
             currentBurstCount--;
         }
 
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(currentWeapon.fireRate);
         firing = false;
     }
 
@@ -192,7 +165,7 @@ public class GunController : MonoBehaviour
         while (true)
         {
             ShootBullet();
-            yield return new WaitForSeconds(fireRate);
+            yield return new WaitForSeconds(currentWeapon.fireRate);
             if (Input.touchCount == 0 || Input.GetTouch(0).phase == TouchPhase.Ended)
             {
                 break;
@@ -225,7 +198,7 @@ public class GunController : MonoBehaviour
         yield return null;
     }
 
-    public void ShootBullet()
+    public void ShootBullet(bool randomizeSpawnRotation = false)
     {
         if (isReloading)
             return;
@@ -233,7 +206,17 @@ public class GunController : MonoBehaviour
         if (currentAmmunition > 0)
         {
             var bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-            bullet.GetComponent<BulletLogic>().ammo = currentAmmo;
+            if (randomizeSpawnRotation)
+            {
+                //offset bullet forward vector by a random amount
+                bullet.transform.forward = bulletSpawnPoint.forward + new Vector3(UnityEngine.Random.Range(-0.1f, 0.1f),
+                    UnityEngine.Random.Range(-0.1f, 0.1f), UnityEngine.Random.Range(-0.1f, 0.1f));
+            }
+
+            var bL = bullet.GetComponent<BulletLogic>();
+            bL.ammo = currentAmmo;
+            bL.collisionPainter.paintColorIndex = currentWeapon.paintColorIndex;
+            
             currentAmmunition--;
         }
         else if (currentAmmunition <= 0)

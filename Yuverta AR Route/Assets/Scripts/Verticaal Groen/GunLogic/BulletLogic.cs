@@ -8,6 +8,8 @@ public class BulletLogic : MonoBehaviour
     public Ammo ammo;
     public UnityEvent onImpact;
     private float spawnTimer;
+    private CollisionPainter _collisionPainter;
+    public CollisionPainter collisionPainter => _collisionPainter;
     public delegate void BulletHitEvent(Vector3 hitPosition);
     public static event BulletHitEvent OnBulletHit;
     

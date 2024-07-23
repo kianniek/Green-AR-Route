@@ -1908,6 +1908,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 8842559061964616650}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1946135027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2240,9 +2252,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - {fileID: 11400000, guid: fb7dc3ab789d2c94aa746b886546a264, type: 2}
-  - {fileID: 11400000, guid: fb7dc3ab789d2c94aa746b886546a264, type: 2}
-  - {fileID: 11400000, guid: fb7dc3ab789d2c94aa746b886546a264, type: 2}
-  weaponOffset: {x: 0.04, y: -0.03, z: 0}
+  - {fileID: 11400000, guid: 51ade991624dada4eb6d2b62e29aa17b, type: 2}
+  - {fileID: 11400000, guid: 7e49d419f8931df4d96a4612e16daa9d, type: 2}
 --- !u!114 &2098316723245564868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2559,7 +2570,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2512387469781535983}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2679,7 +2690,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2512387469781535982}
-  - {fileID: 3876646052444348414}
   m_Father: {fileID: 2512387470688141392}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2512387470057136334
@@ -2833,12 +2843,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6141505326492754562}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2512387470057136333}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &4284101179063055938
 MonoBehaviour:
@@ -3098,6 +3108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3876646052444348414}
   - component: {fileID: 2030370207378040253}
+  - component: {fileID: 6141505326492754563}
   m_Layer: 0
   m_Name: GunController
   m_TagString: MainCamera
@@ -3105,6 +3116,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &6141505326492754563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6141505326492754562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cffe9931d1cc5fa47916640ebed9ce64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 2512387469781535985}
+  targetObject: {fileID: 6141505326492754562}
+  distanceFromCamera: 0.4
+  padding: 0.05
+  presetPosition: 2
+  positionLerpSpeed: 0.9618
+  rotateWithCamera: 1
+  rotationLerpSpeed: 0.168
 --- !u!1 &6397490417156125247
 GameObject:
   m_ObjectHideFlags: 0
@@ -3362,7 +3393,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3379,4 +3410,5 @@ SceneRoots:
   - {fileID: 187865536}
   - {fileID: 1946135025}
   - {fileID: 3759633940026317873}
+  - {fileID: 3876646052444348414}
   - {fileID: 7444759882884219414}

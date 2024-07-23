@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5686a9a74f5a6547b8d42e178754e28, type: 3}
   m_Name: SeedGun
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2912111721532438528, guid: e675f7681e299ac4b87214d8cf4269e0, type: 3}
-  ammo: {fileID: 11400000, guid: 44f92ea49a02fbd4cba47ab3bb02d425, type: 2}
-  magazineSize: 15
+  weaponModel: {fileID: 2912111721532438528, guid: e675f7681e299ac4b87214d8cf4269e0,
+    type: 3}
+  weaponAmmo: {fileID: 11400000, guid: 44f92ea49a02fbd4cba47ab3bb02d425, type: 2}
   weaponType: 0
-  roundsPerMinute: 60
-  burstCount: 5
+  fireRate: 1
+  fireRateCooldownTimer: 0
+  reloadTime: 1
+  magazineSize: 15
+  spreadCount: 1
   maxCharge: 10
   chargeRate: 5
   launchForce: 3
+  paintColorIndex: 2

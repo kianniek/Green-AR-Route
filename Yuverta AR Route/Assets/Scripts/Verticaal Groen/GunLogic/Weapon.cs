@@ -1,27 +1,39 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu]
 public class Weapon : ScriptableObject
 {
-    //All serialized in WeaponEditorGUI so add the variables there too
-    public GameObject prefab;
-    public Ammo ammo;
-    public int magazineSize;
+    [Header("Refrences")]
+    public GameObject weaponModel;
+    public Ammo weaponAmmo;
+    
+    [Header("Weapon Variables")]
     public WeaponType weaponType;
-    public int roundsPerMinute;
-    // This field will only be visible if weaponType is Burst because of the GUI
-    public int burstCount; 
+    public float fireRate;
+    public float fireRateCooldownTimer;
+    public float reloadTime;
+    
+    [Header("Ammo Variables")]
+    public int magazineSize;
+    
+    [Header("Spread Only")]
+    public int spreadCount; 
     
     //Catapult fields
+    [Header("Catapult Only")]
     public int maxCharge;
     public float chargeRate;
     public float launchForce;
+    
+    [Header("Painter Variables")]
+    public int paintColorIndex;
 }
 
 public enum WeaponType
 {
     Single,
-    Burst,
+    Spread,
     Automatic,
     Catapult
 }
