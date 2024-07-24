@@ -12,6 +12,7 @@ public class ImageRecognitionEvent : MonoBehaviour
 
     public event Action<ARTrackedImage> OnImageRecognized;
     public event Action<ARTrackedImage> OnImageRemoved;
+    public event Action<ARTrackedImage> OnImageRecognizedStarted;
 
     void Awake()
     {
@@ -33,20 +34,29 @@ public class ImageRecognitionEvent : MonoBehaviour
         foreach (ARTrackedImage trackedImage in eventArgs.added)
         {
             // Image has been recognized for the first time
-            OnImageRecognized?.Invoke(trackedImage);
+            Debug.Log("Added");
+            OnImageRecognizedStarted?.Invoke(trackedImage);
+            
+            //make an anchor if the tracked image is recognized and the image doesnt already have an anchor
+            var anchor = trackedImage.gameObject.GetComponent<ARAnchor>();
+            if (anchor == null)
+            {
+                anchor = trackedImage.gameObject.AddComponent<ARAnchor>();
+            }
+            
         }
 
         foreach (ARTrackedImage trackedImage in eventArgs.updated)
         {
+            Debug.Log(trackedImage.referenceImage.name +" | "+ trackedImage.trackingState);
             // Image tracking has been updated (position, rotation, etc.)
             if (trackedImage.trackingState == TrackingState.Tracking)
             {
                 OnImageRecognized?.Invoke(trackedImage);
             }
             
-            if(trackedImage.trackingState == TrackingState.None)
+            if(trackedImage.trackingState == TrackingState.Limited)
             {
-                // Image tracking has been lost
                 OnImageRemoved?.Invoke(trackedImage);
             }
         }
