@@ -16,7 +16,7 @@ public class MoveToGrid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (grid == null)
+        if (!grid)
         {
             grid = FindObjectOfType<GridManager>().gameObject;
         }

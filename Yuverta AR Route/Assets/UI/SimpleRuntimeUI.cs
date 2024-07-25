@@ -12,6 +12,12 @@ public class SimpleRuntimeUI : MonoBehaviour
     [SerializeField] private UnityEvent onRainButtonClicked;
     [SerializeField] private UnityEvent onSunButtonClicked;
     
+    private bool snowButtonClicked;
+    private bool rainButtonClicked;
+    private bool sunButtonClicked;
+    
+    [SerializeField] private UnityEvent onAllButtonsClicked;
+    
 
     //Add logic that interacts with the UI controls in the `OnEnable` methods
     private void OnEnable()
@@ -31,13 +37,28 @@ public class SimpleRuntimeUI : MonoBehaviour
     private void OnSnowButtonClicked()
     {
         onSnowButtonClicked.Invoke();
+        snowButtonClicked = true;
+        CheckIfAllButtonsClicked();
     }
     private void OnRainButtonClicked()
     {
         onRainButtonClicked.Invoke();
+        rainButtonClicked = true;
+        CheckIfAllButtonsClicked();
     }
     private void OnSunButtonClicked()
     {
         onSunButtonClicked.Invoke();
+        sunButtonClicked = true;
+        CheckIfAllButtonsClicked();
+    }
+    
+    private void CheckIfAllButtonsClicked()
+    {
+        if (snowButtonClicked && rainButtonClicked && sunButtonClicked)
+        {
+            Debug.Log("All buttons clicked");
+            onAllButtonsClicked.Invoke();
+        }
     }
 }

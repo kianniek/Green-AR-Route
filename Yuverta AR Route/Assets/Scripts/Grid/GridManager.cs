@@ -244,7 +244,10 @@ public class GridManager : MonoBehaviour
         
         var centerPoint = gridBuilder.GetCenterPoint();
 
-        _wadiTopLayer.transform.position = _wadiBottomLayer.transform.position = centerPoint;
+        _wadiTopLayer.transform.position = _wadiBottomLayer.transform.position = centerPoint + transform.position;
+        
+        var rotation = transform.rotation * Quaternion.Euler(0, -90, 0);
+        _wadiTopLayer.transform.rotation = _wadiBottomLayer.transform.rotation = rotation;
 
         //Set the wadi completed flag to true
         _wadiCompleted = true;

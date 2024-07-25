@@ -38,7 +38,7 @@ public class GridBuilder : MonoBehaviour
         convertedGridPositions.Clear();
         gridPoints.Clear();
         ClearGrid();
-        
+
         var maxSize = Vector3.zero;
         if (gridPrefabs.Length != 0)
         {
@@ -50,7 +50,7 @@ public class GridBuilder : MonoBehaviour
         }
         if (maxSize == Vector3.zero)
             maxSize = gridPointPrefab.GetComponentInChildren<Renderer>().bounds.size * blockSizeMultiplier;
-        
+
         maxSize *= blockSizeMultiplier;
         gridPoints = new List<GameObject>();
 
@@ -65,13 +65,15 @@ public class GridBuilder : MonoBehaviour
             {
                 for (var z = 0; z < gridSize.y; z++)
                 {
-                    Vector3 position = CalculateGridPosition(x, y, z);
-                    Vector3 positionConverged = CalculateGridpointConvergePositions(x, y, z);
+                    Vector3 localPosition = CalculateGridPosition(x, y, z);
+                    Vector3 localPositionConverged = CalculateGridpointConvergePositions(x, y, z);
 
                     var rotation = Quaternion.Euler(gridCellRotationDeg);
-                    
+
                     // Instantiate the grid point
-                    var gridPoint = Instantiate(gridPointPrefab, position, rotation, transform);
+                    var gridPoint = Instantiate(gridPointPrefab, transform);
+                    gridPoint.transform.localPosition = localPosition;
+                    gridPoint.transform.localRotation = rotation;
                     gridPoint.transform.localScale = maxSize;
 
                     var gridPointScript = gridPoint.GetComponent<GridPointScript>();
@@ -80,20 +82,20 @@ public class GridBuilder : MonoBehaviour
                         // Set the object position of the grid point based on the indexOfGridPoint
                         gridPointScript.objectGridLocation = (GridManager.ObjectGridLocation)indexOfGridPoint;
                     }
-                    
-                    
-                    if(gridPointScript.objectGridLocation == GridManager.ObjectGridLocation.UpperMiddle)
+
+                    if (gridPointScript.objectGridLocation == GridManager.ObjectGridLocation.UpperMiddle)
                     {
                         // Instantiate the slopKop
                         if (slopKop != null)
                         {
-                            var slopKopPosition = gridPoint.transform.position + slopKopOffset;
+                            var slopKopPosition = gridPoint.transform.localPosition + slopKopOffset;
                             var slopKopRotation = Quaternion.Euler(gridCellRotationDeg);
-                            var slopKopObject = Instantiate(slopKop, slopKopPosition, slopKopRotation, transform);
-            
-                            gridPoints.Add(slopKopObject);
-                            convertedGridPositions.Add(slopKopObject, positionConverged + slopKopOffset);
+                            var slopKopObject = Instantiate(slopKop, transform);
+                            slopKopObject.transform.localPosition = slopKopPosition;
+                            slopKopObject.transform.localRotation = slopKopRotation;
 
+                            gridPoints.Add(slopKopObject);
+                            convertedGridPositions.Add(slopKopObject, localPositionConverged + slopKopOffset);
                         }
                     }
 
@@ -103,21 +105,18 @@ public class GridBuilder : MonoBehaviour
                     // Add the grid point to the list of grid points
                     gridPoints.Add(gridPoint);
 
-                    convertedGridPositions.Add(gridPoint, positionConverged);
+                    convertedGridPositions.Add(gridPoint, localPositionConverged);
 
                     // Keep track of the index of the grid point
                     ++indexOfGridPoint;
                 }
             }
         }
-        
-        
-
 
         // Add all grid points to the list of current grid positions
         foreach (var gridPoint in gridPoints)
         {
-            currentGridPositions.Add(gridPoint, gridPoint.transform.position);
+            currentGridPositions.Add(gridPoint, gridPoint.transform.localPosition);
         }
 
         return gridPoints;
@@ -125,7 +124,7 @@ public class GridBuilder : MonoBehaviour
 
     public void ClearGrid()
     {
-        // Destroy all children of the grid in forloop
+        // Destroy all children of the grid in for loop
         for (var i = transform.childCount - 1; i >= 0; i--)
         {
             if (Application.isPlaying)
@@ -150,9 +149,6 @@ public class GridBuilder : MonoBehaviour
         );
         position -= centerOffset;
 
-        // Adjust for the GridBuilder's position
-        position += transform.position;
-
         return position;
     }
 
@@ -171,34 +167,32 @@ public class GridBuilder : MonoBehaviour
         );
         position -= centerOffset;
 
-        // Adjust for the GridBuilder's position
-        position += transform.position;
-
         return position;
     }
-    
+
     public void MoveGridPointsToConvergedPosition()
     {
         foreach (var gridPoint in gridPoints)
         {
-            gridPoint.transform.position = convertedGridPositions[gridPoint];
+            gridPoint.transform.localPosition = convertedGridPositions[gridPoint];
         }
     }
-    
+
     public void MoveGridPointsToOriginalPosition()
     {
         foreach (var gridPoint in gridPoints)
         {
-            gridPoint.transform.position = currentGridPositions[gridPoint];
+            gridPoint.transform.localPosition = currentGridPositions[gridPoint];
         }
     }
-    
+
     public Vector3 GetCenterPoint()
     {
         var center = Vector3.zero;
         foreach (var gridPoint in gridPoints)
         {
-            center += gridPoint.transform.position;
+            
+            center += gridPoint.transform.localPosition;
         }
 
         center /= gridPoints.Count;
@@ -225,7 +219,7 @@ public class GridBuilder : MonoBehaviour
             maxSize = gridPointPrefab.GetComponentInChildren<Renderer>().bounds.size * blockSizeMultiplier;
 
         maxSize *= blockSizeMultiplier;
-        
+
         gridHeight = Mathf.Max(gridHeight, 1);
 
         var list = new List<Vector3>();
@@ -240,7 +234,7 @@ public class GridBuilder : MonoBehaviour
                     Vector3 position = CalculateGridPosition(x, y, z);
                     list.Add(position);
 
-                    Gizmos.DrawWireCube(position, maxSize);
+                    Gizmos.DrawWireCube(transform.TransformPoint(position), maxSize);
                 }
             }
         }
@@ -255,7 +249,7 @@ public class GridBuilder : MonoBehaviour
                     var position = CalculateGridpointConvergePositions(x, y, z);
                     list.Add(position);
 
-                    Gizmos.DrawWireCube(position, maxSize);
+                    Gizmos.DrawWireCube(transform.TransformPoint(position), maxSize);
                 }
             }
         }

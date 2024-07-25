@@ -20,6 +20,7 @@ public class LerpedObjectMovement : MonoBehaviour
     private void Update()
     {
         KeepObjectOnSnappedPosition();
+        RotateToMatchParent();
     }
 
     private void KeepObjectOnSnappedPosition()
@@ -38,5 +39,10 @@ public class LerpedObjectMovement : MonoBehaviour
         {
             gameObject.transform.position = closestGridPosition;
         }
+    }
+
+    private void RotateToMatchParent()
+    {
+        gameObject.transform.rotation = _objectLogic.SnappedGridPoint.transform.rotation;
     }
 }

@@ -109,7 +109,7 @@ public class ARInteractorSpawnTrigger : MonoBehaviour
 
             if (setActiveInsteadOfInstantiate)
             {
-                if (m_ObjectSpawner.TryEnableObject(arRaycastHit.pose.position, arRaycastHit.pose.up))
+                if (m_ObjectSpawner.TryEnableObject(arRaycastHit.pose.position, arRaycastHit.pose.up.normalized))
                 {
                     m_OnObjectSpawned.Invoke();
                 }
