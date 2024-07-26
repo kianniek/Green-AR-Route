@@ -9,17 +9,33 @@ using UnityEngine.XR.ARSubsystems;
 public class LeafCollectionScript : MonoBehaviour
 {
     [Serializable]
-    public struct Leaf
+    public class Leaf
     {
         public Image image;
         public Sprite sprite;
         public GameObject animation;
         public bool collected;
+        
+        public Leaf(Image image, Sprite sprite, GameObject animation, bool collected)
+        {
+            this.image = image;
+            this.sprite = sprite;
+            this.animation = animation;
+            this.collected = collected;
+        }
+        
+        public void SetCollected(bool collected)
+        {
+            this.collected = collected;
+        }
     }
     public List<Leaf> leaves;
 
     public UnityEvent allLeavesCollected;
     private int collectedLeafCount;
+    
+    public GameObject leaveUIParent;
+    public GameObject leaveUIPrefab;
     
     private ARRaycastManager arRaycastManager;
 
@@ -27,20 +43,32 @@ public class LeafCollectionScript : MonoBehaviour
     {
         arRaycastManager = FindObjectOfType<ARRaycastManager>();
     }
+    
+    // public void SetQrCodeEvents()
+    // {
+    //     for (int i = 0; i < DaktuinManager.Instance.QrCodeManager.qrCodes.Count; i++)
+    //     {
+    //         DaktuinManager.Instance.QrCodeManager.qrCodes[i].action.AddListener(OnLeafCollected);
+    //     }
+    // }
 
-    public void SetQrCodeEvents()
+    public void OnLeafCollected(int index)
     {
-        for (int i = 0; i < DaktuinManager.Instance.QrCodeManager.qrCodes.Count; i++)
-        {
-            DaktuinManager.Instance.QrCodeManager.qrCodes[i].action.AddListener(OnLeafCollected);
-        }
-    }
-
-    private void OnLeafCollected(int index)
-    {
-        Leaf leaf = leaves[index];
+        Debug.Log("Leaf collected");
+        Debug.Log(index);
+        
+        var leaf = leaves[index];
+        
+        if(leaf.collected) 
+            return;
+        
         leaf.collected = true;
-        leaf.image.sprite = leaf.sprite;
+        
+        
+        var leafObj = Instantiate(leaveUIPrefab, leaveUIParent.transform);
+        var leafVisual = leafObj.GetComponent<Image>();
+        leafVisual.sprite = leaf.sprite;
+        
         PerformRaycast(leaf.animation);
         collectedLeafCount++;
         if (collectedLeafCount == leaves.Count)

@@ -8,16 +8,16 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private UnityEvent onQuizFinished = new();
     [SerializeField] private UnityEvent onQuestionAnsweredCorrectly = new();
 
-    [Header("Quiz UI Elements")]
-    [Tooltip("The text element that will display the quiz question")]
-    [SerializeField] private TextMeshPro questionText;
+    [Header("Quiz UI Elements")] [Tooltip("The text element that will display the quiz question")] [SerializeField]
+    private TMP_Text questionText;
 
-    [Tooltip("All the buttons that will be used to answer the quiz questions")]
-    [SerializeField] private QuizButton[] choiceButtons;
+    [Tooltip("All the buttons that will be used to answer the quiz questions")] [SerializeField]
+    private QuizButton[] choiceButtons;
+
     [SerializeField] private string buttonTag = "QuizButton";
 
-    [Tooltip("The scriptable object containing the quiz questions")]
-    [SerializeField] private QuizQuestions quizQuestions;
+    [Tooltip("The scriptable object containing the quiz questions")] [SerializeField]
+    private QuizQuestions quizQuestions;
 
     private List<Question> questions;
     private int currentQuestionIndex;
@@ -50,27 +50,31 @@ public class QuizManager : MonoBehaviour
 
         foreach (var button in choiceButtons)
         {
+            //button.onRaycastHit.AddListener(OnOptionSelected);
             button.gameObject.SetActive(false);
-            button.onRaycastHit.AddListener(OnOptionSelected);
         }
     }
 
     private void DisplayQuestion()
     {
+        // Check if there are still questions left
         if (currentQuestionIndex < questions.Count)
         {
-            Question question = questions[currentQuestionIndex];
+            //disable all buttons
+            foreach (var choiceButton in choiceButtons)
+            {
+                choiceButton.gameObject.SetActive(false);
+            }
+
+            var question = questions[currentQuestionIndex];
             questionText.text = question.questionText;
-            for (int i = 0; i < choiceButtons.Length; i++)
+
+            for (var i = 0; i < choiceButtons.Length; i++)
             {
                 if (i < question.options.Count)
                 {
-                    choiceButtons[i].GetComponentInChildren<TextMeshPro>().text = question.options[i].answer;
                     choiceButtons[i].gameObject.SetActive(true);
-                }
-                else
-                {
-                    choiceButtons[i].gameObject.SetActive(false);
+                    choiceButtons[i].ButtonText = question.options[i].answer;
                 }
             }
         }
@@ -80,13 +84,15 @@ public class QuizManager : MonoBehaviour
             {
                 button.gameObject.SetActive(false);
             }
+
             Debug.Log($"Quiz finished. Correct answers: {correctQuestions}/{totalQuestions}");
             onQuizFinished.Invoke();
         }
     }
 
-    public void OnOptionSelected(int index)
+    public void OnOptionSelected(QuizButton button)
     {
+        int index = button.buttonIndex;
         if (questions[currentQuestionIndex].options[index].isCorrect)
         {
             correctQuestions++;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Events;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,34 +10,36 @@ using UnityEngine.XR.ARSubsystems;
 public class QRCodeManager : MonoBehaviour
 {
     [SerializeField] private ARTrackedImageManager trackedImageManager;
-    
+
     [Serializable]
-    public struct QRCode 
+    public class QRCode
     {
         public string name;
         public bool scanned;
+        public int index;
         public IntEvent action;
     }
-    
-    public List<QRCode> qrCodes;
-    
-    public XRReferenceImageLibrary referenceImageLibrary;
-    
-    void Start()
-    {
-        trackedImageManager.referenceLibrary = referenceImageLibrary;
 
-        foreach (var image in referenceImageLibrary)
-        {
-            qrCodes.Add(new QRCode
-            {
-                name = image.name,
-                scanned = false,
-                action = new IntEvent()
-            });
-        }
-        
-        DaktuinManager.Instance.leafScript.SetQrCodeEvents();
+    public List<QRCode> qrCodes;
+
+    public XRReferenceImageLibrary referenceImageLibrary;
+
+    private void Start()
+    {
+        // trackedImageManager.referenceLibrary = referenceImageLibrary;
+        //
+        // for (var i = 0; i < referenceImageLibrary.count; i++)
+        // {
+        //     qrCodes.Add(new QRCode
+        //     {
+        //         name = referenceImageLibrary[i].name,
+        //         scanned = false,
+        //         index = i,
+        //         action = new IntEvent()
+        //     });
+        // }
+
+        // DaktuinManager.Instance.leafScript.SetQrCodeEvents();
     }
 
     private void Update()
@@ -45,9 +48,12 @@ public class QRCodeManager : MonoBehaviour
         {
             Debug.Log("Invoke");
             qrCodes[0].action.Invoke(0);
+            qrCodes[0].action.Invoke(1);
+            qrCodes[0].action.Invoke(2);
+            qrCodes[0].action.Invoke(3);
         }
     }
-    
+
     void OnEnable()
     {
         trackedImageManager.trackedImagesChanged += OnTrackedImagesChanged;
@@ -73,34 +79,19 @@ public class QRCodeManager : MonoBehaviour
 
     private void ProcessTrackedImage(ARTrackedImage trackedImage)
     {
-        string qrCodeName = trackedImage.referenceImage.name;
+        var qrCodeName = trackedImage.referenceImage.name;
 
-        QRCode scannedQRCode = new QRCode();
-        foreach (var qrCode in qrCodes)
+        foreach (var qrCode in qrCodes.Where(qrCode => qrCode.name == qrCodeName))
         {
-            if (qrCode.name == qrCodeName)
+            switch (qrCode.scanned)
             {
-                switch (qrCode.scanned)
-                {
-                    case true:
-                        ScannedObject(qrCode);
-                        break;
-                    case false:
-                        scannedQRCode = qrCode;
-                        break;
-                }
+                case true:
+                    break;
+                case false:
+                    qrCode.scanned = true;
+                    qrCode.action.Invoke(qrCode.index);
+                    break;
             }
         }
-        
-        if (scannedQRCode.name == null) return;
-        scannedQRCode.scanned = true;
-        scannedQRCode.action.Invoke(qrCodes.IndexOf(scannedQRCode));
-    }
-
-    //Function for when a QR code is scanned for the second time
-    private void ScannedObject(QRCode qrCode)
-    {
-        //Temp code dunno what to do yet
-        Debug.Log($"Scanned object: {qrCode.name}");
     }
 }
