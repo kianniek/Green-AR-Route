@@ -28,15 +28,10 @@ public class QuizManager : MonoBehaviour
     private QuizQuestions quizQuestions;
 
     private List<Question> questions;
+    private List<QuizAnswer> incorrectAnswers;
     private int currentQuestionIndex;
     private int correctQuestions;
     private int totalQuestions;
-    private Camera _camera;
-
-    private void Awake()
-    {
-        _camera = Camera.main;
-    }
 
     private void Start()
     {
@@ -62,6 +57,7 @@ public class QuizManager : MonoBehaviour
         }
         
         questions = new List<Question>(quizQuestions.questions);
+        incorrectAnswers = new List<QuizAnswer>();
         SetupChoiceButtons();
     }
 
@@ -139,10 +135,15 @@ public class QuizManager : MonoBehaviour
     public void OnOptionSelected(QuizButton button)
     {
         int index = button.buttonIndex;
-        if (questions[currentQuestionIndex].options[index].isCorrect)
+        var selectedAnswer = questions[currentQuestionIndex].options[index];
+        if (selectedAnswer.isCorrect)
         {
             correctQuestions++;
             onQuestionAnsweredCorrectly.Invoke();
+        }
+        else
+        {
+            incorrectAnswers.Add(selectedAnswer);
         }
 
         totalQuestions++;
@@ -155,7 +156,18 @@ public class QuizManager : MonoBehaviour
         currentQuestionIndex = 0;
         correctQuestions = 0;
         totalQuestions = 0;
-        DisplayQuestion();
+
+        // Remove previously incorrect answers from the questions
+        foreach (var question in questions)
+        {
+            question.options.RemoveAll(option => incorrectAnswers.Contains(option));
+        }
+    }
+
+    public void RestartQuizWithoutIncorrectAnswers()
+    {
+        ResetQuiz();
+        StartQuiz();
     }
 
     private void Update()
@@ -166,7 +178,7 @@ public class QuizManager : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                var ray = _camera!.ScreenPointToRay(touch.position);
+                var ray = Camera.main.ScreenPointToRay(touch.position);
 
                 if (Physics.Raycast(ray, out var hit))
                 {
@@ -179,7 +191,7 @@ public class QuizManager : MonoBehaviour
         }
         else if (Input.GetMouseButtonDown(0))
         {
-            var ray = _camera!.ScreenPointToRay(Input.mousePosition);
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out var hit))
             {
