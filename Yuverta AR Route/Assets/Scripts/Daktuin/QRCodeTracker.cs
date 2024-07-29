@@ -23,23 +23,13 @@ public class QRCodeManager : MonoBehaviour
     public List<QRCode> qrCodes;
 
     public XRReferenceImageLibrary referenceImageLibrary;
+    
+    private float time;
 
     private void Start()
     {
-        // trackedImageManager.referenceLibrary = referenceImageLibrary;
-        //
-        // for (var i = 0; i < referenceImageLibrary.count; i++)
-        // {
-        //     qrCodes.Add(new QRCode
-        //     {
-        //         name = referenceImageLibrary[i].name,
-        //         scanned = false,
-        //         index = i,
-        //         action = new IntEvent()
-        //     });
-        // }
+        time = Time.time;
 
-        // DaktuinManager.Instance.leafScript.SetQrCodeEvents();
     }
 
     private void Update()
@@ -80,7 +70,7 @@ public class QRCodeManager : MonoBehaviour
     private void ProcessTrackedImage(ARTrackedImage trackedImage)
     {
         var qrCodeName = trackedImage.referenceImage.name;
-
+        
         foreach (var qrCode in qrCodes.Where(qrCode => qrCode.name == qrCodeName))
         {
             switch (qrCode.scanned)

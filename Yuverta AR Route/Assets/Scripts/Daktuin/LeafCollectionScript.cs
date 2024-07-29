@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -15,7 +16,7 @@ public class LeafCollectionScript : MonoBehaviour
         public Sprite sprite;
         public GameObject animation;
         public bool collected;
-        
+
         public Leaf(Image image, Sprite sprite, GameObject animation, bool collected)
         {
             this.image = image;
@@ -23,52 +24,47 @@ public class LeafCollectionScript : MonoBehaviour
             this.animation = animation;
             this.collected = collected;
         }
-        
+
         public void SetCollected(bool collected)
         {
             this.collected = collected;
         }
     }
+
     public List<Leaf> leaves;
 
     public UnityEvent allLeavesCollected;
     private int collectedLeafCount;
-    
+
     public GameObject leaveUIParent;
     public GameObject leaveUIPrefab;
-    
+
     private ARRaycastManager arRaycastManager;
+
+    [SerializeField] private bool deleteAnimationIfFinished;
 
     void Awake()
     {
         arRaycastManager = FindObjectOfType<ARRaycastManager>();
     }
-    
-    // public void SetQrCodeEvents()
-    // {
-    //     for (int i = 0; i < DaktuinManager.Instance.QrCodeManager.qrCodes.Count; i++)
-    //     {
-    //         DaktuinManager.Instance.QrCodeManager.qrCodes[i].action.AddListener(OnLeafCollected);
-    //     }
-    // }
 
     public void OnLeafCollected(int index)
     {
         Debug.Log("Leaf collected");
         Debug.Log(index);
-        
+
         var leaf = leaves[index];
-        
-        if(leaf.collected) 
+
+        if (leaf.collected)
             return;
-        
+
         leaf.collected = true;
-        
-        
+
+
         var leafObj = Instantiate(leaveUIPrefab, leaveUIParent.transform);
         var leafVisual = leafObj.GetComponent<Image>();
         leafVisual.sprite = leaf.sprite;
-        
+
         PerformRaycast(leaf.animation);
         collectedLeafCount++;
         if (collectedLeafCount == leaves.Count)
@@ -79,17 +75,22 @@ public class LeafCollectionScript : MonoBehaviour
 
     private void SpawnNewAnimation(GameObject animationPrefab, Vector3 position)
     {
-        var animation = Instantiate(animationPrefab, position, Quaternion.identity);
-        animation.transform.GetChild(1).gameObject.AddComponent<AnimationDeleter>();
+        var animation = Instantiate(animationPrefab, position, Quaternion.identity, this.transform);
+        
+        if (deleteAnimationIfFinished)
+        {
+            animation.transform.GetChild(1).gameObject.AddComponent<AnimationDeleter>();
+        }
     }
-    
+
     private void PerformRaycast(GameObject animationPrefab)
     {
         // Create a list to store the raycast hits
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
+        var ray = new Ray(Camera.main.transform.position, Vector3.down);
         // Perform the raycast straight down from the device
-        if (arRaycastManager.Raycast(new Vector2(Screen.width / 2f, Screen.height / 2f), hits, TrackableType.Planes))
+        if (arRaycastManager.Raycast(ray, hits, TrackableType.Planes))
         {
             // If we hit a plane, get the hit position
             ARRaycastHit hit = hits[0];

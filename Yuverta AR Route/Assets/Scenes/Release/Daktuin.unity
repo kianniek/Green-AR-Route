@@ -518,6 +518,51 @@ PrefabInstance:
       propertyPath: source
       value: 
       objectReference: {fileID: 1453638263}
+    - target: {fileID: 5140391495286320416, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: vibrancy
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165248859174774745, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: onQuizFinished.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165248859174774745, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: onQuizFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165248859174774745, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: onQuizFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1398168505}
+    - target: {fileID: 5165248859174774745, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: onQuizFinished.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165248859174774745, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: onQuizFinished.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SwitchToScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165248859174774745, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: onQuizFinished.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneSwap, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165248859174774745, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: onQuizFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165248859174774745, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: onQuizFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5277779501345681878, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_fontColor.b
@@ -548,6 +593,11 @@ PrefabInstance:
       propertyPath: source
       value: 
       objectReference: {fileID: 1453638263}
+    - target: {fileID: 5446122778996414936, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: vibrancy
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6084966699585413128, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_fontColor.b
@@ -573,11 +623,21 @@ PrefabInstance:
       propertyPath: source
       value: 
       objectReference: {fileID: 1453638263}
+    - target: {fileID: 6554680404192098837, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: vibrancy
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6786709959881901298, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: source
       value: 
       objectReference: {fileID: 1453638263}
+    - target: {fileID: 6786709959881901298, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: vibrancy
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7323457318964537922, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1092,6 +1152,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a11cf337139446f4c993d7dfea160b68, type: 3}
+--- !u!114 &1398168505 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2190929030095967583, guid: a11cf337139446f4c993d7dfea160b68,
+    type: 3}
+  m_PrefabInstance: {fileID: 1263583458}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f6af01f32ddc0488ae0e4b8b049e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1423012758
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SerializedLibrary: {fileID: 11400000, guid: 353cef57b25733049bdffbf3560591ee,
     type: 2}
-  m_MaxNumberOfMovingImages: 1
+  m_MaxNumberOfMovingImages: 0
   m_TrackedImagePrefab: {fileID: 0}
 --- !u!114 &1451381633
 MonoBehaviour:
@@ -1675,6 +1747,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1694061630 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5165248859174774745, guid: b6e21a326abec1f4a8c89bff5c227217,
+    type: 3}
+  m_PrefabInstance: {fileID: 914897798}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cdf80c642ace7e49a40f8d538ae7b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2017752454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1742,10 +1826,23 @@ MonoBehaviour:
     collected: 0
   allLeavesCollected:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1694061630}
+        m_TargetAssemblyTypeName: QuizManager, Assembly-CSharp
+        m_MethodName: StartQuiz
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   leaveUIParent: {fileID: 1423012758}
   leaveUIPrefab: {fileID: 9022741955546086398, guid: a4c5bd6dc6d07b14a9f317ff77316f9b,
     type: 3}
+  deleteAnimationIfFinished: 0
 --- !u!114 &2017752457
 MonoBehaviour:
   m_ObjectHideFlags: 0

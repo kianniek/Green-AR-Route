@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,24 +8,46 @@ public class QuizManager : MonoBehaviour
 {
     [SerializeField] private UnityEvent onQuizFinished = new();
     [SerializeField] private UnityEvent onQuestionAnsweredCorrectly = new();
+    [SerializeField] private UnityEvent onQuizTotallyCorrect = new();
+    [SerializeField] private UnityEvent onQuizPartiallyCorrect = new();
+    [SerializeField] private UnityEvent onQuizTotallyWrong = new();
 
-    [Header("Quiz UI Elements")] [Tooltip("The text element that will display the quiz question")] [SerializeField]
+    [Header("Quiz UI Elements")] 
+    [Tooltip("The text element that will display the quiz question")] 
+    [SerializeField]
     private TMP_Text questionText;
 
-    [Tooltip("All the buttons that will be used to answer the quiz questions")] [SerializeField]
+    [Tooltip("All the buttons that will be used to answer the quiz questions")] 
+    [SerializeField]
     private QuizButton[] choiceButtons;
 
     [SerializeField] private string buttonTag = "QuizButton";
 
-    [Tooltip("The scriptable object containing the quiz questions")] [SerializeField]
+    [Tooltip("The scriptable object containing the quiz questions")] 
+    [SerializeField]
     private QuizQuestions quizQuestions;
 
     private List<Question> questions;
     private int currentQuestionIndex;
     private int correctQuestions;
     private int totalQuestions;
+    private Camera _camera;
+
+    private void Awake()
+    {
+        _camera = Camera.main;
+    }
 
     private void Start()
+    {
+        // Hide all children of this object
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
+
+    public void StartQuiz()
     {
         InitializeQuiz();
         DisplayQuestion();
@@ -32,6 +55,12 @@ public class QuizManager : MonoBehaviour
 
     private void InitializeQuiz()
     {
+        // Unhide all children of this object
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+        
         questions = new List<Question>(quizQuestions.questions);
         SetupChoiceButtons();
     }
@@ -50,7 +79,7 @@ public class QuizManager : MonoBehaviour
 
         foreach (var button in choiceButtons)
         {
-            //button.onRaycastHit.AddListener(OnOptionSelected);
+            // button.onRaycastHit.AddListener(OnOptionSelected);
             button.gameObject.SetActive(false);
         }
     }
@@ -60,7 +89,7 @@ public class QuizManager : MonoBehaviour
         // Check if there are still questions left
         if (currentQuestionIndex < questions.Count)
         {
-            //disable all buttons
+            // Disable all buttons
             foreach (var choiceButton in choiceButtons)
             {
                 choiceButton.gameObject.SetActive(false);
@@ -87,6 +116,23 @@ public class QuizManager : MonoBehaviour
 
             Debug.Log($"Quiz finished. Correct answers: {correctQuestions}/{totalQuestions}");
             onQuizFinished.Invoke();
+            HandleQuizResult();
+        }
+    }
+
+    private void HandleQuizResult()
+    {
+        if (correctQuestions == totalQuestions)
+        {
+            onQuizTotallyCorrect.Invoke();
+        }
+        else if (correctQuestions == 0)
+        {
+            onQuizTotallyWrong.Invoke();
+        }
+        else
+        {
+            onQuizPartiallyCorrect.Invoke();
         }
     }
 
@@ -120,7 +166,7 @@ public class QuizManager : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
-                var ray = Camera.main.ScreenPointToRay(touch.position);
+                var ray = _camera!.ScreenPointToRay(touch.position);
 
                 if (Physics.Raycast(ray, out var hit))
                 {
@@ -133,7 +179,7 @@ public class QuizManager : MonoBehaviour
         }
         else if (Input.GetMouseButtonDown(0))
         {
-            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            var ray = _camera!.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out var hit))
             {
