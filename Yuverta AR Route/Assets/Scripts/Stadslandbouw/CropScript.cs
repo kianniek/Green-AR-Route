@@ -3,35 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
+
 // ReSharper disable InconsistentNaming
 
 public class CropScript : MonoBehaviour
 {
     public CropObject cropObject;
-    private Transform parent;
     private GameObject currentChild;
-    public int growthStage;
-    private UnityAction fullyGrown;
-    public List<GameObject> growthStages;
+    private int growthStage;
+    private UnityEvent fullyGrown = new();
+    [FormerlySerializedAs("growthStages")] public List<GameObject> growthStagesList;
     private GameObject deadCrop;
     
     [SerializeField] private CropContainer cropContainer;
     [SerializeField] private CropTracker cropTracker;
+    
     private bool hasCrop;
     
     //All crops have 6 growth stages
-    private const int ChildCount = 6;
+    private const int GROWTH_STAGES = 6;
+    
+    public bool IsFullyGrown => growthStage == GROWTH_STAGES - 1;
 
-    private void Awake()
+    private void Start()
     {
         if(cropTracker == null) 
             cropTracker = FindObjectOfType<CropTracker>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        parent = transform;
     }
 
     public void NewCrop(CropObject newCrop)
@@ -44,17 +42,17 @@ public class CropScript : MonoBehaviour
         cropObject = newCrop;
         
         //Creating the new crop
-        Instantiate(cropObject.cropPrefab, parent);
+        Instantiate(cropObject.cropPrefab, transform);
         
-        //Adding the growth stages to the list
-        for (int i = 0; i < ChildCount; i++)
+        //Adding the growth stages to the list and setting them to inactive
+        for (int i = 0; i < GROWTH_STAGES; i++)
         {
-            growthStages.Add(transform.GetChild(0).GetChild(i).gameObject);
-            growthStages[i].SetActive(false);
+            growthStagesList.Add(transform.GetChild(0).GetChild(i).gameObject);
+            growthStagesList[i].SetActive(false);
         }
 
-        //Setting the dead crop
-        for (var i = ChildCount; i < transform.GetChild(0).childCount; i++)
+        //Initializing the dead crop
+        for (var i = GROWTH_STAGES; i < transform.GetChild(0).childCount; i++)
         {
             if (!transform.GetChild(0).GetChild(i).gameObject.name.Contains("Dead")) 
                 continue;
@@ -64,7 +62,8 @@ public class CropScript : MonoBehaviour
             break;
         }
         
-        growthStage = 0;
+        //Setting the current child to the first growth stage
+        growthStage = -1;
         
         GrowCrop();
         
@@ -73,37 +72,26 @@ public class CropScript : MonoBehaviour
 
     public void FullyGrowCrop(CropObject newCrop)
     {
-        //If there is already a crop return
-        if (hasCrop) 
-            return;
-        
         //Setting the new crop object
         cropObject = newCrop;
         
         //Creating the new crop
-        Instantiate(cropObject.cropPrefab, parent);
+        Instantiate(cropObject.cropPrefab, transform);
         
         //Adding the growth stages to the list
-        for (int i = 0; i < ChildCount; i++)
+        for (int i = 0; i < GROWTH_STAGES; i++)
         {
-            growthStages.Add(transform.GetChild(0).GetChild(i).gameObject);
-            growthStages[i].SetActive(false);
+            growthStagesList.Add(transform.GetChild(0).GetChild(i).gameObject);
+            growthStagesList[i].SetActive(false);
         }
         
-        growthStage = 0;
         //Upgrading the growth stage for the next round
-        growthStage = growthStages.Count - 2;
+        growthStage = growthStagesList.Count - 1;
         
-        if (currentChild) 
-            currentChild.SetActive(false);
-        
-        currentChild = growthStages[growthStage];
+        //Setting the current child to the last growth stage
+        currentChild = growthStagesList[growthStage];
         currentChild.SetActive(true);
         currentChild.tag = "Crop";
-        
-
-        if (growthStage < growthStages.Count) 
-            return;
         
         fullyGrown.Invoke();
         Debug.Log("Fully grown");
@@ -116,21 +104,27 @@ public class CropScript : MonoBehaviour
         if (currentChild) 
             currentChild.SetActive(false);
         
-        currentChild = growthStages[growthStage];
+        //Upgrading the growth stage for the next round
+        growthStage++;
+        
+        currentChild = growthStagesList[growthStage];
         currentChild.SetActive(true);
         currentChild.tag = "Crop";
 
-        if (growthStage == ChildCount - 1 && !cropContainer.currentCropIsRightCrop)
+        //If the crop is not the right crop, show the dead crop at the last growth stage
+        if (growthStage == GROWTH_STAGES - 1 && !cropContainer.currentCropIsRightCrop)
         {
             deadCrop.SetActive(true);
             deadCrop.tag = "Crop";
-            growthStages[growthStage].SetActive(false);
+            growthStagesList[growthStage].SetActive(false);
+            
+            fullyGrown.Invoke();
+            Debug.Log("Fully grown");
+            return;
         }
         
-        //Upgrading the growth stage for the next round
-        growthStage++;
 
-        if (growthStage < growthStages.Count) 
+        if (growthStage < growthStagesList.Count) 
             return;
         
         fullyGrown.Invoke();
@@ -141,7 +135,7 @@ public class CropScript : MonoBehaviour
     {
         Destroy(transform.GetChild(0).gameObject);
         
-        growthStages.Clear();
+        growthStagesList.Clear();
         hasCrop = false;
         cropTracker.NewRound();
     }

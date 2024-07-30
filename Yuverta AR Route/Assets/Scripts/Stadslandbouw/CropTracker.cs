@@ -82,9 +82,6 @@ public class CropTracker : MonoBehaviour
 
         lastPlacedCrop = randomCrop;
         nextCorrectCropType = randomCrop.nextCrop;
-        
-        // Starting the first round
-        NewRound();
     }
 
 
