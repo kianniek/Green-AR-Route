@@ -22,9 +22,10 @@ public class CropGrowthSystem : MonoBehaviour
         
         cropContainer = FindObjectOfType<CropContainer>();
         
-        cropContainer.onCropPlanted += EnableButtons;
-        cropContainer.onCropPlanted += () => NewCrop(cropContainer.CropScript);
-        cropContainer.onCropHarvested += DisableButtons;
+        cropContainer.onCropPlanted.AddListener(EnableButtons);
+        cropContainer.onCropPlanted.AddListener(NewCrop);
+        
+        cropContainer.onCropHarvested.AddListener(DisableButtons);
         
         growthAnimator = GetComponent<Animator>();
         
@@ -39,20 +40,20 @@ public class CropGrowthSystem : MonoBehaviour
         growthAnimator.Play(button.name);
     }
     
-    private void NewCrop(CropScript cropScript)
-    {
-        currentCrop = cropScript;
-    }
-    
-    private void EnableButtons()
+    private void EnableButtons(CropScript cropScript)
     {
         foreach (var button in cropGrowButtons)
         {
             button.interactable = true;
         }   
     }
-
-    private void DisableButtons()
+    
+    private void NewCrop(CropScript cropScript)
+    {
+        currentCrop = cropScript;
+    }
+    
+    public void DisableButtons()
     {
         foreach (var button in cropGrowButtons)
         {

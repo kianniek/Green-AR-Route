@@ -2,15 +2,16 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
-[RequireComponent(typeof(CropTracker), typeof(CropGrowthSystem))]
+[RequireComponent(typeof(CropTracker),typeof(CropGrowthSystem))]
 public class CropContainer : MonoBehaviour
 {
     [Tooltip("This is the location where the crop will spawn when the seed is planted.")]
     [SerializeField] private Transform cropSpawnLocation;
     
     [Tooltip("This is the text that will display the name of the crop.")]
-    [SerializeField] private TextMeshPro cropNameDisplay;
+    [SerializeField]private TextMeshPro cropDisplayName;
     
     [SerializeField] private CropScript cropScript;
     
@@ -19,10 +20,17 @@ public class CropContainer : MonoBehaviour
     public Transform CropSpawnLocation => cropSpawnLocation;
     
     private bool rightCrop;
+    private Camera _camera;
+    
     public bool currentCropIsRightCrop => rightCrop;
     
-    public UnityAction onCropHarvested;
-    public UnityAction onCropPlanted;
+    public UnityEvent onCropHarvested = new ();
+    public UnityEvent<CropScript> onCropPlanted = new ();
+
+    private void Awake()
+    {
+        _camera = Camera.main;
+    }
 
     private void Update()
     {
@@ -47,27 +55,28 @@ public class CropContainer : MonoBehaviour
         Debug.Log("Correct crop: " + cropScript.cropObject.currentCropType);
         
         // Update the display with the new crop's name
-        cropNameDisplay.text = cropScript.cropObject.cropName;
+        cropDisplayName.text = cropScript.cropObject.cropName;
     
         // Invoke the crop planted event
-        onCropPlanted.Invoke(); 
+        onCropPlanted.Invoke(cropScript); 
     
         // Add the new crop's HarvestCrop method to the onCropHarvested event
-        onCropHarvested += newCropObject.HarvestCrop;
+        onCropHarvested.AddListener(newCropObject.HarvestCrop);
     }
 
     private void HarvestCrop(Vector2 touchPosition)
     {
         // Check if the crop is fully grown
-        if (cropScript.growthStage < cropScript.growthStages.Count - 1) 
+        if (!cropScript.IsFullyGrown) 
             return;
         
         // Check with a raycast if the touch actually hit the crop
-        var ray = Camera.main!.ScreenPointToRay(touchPosition);
-        if (Physics.Raycast(ray, out var hit, 1000f))
+        var ray = _camera!.ScreenPointToRay(touchPosition);
+        if (Physics.Raycast(ray, out var hit))
         {
             if (hit.collider.gameObject.CompareTag("Crop"))
             {
+                Debug.Log("Crop harvested");
                 onCropHarvested.Invoke();
             }
         }
