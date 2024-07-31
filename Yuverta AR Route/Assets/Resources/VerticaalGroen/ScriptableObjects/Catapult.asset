@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5686a9a74f5a6547b8d42e178754e28, type: 3}
   m_Name: Catapult
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2912111721532438528, guid: e675f7681e299ac4b87214d8cf4269e0, type: 3}
-  ammo: {fileID: 11400000, guid: 055c0188e28cb4f41b4c8907bc4c70d1, type: 2}
-  paintColorIndex: 3
-  magazineSize: 16
+  weaponModel: {fileID: 919132149155446097, guid: f653079b035434c14b7f33e3b23edd35,
+    type: 3}
+  weaponAmmo: {fileID: 11400000, guid: 055c0188e28cb4f41b4c8907bc4c70d1, type: 2}
   weaponType: 3
-  roundsPerSecond: 10
-  burstCount: 10
+  fireRate: 1
+  reloadTime: 1
+  magazineSize: 16
+  spreadCount: 0
   maxCharge: 100
   chargeRate: 10
   launchForce: 1
+  paintColorIndex: 3

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2856375, g: 0.39764848, b: 0.47223145, a: 1}
+  m_IndirectSpecularColor: {r: 0.28630278, g: 0.39634225, b: 0.47054592, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2252,8 +2252,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - {fileID: 11400000, guid: fb7dc3ab789d2c94aa746b886546a264, type: 2}
-  - {fileID: 11400000, guid: 51ade991624dada4eb6d2b62e29aa17b, type: 2}
   - {fileID: 11400000, guid: 7e49d419f8931df4d96a4612e16daa9d, type: 2}
+  bulletSpawnPoint: {fileID: 3876646052444348414}
 --- !u!114 &2098316723245564868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2271,7 +2271,7 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 0, g: 0, b: 1, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
-  paintColorIndex: 0
+  paintColorIndex: 1
   radius: 2
   strength: 1
   hardness: 1
@@ -3132,7 +3132,7 @@ MonoBehaviour:
   targetObject: {fileID: 6141505326492754562}
   distanceFromCamera: 0.4
   padding: 0.05
-  presetPosition: 2
+  presetPosition: 1
   positionLerpSpeed: 0.9618
   rotateWithCamera: 1
   rotationLerpSpeed: 0.168
@@ -3285,6 +3285,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: City
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099430896594542852, guid: 975abe4fa72894a46ada55587bedaf21,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

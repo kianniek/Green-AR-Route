@@ -21,6 +21,7 @@ public class BulletLogic : MonoBehaviour
         //Get all components
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
+        _collisionPainter = GetComponent<CollisionPainter>();
     }
 
     private void Start()
