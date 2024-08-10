@@ -1,56 +1,48 @@
+using Autodesk.Fbx;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectGrower : MonoBehaviour
 {
-    public float growthDuration = 2f; // Duration for the flower to fully grow
-    public float maxGrowDistance = 5f; // Max distance for the flower to grow fully
+    private Dictionary<GameObject, Vector3> childrenObjects = new();
 
-    private Vector3 initialScale;
+    public float growthDuration = 2f; // Duration for the flower to fully grow
 
     void Awake()
     {
-        initialScale = transform.localScale;
-        transform.localScale = Vector3.zero;
+        foreach (Transform obj in transform)
+        {
+            childrenObjects.Add(obj.gameObject, obj.transform.localScale);
+            obj.transform.localScale = Vector3.zero;
+        }
+
     }
 
-    void OnEnable()
+    public IEnumerator Grow(GameObject Key, Vector3 Value)
     {
-        BulletLogic.OnBulletHit += HandleBulletHit;
-    }
 
-    void OnDisable()
-    {
-        BulletLogic.OnBulletHit -= HandleBulletHit;
-    }
-
-    public IEnumerator Grow(float distance, float maxDistance, float duration)
-    {
-        var growFactor = 1f - Mathf.Clamp01(distance / maxDistance);
-        var targetScale = initialScale * growFactor;
         var elapsedTime = 0f;
 
-        while (elapsedTime < duration)
+        while (elapsedTime < growthDuration)
         {
-            transform.localScale = Vector3.Lerp(Vector3.zero, targetScale, elapsedTime / duration);
+            Key.transform.localScale = Vector3.Lerp(Vector3.zero, Value, elapsedTime / growthDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        transform.localScale = targetScale;
+        Key.transform.localScale = Value;
     }
 
-    private void HandleBulletHit(Vector3 hitPosition)
+    public void GrowChildObjects()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(hitPosition, maxGrowDistance);
-        foreach (var hitCollider in hitColliders)
+        foreach (var item in childrenObjects)
         {
-            float distance = Vector3.Distance(hitPosition, transform.position);
-            StartCoroutine(Grow(distance, maxGrowDistance, growthDuration));
+            StartCoroutine(Grow(item.Key, item.Value));
         }
     }
-    
+
     public void ResetSize()
     {
         StopAllCoroutines();

@@ -54,6 +54,7 @@ public class CollisionPainter : MonoBehaviour
         {
             p.SetPreviouslyFilledColorIndex(coverageIndex);
             Paintable.SetMaskToColor(p, paintColors[coverageIndex]);
+            p.OnCovered.Invoke();
         }
     }
 

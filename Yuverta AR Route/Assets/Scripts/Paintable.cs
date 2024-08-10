@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Serialization;
 
@@ -29,6 +30,10 @@ public class Paintable : MonoBehaviour
 
     public Vector2 uvMin;
     public Vector2 uvMax;
+
+    [Space(10f)]
+
+    public UnityEvent OnCovered = new();
 
     RenderTexture extendIslandsRenderTexture;
     RenderTexture uvIslandsRenderTexture;
@@ -199,6 +204,7 @@ public class Paintable : MonoBehaviour
         if (hitCount >= hitTreshold)
         {
             SetMaskToColor(this, color);
+            OnCovered.Invoke();
         }
     }
 
