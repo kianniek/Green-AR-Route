@@ -30,7 +30,7 @@ public class CollisionPainter : MonoBehaviour
         Paintable p = other.collider.GetComponent<Paintable>();
         if (p != null)
         {
-            p.OnHit(paintColors[paintColorIndex]);
+            p.OnHit(paintColors[paintColorIndex], paintColorIndex);
         }
     }
 
@@ -43,7 +43,6 @@ public class CollisionPainter : MonoBehaviour
         PaintManager.instance.paint(p, pos, radius, hardness, strength, paintColors, paintColorIndex);
 
         var coverage = GetCoverage(p);
-        Debug.Log($"Coverage: {coverage * 100} %");
 
         p.coverage = coverage;
 
@@ -54,7 +53,7 @@ public class CollisionPainter : MonoBehaviour
         {
             p.SetPreviouslyFilledColorIndex(coverageIndex);
             Paintable.SetMaskToColor(p, paintColors[coverageIndex]);
-            p.OnCovered.Invoke();
+            p.OnCovered.Invoke(coverageIndex);
         }
     }
 

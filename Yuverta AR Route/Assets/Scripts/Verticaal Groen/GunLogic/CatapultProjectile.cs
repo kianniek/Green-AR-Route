@@ -1,61 +1,44 @@
+using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class CatapultProjectile : MonoBehaviour
 {
     public Ammo ammo;
-    private Vector3 initialVelocity;
-    private Vector3 currentVelocity;
-    private float startTime;
-    private float maxTime = 5f;
+    private Rigidbody rb;
+
+    private const float SEC_UNTIL_SHRIKING = 2f;
 
     public void Launch(Vector3 velocity)
     {
-        initialVelocity = velocity;
-        currentVelocity = initialVelocity;
-        startTime = Time.time;
+        rb = GetComponent<Rigidbody>();
+
+        rb.AddForce(velocity, ForceMode.Impulse);
+    }
+
+    private IEnumerator ShrinkObject()
+    {
+        yield return new WaitForSeconds(SEC_UNTIL_SHRIKING);
+        while(gameObject.transform.localScale.magnitude > 0.01f)
+        {
+            gameObject.transform.localScale *= 0.9f;
+            yield return null;
+        }
+
+        //If the object is shrunken all the way we can delete it
+        Destroy(gameObject);
+
+        yield break;
     }
 
     void Update()
     {
-        Collide();
-        if (Time.time - startTime > maxTime)
-        {
-            Destroy(gameObject);
-            Destroy(this);
-            return;
-        }
-
-        // Calculate the elapsed time
-        float elapsedTime = Time.time - startTime;
-
-        // Update the velocity
-        currentVelocity.y = initialVelocity.y + (Physics.gravity.y * elapsedTime);
-
-        // Calculate the new position
-        Vector3 newPosition = transform.position + (currentVelocity * Time.deltaTime);
-
-        // Update the position
-        transform.position = newPosition;
-
         // Rotate the projectile to face the direction of travel
-        transform.rotation = Quaternion.LookRotation(currentVelocity.normalized);
+        transform.rotation = Quaternion.LookRotation(rb.velocity.normalized);
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        Collide();
-    }
-
-    private void Collide()
-    {
-        if (Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hit,
-                ammo.projectileSpeed * Time.deltaTime) && !hit.collider.gameObject.CompareTag("Bullet"))
-        {
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
-            
-            // Destroy the bullet
-            Destroy(gameObject, 1f);
-            Destroy(this);
-        }
+        StartCoroutine(ShrinkObject());
     }
 }

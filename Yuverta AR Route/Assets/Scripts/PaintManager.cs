@@ -163,7 +163,6 @@ public class PaintManager : Singleton<PaintManager>
 
         RenderTexture.active = null;
 
-        Debug.Log(Average);
         //calculate how close the color is to red
         var coveredPixels = new Vector4(Average.r / 255f, Average.g / 255f, Average.b / 255f, Average.a / 255f); 
 

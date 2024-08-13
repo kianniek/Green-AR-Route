@@ -33,7 +33,7 @@ public class Paintable : MonoBehaviour
 
     [Space(10f)]
 
-    public UnityEvent OnCovered = new();
+    public UnityEvent<int> OnCovered = new();
 
     RenderTexture extendIslandsRenderTexture;
     RenderTexture uvIslandsRenderTexture;
@@ -195,7 +195,7 @@ public class Paintable : MonoBehaviour
         this.uvMax = uvMax;
     }
 
-    public void OnHit(Color color)
+    public void OnHit(Color color, int index)
     {
         if (!useHitTreshold)
             return;
@@ -204,7 +204,7 @@ public class Paintable : MonoBehaviour
         if (hitCount >= hitTreshold)
         {
             SetMaskToColor(this, color);
-            OnCovered.Invoke();
+            OnCovered.Invoke(index);
         }
     }
 
