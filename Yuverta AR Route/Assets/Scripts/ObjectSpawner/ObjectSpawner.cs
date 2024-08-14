@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Events;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.XR.Interaction.Toolkit.Utilities;
@@ -25,12 +26,14 @@ public class ObjectSpawner : MonoBehaviour
         }
         set => m_CameraToFace = value;
     }
-    
+
     [Tooltip("Object Spawns with its rotation set to Quaternion.identity")]
     [SerializeField] private bool m_SpawnWithIdentityRotation = false;
 
-    [FormerlySerializedAs("m_ObjectPrefab")] [SerializeField] [Tooltip("The list of prefabs available to spawn.")]
-    public List<GameObject> m_ObjectPrefabs = new ();
+    [FormerlySerializedAs("m_ObjectPrefab")]
+    [SerializeField]
+    [Tooltip("The list of prefabs available to spawn.")]
+    public List<GameObject> m_ObjectPrefabs = new();
 
     /// <summary>
     /// The list of prefabs available to spawn.
@@ -41,7 +44,8 @@ public class ObjectSpawner : MonoBehaviour
         set => m_ObjectPrefabs = value;
     }
 
-    [SerializeField] [Tooltip("Whether to only spawn an object if the spawn point is within view of the camera.")]
+    [SerializeField]
+    [Tooltip("Whether to only spawn an object if the spawn point is within view of the camera.")]
     bool m_OnlySpawnInView = true;
 
     /// <summary>
@@ -97,11 +101,13 @@ public class ObjectSpawner : MonoBehaviour
         get => m_SpawnAngleRange;
         set => m_SpawnAngleRange = value;
     }
-    
-    [SerializeField][Tooltip("Rather or not to spawn the object at a fixed lerp between the camera Y position and the spawn point Y position /n Uses the spawn height offset as the lerp value.")]
+
+    [SerializeField]
+    [Tooltip("Rather or not to spawn the object at a fixed lerp between the camera Y position and the spawn point Y position /n Uses the spawn height offset as the lerp value.")]
     private bool m_LerpToSpawnHeight = false;
 
-    [SerializeField] [Tooltip("The height the object goes off the surface of the plane the raycast has hit")]
+    [SerializeField]
+    [Tooltip("The height the object goes off the surface of the plane the raycast has hit")]
     float m_SpawnHeightOffset = 1.5f;
 
     public float spawnHeightOffset
@@ -110,7 +116,8 @@ public class ObjectSpawner : MonoBehaviour
         set => m_SpawnHeightOffset = value;
     }
 
-    [SerializeField] [Tooltip("Whether to spawn each object as a child of this object.")]
+    [SerializeField]
+    [Tooltip("Whether to spawn each object as a child of this object.")]
     private bool mSpawnAsChild;
 
     /// <summary>
@@ -160,65 +167,65 @@ public class ObjectSpawner : MonoBehaviour
     /// </remarks>
     /// <seealso cref="objectSpawned"/>
     public bool TrySpawnObject(Vector3 spawnPoint, Vector3 spawnNormal, out GameObject objectSpawned)
-{
-
-    if (m_OnlySpawnInView)
-    {
-        var inViewMin = m_ViewportPeriphery;
-        var inViewMax = 1f - m_ViewportPeriphery;
-        var pointInViewportSpace = cameraToFace.WorldToViewportPoint(spawnPoint);
-
-
-        if (pointInViewportSpace.z < 0f || pointInViewportSpace.x > inViewMax ||
-            pointInViewportSpace.x < inViewMin ||
-            pointInViewportSpace.y > inViewMax || pointInViewportSpace.y < inViewMin)
-        {
-            Debug.Log("Spawn point is outside the view.");
-            objectSpawned = null;
-            return false;
-        }
-    }
-
-    objectSpawned = null;
-
-    foreach (var objPrefab in m_ObjectPrefabs)
     {
 
-        var newObject = Instantiate(objPrefab);
-
-        if (mSpawnAsChild)
+        if (m_OnlySpawnInView)
         {
-            newObject.transform.parent = transform;
+            var inViewMin = m_ViewportPeriphery;
+            var inViewMax = 1f - m_ViewportPeriphery;
+            var pointInViewportSpace = cameraToFace.WorldToViewportPoint(spawnPoint);
+
+
+            if (pointInViewportSpace.z < 0f || pointInViewportSpace.x > inViewMax ||
+                pointInViewportSpace.x < inViewMin ||
+                pointInViewportSpace.y > inViewMax || pointInViewportSpace.y < inViewMin)
+            {
+                Debug.Log("Spawn point is outside the view.");
+                objectSpawned = null;
+                return false;
+            }
         }
 
-        // Set the initial position and add the GridSnapper component
-        newObject.transform.position = spawnPoint;
+        objectSpawned = null;
 
-        EnsureFacingCamera();
-
-        var facePosition = m_CameraToFace.transform.position;
-        var forward = facePosition - spawnPoint;
-
-        BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
-        
-        
-        newObject.transform.rotation = m_SpawnWithIdentityRotation ? Quaternion.identity : Quaternion.LookRotation(projectedForward, spawnNormal);
-
-        newObject.transform.position += spawnNormal * (m_LerpToSpawnHeight ? Mathf.Lerp(m_CameraToFace.transform.position.y, spawnPoint.y, m_SpawnHeightOffset) : m_SpawnHeightOffset);
-
-        if (m_ApplyRandomAngleAtSpawn)
+        foreach (var objPrefab in m_ObjectPrefabs)
         {
-            var randomRotation = Random.Range(-m_SpawnAngleRange, m_SpawnAngleRange);
-            newObject.transform.Rotate(Vector3.up, randomRotation);
+
+            var newObject = Instantiate(objPrefab);
+
+            if (mSpawnAsChild)
+            {
+                newObject.transform.parent = transform;
+            }
+
+            // Set the initial position and add the GridSnapper component
+            newObject.transform.position = spawnPoint;
+
+            EnsureFacingCamera();
+
+            var facePosition = m_CameraToFace.transform.position;
+            var forward = facePosition - spawnPoint;
+
+            BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
+
+
+            newObject.transform.rotation = m_SpawnWithIdentityRotation ? Quaternion.identity : Quaternion.LookRotation(projectedForward, spawnNormal);
+
+            newObject.transform.position += spawnNormal * (m_LerpToSpawnHeight ? Mathf.Lerp(m_CameraToFace.transform.position.y, spawnPoint.y, m_SpawnHeightOffset) : m_SpawnHeightOffset);
+
+            if (m_ApplyRandomAngleAtSpawn)
+            {
+                var randomRotation = Random.Range(-m_SpawnAngleRange, m_SpawnAngleRange);
+                newObject.transform.Rotate(Vector3.up, randomRotation);
+            }
+
+            ObjectSpawned.Invoke(newObject);
+
+            objectSpawned = newObject;
         }
 
-        ObjectSpawned.Invoke(newObject);
-
-        objectSpawned = newObject;
+        return true;
     }
-
-    return true;
-}
     public bool TryEnableObject(Vector3 spawnPoint, Vector3 spawnNormal)
     {
         foreach (var objPrefab in m_ObjectPrefabs)
@@ -237,8 +244,8 @@ public class ObjectSpawner : MonoBehaviour
             var forward = facePosition - spawnPoint;
 
             BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
-        
-        
+
+
             objPrefab.transform.rotation = m_SpawnWithIdentityRotation ? Quaternion.identity : Quaternion.LookRotation(projectedForward, spawnNormal);
 
             objPrefab.transform.position += spawnNormal * m_SpawnHeightOffset;
@@ -248,8 +255,10 @@ public class ObjectSpawner : MonoBehaviour
                 var randomRotation = Random.Range(-m_SpawnAngleRange, m_SpawnAngleRange);
                 objPrefab.transform.Rotate(Vector3.up, randomRotation);
             }
-            
+
             objPrefab.SetActive(true);
+
+            ObjectSpawned.Invoke(null);
         }
 
         return true;

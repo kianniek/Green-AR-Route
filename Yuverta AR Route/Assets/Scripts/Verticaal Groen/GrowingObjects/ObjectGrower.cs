@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ObjectGrower : MonoBehaviour
 {
@@ -9,7 +10,13 @@ public class ObjectGrower : MonoBehaviour
     [SerializeField]
     private GameObject[] individualObjectsToGrow;
 
+    [SerializeField]
+    private UnityEvent OnGrownObjects;
     public float growthDuration = 2f; // Duration for the flower to fully grow
+
+    private bool hasGrownObjects;
+
+
 
     void Awake()
     {
@@ -48,23 +55,25 @@ public class ObjectGrower : MonoBehaviour
     /// <param name="covagageID">Is used to determine which paint index was used to complete the covarage</param>
     public void GrowChildObjects(int covagageID)
     {
-        Debug.Log($"Covarage ID = {covagageID}");
         switch (covagageID)
         {
-            case -1:
-                break;
-            case 0:
-                break;
-            case 1:
-                break;
             case 2:
+
+                if (hasGrownObjects)
+                {
+                    break;
+                }
+
                 foreach (var item in childrenObjects)
                 {
                     StartCoroutine(Grow(item.Key, item.Value));
                 }
+
+                OnGrownObjects.Invoke();
+
+                hasGrownObjects = true;
                 break;
-            case 3:
-                break;
+
             default:
                 break;
         }

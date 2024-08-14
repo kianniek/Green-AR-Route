@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering;
 
@@ -9,22 +11,47 @@ public class PaintManager : Singleton<PaintManager>
     public Shader extendIslands;
     public Shader zoomToBounds;
 
-    int prepareUVID = Shader.PropertyToID("_PrepareUV");
-    int positionID = Shader.PropertyToID("_PainterPosition");
-    int hardnessID = Shader.PropertyToID("_Hardness");
-    int strengthID = Shader.PropertyToID("_Strength");
-    int radiusID = Shader.PropertyToID("_Radius");
-    int blendOpID = Shader.PropertyToID("_BlendOp");
-    int colorID = Shader.PropertyToID("_PainterColor");
-    int textureID = Shader.PropertyToID("_MainTex");
-    int uvOffsetID = Shader.PropertyToID("_OffsetUV");
-    int uvIslandsID = Shader.PropertyToID("_UVIslands");
+    public int coveredTreshold;
+    [Tooltip("Event that fires when an trashold is reached for the amount of objects covered in the 2nd mask color")]
+    public UnityEvent OnTresholdReached;
 
-    Material paintMaterial;
-    Material extendMaterial;
-    Material zoomMaterial;
+    private Dictionary<Paintable, int> paintables = new();
 
-    CommandBuffer command;
+    private int prepareUVID = Shader.PropertyToID("_PrepareUV");
+    private int positionID = Shader.PropertyToID("_PainterPosition");
+    private int hardnessID = Shader.PropertyToID("_Hardness");
+    private int strengthID = Shader.PropertyToID("_Strength");
+    private int radiusID = Shader.PropertyToID("_Radius");
+    private int blendOpID = Shader.PropertyToID("_BlendOp");
+    private int colorID = Shader.PropertyToID("_PainterColor");
+    private int textureID = Shader.PropertyToID("_MainTex");
+    private int uvOffsetID = Shader.PropertyToID("_OffsetUV");
+    private int uvIslandsID = Shader.PropertyToID("_UVIslands");
+
+    private Material paintMaterial;
+    private Material extendMaterial;
+    private Material zoomMaterial;
+
+    private CommandBuffer command;
+    public bool HasReachedTreshold
+    {
+        get
+        {
+            var id = 0;
+            foreach (var item in paintables)
+            {
+                switch (item.Value)
+                {
+                    case 2:
+                        id++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return coveredTreshold < paintables.Count;
+        }
+    }
 
     public override void Awake()
     {
@@ -72,14 +99,14 @@ public class PaintManager : Singleton<PaintManager>
                 }
             }
         }
-        
-        
+
+
         var mask = paintable.getMask();
         var uvIslands = paintable.getUVIslands();
         var extend = paintable.getExtend();
         var support = paintable.getSupport();
         var rend = paintable.getRenderer();
-    
+
         paintMaterial.SetFloat(prepareUVID, 0);
         paintMaterial.SetVector(positionID, pos);
         paintMaterial.SetFloat(hardnessID, hardness);
@@ -102,7 +129,7 @@ public class PaintManager : Singleton<PaintManager>
         Graphics.ExecuteCommandBuffer(command);
         command.Clear();
     }
-    
+
     public void paint(Paintable paintable, Vector3 pos, float radius = 1f, float hardness = .5f, float strength = .5f,
         Color? color = null)
     {
@@ -111,7 +138,7 @@ public class PaintManager : Singleton<PaintManager>
         var extend = paintable.getExtend();
         var support = paintable.getSupport();
         var rend = paintable.getRenderer();
-    
+
         paintMaterial.SetFloat(prepareUVID, 0);
         paintMaterial.SetVector(positionID, pos);
         paintMaterial.SetFloat(hardnessID, hardness);
@@ -141,18 +168,18 @@ public class PaintManager : Singleton<PaintManager>
         var mask = paintable.getMask();
         var islands = paintable.getIslands();
         var rend = paintable.getRenderer();
-        
+
         // Set the bounds on the material
         zoomMaterial.SetVector("_MinBound", new Vector4(uvBoundsMin.x, uvBoundsMin.y, 0, 0));
         zoomMaterial.SetVector("_MaxBound", new Vector4(uvBoundsMax.x, uvBoundsMax.y, 0, 0));
-        
+
         command.SetRenderTarget(islands);
         command.DrawRenderer(rend, zoomMaterial, 0);
         command.Blit(mask, islands, zoomMaterial);
 
         Graphics.ExecuteCommandBuffer(command);
         command.Clear();
-        
+
         RenderTexture.active = islands;
 
         var asyncAction = AsyncGPUReadback.Request(islands, islands.mipmapCount - 1);
@@ -164,7 +191,7 @@ public class PaintManager : Singleton<PaintManager>
         RenderTexture.active = null;
 
         //calculate how close the color is to red
-        var coveredPixels = new Vector4(Average.r / 255f, Average.g / 255f, Average.b / 255f, Average.a / 255f); 
+        var coveredPixels = new Vector4(Average.r / 255f, Average.g / 255f, Average.b / 255f, Average.a / 255f);
 
         return coveredPixels;
     }
@@ -186,4 +213,33 @@ public class PaintManager : Singleton<PaintManager>
         paintable.coverage = Vector4.zero;
     }
 
+    public Dictionary<Paintable, int> AddToPaintablesList(Paintable paintable, int covarageID)
+    {
+        //Check if the painable is already in the dictionary
+        if (paintables.ContainsKey(paintable))
+        {
+            //Update the painable value with the bigger covarageID
+            if (paintables[paintable] < covarageID)
+            {
+                paintables[paintable] = covarageID;
+            }
+
+            if (HasReachedTreshold)
+            {
+                OnTresholdReached.Invoke();
+            }
+
+            return paintables;
+        }
+
+        //If the paintable is not in the dictionary, add it and assing its covarageID as value
+        paintables.Add(paintable, covarageID);
+
+        if (HasReachedTreshold)
+        {
+            OnTresholdReached.Invoke();
+        }
+
+        return paintables;
+    }
 }

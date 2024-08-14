@@ -125,18 +125,26 @@ public class Paintable : MonoBehaviour
     public int CheckCoverage()
     {
         // Check if the coverage is above the threshold for each color channel
+        if (coverage.w > coverageThreshold && previouslyFilledColorIndex != 3)
+        {
+            return 3; // Color index for z
+        }
+
         if (coverage.z > coverageThreshold && previouslyFilledColorIndex != 2)
         {
+            PaintManager.instance.AddToPaintablesList(this, 2);
             return 2; // Color index for z
         }
 
         if (coverage.y > coverageThreshold && previouslyFilledColorIndex != 1)
         {
+            PaintManager.instance.AddToPaintablesList(this, 1);
             return 1; // Color index for y
         }
 
         if (coverage.x > coverageThreshold && previouslyFilledColorIndex != 0)
         {
+            PaintManager.instance.AddToPaintablesList(this, 0);
             return 0; // Color index for x
         }
 
@@ -197,7 +205,7 @@ public class Paintable : MonoBehaviour
 
     public void OnHit(Color color, int index)
     {
-        if (!useHitTreshold)
+        if (!useHitTreshold || previouslyFilledColorIndex >= index)
             return;
 
         hitCount++;
