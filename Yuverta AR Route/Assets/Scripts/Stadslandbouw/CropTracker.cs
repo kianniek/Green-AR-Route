@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -7,9 +8,10 @@ using Random = UnityEngine.Random;
 public class CropTracker : MonoBehaviour
 {
     [Tooltip("This list contains the spawn locations for the seeds the crop tracker spawns")]
-    public List<Transform> seedsSpawnLocations;
+    public Transform[] seedsSpawnLocations;
 
-    [Tooltip("The list of crops that are actually used in Crop Rotation.")] [SerializeField]
+    [Tooltip("The list of crops that are actually used in Crop Rotation.")]
+    [SerializeField]
     private List<CropObject> rightCrops;
 
     [FormerlySerializedAs("wrongCrops")]
@@ -18,7 +20,7 @@ public class CropTracker : MonoBehaviour
     private List<CropObject> distractCrops;
 
     /// <summary>
-    /// The list of all crops that are used in Crop Rotation.
+    /// The list of all crops that are used
     /// </summary>
     private List<CropObject> allCrops;
 
@@ -28,13 +30,14 @@ public class CropTracker : MonoBehaviour
     /// <summary>
     /// The crop container that this script is attached to.
     /// </summary>
-    private CropContainer cropContainer;
+    [SerializeField] private CropContainer cropContainer;
+
+    [SerializeField] private CropScript cropScript;
+
+    [SerializeField] private CropGrowthSystem cropGrowthSystem;
 
     private void Start()
     {
-        // Initializing variables
-        cropContainer = GetComponent<CropContainer>();
-
         // Adding right crops and distract crops to the all crops list
         allCrops = new List<CropObject>();
         allCrops.AddRange(rightCrops);
@@ -44,7 +47,7 @@ public class CropTracker : MonoBehaviour
 
         // Initialize a fully grown crop the first time
         InitializeFullyGrownCrop();
-        
+
     }
 
     private void Update()
@@ -66,13 +69,12 @@ public class CropTracker : MonoBehaviour
             }
         }
     }
-    
+
     public void InitializeFullyGrownCrop()
     {
         // Pick a random crop from the right crops list
         var randomCrop = rightCrops[Random.Range(0, rightCrops.Count)];
 
-        var cropScript = cropContainer.CropSpawnLocation.gameObject.GetComponent<CropScript>();
         cropScript.FullyGrowCrop(randomCrop);
 
         Debug.Log("Fully grown crop initialized");
@@ -82,6 +84,8 @@ public class CropTracker : MonoBehaviour
 
         lastPlacedCrop = randomCrop;
         nextCorrectCropType = randomCrop.nextCrop;
+
+        cropGrowthSystem.DisableButtons();
     }
 
 
@@ -91,7 +95,6 @@ public class CropTracker : MonoBehaviour
         var crop = allCrops.Find(crop => crop.cropName == cropName);
         Debug.Log("Picked seed: " + cropName);
 
-        var cropScript = cropContainer.CropSpawnLocation.gameObject.GetComponent<CropScript>();
         cropScript.NewCrop(crop);
 
         // Spawning the new Crop on the crop container
@@ -115,7 +118,7 @@ public class CropTracker : MonoBehaviour
         // Getting the new seed list
         var seedList = NewSeedList();
 
-        for (var i = 0; i < seedList.Count; i++)
+        for (var i = 0; i < seedsSpawnLocations.Length; i++)
         {
             var prefab = seedList[i].seedPrefab;
             var parent = seedsSpawnLocations[i];
@@ -127,39 +130,28 @@ public class CropTracker : MonoBehaviour
 
     private List<CropObject> NewSeedList()
     {
-        // Getting new seeds minus one
+        // List to hold the new crops to spawn
         var newCrops = new List<CropObject>();
 
-        if (lastPlacedCrop == null)
-        {
-            // Adding the wrong seeds to all except one correct seed
-            for (var i = 0; i < seedsSpawnLocations.Count; i++)
-            {
-                newCrops.Add(GetRandomCrop(newCrops.ToArray()));
-            }
+        // Get the correct crop based on the last placed crop
+        CropObject nextCorrectCrop = allCrops.Find(crop => lastPlacedCrop.nextCrop == crop.currentCropType);
 
-            return RandomizeList(newCrops);
-        }
-
-        // The last one is added here to make sure there is always one correct seed
-        CropObject nextCorrectCrop;
-
-        do
-        {
-            nextCorrectCrop = allCrops.Find(crop => lastPlacedCrop.nextCrop == crop.currentCropType);
-        } while (nextCorrectCrop == null);
-
+        // Always add the correct crop first
         newCrops.Add(nextCorrectCrop);
 
-        // Adding the wrong seeds to all except one correct seed
-        for (var i = 0; i < seedsSpawnLocations.Count - 1; i++)
+        // Add distract crops until we reach the required number of seeds
+        int cropsToAdd = seedsSpawnLocations.Length - 1; // Subtract 1 because we already added the correct crop
+
+        for (int i = 0; i < cropsToAdd; i++)
         {
-            newCrops.Add(GetRandomCrop(nextCorrectCrop));
+            CropObject randomCrop = GetRandomCrop(nextCorrectCrop);
+            newCrops.Add(randomCrop);
         }
 
-        // Randomizing the list of seeds before returning it
+        // Randomize the order of the seeds before returning
         return RandomizeList(newCrops);
     }
+
 
     private CropObject GetRandomCrop(CropObject cropToExclude = null)
     {

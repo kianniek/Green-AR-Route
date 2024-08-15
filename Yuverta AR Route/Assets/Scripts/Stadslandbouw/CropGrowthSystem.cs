@@ -9,29 +9,41 @@ public class CropGrowthSystem : MonoBehaviour
 {
     public List<Button> cropGrowButtons;
     private CropScript currentCrop;
-    private CropContainer cropContainer;
-    
+    [SerializeField] private CropContainer cropContainer;
+
     private Animator growthAnimator;
-    
-    private void Start()
+
+    private void Awake()
+    {
+        growthAnimator = GetComponent<Animator>();
+
+        DisableButtons();
+    }
+
+    private void OnEnable()
     {
         foreach (var button in cropGrowButtons)
         {
             button.onClick.AddListener(() => GrowCrop(button));
         }
-        
-        cropContainer = FindObjectOfType<CropContainer>();
-        
         cropContainer.onCropPlanted.AddListener(EnableButtons);
         cropContainer.onCropPlanted.AddListener(NewCrop);
-        
+
         cropContainer.onCropHarvested.AddListener(DisableButtons);
-        
-        growthAnimator = GetComponent<Animator>();
-        
-        DisableButtons();
     }
-    
+
+    private void OnDisable()
+    {
+        foreach (var button in cropGrowButtons)
+        {
+            button.onClick.RemoveListener(() => GrowCrop(button));
+        }
+        cropContainer.onCropPlanted.RemoveListener(EnableButtons);
+        cropContainer.onCropPlanted.RemoveListener(NewCrop);
+
+        cropContainer.onCropHarvested.RemoveListener(DisableButtons);
+    }
+
     private void GrowCrop(Button button)
     {
         currentCrop.GrowCrop();
@@ -39,20 +51,20 @@ public class CropGrowthSystem : MonoBehaviour
         //Temporarily use the name of the button as the animation name
         growthAnimator.Play(button.name);
     }
-    
+
     private void EnableButtons(CropScript cropScript)
     {
         foreach (var button in cropGrowButtons)
         {
             button.interactable = true;
-        }   
+        }
     }
-    
+
     private void NewCrop(CropScript cropScript)
     {
         currentCrop = cropScript;
     }
-    
+
     public void DisableButtons()
     {
         foreach (var button in cropGrowButtons)

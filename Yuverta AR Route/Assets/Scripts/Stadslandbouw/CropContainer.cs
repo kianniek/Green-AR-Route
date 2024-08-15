@@ -58,10 +58,7 @@ public class CropContainer : MonoBehaviour
         cropDisplayName.text = cropScript.cropObject.cropName;
     
         // Invoke the crop planted event
-        onCropPlanted.Invoke(cropScript); 
-    
-        // Add the new crop's HarvestCrop method to the onCropHarvested event
-        onCropHarvested.AddListener(newCropObject.HarvestCrop);
+        onCropPlanted.Invoke(cropScript);
     }
 
     private void HarvestCrop(Vector2 touchPosition)
@@ -78,6 +75,7 @@ public class CropContainer : MonoBehaviour
             {
                 Debug.Log("Crop harvested");
                 onCropHarvested.Invoke();
+                cropScript.HarvestCrop();
             }
         }
     }
