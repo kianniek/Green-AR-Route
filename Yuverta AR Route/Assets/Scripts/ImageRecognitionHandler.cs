@@ -89,7 +89,8 @@ public class ImageRecognitionHandler : MonoBehaviour
                     promptTextObject.text = currentPromptText; // Update the prompt text on screen
                 }
             }
-        }else if (currentRecognizedImage != trackedImage.referenceImage.name)
+        }
+        else if (currentRecognizedImage != trackedImage.referenceImage.name)
         {
             currentRecognizedImage = trackedImage.referenceImage.name;
             foreach (var imageEvent in imageEvents)

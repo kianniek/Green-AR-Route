@@ -48,7 +48,7 @@ public class ImageRecognitionEvent : MonoBehaviour
 
         foreach (ARTrackedImage trackedImage in eventArgs.updated)
         {
-            Debug.Log(trackedImage.referenceImage.name +" | "+ trackedImage.trackingState);
+            Debug.Log(trackedImage.referenceImage + "  "+ trackedImage.referenceImage.name +" | "+ trackedImage.trackingState);
             // Image tracking has been updated (position, rotation, etc.)
             if (trackedImage.trackingState == TrackingState.Tracking)
             {
