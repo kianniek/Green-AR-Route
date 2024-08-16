@@ -34,7 +34,7 @@ public class QRCodeManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             Debug.Log("Invoke");
             qrCodes[0].action.Invoke(0);
