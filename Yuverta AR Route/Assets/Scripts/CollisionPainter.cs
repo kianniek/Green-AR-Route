@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class CollisionPainter : MonoBehaviour
 {
-    public Color[] paintColors;
+    public PaintColors paintColors;
     public int paintColorIndex;
     public float radius = 1;
     public float strength = 1;
@@ -13,14 +13,10 @@ public class CollisionPainter : MonoBehaviour
 
     private void Awake()
     {
-        if (paintColors.Length == 0)
+        if (paintColors == null)
         {
             // Add Default Colors
-            paintColors = new Color[4];
-            paintColors[0] = Color.red;
-            paintColors[1] = Color.green;
-            paintColors[2] = Color.blue;
-            paintColors[3] = Color.white;
+            Debug.LogWarning("Please assign a PaintColors scriptable object to the CollisionPainter script.");
         }
     }
     
@@ -30,7 +26,7 @@ public class CollisionPainter : MonoBehaviour
         Paintable p = other.collider.GetComponent<Paintable>();
         if (p != null)
         {
-            p.OnHit(paintColors[paintColorIndex], paintColorIndex);
+            p.OnHit(paintColors.GetColor(paintColorIndex), paintColorIndex);
         }
     }
 
@@ -40,7 +36,7 @@ public class CollisionPainter : MonoBehaviour
 
         if (p == null) return;
         var pos = other.contacts[0].point;
-        PaintManager.instance.paint(p, pos, radius, hardness, strength, paintColors, paintColorIndex);
+        PaintManager.instance.paint(p, pos,paintColors, radius, hardness, strength,  paintColorIndex);
 
         var coverage = GetCoverage(p);
 
@@ -52,8 +48,7 @@ public class CollisionPainter : MonoBehaviour
         if (coverageIndex != -1)
         {
             p.SetPreviouslyFilledColorIndex(coverageIndex);
-            Paintable.SetMaskToColor(p, paintColors[coverageIndex]);
-            p.OnCovered.Invoke(coverageIndex);
+            Paintable.SetMaskToColor(p, paintColors.GetColor(coverageIndex));
         }
     }
 
@@ -69,9 +64,9 @@ public class CollisionPainter : MonoBehaviour
         {
             paintColorIndex = 0;
         }
-        else if (paintColorIndex >= paintColors.Length)
+        else if (paintColorIndex >= paintColors.GetColorCount())
         {
-            paintColorIndex = paintColors.Length - 1;
+            paintColorIndex = paintColors.GetColorCount() - 1;
         }
     }
 }
