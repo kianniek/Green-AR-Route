@@ -26,7 +26,7 @@ public class VideoPlayerScript : MonoBehaviour
         videoPlayer.clip = videoClip; //When this is on the clip is loaded first instead of the url
         videoPlayer.EnableAudioTrack(0, true);
         videoPlayer.Prepare();
-        videoPlayer.Pause();
+        videoPlayer.Play();
     }
 
     public void OnClick()
