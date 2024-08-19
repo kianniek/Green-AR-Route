@@ -483,6 +483,7 @@ MonoBehaviour:
       m_Calls: []
   promptAnimator: {fileID: 2078948396}
   sceneSwap: {fileID: 2190929029291708236}
+  hideDelay: 10
 --- !u!4 &1527384746
 Transform:
   m_ObjectHideFlags: 0
@@ -649,6 +650,68 @@ PrefabInstance:
     - target: {fileID: 6729005792020687776, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
         type: 3}
       propertyPath: m_text
+      value: Yuverta AR Route
+      objectReference: {fileID: 0}
+    - target: {fileID: 6729005792020687776, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 68
+      objectReference: {fileID: 0}
+    - target: {fileID: 6729005792020687776, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: a6b35a2bd31b81847a2a58117b008071,
+        type: 2}
+    - target: {fileID: 6729005792020687776, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      propertyPath: m_fontSizeMax
+      value: 68
+      objectReference: {fileID: 0}
+    - target: {fileID: 6729005792020687776, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      propertyPath: m_fontSizeMin
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6729005792020687776, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      propertyPath: m_overflowMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6729005792020687776, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8453757789355671577, guid: a6b35a2bd31b81847a2a58117b008071,
+        type: 2}
+    - target: {fileID: 6729005792020687776, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      propertyPath: m_verticalMapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6729005792020687776, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6729005792020687776, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 4096
+      objectReference: {fileID: 0}
+    - target: {fileID: 6729005792020687776, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6729005792020687776, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6729005792020687776, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      propertyPath: m_linkedTextComponent
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -717,6 +780,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 342346d53d2e6f241b5ac2880141acff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnImageRecognized:
+    m_PersistentCalls:
+      m_Calls: []
+  OnImageRemoved:
+    m_PersistentCalls:
+      m_Calls: []
+  OnImageRecognizedStarted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &375813117212905899
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,7 +963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dea56a9eaadd1c439095de4f9a371cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SerializedLibrary: {fileID: 11400000, guid: 09fb5e09facbf744295047a0bcf76800,
+  m_SerializedLibrary: {fileID: 11400000, guid: 70ed88712bfbc334f84cfd7227265c3b,
     type: 2}
   m_MaxNumberOfMovingImages: 0
   m_TrackedImagePrefab: {fileID: 0}
@@ -964,7 +1036,7 @@ MonoBehaviour:
   m_FocusMode: -1
   m_LightEstimationMode: -1
   m_AutoFocus: 1
-  m_LightEstimation: 0
+  m_LightEstimation: -1
   m_FacingDirection: 1
   m_RenderMode: 0
 --- !u!81 &2512387469332387781
@@ -1554,7 +1626,7 @@ RectTransform:
   m_Father: {fileID: 6103748182147705050}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1650,7 +1722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &7457549696247373422
 MonoBehaviour:
   m_ObjectHideFlags: 0

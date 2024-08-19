@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.ARFoundation;
 using TMPro;
+using System.Collections;
 
 [Serializable]
 public struct ImageEvent
@@ -19,7 +20,7 @@ public class ImageRecognitionHandler : MonoBehaviour
     public ImageEvent[] imageEvents;
     public TMP_Text promptTextObject; // Reference to the TMP text object in the scene
 
-    private string currentRecognizedImage = null;
+    private ARTrackedImage currentRecognizedImage = null;
     private string currentPromptText = null;
 
     [Header("Events")] [SerializeField] internal UnityEvent onImageTracked = new();
@@ -30,16 +31,17 @@ public class ImageRecognitionHandler : MonoBehaviour
     [SerializeField] private Animator promptAnimator;
 
     [SerializeField] internal SceneSwap sceneSwap;
-    
+
     private ARAnchor anchor;
+    [SerializeField] private float hideDelay = 2f; // Time to wait before hiding the text
 
     void OnEnable()
     {
         if (imageRecognitionEvent != null)
         {
-            imageRecognitionEvent.OnImageRecognized += HandleImageRecognized;
-            imageRecognitionEvent.OnImageRecognizedStarted += HandleImageRecognizedStarted;
-            imageRecognitionEvent.OnImageRemoved += HandleImageRemoved;
+            imageRecognitionEvent.OnImageRecognized.AddListener(HandleImageRecognized);
+            imageRecognitionEvent.OnImageRecognizedStarted.AddListener(HandleImageRecognizedStarted);
+            imageRecognitionEvent.OnImageRemoved.AddListener(HandleImageRemoved);
         }
     }
 
@@ -47,10 +49,9 @@ public class ImageRecognitionHandler : MonoBehaviour
     {
         if (imageRecognitionEvent != null)
         {
-            imageRecognitionEvent.OnImageRecognized -= HandleImageRecognized;
-            imageRecognitionEvent.OnImageRecognizedStarted -= HandleImageRecognizedStarted;
-
-            imageRecognitionEvent.OnImageRemoved -= HandleImageRemoved;
+            imageRecognitionEvent.OnImageRecognized.RemoveListener(HandleImageRecognized);
+            imageRecognitionEvent.OnImageRecognizedStarted.RemoveListener(HandleImageRecognizedStarted);
+            imageRecognitionEvent.OnImageRemoved.RemoveListener(HandleImageRemoved);
         }
     }
 
@@ -72,14 +73,14 @@ public class ImageRecognitionHandler : MonoBehaviour
         promptAnimator.SetBool("Top", false);
     }
 
-
     private void HandleImageRecognized(ARTrackedImage trackedImage)
     {
         anchor = trackedImage.gameObject.GetComponent<ARAnchor>();
+
         // Only process the first recognized image
         if (currentRecognizedImage == null)
         {
-            currentRecognizedImage = trackedImage.referenceImage.name;
+            currentRecognizedImage = trackedImage;
 
             foreach (var imageEvent in imageEvents)
             {
@@ -90,20 +91,21 @@ public class ImageRecognitionHandler : MonoBehaviour
                 }
             }
         }
-        else if (currentRecognizedImage != trackedImage.referenceImage.name)
+        else if (currentRecognizedImage != trackedImage)
         {
-            currentRecognizedImage = trackedImage.referenceImage.name;
+            currentRecognizedImage = trackedImage;
             foreach (var imageEvent in imageEvents)
             {
-                if (imageEvent.nameOfImage == trackedImage.referenceImage.name)
-                {
-                    currentPromptText = imageEvent.promptText;
-                    promptTextObject.text = currentPromptText; // Update the prompt text on screen
-                    onImageChanged.Invoke();
-                }
+                if (imageEvent.nameOfImage != trackedImage.referenceImage.name) 
+                    continue;
+                
+                Debug.Log(imageEvent.promptText);
+                currentPromptText = imageEvent.promptText;
+                promptTextObject.text = currentPromptText; // Update the prompt text on screen
+                onImageChanged.Invoke();
             }
         }
-        
+
         promptAnimator.SetBool("Hidden", false);
         promptAnimator.SetBool("Middle", true);
         promptAnimator.SetBool("Top", false);
@@ -112,7 +114,7 @@ public class ImageRecognitionHandler : MonoBehaviour
     private void HandleImageRemoved(ARTrackedImage trackedImage)
     {
         onImageRemoved.Invoke();
-        if (currentRecognizedImage == trackedImage.referenceImage.name)
+        if (currentRecognizedImage == trackedImage)
         {
             // Check if there are other tracked images to switch to
             foreach (var otherTrackedImage in FindObjectsOfType<ARTrackedImage>())
@@ -128,6 +130,9 @@ public class ImageRecognitionHandler : MonoBehaviour
         promptAnimator.SetBool("Hidden", false);
         promptAnimator.SetBool("Middle", false);
         promptAnimator.SetBool("Top", true);
+
+        // Start the coroutine to hide the text after a delay
+        StartCoroutine(HidePromptTextWithDelay(hideDelay));
     }
 
     private void HandleScreenTap()
@@ -145,7 +150,7 @@ public class ImageRecognitionHandler : MonoBehaviour
         foreach (var imageEvent in imageEvents)
         {
             Debug.Log("Checking image event: " + imageEvent.nameOfImage);
-            if (imageEvent.nameOfImage == currentRecognizedImage)
+            if (imageEvent.nameOfImage == currentRecognizedImage.referenceImage.name)
             {
                 onTapped.Invoke();
                 Debug.Log("Invoking action for image: " + currentRecognizedImage);
@@ -154,5 +159,13 @@ public class ImageRecognitionHandler : MonoBehaviour
                 break;
             }
         }
+    }
+
+    private IEnumerator HidePromptTextWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        promptAnimator.SetBool("Hidden", true);
+        promptAnimator.SetBool("Middle", false);
+        promptAnimator.SetBool("Top", false);
     }
 }

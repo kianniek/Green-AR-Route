@@ -12,6 +12,7 @@ public class PaintManager : Singleton<PaintManager>
     public Shader zoomToBounds;
 
     public int coveredTreshold;
+
     [Tooltip("Event that fires when an trashold is reached for the amount of objects covered in the 2nd mask color")]
     public UnityEvent OnTresholdReached;
 
@@ -33,6 +34,7 @@ public class PaintManager : Singleton<PaintManager>
     private Material zoomMaterial;
 
     private CommandBuffer command;
+
     public bool HasReachedTreshold
     {
         get
@@ -49,6 +51,7 @@ public class PaintManager : Singleton<PaintManager>
                         break;
                 }
             }
+
             return coveredTreshold < paintables.Count;
         }
     }
@@ -85,13 +88,14 @@ public class PaintManager : Singleton<PaintManager>
     }
 
 
-    public void paint(Paintable paintable, Vector3 pos, float radius = 1f, float hardness = .5f, float strength = .5f,
-        Color[]? colors = null, int colorIndex = -1)
+    public void paint(Paintable paintable, Vector3 pos, PaintColors colors, float radius = 1f, float hardness = .5f,
+        float strength = .5f,
+        int colorIndex = -1)
     {
         //if paintable previously filled, check if the color is the same or of an lower index
         if (paintable.previouslyFilledColorIndex != -1)
         {
-            if (colors.Length != 0)
+            if (colors != null)
             {
                 if (paintable.previouslyFilledColorIndex > colorIndex)
                 {
@@ -113,7 +117,7 @@ public class PaintManager : Singleton<PaintManager>
         paintMaterial.SetFloat(strengthID, strength);
         paintMaterial.SetFloat(radiusID, radius);
         paintMaterial.SetTexture(textureID, support);
-        paintMaterial.SetColor(colorID, colorIndex > -1 ? colors[colorIndex] : colors[0]);
+        paintMaterial.SetColor(colorID, colorIndex > -1 ? colors.GetColor(colorIndex) : colors.GetColor(0));
         extendMaterial.SetFloat(uvOffsetID, paintable.extendsIslandOffset);
         extendMaterial.SetTexture(uvIslandsID, uvIslands);
 

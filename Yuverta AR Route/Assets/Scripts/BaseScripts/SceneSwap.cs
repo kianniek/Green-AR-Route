@@ -64,6 +64,7 @@ public class SceneSwap : MonoBehaviour
     IEnumerator LoadSceneAsync(int sceneIndex)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneIndex);
+        asyncLoad.allowSceneActivation = false;
 
         if (loadingSlider == null)
         {
@@ -87,5 +88,14 @@ public class SceneSwap : MonoBehaviour
 
             yield return null;
         }
+        
+        // Reset the slider value after loading is complete
+        if (loadingSlider != null)
+        {
+            loadingSlider.value = 0f;
+        }
+        
+        // Activate the loaded scene
+        asyncLoad.allowSceneActivation = true;
     }
 }

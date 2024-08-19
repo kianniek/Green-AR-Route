@@ -10,9 +10,9 @@ public class ImageRecognitionEvent : MonoBehaviour
 {
     private ARTrackedImageManager _trackedImageManager;
 
-    public event Action<ARTrackedImage> OnImageRecognized;
-    public event Action<ARTrackedImage> OnImageRemoved;
-    public event Action<ARTrackedImage> OnImageRecognizedStarted;
+    public UnityEvent<ARTrackedImage> OnImageRecognized = new();
+    public UnityEvent<ARTrackedImage> OnImageRemoved = new();
+    public UnityEvent<ARTrackedImage> OnImageRecognizedStarted = new();
 
     void Awake()
     {
@@ -31,31 +31,37 @@ public class ImageRecognitionEvent : MonoBehaviour
 
     void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
     {
-        foreach (ARTrackedImage trackedImage in eventArgs.added)
+        foreach (var trackedImage in eventArgs.added)
         {
-            // Image has been recognized for the first time
-            Debug.Log("Added");
-            OnImageRecognizedStarted?.Invoke(trackedImage);
-            
-            //make an anchor if the tracked image is recognized and the image doesnt already have an anchor
-            var anchor = trackedImage.gameObject.GetComponent<ARAnchor>();
-            if (anchor == null)
+            if (trackedImage.referenceImage != null)
             {
-                anchor = trackedImage.gameObject.AddComponent<ARAnchor>();
+                Debug.Log($"New image recognized: {trackedImage.referenceImage.name}");
             }
-            
+            else
+            {
+                Debug.LogWarning("Added image reference is null.");
+            }
+        
+            OnImageRecognizedStarted?.Invoke(trackedImage);
         }
 
-        foreach (ARTrackedImage trackedImage in eventArgs.updated)
+        foreach (var trackedImage in eventArgs.updated)
         {
-            Debug.Log(trackedImage.referenceImage + "  "+ trackedImage.referenceImage.name +" | "+ trackedImage.trackingState);
-            // Image tracking has been updated (position, rotation, etc.)
+            if (trackedImage.referenceImage != null)
+            {
+                Debug.Log($"trackedImage: {trackedImage.referenceImage.name} | {trackedImage.trackingState}");
+            }
+            else
+            {
+                Debug.LogWarning("Updated image reference is null.");
+            }
+
             if (trackedImage.trackingState == TrackingState.Tracking)
             {
                 OnImageRecognized?.Invoke(trackedImage);
             }
-            
-            if(trackedImage.trackingState == TrackingState.Limited)
+        
+            if (trackedImage.trackingState == TrackingState.Limited)
             {
                 OnImageRemoved?.Invoke(trackedImage);
             }
