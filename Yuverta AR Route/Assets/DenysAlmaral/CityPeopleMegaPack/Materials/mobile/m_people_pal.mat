@@ -21,17 +21,18 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: m_people_pal
-  m_Shader: {fileID: 4800000, guid: 650dd9526735d5b46b79224bc6e94025, type: 3}
+  m_Shader: {fileID: 4800000, guid: 5bc7a85970eb84568952794626aa410d, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - TCP2_DISSOLVE
+  - TCP2_RIM_LIGHTING
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -55,6 +56,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _DetailNormalMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DissolveGradientTexture:
+        m_Texture: {fileID: 2800000, guid: 7dbe7853e8691d142bc9342d60881b1a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DissolveMap:
+        m_Texture: {fileID: 2800000, guid: 532c9e2e0905df744860e5e5c36ada26, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -87,6 +96,9 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DissolveGradientWidth: 0.29
+    - _DissolveValue: 0
+    - _DissolveValue1: 0
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _GlossMapScale: 1
@@ -97,6 +109,11 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueOffset: 0
+    - _RampSmoothing: 0.5
+    - _RampThreshold: 0.5
+    - _ReceiveShadowsOff: 1
+    - _RimMax: 0.56
+    - _RimMin: 0.52
     - _SampleGI: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -104,9 +121,18 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _UVSec: 0
+    - _UseDissolve: 1
+    - _UseRim: 1
     - _ZWrite: 1
+    - __dummy__: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DissolveGradientTexture: {r: 1, g: 1, b: 1, a: 1}
+    - _DissolveMap_SC: {r: 1, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
+    - _RimColor: {r: 0.36470592, g: 0.9691141, b: 1, a: 0.5}
+    - _SColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _TriplanarSamplingStrength: {r: 8, g: 8, b: 8, a: 0.5}
   m_BuildTextureStacks: []
