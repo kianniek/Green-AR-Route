@@ -12,20 +12,26 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private UnityEvent onQuizPartiallyCorrect = new();
     [SerializeField] private UnityEvent onQuizTotallyWrong = new();
 
-    [Header("Quiz UI Elements")] 
-    [Tooltip("The text element that will display the quiz question")] 
-    [SerializeField]
+    [Header("Quiz UI Elements")] [Tooltip("The text element that will display the quiz question")] [SerializeField]
     private TMP_Text questionText;
 
-    [Tooltip("All the buttons that will be used to answer the quiz questions")] 
+    [Tooltip(
+        "The text element that will display the number of correct answers. Use {correctQuestions} as a placeholder for the actual number of correct answers")]
     [SerializeField]
+    private TMP_Text correctAnswersText; // Add TMP_Text field for displaying correct answers count
+
+    [SerializeField]
+    private GameObject correctAnswersDisplay; // Add GameObject field for displaying correct answers count
+
+    [Tooltip("All the buttons that will be used to answer the quiz questions")] [SerializeField]
     private QuizButton[] choiceButtons;
 
     [SerializeField] private string buttonTag = "QuizButton";
 
-    [Tooltip("The scriptable object containing the quiz questions")] 
-    [SerializeField]
+    [Tooltip("The scriptable object containing the quiz questions")] [SerializeField]
     private QuizQuestions quizQuestions;
+
+    [SerializeField] private bool restartQuizWithoutIncorrectAnswers = true;
 
     private List<Question> questions;
     private List<QuizAnswer> incorrectAnswers;
@@ -46,6 +52,7 @@ public class QuizManager : MonoBehaviour
     {
         InitializeQuiz();
         DisplayQuestion();
+        UpdateCorrectAnswersText(); // Initialize the correct answers text display
     }
 
     private void InitializeQuiz()
@@ -55,7 +62,7 @@ public class QuizManager : MonoBehaviour
         {
             child.gameObject.SetActive(true);
         }
-        
+
         questions = new List<Question>(quizQuestions.questions);
         incorrectAnswers = new List<QuizAnswer>();
         SetupChoiceButtons();
@@ -75,13 +82,13 @@ public class QuizManager : MonoBehaviour
 
         foreach (var button in choiceButtons)
         {
-            // button.onRaycastHit.AddListener(OnOptionSelected);
             button.gameObject.SetActive(false);
         }
     }
 
     private void DisplayQuestion()
     {
+        correctAnswersDisplay.SetActive(false); // Hide the correct answers count display
         // Check if there are still questions left
         if (currentQuestionIndex < questions.Count)
         {
@@ -118,6 +125,7 @@ public class QuizManager : MonoBehaviour
 
     private void HandleQuizResult()
     {
+        correctAnswersDisplay.SetActive(true); // Show the correct answers count display
         if (correctQuestions == totalQuestions)
         {
             onQuizTotallyCorrect.Invoke();
@@ -140,6 +148,7 @@ public class QuizManager : MonoBehaviour
         {
             correctQuestions++;
             onQuestionAnsweredCorrectly.Invoke();
+            UpdateCorrectAnswersText(); // Update the correct answers count whenever a correct answer is selected
         }
         else
         {
@@ -156,18 +165,28 @@ public class QuizManager : MonoBehaviour
         currentQuestionIndex = 0;
         correctQuestions = 0;
         totalQuestions = 0;
+        UpdateCorrectAnswersText(); // Reset the correct answers text display
 
-        // Remove previously incorrect answers from the questions
-        foreach (var question in questions)
+        if (restartQuizWithoutIncorrectAnswers)
         {
-            question.options.RemoveAll(option => incorrectAnswers.Contains(option));
+            // Remove previously incorrect answers from the questions
+            foreach (var question in questions)
+            {
+                question.options.RemoveAll(option => incorrectAnswers.Contains(option));
+            }
         }
     }
 
-    public void RestartQuizWithoutIncorrectAnswers()
+    public void RestartQuiz()
     {
         ResetQuiz();
         StartQuiz();
+    }
+
+    private void UpdateCorrectAnswersText()
+    {
+        // Replace the placeholder {correctQuestions} with the current correctQuestions value
+        correctAnswersText.text = correctAnswersText.text.Replace("{correctQuestions}", correctQuestions.ToString());
     }
 
     private void Update()
