@@ -114,6 +114,7 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 			{
 				"LightMode"="UniversalForward"
 			}
+			Cull Off
 
 			HLSLPROGRAM
 			// Required to compile gles 2.0 with standard SRP library
@@ -525,6 +526,7 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 
 			ZWrite On
 			ZTest LEqual
+			Cull Off
 
 			HLSLPROGRAM
 			// Required to compile gles 2.0 with standard srp library
@@ -563,6 +565,7 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 
 			ZWrite On
 			ColorMask 0
+			Cull Off
 
 			HLSLPROGRAM
 
@@ -594,5 +597,5 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 	CustomEditor "ToonyColorsPro.ShaderGenerator.MaterialInspector_SG2"
 }
 
-/* TCP_DATA u config(ver:"2.9.10";unity:"2022.3.22f1";tmplt:"SG2_Template_URP";features:list["UNITY_5_4","UNITY_5_5","UNITY_5_6","UNITY_2017_1","UNITY_2018_1","UNITY_2018_2","UNITY_2018_3","UNITY_2019_1","UNITY_2019_2","UNITY_2019_3","UNITY_2019_4","UNITY_2020_1","UNITY_2021_1","UNITY_2021_2","UNITY_2022_2","DISSOLVE","DISSOLVE_CLIP","DISSOLVE_GRADIENT","DISSOLVE_SHADER_FEATURE","RIM","RIM_SHADER_FEATURE","TEMPLATE_LWRP"];flags:list[];flags_extra:dict[];keywords:dict[RENDER_TYPE="Opaque",RampTextureDrawer="[TCP2Gradient]",RampTextureLabel="Ramp Texture",SHADER_TARGET="3.0",RIM_LABEL="Rim Lighting"];shaderProperties:list[];customTextures:list[];codeInjection:codeInjection(injectedFiles:list[];mark:False);matLayers:list[]) */
-/* TCP_HASH 3e05be892d88d229291a42659eaacbd2 */
+/* TCP_DATA u config(ver:"2.9.10";unity:"2022.3.22f1";tmplt:"SG2_Template_URP";features:list["UNITY_5_4","UNITY_5_5","UNITY_5_6","UNITY_2017_1","UNITY_2018_1","UNITY_2018_2","UNITY_2018_3","UNITY_2019_1","UNITY_2019_2","UNITY_2019_3","UNITY_2019_4","UNITY_2020_1","UNITY_2021_1","UNITY_2021_2","UNITY_2022_2","DISSOLVE","DISSOLVE_CLIP","DISSOLVE_GRADIENT","DISSOLVE_SHADER_FEATURE","RIM","RIM_SHADER_FEATURE","TEMPLATE_LWRP","CULLING"];flags:list[];flags_extra:dict[];keywords:dict[RENDER_TYPE="Opaque",RampTextureDrawer="[TCP2Gradient]",RampTextureLabel="Ramp Texture",SHADER_TARGET="3.0",RIM_LABEL="Rim Lighting"];shaderProperties:list[,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,sp(name:"Face Culling";imps:list[imp_enum(value_type:0;value:2;enum_type:"ToonyColorsPro.ShaderGenerator.Culling";guid:"56ef4201-e13a-40ed-a6f5-0b274b513884";op:Multiply;lbl:"Face Culling";gpu_inst:False;dots_inst:False;locked:False;impl_index:0)];layers:list[];unlocked:list[];layer_blend:dict[];custom_blend:dict[];clones:dict[];isClone:False)];customTextures:list[];codeInjection:codeInjection(injectedFiles:list[];mark:False);matLayers:list[]) */
+/* TCP_HASH 137f9756dd70980df31fb096fc9a1a33 */
