@@ -8,12 +8,18 @@ public class PromptTextController : MonoBehaviour
     [SerializeField] private TMP_Text promptText;
 
     [SerializeField] private Animator promptTextAnimator;
+    
+    [SerializeField] private bool showOnStart = false;
 
     // Start is called before the first frame update
     void Start()
     {
         if (!promptTextAnimator)
             promptTextAnimator = promptText.GetComponent<Animator>();
+        
+        if (showOnStart)
+            ToMiddel();
+            ToTopAfterDelay(5f);
     }
 
     public void ToMiddel()
@@ -42,10 +48,21 @@ public class PromptTextController : MonoBehaviour
         StartCoroutine(HideAfterDelayCoroutine(delay));
     }
     
+    public void ToTopAfterDelay(float delay)
+    {
+        StartCoroutine(ToTopAfterDelayCoroutine(delay));
+    }
+    
     private IEnumerator HideAfterDelayCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
         Hide();
+    }
+    
+    private IEnumerator ToTopAfterDelayCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ToTop();
     }
     
     public void SetText(string text)

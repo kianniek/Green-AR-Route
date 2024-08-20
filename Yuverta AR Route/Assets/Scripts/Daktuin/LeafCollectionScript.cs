@@ -1,26 +1,39 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
+using Events.GameEvents;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
 public class LeafCollectionScript : MonoBehaviour
 {
+    public enum FlowerPart
+    {
+        middel,
+        top,
+        bottom,
+        left,
+        right
+    }
+
     [Serializable]
     public class Leaf
     {
         public Image image;
-        public Sprite sprite;
+        [FormerlySerializedAs("sprite")] public GameObject spriteGameobjectUI;
         public GameObject animation;
         public bool collected;
+        public FlowerPart flowerPart;
 
-        public Leaf(Image image, Sprite sprite, GameObject animation, bool collected)
+        public Leaf(Image image, GameObject spriteGameobjectUI, GameObject animation, bool collected)
         {
             this.image = image;
-            this.sprite = sprite;
+            this.spriteGameobjectUI = spriteGameobjectUI;
             this.animation = animation;
             this.collected = collected;
         }
@@ -33,7 +46,10 @@ public class LeafCollectionScript : MonoBehaviour
 
     public List<Leaf> leaves;
 
+    public RectTransform[] leafPositions = new RectTransform[5];
+
     public UnityEvent allLeavesCollected;
+    public UnityEvent onLeafCollected = new();
     private int collectedLeafCount;
 
     public GameObject leaveUIParent;
@@ -60,13 +76,34 @@ public class LeafCollectionScript : MonoBehaviour
 
         leaf.collected = true;
 
+        var leafObj = Instantiate(leaf.spriteGameobjectUI, leaveUIParent.transform);
+        // set the position of the leaf object to the middle of the screen
+        leafObj.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
 
-        var leafObj = Instantiate(leaveUIPrefab, leaveUIParent.transform);
-        var leafVisual = leafObj.GetComponent<Image>();
-        leafVisual.sprite = leaf.sprite;
+        switch (leaf.flowerPart)
+        {
+            case FlowerPart.middel:
+                StartCoroutine(LeafCollectedAnimation(leafPositions[0], leafObj));
+                break;
+            case FlowerPart.top:
+                StartCoroutine(LeafCollectedAnimation(leafPositions[1], leafObj));
+                break;
+            case FlowerPart.bottom:
+                StartCoroutine(LeafCollectedAnimation(leafPositions[2], leafObj));
+                break;
+            case FlowerPart.left:
+                StartCoroutine(LeafCollectedAnimation(leafPositions[3], leafObj));
+                break;
+            case FlowerPart.right:
+                StartCoroutine(LeafCollectedAnimation(leafPositions[4], leafObj));
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
 
         PerformRaycast(leaf.animation);
         collectedLeafCount++;
+        onLeafCollected.Invoke();
         if (collectedLeafCount == leaves.Count)
         {
             allLeavesCollected.Invoke();
@@ -76,12 +113,29 @@ public class LeafCollectionScript : MonoBehaviour
     private void SpawnNewAnimation(GameObject animationPrefab, Vector3 position)
     {
         var animation = Instantiate(animationPrefab, position, Quaternion.identity, this.transform);
-        
+
         if (deleteAnimationIfFinished)
         {
             animation.transform.GetChild(1).gameObject.AddComponent<AnimationDeleter>();
         }
     }
+
+    public IEnumerator LeafCollectedAnimation(RectTransform targetTransform, GameObject leafUIPrefab)
+    {
+        // Adjust this speed value as needed
+        float speed = 5.0f;
+    
+        while (Vector3.Distance(leafUIPrefab.transform.position, targetTransform.position) > 0.1f)
+        {
+            leafUIPrefab.transform.position = Vector3.Lerp(leafUIPrefab.transform.position, targetTransform.position, Time.deltaTime * speed);
+            yield return null;
+        }
+
+        // Ensure the leaf reaches the exact target position
+        leafUIPrefab.transform.position = targetTransform.position;
+    }
+
+
 
     private void PerformRaycast(GameObject animationPrefab)
     {

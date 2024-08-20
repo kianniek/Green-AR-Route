@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{f1a1e79e-ec04-4531-b059-e8b196b82a79}">
+		<property name="name">
+			<value>Schieten</value>
+		</property>
+		<relationship name="folder">
+			<destination>{a4ad5f70-6186-4093-9c38-75638dcf9e40}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{5956be6e-5451-4a6e-9fd2-bd081af7c95e}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{5956be6e-5451-4a6e-9fd2-bd081af7c95e}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>opladen_schieten</value>
+			<value>loslaten_schieten</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
