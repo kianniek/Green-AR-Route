@@ -166,7 +166,7 @@ public class ObjectSpawner : MonoBehaviour
     /// Otherwise, it will spawn the prefab at the index.
     /// </remarks>
     /// <seealso cref="objectSpawned"/>
-    public bool TrySpawnObject(Vector3 spawnPoint, Vector3 spawnNormal, out GameObject objectSpawned)
+    public bool TrySpawnObject(Vector3 spawnPoint, Vector3 spawnNormal, out GameObject objectSpawned, out Vector3 spawnPosition)
     {
 
         if (m_OnlySpawnInView)
@@ -182,11 +182,13 @@ public class ObjectSpawner : MonoBehaviour
             {
                 Debug.Log("Spawn point is outside the view.");
                 objectSpawned = null;
+                spawnPosition = Vector3.positiveInfinity;
                 return false;
             }
         }
 
         objectSpawned = null;
+        spawnPosition = Vector3.positiveInfinity;
 
         foreach (var objPrefab in m_ObjectPrefabs)
         {
@@ -222,10 +224,12 @@ public class ObjectSpawner : MonoBehaviour
             ObjectSpawned.Invoke(newObject);
 
             objectSpawned = newObject;
+            spawnPosition = newObject.transform.position;
         }
 
         return true;
     }
+    
     public bool TryEnableObject(Vector3 spawnPoint, Vector3 spawnNormal)
     {
         foreach (var objPrefab in m_ObjectPrefabs)

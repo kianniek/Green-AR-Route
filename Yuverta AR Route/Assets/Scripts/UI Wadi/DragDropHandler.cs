@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Kamgam.UGUIWorldImage;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -20,6 +21,9 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
     [Tooltip("Visuals of the item.")] [SerializeField]
     private GameObject visuals;
+    
+    [FormerlySerializedAs("spawnParticles")] [Tooltip("Particles of the item.")] [SerializeField]
+    private GameObject spawnParticlesPrefab;
 
     [Tooltip("Time to hold before it counts as a drag.")] [SerializeField]
     private float holdTimeThreshold = 0.5f; // Time to hold before it counts as a drag
@@ -248,12 +252,18 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
                 return;
 
             // Try to spawn the object at the hit point
-            var spawnedObject = _objectSpawner.TrySpawnObject(hit.point, hit.normal, out var spawnObject);
+            var spawnedObject = _objectSpawner.TrySpawnObject(hit.point, hit.normal, out var spawnObject, out var spawnPosition);
 
             if (spawnedObject)
             {
                 // Add the spawned object to the UI menu logic's dictionary
                 _uiMenuLogic.UIObjectDictionary.Add(spawnObject, this);
+                
+                var particles = Instantiate(spawnParticlesPrefab, spawnPosition, Quaternion.identity);
+                var particleSystem = particles.GetComponent<ParticleSystem>();
+                
+                if (particleSystem != null)
+                    particleSystem.Play();
             }
 
             gameObject.SetActive(!spawnedObject);
