@@ -57,12 +57,17 @@ public class PromptTextController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Hide();
+        yield return null;
+
     }
     
     private IEnumerator ToTopAfterDelayCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
         ToTop();
+        
+        //stop this coroutine
+        yield return null;
     }
     
     public void SetText(string text)

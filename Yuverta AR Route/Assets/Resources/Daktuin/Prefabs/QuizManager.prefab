@@ -170,7 +170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -80, y: -52.2}
+  m_AnchoredPosition: {x: -60, y: -20}
   m_SizeDelta: {x: 100, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5865690606286658486
@@ -224,7 +224,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5165248859174774745}
+        m_TargetAssemblyTypeName: QuizManager, Assembly-CSharp
+        m_MethodName: RestartQuiz
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6022106132500738609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,7 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 96c5704d0681e35408630c488fc0c234, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -532,7 +544,7 @@ MonoBehaviour:
   vibrancy: 1
   brightness: 0
   flatten: 0
-  m_spriteBlending: 0.01
+  m_spriteBlending: 0.5
 --- !u!114 &157106264508285798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,7 +815,7 @@ MonoBehaviour:
   - {fileID: 8243964084514327723}
   buttonTag: WorldUI
   quizQuestions: {fileID: 11400000, guid: 8053804cfb45b7149993063e5a200071, type: 2}
-  restartQuizWithoutIncorrectAnswers: 1
+  restartQuizWithoutIncorrectAnswers: 0
 --- !u!114 &2349152777464465350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -938,7 +950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 96c5704d0681e35408630c488fc0c234, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -959,7 +971,7 @@ MonoBehaviour:
   vibrancy: 1
   brightness: 0
   flatten: 0
-  m_spriteBlending: 0.01
+  m_spriteBlending: 0.5
 --- !u!114 &7066761383286271579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,7 +1053,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <nobr>Hoeveelheid  correct<nobr>\n{correctQuestions}
+  m_text: <nobr>Hoeveelheid  correct<nobr> <br> {correctQuestions}/{totalQuestions}
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a6b35a2bd31b81847a2a58117b008071, type: 2}
   m_sharedMaterial: {fileID: -8453757789355671577, guid: a6b35a2bd31b81847a2a58117b008071,
@@ -1228,7 +1240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 96c5704d0681e35408630c488fc0c234, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1249,7 +1261,7 @@ MonoBehaviour:
   vibrancy: 1
   brightness: 0
   flatten: 0
-  m_spriteBlending: 0.01
+  m_spriteBlending: 0.5
 --- !u!114 &8243964084514327723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1383,7 +1395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 96c5704d0681e35408630c488fc0c234, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1404,7 +1416,7 @@ MonoBehaviour:
   vibrancy: 1
   brightness: 0
   flatten: 0
-  m_spriteBlending: 0.01
+  m_spriteBlending: 0.5
 --- !u!114 &8174874919110019714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1943,7 +1955,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 80, y: -52.2}
+  m_AnchoredPosition: {x: 60, y: -20}
   m_SizeDelta: {x: 100, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2094492806098421826
@@ -1997,7 +2009,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3429666593023544241}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: SceneSwap, Assembly-CSharp
+        m_MethodName: SwitchToScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3429666593023544241
 MonoBehaviour:
   m_ObjectHideFlags: 0

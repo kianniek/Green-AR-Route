@@ -84,18 +84,27 @@ public class LeafCollectionScript : MonoBehaviour
         {
             case FlowerPart.middel:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[0], leafObj));
+                leafObj.transform.SetSiblingIndex(4);
                 break;
             case FlowerPart.top:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[1], leafObj));
+                leafObj.transform.SetSiblingIndex(3);
+
                 break;
             case FlowerPart.bottom:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[2], leafObj));
+                leafObj.transform.SetSiblingIndex(2);
+
                 break;
             case FlowerPart.left:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[3], leafObj));
+                leafObj.transform.SetSiblingIndex(1);
+
                 break;
             case FlowerPart.right:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[4], leafObj));
+                leafObj.transform.SetSiblingIndex(0);
+
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -125,14 +134,14 @@ public class LeafCollectionScript : MonoBehaviour
         // Adjust this speed value as needed
         float speed = 5.0f;
     
-        while (Vector3.Distance(leafUIPrefab.transform.position, targetTransform.position) > 0.1f)
+        while (Vector3.Distance(leafUIPrefab.transform.position, targetTransform.transform.position) > 0.1f)
         {
-            leafUIPrefab.transform.position = Vector3.Lerp(leafUIPrefab.transform.position, targetTransform.position, Time.deltaTime * speed);
+            leafUIPrefab.transform.position = Vector3.Lerp(leafUIPrefab.transform.position, targetTransform.transform.position, Time.deltaTime * speed);
             yield return null;
         }
 
         // Ensure the leaf reaches the exact target position
-        leafUIPrefab.transform.position = targetTransform.position;
+        leafUIPrefab.transform.position = targetTransform.transform.position;
     }
 
 

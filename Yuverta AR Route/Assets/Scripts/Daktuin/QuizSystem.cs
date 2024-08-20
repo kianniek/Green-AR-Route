@@ -39,6 +39,8 @@ public class QuizManager : MonoBehaviour
     private int correctQuestions;
     private int totalQuestions;
 
+    private string quizEndText;
+
     private void Start()
     {
         // Hide all children of this object
@@ -46,6 +48,8 @@ public class QuizManager : MonoBehaviour
         {
             child.gameObject.SetActive(false);
         }
+
+        quizEndText = correctAnswersText.text;
     }
 
     public void StartQuiz()
@@ -65,6 +69,7 @@ public class QuizManager : MonoBehaviour
 
         questions = new List<Question>(quizQuestions.questions);
         incorrectAnswers = new List<QuizAnswer>();
+        totalQuestions = questions.Count;
         SetupChoiceButtons();
     }
 
@@ -126,6 +131,8 @@ public class QuizManager : MonoBehaviour
     private void HandleQuizResult()
     {
         correctAnswersDisplay.SetActive(true); // Show the correct answers count display
+        questionText.gameObject.SetActive(false);
+        
         if (correctQuestions == totalQuestions)
         {
             onQuizTotallyCorrect.Invoke();
@@ -154,8 +161,7 @@ public class QuizManager : MonoBehaviour
         {
             incorrectAnswers.Add(selectedAnswer);
         }
-
-        totalQuestions++;
+        
         currentQuestionIndex++;
         DisplayQuestion();
     }
@@ -186,7 +192,11 @@ public class QuizManager : MonoBehaviour
     private void UpdateCorrectAnswersText()
     {
         // Replace the placeholder {correctQuestions} with the current correctQuestions value
-        correctAnswersText.text = correctAnswersText.text.Replace("{correctQuestions}", correctQuestions.ToString());
+        Debug.Log($"Quiz finished. Correct answers: {correctQuestions}/{totalQuestions}");
+        var str = quizEndText;
+        str = str.Replace("{correctQuestions}", correctQuestions.ToString());
+        str = str.Replace("{totalQuestions}", totalQuestions.ToString());
+        correctAnswersText.text = str;
     }
 
     private void Update()
