@@ -14,6 +14,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private GameObject wadiTopLayerPrefab;
     [SerializeField] private GameObject wadiBottomLayerPrefab;
     [SerializeField] private GameObject wadiCompleteParticlesPrefab;
+    [SerializeField] private GameObject wadiWrongParticlesPrefab;
     [SerializeField] private GameObject wadiWeatherUIPrefab;
 
     [Header("Events")] [Space(10)] [SerializeField]
@@ -232,6 +233,18 @@ public class GridManager : MonoBehaviour
         return _placedObjects.Count == objsToSpawn.keys.Count;
     }
 
+    public void OnWadiWrong()
+    {
+        if (wadiWrongParticlesPrefab)
+        {
+            var particles = Instantiate(wadiWrongParticlesPrefab, transform.position, Quaternion.identity);
+            var particleSystem = particles.GetComponent<ParticleSystem>();
+                
+            if (particleSystem != null)
+                particleSystem.Play();
+        }
+    }
+
     public void OnWadiCompleted()
     {
         HideGridPointVisualIfOccupied();
@@ -284,6 +297,8 @@ public class GridManager : MonoBehaviour
             if (particleSystem != null)
                 particleSystem.Play();
         }
+        
+        
 
         onWadiCompleted.Invoke();
     }
