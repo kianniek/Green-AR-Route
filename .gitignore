@@ -50,13 +50,6 @@ Recordings/
 Assets/Plugins/Editor/JetBrains/
 Assets/Plugins/Editor/JetBrains.meta
 
-# FMOD
-FMOD/*/.cache/
-Assets/FMODStudioCache.asset
-Assets/FMODStudioCache.asset.meta
-fmod.log
-fmod_editor.log
-
 # Builds
 *.apk
 *.unitypackage
@@ -74,10 +67,6 @@ Assets/Plugins/ClientOnly.meta
 
 # Ignore the Cache folder since it is updated locally.
 /[Aa]ssets/Plugins/FMOD/Cache/*
-
-# Ignore bank files in the StreamingAssets folder.
-/[Aa]ssets/StreamingAssets/**/*.bank
-/[Aa]ssets/StreamingAssets/**/*.bank.meta
 
 # If the source bank files are kept outside of the StreamingAssets folder then these can be ignored.
 # Log files can be ignored.
