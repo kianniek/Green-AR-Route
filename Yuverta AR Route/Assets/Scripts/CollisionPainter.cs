@@ -19,7 +19,7 @@ public class CollisionPainter : MonoBehaviour
             Debug.LogWarning("Please assign a PaintColors scriptable object to the CollisionPainter script.");
         }
     }
-    
+
 
     private void OnCollisionEnter(Collision other)
     {
@@ -36,7 +36,7 @@ public class CollisionPainter : MonoBehaviour
 
         if (p == null) return;
         var pos = other.contacts[0].point;
-        PaintManager.instance.paint(p, pos,paintColors, radius, hardness, strength,  paintColorIndex);
+        PaintManager.instance.paint(p, pos, paintColors, radius, hardness, strength, paintColorIndex);
 
         var coverage = GetCoverage(p);
 
@@ -60,6 +60,9 @@ public class CollisionPainter : MonoBehaviour
 
     private void OnValidate()
     {
+        if (paintColors == null)
+            return;
+
         if (paintColorIndex < 0)
         {
             paintColorIndex = 0;
