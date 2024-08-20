@@ -5,11 +5,19 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 {
 	Properties
 	{
+		[Enum(Front, 2, Back, 1, Both, 0)] _Cull ("Render Face", Float) = 2.0
+		[TCP2ToggleNoKeyword] _ZWrite ("Depth Write", Float) = 1.0
+		[HideInInspector] _RenderingMode ("rendering mode", Float) = 0.0
+		[HideInInspector] _SrcBlend ("blending source", Float) = 1.0
+		[HideInInspector] _DstBlend ("blending destination", Float) = 0.0
+		[TCP2Separator]
+
 		[TCP2HeaderHelp(Base)]
 		_BaseColor ("Color", Color) = (1,1,1,1)
 		[TCP2ColorNoAlpha] _HColor ("Highlight Color", Color) = (0.75,0.75,0.75,1)
 		[TCP2ColorNoAlpha] _SColor ("Shadow Color", Color) = (0.2,0.2,0.2,1)
 		[MainTexture] _BaseMap ("Albedo", 2D) = "white" {}
+		_Cutoff ("Alpha Cutoff", Range(0,1)) = 0.5
 		[TCP2Separator]
 
 		[TCP2Header(Ramp Shading)]
@@ -44,7 +52,7 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 		Tags
 		{
 			"RenderPipeline" = "UniversalPipeline"
-			"RenderType"="Opaque"
+			"RenderType"="TransparentCutout"
 			"Queue"="AlphaTest"
 		}
 
@@ -86,6 +94,7 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 			float4 _BaseMap_ST;
 			float _DissolveValue;
 			float _DissolveGradientWidth;
+			float _Cutoff;
 			fixed4 _BaseColor;
 			float _RampThreshold;
 			float _RampSmoothing;
@@ -114,7 +123,9 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 			{
 				"LightMode"="UniversalForward"
 			}
-			Cull Off
+		Blend [_SrcBlend] [_DstBlend]
+		Cull [_Cull]
+		ZWrite [_ZWrite]
 
 			HLSLPROGRAM
 			// Required to compile gles 2.0 with standard SRP library
@@ -148,6 +159,7 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 			//--------------------------------------
 			// Toony Colors Pro 2 keywords
 			#pragma shader_feature_local_fragment TCP2_RIM_LIGHTING
+		#pragma shader_feature_local _ _ALPHAPREMULTIPLY_ON
 			#pragma shader_feature_local_fragment TCP2_DISSOLVE
 
 			// vertex input
@@ -229,6 +241,7 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 				float __dissolveValue = ( _DissolveValue );
 				float __dissolveGradientWidth = ( _DissolveGradientWidth );
 				float __dissolveGradientStrength = ( 2.0 );
+				float __cutoff = ( _Cutoff );
 				float __ambientIntensity = ( 1.0 );
 				float __rampThreshold = ( _RampThreshold );
 				float __rampSmoothing = ( _RampSmoothing );
@@ -260,6 +273,9 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 				dissolveColor *= __dissolveGradientStrength * dissolveUV;
 				emission += dissolveColor.rgb;
 				#endif
+				// Alpha Testing
+				half cutoffValue = __cutoff;
+				clip(alpha - cutoffValue);
 				
 				albedo *= __mainColor.rgb;
 
@@ -379,6 +395,11 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 				// apply ambient
 				color += indirectDiffuse;
 
+				// Premultiply blending
+				#if defined(_ALPHAPREMULTIPLY_ON)
+					color.rgb *= alpha;
+				#endif
+
 				color += emission;
 
 				return half4(color, alpha);
@@ -488,6 +509,7 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 				float __dissolveValue = ( _DissolveValue );
 				float __dissolveGradientWidth = ( _DissolveGradientWidth );
 				float __dissolveGradientStrength = ( 2.0 );
+				float __cutoff = ( _Cutoff );
 
 				half3 viewDirWS = SafeNormalize(GetCameraPositionWS() - positionWS);
 				half ndv = abs(dot(viewDirWS, normalWS));
@@ -509,6 +531,9 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 				dissolveColor *= __dissolveGradientStrength * dissolveUV;
 				emission += dissolveColor.rgb;
 				#endif
+				// Alpha Testing
+				half cutoffValue = __cutoff;
+				clip(alpha - cutoffValue);
 
 				return 0;
 			}
@@ -565,7 +590,7 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 
 			ZWrite On
 			ColorMask 0
-			Cull Off
+			Cull [_Cull]
 
 			HLSLPROGRAM
 
@@ -597,5 +622,5 @@ Shader "Toony Colors Pro 2/User/My TCP2 Dissolve Shader"
 	CustomEditor "ToonyColorsPro.ShaderGenerator.MaterialInspector_SG2"
 }
 
-/* TCP_DATA u config(ver:"2.9.10";unity:"2022.3.22f1";tmplt:"SG2_Template_URP";features:list["UNITY_5_4","UNITY_5_5","UNITY_5_6","UNITY_2017_1","UNITY_2018_1","UNITY_2018_2","UNITY_2018_3","UNITY_2019_1","UNITY_2019_2","UNITY_2019_3","UNITY_2019_4","UNITY_2020_1","UNITY_2021_1","UNITY_2021_2","UNITY_2022_2","DISSOLVE","DISSOLVE_CLIP","DISSOLVE_GRADIENT","DISSOLVE_SHADER_FEATURE","RIM","RIM_SHADER_FEATURE","TEMPLATE_LWRP","CULLING"];flags:list[];flags_extra:dict[];keywords:dict[RENDER_TYPE="Opaque",RampTextureDrawer="[TCP2Gradient]",RampTextureLabel="Ramp Texture",SHADER_TARGET="3.0",RIM_LABEL="Rim Lighting"];shaderProperties:list[,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,sp(name:"Face Culling";imps:list[imp_enum(value_type:0;value:2;enum_type:"ToonyColorsPro.ShaderGenerator.Culling";guid:"56ef4201-e13a-40ed-a6f5-0b274b513884";op:Multiply;lbl:"Face Culling";gpu_inst:False;dots_inst:False;locked:False;impl_index:0)];layers:list[];unlocked:list[];layer_blend:dict[];custom_blend:dict[];clones:dict[];isClone:False)];customTextures:list[];codeInjection:codeInjection(injectedFiles:list[];mark:False);matLayers:list[]) */
-/* TCP_HASH 137f9756dd70980df31fb096fc9a1a33 */
+/* TCP_DATA u config(ver:"2.9.10";unity:"2022.3.22f1";tmplt:"SG2_Template_URP";features:list["UNITY_5_4","UNITY_5_5","UNITY_5_6","UNITY_2017_1","UNITY_2018_1","UNITY_2018_2","UNITY_2018_3","UNITY_2019_1","UNITY_2019_2","UNITY_2019_3","UNITY_2019_4","UNITY_2020_1","UNITY_2021_1","UNITY_2021_2","UNITY_2022_2","DISSOLVE","DISSOLVE_CLIP","DISSOLVE_GRADIENT","DISSOLVE_SHADER_FEATURE","RIM","RIM_SHADER_FEATURE","CULLING","AUTO_TRANSPARENT_BLENDING","TEMPLATE_LWRP","ALPHA_TESTING"];flags:list[];flags_extra:dict[];keywords:dict[RENDER_TYPE="TransparentCutout",RampTextureDrawer="[TCP2Gradient]",RampTextureLabel="Ramp Texture",SHADER_TARGET="3.0",RIM_LABEL="Rim Lighting"];shaderProperties:list[,,,,,,,,,,,,,,,,,,sp(name:"Face Culling";imps:list[imp_enum(value_type:0;value:2;enum_type:"ToonyColorsPro.ShaderGenerator.Culling";guid:"56ef4201-e13a-40ed-a6f5-0b274b513884";op:Multiply;lbl:"Face Culling";gpu_inst:False;dots_inst:False;locked:False;impl_index:0)];layers:list[];unlocked:list[];layer_blend:dict[];custom_blend:dict[];clones:dict[];isClone:False)];customTextures:list[];codeInjection:codeInjection(injectedFiles:list[];mark:False);matLayers:list[]) */
+/* TCP_HASH db0952fd56b7bf7188bfd1ef768edb35 */

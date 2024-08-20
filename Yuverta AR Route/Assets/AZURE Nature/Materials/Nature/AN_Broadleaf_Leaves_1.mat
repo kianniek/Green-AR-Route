@@ -8,29 +8,38 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AN_Broadleaf_Leaves_1
-  m_Shader: {fileID: 4800000, guid: 0154318cd2c5a3747a66420b5d885dd5, type: 3}
+  m_Shader: {fileID: 4800000, guid: 5bc7a85970eb84568952794626aa410d, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - TCP2_DISSOLVE
+  - TCP2_RIM_LIGHTING
+  m_InvalidKeywords:
   - _COLOR2ENABLE_ON
   - _COLOR2OVERLAYTYPE_VERTEX_POSITION_BASED
-  - _SNOWOVERLAYTYPE_WORLD_NORMAL_BASED
-  - _TRANCLUSENCYENABLE_ON
-  - _WIND_ON
-  m_InvalidKeywords:
   - _COLOR2_ON
   - _ENABLECOLOR2_ON
   - _KEYWORD0_ON
+  - _SNOWOVERLAYTYPE_WORLD_NORMAL_BASED
+  - _TRANCLUSENCYENABLE_ON
   - _TREETYPE_BROADLEAF
+  - _WIND_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - TextureSample1:
         m_Texture: {fileID: 2800000, guid: 16d574e53541bba44a84052fa38778df, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 2f80b337770c89c45a1df52df1a8dfed, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -51,6 +60,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _DetailNormalMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DissolveGradientTexture:
+        m_Texture: {fileID: 2800000, guid: 7dbe7853e8691d142bc9342d60881b1a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DissolveMap:
+        m_Texture: {fileID: 2800000, guid: a8d1786156574934f98fdfc3e0cc8881, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -145,12 +162,15 @@ Material:
     - _Color2OverlayType: 0
     - _Color2Power: 0.975
     - _Color2__________: 0
+    - _Cull: 2
     - _Cutoff: 0.35
     - _DetailNormalMapScale: 1
     - _DirectLightInt: 1
     - _DirectLightInt1: 1
     - _DirectLightOffset: 0
     - _DirectLightOffset1: 0
+    - _DissolveGradientWidth: 0.2
+    - _DissolveValue: 0
     - _DstBlend: 0
     - _EnableColor2: 1
     - _EnvironmentReflections: 1
@@ -169,7 +189,13 @@ Material:
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _RampSmoothing: 0.415
+    - _RampThreshold: 0.01
     - _ReceiveShadows: 1
+    - _ReceiveShadowsOff: 1
+    - _RenderingMode: 0
+    - _RimMax: 2
+    - _RimMin: 0.08
     - _SNOW: 0
     - _Smoothness: 0.2
     - _Smoothness1: 0.2
@@ -195,6 +221,8 @@ Material:
     - _TranslucencyInt1: 1
     - _TreeType: 0
     - _UVSec: 0
+    - _UseDissolve: 1
+    - _UseRim: 1
     - _WIND: 1
     - _Wind: 1
     - _WindForce: 0.327
@@ -204,12 +232,17 @@ Material:
     - _ZWrite: 1
     - _____SNOW_____: 0
     - __dirty: 0
+    - __dummy__: 0
     m_Colors:
+    - _BaseColor: {r: 0.8867924, g: 0.47520885, b: 0.17903176, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color1: {r: 1, g: 0.100000024, b: 0.15744694, a: 0}
     - _Color2: {r: 1, g: 0.8874893, b: 0, a: 0}
     - _CoverageColor: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _HColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 0.37647063, g: 0.9921569, b: 0.9960785, a: 0.5}
+    - _SColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SnowColor: {r: 1, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
