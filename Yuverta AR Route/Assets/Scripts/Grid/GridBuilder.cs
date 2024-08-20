@@ -125,7 +125,7 @@ public class GridBuilder : MonoBehaviour
     public void ClearGrid()
     {
         // Destroy all children of the grid in for loop
-        for (var i = transform.childCount - 1; i >= 0; i--)
+        for (var i = 1; i < transform.childCount - 1; i++)
         {
             if (Application.isPlaying)
                 Destroy(transform.GetChild(i).gameObject);

@@ -6,25 +6,8 @@ using UnityEngine.UI;
 
 public class SceneSwap : MonoBehaviour
 {
-    // Singleton instance
-    public static SceneSwap Instance { get; private set; }
-
     // UI Slider to display loading progress
     public Slider loadingSlider;
-
-    private void Awake()
-    {
-        // Ensure there's only one instance of the SceneSwap class
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     // Function to switch to the next scene
     public void SwitchToNextScene()
@@ -36,7 +19,8 @@ public class SceneSwap : MonoBehaviour
     // Function to switch to the previous scene
     public void SwitchToPreviousScene()
     {
-        int prevSceneIndex = (SceneManager.GetActiveScene().buildIndex - 1 + SceneManager.sceneCountInBuildSettings) % SceneManager.sceneCountInBuildSettings;
+        int prevSceneIndex = (SceneManager.GetActiveScene().buildIndex - 1 + SceneManager.sceneCountInBuildSettings) %
+                             SceneManager.sceneCountInBuildSettings;
         LoadScene(prevSceneIndex);
     }
 
@@ -70,31 +54,30 @@ public class SceneSwap : MonoBehaviour
         {
             loadingSlider = GetComponentInChildren<Slider>();
         }
-        
+
         while (!asyncLoad.isDone)
         {
             // Update the slider's value based on the progress
             if (loadingSlider != null)
             {
                 loadingSlider.value = asyncLoad.progress;
-            }
 
-            // Check if the load has finished
-            if (asyncLoad.progress >= 0.9f)
-            {
-                // Loading completed
-                loadingSlider.value = 1f;
+                // Check if the load has finished
+                if (asyncLoad.progress >= 0.9f)
+                {
+                    // Loading completed
+                    loadingSlider.value = 1f;
+                }
             }
-
             yield return null;
         }
-        
+
         // Reset the slider value after loading is complete
         if (loadingSlider != null)
         {
             loadingSlider.value = 0f;
         }
-        
+
         // Activate the loaded scene
         asyncLoad.allowSceneActivation = true;
     }

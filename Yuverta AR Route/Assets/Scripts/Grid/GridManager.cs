@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.Events;
 using UnityEngine.XR.Interaction.Toolkit.Samples.ARStarterAssets;
 
 [RequireComponent(typeof(GridBuilder))]
@@ -12,8 +13,15 @@ public class GridManager : MonoBehaviour
     [SerializeField] private SerializableDictionary<GameObject, ObjectGridLocation> objsToSpawn = new();
     [SerializeField] private GameObject wadiTopLayerPrefab;
     [SerializeField] private GameObject wadiBottomLayerPrefab;
+    [SerializeField] private GameObject wadiCompleteParticlesPrefab;
+    [SerializeField] private GameObject wadiWrongParticlesPrefab;
     [SerializeField] private GameObject wadiWeatherUIPrefab;
-    
+
+    [Header("Events")] [Space(10)] [SerializeField]
+    private UnityEvent onWadiCompleted = new();
+    [SerializeField]
+    private UnityEvent onBlockPlaced = new();
+
     private GameObject _wadiTopLayer;
     private GameObject _wadiBottomLayer;
     private GameObject _wadiWeatherUI;
@@ -90,6 +98,8 @@ public class GridManager : MonoBehaviour
 
     public GameObject SnapToGridPoint(GameObject objToSnap)
     {
+        onBlockPlaced.Invoke();
+        
         var closestGridPoint = ClosestGridPoint(objToSnap);
         if (closestGridPoint != null)
         {
@@ -104,6 +114,8 @@ public class GridManager : MonoBehaviour
         {
             _placedObjects.Add(objToSnap);
         }
+        
+        HideGridPointVisualIfOccupied();
 
         return closestGridPoint;
     }
@@ -132,6 +144,9 @@ public class GridManager : MonoBehaviour
 
         // Mark the closest grid point as occupied
         _occupiedPositions[closestGridPoint] = true;
+        
+        HideGridPointVisualIfOccupied();
+
 
         return closestGridPoint;
     }
@@ -165,6 +180,9 @@ public class GridManager : MonoBehaviour
 
             return null;
         }
+        
+        HideGridPointVisualIfOccupied();
+
     }
 
     public bool CheckPosition(out List<GameObject> wrongPlaces)
@@ -180,11 +198,13 @@ public class GridManager : MonoBehaviour
             // Add the object to the list of wrongly placed objects
             wrongPlaces.Add(obj);
             Debug.Log($"Object {obj.name} is not correctly placed.");
-            
+
             //make the wrong objects shake
             script.ShakeObject();
         }
+        HideGridPointVisualIfOccupied();
 
+        
         return wrongPlaces.Count == 0 && CheckIfAllPlaced();
     }
 
@@ -203,6 +223,9 @@ public class GridManager : MonoBehaviour
             Destroy(obj);
             Debug.Log($"Object {obj.name} removed from grid point {gridPoint.name}");
         }
+        
+        HideGridPointVisualIfOccupied();
+
     }
 
     private bool CheckIfAllPlaced()
@@ -210,8 +233,21 @@ public class GridManager : MonoBehaviour
         return _placedObjects.Count == objsToSpawn.keys.Count;
     }
 
+    public void OnWadiWrong()
+    {
+        if (wadiWrongParticlesPrefab)
+        {
+            var particles = Instantiate(wadiWrongParticlesPrefab, transform.position, Quaternion.identity);
+            var particleSystem = particles.GetComponent<ParticleSystem>();
+                
+            if (particleSystem != null)
+                particleSystem.Play();
+        }
+    }
+
     public void OnWadiCompleted()
     {
+        HideGridPointVisualIfOccupied();
         //Remove all objects from the grid and don't place them back into UI
         foreach (var obj in _placedObjects)
         {
@@ -227,7 +263,7 @@ public class GridManager : MonoBehaviour
         _wadiTopLayer = Instantiate(wadiTopLayerPrefab);
         _wadiBottomLayer = Instantiate(wadiBottomLayerPrefab);
         _wadiWeatherUI = Instantiate(wadiWeatherUIPrefab);
-        
+
         //Get the position constraints in the wadiWeatherUI
         var weatherUIPositionConstraints = _wadiWeatherUI.GetComponentsInChildren<PositionConstraint>();
 
@@ -238,18 +274,40 @@ public class GridManager : MonoBehaviour
             var constraintSources = new ConstraintSource();
             constraintSources.sourceTransform = _wadiTopLayer.transform;
             constraintSources.weight = 1;
-            
+
             positionConstraint.AddSource(constraintSources);
         }
-        
+
         var centerPoint = gridBuilder.GetCenterPoint();
 
         _wadiTopLayer.transform.position = _wadiBottomLayer.transform.position = centerPoint + transform.position;
-        
+
         var rotation = transform.rotation * Quaternion.Euler(0, -90, 0);
         _wadiTopLayer.transform.rotation = _wadiBottomLayer.transform.rotation = rotation;
 
         //Set the wadi completed flag to true
         _wadiCompleted = true;
+
+        //Play the wadi completion particles
+        if (wadiCompleteParticlesPrefab)
+        {
+            var particles = Instantiate(wadiCompleteParticlesPrefab, transform.position, Quaternion.identity);
+            var particleSystem = particles.GetComponent<ParticleSystem>();
+                
+            if (particleSystem != null)
+                particleSystem.Play();
+        }
+        
+        
+
+        onWadiCompleted.Invoke();
+    }
+    
+    public void HideGridPointVisualIfOccupied()
+    {
+        foreach (var occupiedPosition in _occupiedPositions)
+        {
+            occupiedPosition.Key.transform.GetChild(0).gameObject.SetActive(!occupiedPosition.Value);
+        }
     }
 }

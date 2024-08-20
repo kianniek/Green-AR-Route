@@ -120,7 +120,7 @@ public class ARInteractorSpawnTrigger : MonoBehaviour
                 return;
             }
 
-            if (m_ObjectSpawner.TrySpawnObject(arRaycastHit.pose.position, arRaycastHit.pose.up, out var spawnedObject))
+            if (m_ObjectSpawner.TrySpawnObject(arRaycastHit.pose.position, arRaycastHit.pose.up, out var spawnedObject, out var spawnPosition))
             {
                 m_OnObjectSpawned.Invoke();
             }

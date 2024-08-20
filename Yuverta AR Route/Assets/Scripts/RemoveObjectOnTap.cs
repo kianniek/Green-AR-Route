@@ -9,6 +9,8 @@ using TouchPhase = UnityEngine.TouchPhase;
 public class RemoveObjectOnTap : MonoBehaviour
 {
     [SerializeField] private string tagToRaycast = "GridPoint";
+    [SerializeField] private GameObject removeParticlesPrefab;
+
     private ObjectLogic _objectLogic;
 
     // Double tap detection
@@ -65,6 +67,13 @@ public class RemoveObjectOnTap : MonoBehaviour
             {
                 Debug.Log("Hit object: " + gameObject.name);
                 _objectLogic.RemoveObjectFromGrid();
+
+                // Spawn particles
+                var particles = Instantiate(removeParticlesPrefab, transform.position, Quaternion.identity);
+                var particleSystem = particles.GetComponent<ParticleSystem>();
+                
+                if (particleSystem != null)
+                    particleSystem.Play();
             }
         }
     }

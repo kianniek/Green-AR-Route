@@ -42,7 +42,10 @@ public class CropScript : MonoBehaviour
         cropObject = newCrop;
         
         //Creating the new crop
-        Instantiate(cropObject.cropPrefab, transform);
+        var prefab = Instantiate(cropObject.cropPrefab, transform);
+        
+        //Setting the new crop as the first child
+        prefab.transform.SetSiblingIndex(0);
         
         //Adding the growth stages to the list and setting them to inactive
         for (int i = 0; i < GROWTH_STAGES; i++)
@@ -76,7 +79,10 @@ public class CropScript : MonoBehaviour
         cropObject = newCrop;
         
         //Creating the new crop
-        Instantiate(cropObject.cropPrefab, transform);
+        var prefab = Instantiate(cropObject.cropPrefab, transform);
+        
+        //Setting the new crop as the first child
+        prefab.transform.SetSiblingIndex(0);
         
         //Adding the growth stages to the list
         for (int i = 0; i < GROWTH_STAGES; i++)

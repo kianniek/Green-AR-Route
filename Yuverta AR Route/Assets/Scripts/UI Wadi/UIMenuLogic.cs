@@ -116,6 +116,7 @@ public class UIMenuLogic : MonoBehaviour//, IDragHandler, IEndDragHandler
         else
         {
             onWadiIncorrect.Invoke();
+            _gridManager.OnWadiWrong();
             _gridManager.GridBuilder.MoveGridPointsToOriginalPosition();
             Debug.Log("Wadi Incorrect");
         }
