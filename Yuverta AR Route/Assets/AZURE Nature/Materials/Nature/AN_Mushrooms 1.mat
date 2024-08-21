@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1310109582606653780
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -20,15 +7,15 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_City_tex
-  m_Shader: {fileID: -6465566751694194690, guid: 2b2446775dddaa849871c94386048a90,
-    type: 3}
+  m_Name: AN_Mushrooms 1
+  m_Shader: {fileID: 4800000, guid: c61194769c49566439e564fcdf2deff8, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _COVERAGEOVERLAYTYPE_VERTEX_POSITION
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -37,19 +24,39 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: dfe6e0ac3e5f24740a17e14b65e08406, type: 3}
+    - _Albedo:
+        m_Texture: {fileID: 2800000, guid: 4ff322f4f5ae2984d9c5dc6614401bc1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _BaseMap_1:
-        m_Texture: {fileID: 2800000, guid: 0fa8fc0857554f94293fdcfd19b8433a, type: 3}
+    - _BarkAlbedo:
+        m_Texture: {fileID: 2800000, guid: 4ff322f4f5ae2984d9c5dc6614401bc1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _BaseMap_2:
-        m_Texture: {fileID: 2800000, guid: 0fa8fc0857554f94293fdcfd19b8433a, type: 3}
+    - _BarkNormal:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CoverageAlbedo:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CoverageMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CoverageMask1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CoverageNormal:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CoverageTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -73,15 +80,11 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MaskTexture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _NormalMap:
+    - _Normal:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -93,23 +96,27 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
+    - _SnowAlbedo:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Texture01:
-        m_Texture: {fileID: 2800000, guid: d128345017579884f86e29adf0866452, type: 3}
+    - _SurfaceAlbedo:
+        m_Texture: {fileID: 2800000, guid: 4ff322f4f5ae2984d9c5dc6614401bc1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Texture02:
-        m_Texture: {fileID: 2800000, guid: aa5b7be62f9024d4fb3749196e53f5b7, type: 3}
+    - _SurfaceNormal:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: 0fa8fc0857554f94293fdcfd19b8433a, type: 3}
+    - _Texture:
+        m_Texture: {fileID: 2800000, guid: 4ff322f4f5ae2984d9c5dc6614401bc1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _UVTexture:
+    - _TextureSample0:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -127,59 +134,52 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_2871f666316541908d110962eef07f02: 40
-    - Vector1_2c6f3ce4bba145b09c0a22fced0d7f85: 0
-    - Vector1_b160a6374fb04a77b114bb611b8c55e4: 0
-    - _AlphaClip: 0
-    - _AlphaToMask: 0
-    - _Blend: 0
-    - _BlendModePreserveSpecular: 1
-    - _Blending_vertex_color: 0.5
+    - _AlphaCutoff: 0.5
+    - _BlendNormals: 0
+    - _BottomCoverage: 0
     - _BumpScale: 1
-    - _ClearCoatMask: 0
-    - _ClearCoatSmoothness: 0
-    - _Contrast: 1
-    - _Cull: 2
+    - _COVERAGE: 0
+    - _Coverage: 0
+    - _CoverageContrast: 1
+    - _CoverageFade: 0
+    - _CoverageFade1: 0.4
+    - _CoverageLevel: 0
+    - _CoverageLevel1: 0.3
+    - _CoverageOverlayType: 1
+    - _CoverageSmoothness: 0
+    - _CoverageThickness: 0
+    - _CoverageThicknessLevel: 1
     - _Cutoff: 0.5
-    - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _DstBlendAlpha: 0
-    - _EnvironmentReflections: 1
-    - _Float: 0
+    - _Float0: 0.3
+    - _Float2: 1
     - _GlossMapScale: 1
-    - _Glossiness: 0.100000024
+    - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _MainTexture_Hue: 0
-    - _MainTexture_Saturation: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ReceiveShadows: 1
-    - _Saturation: 0.969
-    - _Smoothness: 0.100000024
+    - _SNOW: 0
+    - _Smoothness: 0.15
     - _SmoothnessTextureChannel: 0
-    - _Smootnes: 0.506
+    - _Snow: 1
+    - _SnowAmount: 0.5
+    - _SnowFade: 0.1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _SrcBlendAlpha: 1
-    - _Substraat_Hue: 0
-    - _Substraat_Saturation: 0
-    - _Surface: 0
+    - _SurfaceSmoothness: 0.2
+    - _ThicknessLevel: 1
     - _UVSec: 0
-    - _WorkflowMode: 1
     - _ZWrite: 1
-    - _Zaad_Hue: 0
-    - _Zaad_Saturation: 0
+    - __dirty: 0
     m_Colors:
-    - _BaseColor: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+    - _BarkColor: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color_1: {r: 1, g: 1, b: 1, a: 1}
-    - _Color_2: {r: 1, g: 1, b: 1, a: 1}
+    - _CoverageColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - m_Scale: {r: 1, g: 1, b: 0, a: 0}
+    - _SurfaceColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []

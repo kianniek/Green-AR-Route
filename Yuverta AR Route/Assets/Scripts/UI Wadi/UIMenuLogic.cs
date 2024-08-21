@@ -110,7 +110,7 @@ public class UIMenuLogic : MonoBehaviour//, IDragHandler, IEndDragHandler
         if (correct)
         {
             onWadiCorrect.Invoke();
-            _gridManager.OnWadiCompleted();
+            StartCoroutine(_gridManager.OnWadiCompleted());
             Debug.Log("Wadi Correct");
         }
         else

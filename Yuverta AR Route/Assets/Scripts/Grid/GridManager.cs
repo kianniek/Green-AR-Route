@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,24 +14,29 @@ public class GridManager : MonoBehaviour
     [SerializeField] private SerializableDictionary<GameObject, ObjectGridLocation> objsToSpawn = new();
     [SerializeField] private GameObject wadiTopLayerPrefab;
     [SerializeField] private GameObject wadiBottomLayerPrefab;
+    [SerializeField] private GameObject wadiWaterPrefab;
     [SerializeField] private GameObject wadiCompleteParticlesPrefab;
     [SerializeField] private GameObject wadiWrongParticlesPrefab;
     [SerializeField] private GameObject wadiWeatherUIPrefab;
 
     [Header("Events")] [Space(10)] [SerializeField]
     private UnityEvent onWadiCompleted = new();
-    [SerializeField]
-    private UnityEvent onBlockPlaced = new();
+
+    [SerializeField] private UnityEvent onBlockPlaced = new();
 
     private GameObject _wadiTopLayer;
     private GameObject _wadiBottomLayer;
+    private GameObject _wadiwater;
     private GameObject _wadiWeatherUI;
+    private float _waterLevel = 0.0f;
 
     private List<GameObject> _placedObjects = new();
     private int _selectedObjectIndex;
     private Dictionary<GameObject, bool> _occupiedPositions = new(); // Changed value type to bool
     private UIMenuLogic _uiMenuLogic;
     private bool _wadiCompleted;
+    private bool riseAndDrainWaterAnimationCompleted = false;
+
 
     public enum ObjectGridLocation
     {
@@ -99,7 +105,7 @@ public class GridManager : MonoBehaviour
     public GameObject SnapToGridPoint(GameObject objToSnap)
     {
         onBlockPlaced.Invoke();
-        
+
         var closestGridPoint = ClosestGridPoint(objToSnap);
         if (closestGridPoint != null)
         {
@@ -114,7 +120,7 @@ public class GridManager : MonoBehaviour
         {
             _placedObjects.Add(objToSnap);
         }
-        
+
         HideGridPointVisualIfOccupied();
 
         return closestGridPoint;
@@ -144,7 +150,7 @@ public class GridManager : MonoBehaviour
 
         // Mark the closest grid point as occupied
         _occupiedPositions[closestGridPoint] = true;
-        
+
         HideGridPointVisualIfOccupied();
 
 
@@ -180,9 +186,8 @@ public class GridManager : MonoBehaviour
 
             return null;
         }
-        
-        HideGridPointVisualIfOccupied();
 
+        HideGridPointVisualIfOccupied();
     }
 
     public bool CheckPosition(out List<GameObject> wrongPlaces)
@@ -202,9 +207,10 @@ public class GridManager : MonoBehaviour
             //make the wrong objects shake
             script.ShakeObject();
         }
+
         HideGridPointVisualIfOccupied();
 
-        
+
         return wrongPlaces.Count == 0 && CheckIfAllPlaced();
     }
 
@@ -223,9 +229,8 @@ public class GridManager : MonoBehaviour
             Destroy(obj);
             Debug.Log($"Object {obj.name} removed from grid point {gridPoint.name}");
         }
-        
-        HideGridPointVisualIfOccupied();
 
+        HideGridPointVisualIfOccupied();
     }
 
     private bool CheckIfAllPlaced()
@@ -239,13 +244,13 @@ public class GridManager : MonoBehaviour
         {
             var particles = Instantiate(wadiWrongParticlesPrefab, transform.position, Quaternion.identity);
             var particleSystem = particles.GetComponent<ParticleSystem>();
-                
+
             if (particleSystem != null)
                 particleSystem.Play();
         }
     }
 
-    public void OnWadiCompleted()
+    public IEnumerator OnWadiCompleted()
     {
         HideGridPointVisualIfOccupied();
         //Remove all objects from the grid and don't place them back into UI
@@ -263,6 +268,24 @@ public class GridManager : MonoBehaviour
         _wadiTopLayer = Instantiate(wadiTopLayerPrefab);
         _wadiBottomLayer = Instantiate(wadiBottomLayerPrefab);
         _wadiWeatherUI = Instantiate(wadiWeatherUIPrefab);
+        _wadiwater = Instantiate(wadiWaterPrefab, _wadiBottomLayer.transform);
+        var anim = _wadiwater.GetComponent<Animator>();
+        var centerPoint = gridBuilder.GetCenterPoint();
+
+        _wadiwater.transform.position = _wadiTopLayer.transform.position =
+            _wadiBottomLayer.transform.position = centerPoint + transform.position;
+
+        var rotation = transform.rotation * Quaternion.Euler(0, -90, 0);
+        _wadiwater.transform.rotation =
+            _wadiTopLayer.transform.rotation = _wadiBottomLayer.transform.rotation = rotation;
+
+
+        yield return StartCoroutine(RiseAndDrainWaterAnimation(anim));
+
+        while (!riseAndDrainWaterAnimationCompleted)
+        {
+            yield return null;
+        }
 
         //Get the position constraints in the wadiWeatherUI
         var weatherUIPositionConstraints = _wadiWeatherUI.GetComponentsInChildren<PositionConstraint>();
@@ -278,12 +301,6 @@ public class GridManager : MonoBehaviour
             positionConstraint.AddSource(constraintSources);
         }
 
-        var centerPoint = gridBuilder.GetCenterPoint();
-
-        _wadiTopLayer.transform.position = _wadiBottomLayer.transform.position = centerPoint + transform.position;
-
-        var rotation = transform.rotation * Quaternion.Euler(0, -90, 0);
-        _wadiTopLayer.transform.rotation = _wadiBottomLayer.transform.rotation = rotation;
 
         //Set the wadi completed flag to true
         _wadiCompleted = true;
@@ -293,16 +310,30 @@ public class GridManager : MonoBehaviour
         {
             var particles = Instantiate(wadiCompleteParticlesPrefab, transform.position, Quaternion.identity);
             var particleSystem = particles.GetComponent<ParticleSystem>();
-                
+
             if (particleSystem != null)
                 particleSystem.Play();
         }
-        
-        
+
 
         onWadiCompleted.Invoke();
+
+        yield return true;
     }
-    
+
+    public IEnumerator RiseAndDrainWaterAnimation(Animator anim)
+    {
+        anim.SetTrigger("Rise");
+
+        yield return new WaitForSeconds(1.0f);
+
+        anim.SetTrigger("Drain");
+        anim.ResetTrigger("Rise");
+
+        riseAndDrainWaterAnimationCompleted = true;
+        yield return null;
+    }
+
     public void HideGridPointVisualIfOccupied()
     {
         foreach (var occupiedPosition in _occupiedPositions)

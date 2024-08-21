@@ -134,10 +134,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paintColors: {fileID: 11400000, guid: a7c7da171bb33614996067a3485c1dbb, type: 2}
-  paintColorIndex: 1
-  radius: 1
-  strength: 1
-  hardness: 1
+  paintColorIndex: 0
+  radius: 8
+  strength: 0.5
+  hardness: 0
 --- !u!54 &1294319580271209805
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -162,6 +162,6 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
