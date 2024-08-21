@@ -26,7 +26,10 @@ public class CropContainer : MonoBehaviour
     public bool currentCropIsRightCrop => rightCrop;
 
     public UnityEvent onCropHarvested = new();
+    public UnityEvent onCropFirstHarvested = new();
     public UnityEvent<CropScript> onCropPlanted = new();
+
+    bool firstHarvest = false;
 
     private void Awake()
     {
@@ -60,6 +63,11 @@ public class CropContainer : MonoBehaviour
         cropDisplayName.text = cropScript.cropObject.cropName;
 
         // Invoke the crop planted event
+        if (firstHarvest == false)
+        {
+            return;
+        }
+
         onCropPlanted.Invoke(cropScript);
     }
 
@@ -76,6 +84,13 @@ public class CropContainer : MonoBehaviour
             if (hit.collider.gameObject.CompareTag("Crop"))
             {
                 Debug.Log("Crop harvested");
+
+                if (firstHarvest == false)
+                {
+                    firstHarvest = true;
+                    onCropFirstHarvested.Invoke();
+                }
+
                 onCropHarvested.Invoke();
                 cropScript.HarvestCrop();
             }
