@@ -5,29 +5,28 @@ using UnityEngine.EventSystems;
 
 public class GunController : MonoBehaviour
 {
-    [Header("Weapon Variables")]
-    [SerializeField]
+    [Header("Weapon Variables")] [SerializeField]
     private List<Weapon> weapons;
 
-    [Header("Bullet Variables")]
-    private GameObject bulletPrefab;
+    [Header("Bullet Variables")] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawnPoint;
 
-    [Header("Ammunition Variables")]
-    private Ammo currentAmmo;
+    [Header("Ammunition Variables")] private Ammo currentAmmo;
 
     private Weapon currentWeapon;
     private WeaponType weaponType;
     private bool firing;
 
-    [Header("Catapult Variables")]
-    private float chargeRate;
+    [Header("Catapult Variables")] private float chargeRate;
     private float maxCharge;
     private float launchForce;
     private float elapsedTime = 0;
 
-    [Header("Miscellaneous")]
-    private Camera mainCamera;
+    [Header("Miscellaneous")] private Camera mainCamera;
+
+    private GameObject weaponInstance;
+
+    public RectTransform weaponWheel;
 
     protected virtual void Start()
     {
@@ -58,36 +57,22 @@ public class GunController : MonoBehaviour
             Touch touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began && IsTouchOverUI(touch.fingerId))
             {
+                LoadingModelCatapult(true);
                 return;
             }
 
             if (touch.phase == TouchPhase.Ended)
             {
+                LoadingModelCatapult(false);
                 Shoot(elapsedTime);
                 elapsedTime = 0;
             }
             else
             {
+                LoadingModelCatapult(true);
                 elapsedTime += Time.deltaTime;
             }
         }
-
-#if UNITY_EDITOR
-        if (Input.GetMouseButtonDown(0) && EventSystem.current.IsPointerOverGameObject())
-        {
-            return;
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            Shoot(elapsedTime);
-            elapsedTime = 0;
-        }
-        else
-        {
-            elapsedTime += Time.deltaTime;
-        }
-#endif
     }
 
     private bool IsTouchOverUI(int fingerId)
@@ -97,6 +82,10 @@ public class GunController : MonoBehaviour
 
     public void ChangeWeapon(int weaponIndex)
     {
+        if (currentWeapon == weapons[weaponIndex])
+            return;
+
+        StartCoroutine(RotateWeaponWheel());
         // Destroy the old gun
         if (transform.childCount > 0)
         {
@@ -105,7 +94,7 @@ public class GunController : MonoBehaviour
 
         // Spawn the new gun
         currentWeapon = weapons[weaponIndex];
-        GameObject weaponInstance = Instantiate(currentWeapon.weaponModel, transform);
+        weaponInstance = Instantiate(currentWeapon.weaponModel, transform);
 
         // Set ammo and weapon variables
         currentAmmo = currentWeapon.weaponAmmo;
@@ -134,6 +123,35 @@ public class GunController : MonoBehaviour
 
         firing = false;
     }
+
+    public IEnumerator RotateWeaponWheel()
+    {
+        if (!weaponWheel)
+            yield return null;
+
+        float turnAmount = 180f;
+        float amountTurned = 0f;
+        float rotationSpeed = 180f; // Degrees per second
+        Quaternion initialRotation = weaponWheel.rotation;
+        Quaternion targetRotation = Quaternion.Euler(weaponWheel.rotation.eulerAngles + new Vector3(0, 0, turnAmount));
+
+        while (amountTurned < turnAmount)
+        {
+            float turnAddition = rotationSpeed * Time.deltaTime;
+            amountTurned += turnAddition;
+
+            // Interpolating the rotation
+            weaponWheel.rotation = Quaternion.Slerp(initialRotation, targetRotation, amountTurned / turnAmount);
+
+            yield return null;
+        }
+
+        // Ensure final rotation is exactly at the target rotation
+        weaponWheel.rotation = targetRotation;
+
+        yield return null;
+    }
+
 
     public void Shoot(float elapsedTime)
     {
@@ -175,6 +193,17 @@ public class GunController : MonoBehaviour
         yield return null;
     }
 
+    private void LoadingModelCatapult(bool isActive)
+    {
+        if (currentWeapon.weaponType != WeaponType.Slingshot)
+            return;
+
+        var activeState = weaponInstance.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>();
+        var unactiveState = weaponInstance.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>();
+
+        unactiveState.enabled = !isActive;
+        activeState.enabled = isActive;
+    }
 
     private void LaunchProjectile(float currentCharge)
     {
