@@ -57,7 +57,7 @@ public class ObjectGrower : MonoBehaviour
     {
         switch (covagageID)
         {
-            case 2:
+            case 1:
 
                 if (hasGrownObjects)
                 {

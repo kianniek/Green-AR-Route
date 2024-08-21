@@ -1,4 +1,5 @@
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PaintColors", menuName = "ScriptableObjects/PaintColors", order = 1)]
@@ -8,6 +9,10 @@ public class PaintColors : ScriptableObject
     
     public Color GetColor(int index)
     {
+        if (index > colors.Length)
+        {
+            Debug.Log($"index was {index}, length of array colors was {colors.Length}", this);
+        }
         return colors[index];
     }
     

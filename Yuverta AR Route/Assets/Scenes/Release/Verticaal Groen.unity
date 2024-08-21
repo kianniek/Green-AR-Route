@@ -130,6 +130,136 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9183717264194731524}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &131015033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1283850826545415210, guid: 5c134ea5807842c41a418f827ad5bc6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9183717264194731524}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &131015036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131015033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 131015037}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &131015037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131015033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
+--- !u!1 &138199257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3637139896599113635, guid: 5c134ea5807842c41a418f827ad5bc6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9183717264194731524}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &138199260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138199257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 138199261}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &138199261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138199257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
 --- !u!1 &143266677 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5054892882462206671, guid: ab2fa1657fff4274d8f622599483201c,
@@ -350,6 +480,71 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wheel: {fileID: 4686417139833723394}
   gunController: {fileID: 6141505326492754562}
+--- !u!1 &347542917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6528708035287701235, guid: 5c134ea5807842c41a418f827ad5bc6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9183717264194731524}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &347542920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347542917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 347542921}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &347542921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347542917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
 --- !u!1 &348978561
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,6 +766,71 @@ MonoBehaviour:
       holeTexture: {fileID: 2800000, guid: 311c056bd3da5ad4f8328cddf5f0c6b9, type: 3}
     isFoldedOut: 1
   sliceIndex: 1
+--- !u!1 &376144968 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4822084935682923534, guid: 5c134ea5807842c41a418f827ad5bc6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9183717264194731524}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &376144971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376144968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 376144972}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &376144972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376144968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
 --- !u!1 &379320995 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6352110331612235867, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -643,6 +903,71 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9183717264194731524}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &480064635 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2372991394508035709, guid: 5c134ea5807842c41a418f827ad5bc6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9183717264194731524}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &480064638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480064635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 480064639}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &480064639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480064635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
 --- !u!1 &510680299 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6175602627126630965, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -776,6 +1101,65 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9183717264194731524}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &588218466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588218463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 588218467}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &588218467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588218463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
 --- !u!1 &599832390
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,6 +1326,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f6af01f32ddc0488ae0e4b8b049e9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &648452313 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7721941114840080195, guid: 5c134ea5807842c41a418f827ad5bc6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9183717264194731524}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &648452316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648452313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 648452317}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &648452317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648452313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
 --- !u!1 &656123342 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2491245301436015319, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -1270,6 +1719,71 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &705674727 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5211748054559549219, guid: 5c134ea5807842c41a418f827ad5bc6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9183717264194731524}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &705674730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705674727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 705674731}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &705674731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 705674727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
 --- !u!1 &732370133 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4034950712519336223, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -1425,12 +1939,142 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &792028183 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4835331501013869666, guid: 5c134ea5807842c41a418f827ad5bc6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9183717264194731524}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &792028186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792028183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 792028187}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &792028187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792028183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
 --- !u!1 &836863199 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5702053529900741662, guid: 5c134ea5807842c41a418f827ad5bc6e,
     type: 3}
   m_PrefabInstance: {fileID: 9183717264194731524}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &855764657 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1969798954288626880, guid: 5c134ea5807842c41a418f827ad5bc6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9183717264194731524}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &855764660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855764657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 855764661}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &855764661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855764657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
 --- !u!1 &870369493 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2705234427831767016, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -1589,12 +2233,6 @@ MonoBehaviour:
   - {fileID: 761934807}
   - {fileID: 1180152708}
   centerPoint: {fileID: 1192383891}
---- !u!1 &991265418 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4228641315623241192, guid: 5c134ea5807842c41a418f827ad5bc6e,
-    type: 3}
-  m_PrefabInstance: {fileID: 9183717264194731524}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1068480540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1724,6 +2362,71 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9183717264194731524}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1088571839 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 340057629861430448, guid: 5c134ea5807842c41a418f827ad5bc6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9183717264194731524}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1088571842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088571839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1088571843}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1088571843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088571839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
 --- !u!1 &1104209036 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6692705720644743881, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -2466,6 +3169,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1549452047}
   m_CullTransparentMesh: 1
+--- !u!1 &1588498001 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2495549887545899418, guid: 5c134ea5807842c41a418f827ad5bc6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9183717264194731524}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1588498004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588498001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1588498005}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1588498005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588498001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
 --- !u!1 &1607475384 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8458842943954607270, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -2565,6 +3333,71 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 9183717264194731524}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1806170206 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8658597792559528738, guid: 5c134ea5807842c41a418f827ad5bc6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9183717264194731524}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1806170209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806170206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1806170210}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1806170210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806170206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
 --- !u!1 &1808165014 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6724028444172953479, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -2634,6 +3467,71 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!1 &1818412017 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 550398127574008734, guid: 5c134ea5807842c41a418f827ad5bc6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 9183717264194731524}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1818412020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818412017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1818412021}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1818412021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818412017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
 --- !u!1 &1843963645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2717,12 +3615,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1893612139 stripped
+--- !u!1 &1904452087 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 7551261362925282404, guid: 5c134ea5807842c41a418f827ad5bc6e,
+  m_CorrespondingSourceObject: {fileID: 1286263652806738276, guid: 5c134ea5807842c41a418f827ad5bc6e,
     type: 3}
   m_PrefabInstance: {fileID: 9183717264194731524}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1904452090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904452087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1904452091}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1904452091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1904452087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
 --- !u!1 &1912376261 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 519318705477357739, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -3127,7 +4084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paintColors: {fileID: 11400000, guid: a7c7da171bb33614996067a3485c1dbb, type: 2}
-  paintColorIndex: 2
+  paintColorIndex: 0
   radius: 2
   strength: 1
   hardness: 1
@@ -4088,7 +5045,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &6141505326492754562
 GameObject:
   m_ObjectHideFlags: 0
@@ -4446,7 +5403,7 @@ PrefabInstance:
     - target: {fileID: 1098915412154293001, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.size
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1098915412154293001, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
@@ -4521,13 +5478,13 @@ PrefabInstance:
     - target: {fileID: 1294866582934714370, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1294866582934714370, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.data[0]
       value: 
-      objectReference: {fileID: 588218463}
+      objectReference: {fileID: 1128800291}
     - target: {fileID: 1294866582934714370, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.data[1]
@@ -4556,7 +5513,7 @@ PrefabInstance:
     - target: {fileID: 1679390189267313453, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1687042901980293048, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
@@ -4601,7 +5558,7 @@ PrefabInstance:
     - target: {fileID: 1781706573583403251, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: useHitTreshold
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1781706573583403251, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
@@ -4926,53 +5883,53 @@ PrefabInstance:
     - target: {fileID: 4523242229768550798, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.size
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4523242229768550798, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.data[0]
       value: 
-      objectReference: {fileID: 991265418}
+      objectReference: {fileID: 379320995}
     - target: {fileID: 4523242229768550798, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.data[1]
       value: 
-      objectReference: {fileID: 1893612139}
+      objectReference: {fileID: 560834023}
     - target: {fileID: 4523242229768550798, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.data[2]
       value: 
-      objectReference: {fileID: 560834023}
+      objectReference: {fileID: 338209096}
     - target: {fileID: 4523242229768550798, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.data[3]
       value: 
-      objectReference: {fileID: 338209096}
+      objectReference: {fileID: 893359165}
     - target: {fileID: 4523242229768550798, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.data[4]
       value: 
-      objectReference: {fileID: 893359165}
+      objectReference: {fileID: 1085186673}
     - target: {fileID: 4523242229768550798, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.data[5]
       value: 
-      objectReference: {fileID: 1085186673}
+      objectReference: {fileID: 1454206185}
     - target: {fileID: 4523242229768550798, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.data[6]
       value: 
-      objectReference: {fileID: 1454206185}
+      objectReference: {fileID: 231667019}
     - target: {fileID: 4523242229768550798, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.data[7]
       value: 
-      objectReference: {fileID: 231667019}
+      objectReference: {fileID: 1965148547}
     - target: {fileID: 4523242229768550798, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.data[8]
       value: 
-      objectReference: {fileID: 1965148547}
+      objectReference: {fileID: 379320995}
     - target: {fileID: 4523242229768550798, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.data[9]
@@ -5022,11 +5979,6 @@ PrefabInstance:
         type: 3}
       propertyPath: OnCovered.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5165209271671066165, guid: 5c134ea5807842c41a418f827ad5bc6e,
-        type: 3}
-      propertyPath: _coverage.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5165209271671066165, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
@@ -5166,7 +6118,7 @@ PrefabInstance:
     - target: {fileID: 6084069259546162683, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: individualObjectsToGrow.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6084069259546162683, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
@@ -5406,6 +6358,126 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1383652002}
+    - targetCorrespondingSourceObject: {fileID: 4822084935682923534, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 376144972}
+    - targetCorrespondingSourceObject: {fileID: 4822084935682923534, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 376144971}
+    - targetCorrespondingSourceObject: {fileID: 5211748054559549219, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 705674731}
+    - targetCorrespondingSourceObject: {fileID: 5211748054559549219, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 705674730}
+    - targetCorrespondingSourceObject: {fileID: 3648411437042424073, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 588218467}
+    - targetCorrespondingSourceObject: {fileID: 3648411437042424073, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 588218466}
+    - targetCorrespondingSourceObject: {fileID: 550398127574008734, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1818412021}
+    - targetCorrespondingSourceObject: {fileID: 550398127574008734, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1818412020}
+    - targetCorrespondingSourceObject: {fileID: 1286263652806738276, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1904452091}
+    - targetCorrespondingSourceObject: {fileID: 1286263652806738276, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1904452090}
+    - targetCorrespondingSourceObject: {fileID: 1283850826545415210, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 131015037}
+    - targetCorrespondingSourceObject: {fileID: 1283850826545415210, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 131015036}
+    - targetCorrespondingSourceObject: {fileID: 4835331501013869666, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 792028187}
+    - targetCorrespondingSourceObject: {fileID: 4835331501013869666, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 792028186}
+    - targetCorrespondingSourceObject: {fileID: 1969798954288626880, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 855764661}
+    - targetCorrespondingSourceObject: {fileID: 1969798954288626880, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 855764660}
+    - targetCorrespondingSourceObject: {fileID: 7721941114840080195, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 648452317}
+    - targetCorrespondingSourceObject: {fileID: 7721941114840080195, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 648452316}
+    - targetCorrespondingSourceObject: {fileID: 2372991394508035709, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 480064639}
+    - targetCorrespondingSourceObject: {fileID: 2372991394508035709, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 480064638}
+    - targetCorrespondingSourceObject: {fileID: 2495549887545899418, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1588498005}
+    - targetCorrespondingSourceObject: {fileID: 2495549887545899418, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1588498004}
+    - targetCorrespondingSourceObject: {fileID: 6528708035287701235, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 347542921}
+    - targetCorrespondingSourceObject: {fileID: 6528708035287701235, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 347542920}
+    - targetCorrespondingSourceObject: {fileID: 340057629861430448, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1088571843}
+    - targetCorrespondingSourceObject: {fileID: 340057629861430448, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1088571842}
+    - targetCorrespondingSourceObject: {fileID: 8658597792559528738, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1806170210}
+    - targetCorrespondingSourceObject: {fileID: 8658597792559528738, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1806170209}
+    - targetCorrespondingSourceObject: {fileID: 3637139896599113635, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 138199261}
+    - targetCorrespondingSourceObject: {fileID: 3637139896599113635, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 138199260}
   m_SourcePrefab: {fileID: 100100000, guid: 5c134ea5807842c41a418f827ad5bc6e, type: 3}
 --- !u!1 &9183717264194731525 stripped
 GameObject:

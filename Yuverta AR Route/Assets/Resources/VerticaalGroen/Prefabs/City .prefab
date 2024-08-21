@@ -12748,8 +12748,81 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2077048177599070835, guid: abadec0432f2c4ac4a65f6bd9e92382b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9195233559657203224}
+    - targetCorrespondingSourceObject: {fileID: 2077048177599070835, guid: abadec0432f2c4ac4a65f6bd9e92382b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3008906954328784736}
   m_SourcePrefab: {fileID: 100100000, guid: abadec0432f2c4ac4a65f6bd9e92382b, type: 3}
+--- !u!1 &1963740155093934010 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2077048177599070835, guid: abadec0432f2c4ac4a65f6bd9e92382b,
+    type: 3}
+  m_PrefabInstance: {fileID: 545976879675416009}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9195233559657203224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963740155093934010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63156596f118d164bbaa559abf9e8823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  individualObjectsToGrow: []
+  OnGrownObjects:
+    m_PersistentCalls:
+      m_Calls: []
+  growthDuration: 2
+--- !u!114 &3008906954328784736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963740155093934010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnCollisionEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9195233559657203224}
+        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
+        m_MethodName: GrowChildObjects
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnCollisionStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCollisionExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &8407147438596134250 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8304500382289791139, guid: abadec0432f2c4ac4a65f6bd9e92382b,

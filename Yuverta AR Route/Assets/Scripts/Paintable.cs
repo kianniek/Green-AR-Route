@@ -124,12 +124,6 @@ public class Paintable : MonoBehaviour
 
     public int CheckCoverage()
     {
-        // Check if the coverage is above the threshold for each color channel
-        if (coverage.w > coverageThreshold && previouslyFilledColorIndex != 3)
-        {
-            return 3; // Color index for z
-        }
-
         if (coverage.z > coverageThreshold && previouslyFilledColorIndex != 2)
         {
             PaintManager.instance.AddToPaintablesList(this, 2);

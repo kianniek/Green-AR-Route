@@ -45,11 +45,11 @@ public class CollisionPainter : MonoBehaviour
         var coverageIndex = p.CheckCoverage();
 
         // Set the previously filled color index to allow overlay
-        if (coverageIndex != -1)
-        {
-            p.SetPreviouslyFilledColorIndex(coverageIndex);
-            Paintable.SetMaskToColor(p, paintColors.GetColor(coverageIndex));
-        }
+        if (coverageIndex == -1) 
+            return;
+        
+        p.SetPreviouslyFilledColorIndex(coverageIndex);
+        Paintable.SetMaskToColor(p, paintColors.GetColor(coverageIndex));
     }
 
 
