@@ -68,9 +68,6 @@ public class ImageRecognitionHandler : MonoBehaviour
     private void HandleImageRecognizedStarted(ARTrackedImage trackedImage)
     {
         onImageTracked.Invoke();
-        promptAnimator.SetBool("Hidden", false);
-        promptAnimator.SetBool("Middle", true);
-        promptAnimator.SetBool("Top", false);
     }
 
     private void HandleImageRecognized(ARTrackedImage trackedImage)
@@ -86,6 +83,7 @@ public class ImageRecognitionHandler : MonoBehaviour
             {
                 if (imageEvent.nameOfImage == trackedImage.referenceImage.name)
                 {
+                    Debug.Log(imageEvent.promptText);
                     currentPromptText = imageEvent.promptText;
                     promptTextObject.text = currentPromptText; // Update the prompt text on screen
                 }
@@ -96,50 +94,27 @@ public class ImageRecognitionHandler : MonoBehaviour
             currentRecognizedImage = trackedImage;
             foreach (var imageEvent in imageEvents)
             {
-                if (imageEvent.nameOfImage != trackedImage.referenceImage.name) 
+                if (imageEvent.nameOfImage != trackedImage.referenceImage.name)
                     continue;
-                
+
                 Debug.Log(imageEvent.promptText);
                 currentPromptText = imageEvent.promptText;
                 promptTextObject.text = currentPromptText; // Update the prompt text on screen
                 onImageChanged.Invoke();
             }
         }
-
-        promptAnimator.SetBool("Hidden", false);
-        promptAnimator.SetBool("Middle", true);
-        promptAnimator.SetBool("Top", false);
     }
 
     private void HandleImageRemoved(ARTrackedImage trackedImage)
     {
-        onImageRemoved.Invoke();
         if (currentRecognizedImage == trackedImage)
         {
-            // Check if there are other tracked images to switch to
-            foreach (var otherTrackedImage in FindObjectsOfType<ARTrackedImage>())
-            {
-                if (otherTrackedImage.trackingState == UnityEngine.XR.ARSubsystems.TrackingState.Tracking)
-                {
-                    HandleImageRecognized(otherTrackedImage);
-                    break;
-                }
-            }
+            onImageRemoved.Invoke();
         }
-        
-        promptAnimator.SetBool("Hidden", false);
-        promptAnimator.SetBool("Middle", false);
-        promptAnimator.SetBool("Top", true);
-
-        // Start the coroutine to hide the text after a delay
-        StartCoroutine(HidePromptTextWithDelay(hideDelay));
     }
 
     private void HandleScreenTap()
     {
-        promptAnimator.SetBool("Hidden", true);
-        promptAnimator.SetBool("Middle", false);
-        promptAnimator.SetBool("Top", false);
         Debug.Log("Screen tapped");
         Debug.Log("Current recognized image: " + currentRecognizedImage);
         if (currentRecognizedImage == null)
@@ -159,13 +134,5 @@ public class ImageRecognitionHandler : MonoBehaviour
                 break;
             }
         }
-    }
-
-    private IEnumerator HidePromptTextWithDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        promptAnimator.SetBool("Hidden", true);
-        promptAnimator.SetBool("Middle", false);
-        promptAnimator.SetBool("Top", false);
     }
 }

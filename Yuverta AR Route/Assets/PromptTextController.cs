@@ -74,4 +74,37 @@ public class PromptTextController : MonoBehaviour
     {
         promptText.text = text;
     }
+    
+    public void ForceTop()
+    {
+        promptTextAnimator.SetBool("Hidden", false);
+        promptTextAnimator.SetBool("Middle", false);
+        promptTextAnimator.SetBool("Top", false);
+        
+        promptTextAnimator.SetTrigger("ForceTop");
+        promptTextAnimator.ResetTrigger("ForceMiddle");
+        promptTextAnimator.ResetTrigger("ForceHide");
+    }
+    
+    public void ForceMiddle()
+    {
+        promptTextAnimator.SetBool("Hidden", false);
+        promptTextAnimator.SetBool("Middle", false);
+        promptTextAnimator.SetBool("Top", false);
+        
+        promptTextAnimator.SetTrigger("ForceMiddle");
+        promptTextAnimator.ResetTrigger("ForceTop");
+        promptTextAnimator.ResetTrigger("ForceHide");
+    }
+    
+    public void ForceHide()
+    {
+        promptTextAnimator.SetBool("Hidden", false);
+        promptTextAnimator.SetBool("Middle", false);
+        promptTextAnimator.SetBool("Top", false);
+        
+        promptTextAnimator.SetTrigger("ForceHide");
+        promptTextAnimator.ResetTrigger("ForceTop");
+        promptTextAnimator.ResetTrigger("ForceMiddle");
+    }
 }

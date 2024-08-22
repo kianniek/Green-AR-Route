@@ -458,23 +458,47 @@ MonoBehaviour:
   imageEvents:
   - nameOfImage: wadi
     imageSceneIndex: 2
-    promptText: Klick op het scherm om de <b>wadi</b> activiteit te starten
+    promptText: Klik op het scherm om de <b>wadi</b> activiteit te starten
   - nameOfImage: verticaal groen
     imageSceneIndex: 3
-    promptText: Klick op het scherm om de <b>verticaal groen</b> activiteit te starten
+    promptText: Klik op het scherm om de <b>verticaal groen</b> activiteit te starten
   - nameOfImage: daktuin
     imageSceneIndex: 4
-    promptText: Klick op het scherm om de <b>daktuin</b> activiteit te starten
+    promptText: Klik op het scherm om de <b>daktuin</b> activiteit te starten
   - nameOfImage: stadslandbouw
     imageSceneIndex: 5
-    promptText: Klick op het scherm om de <b>stadslandbouw</b> activiteit te starten
+    promptText: Klik op het scherm om de <b>stadslandbouw</b> activiteit te starten
   promptTextObject: {fileID: 2078948394}
   onImageTracked:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2078948401}
+        m_TargetAssemblyTypeName: PromptTextController, Assembly-CSharp
+        m_MethodName: ToMiddel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onImageRemoved:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2078948401}
+        m_TargetAssemblyTypeName: PromptTextController, Assembly-CSharp
+        m_MethodName: ToTop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onImageChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -722,6 +746,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2078948396}
+    - targetCorrespondingSourceObject: {fileID: 5289244225045815206, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2078948401}
   m_SourcePrefab: {fileID: 100100000, guid: ed2d29e7567e8854e979a8f6eb3f7a01, type: 3}
 --- !u!224 &2078948393 stripped
 RectTransform:
@@ -768,6 +796,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2078948401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078948395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846b734844d81c5498a9e5a8e66f5b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  promptText: {fileID: 2078948394}
+  promptTextAnimator: {fileID: 2078948396}
+  showOnStart: 0
 --- !u!114 &331639556946135412
 MonoBehaviour:
   m_ObjectHideFlags: 0

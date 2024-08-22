@@ -33,37 +33,23 @@ public class ImageRecognitionEvent : MonoBehaviour
     {
         foreach (var trackedImage in eventArgs.added)
         {
-            if (trackedImage.referenceImage != null)
-            {
-                Debug.Log($"New image recognized: {trackedImage.referenceImage.name}");
-            }
-            else
-            {
-                Debug.LogWarning("Added image reference is null.");
-            }
-        
+            Debug.Log($"New image recognized: {trackedImage.referenceImage.name}");
+
             OnImageRecognizedStarted?.Invoke(trackedImage);
         }
 
         foreach (var trackedImage in eventArgs.updated)
         {
-            if (trackedImage.referenceImage != null)
-            {
-                Debug.Log($"trackedImage: {trackedImage.referenceImage.name} | {trackedImage.trackingState}");
-            }
-            else
-            {
-                Debug.LogWarning("Updated image reference is null.");
-            }
+            Debug.Log($"trackedImage: {trackedImage.referenceImage.name} | {trackedImage.trackingState}");
 
-            if (trackedImage.trackingState == TrackingState.Tracking)
+            switch (trackedImage.trackingState)
             {
-                OnImageRecognized?.Invoke(trackedImage);
-            }
-        
-            if (trackedImage.trackingState == TrackingState.Limited)
-            {
-                OnImageRemoved?.Invoke(trackedImage);
+                case TrackingState.Tracking:
+                    OnImageRecognized?.Invoke(trackedImage);
+                    break;
+                case TrackingState.Limited:
+                    OnImageRemoved?.Invoke(trackedImage);
+                    break;
             }
         }
     }
