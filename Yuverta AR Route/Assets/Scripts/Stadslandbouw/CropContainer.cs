@@ -27,6 +27,7 @@ public class CropContainer : MonoBehaviour
 
     public UnityEvent onCropHarvested = new();
     public UnityEvent onCropFirstHarvested = new();
+    public UnityEvent onCropDead = new();
     public UnityEvent<CropScript> onCropPlanted = new();
 
     bool firstHarvest = false;

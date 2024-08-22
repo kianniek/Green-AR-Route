@@ -12,7 +12,8 @@ public class CropScript : MonoBehaviour
     public CropObject cropObject;
     private GameObject currentChild;
     private int growthStage;
-    private UnityEvent fullyGrown = new();
+    [SerializeField] private UnityEvent fullyGrownCorrect = new();
+    [SerializeField] private UnityEvent fullyGrownWrong = new();
     [FormerlySerializedAs("growthStages")] public List<GameObject> growthStagesList;
     private GameObject deadCrop;
     
@@ -99,7 +100,6 @@ public class CropScript : MonoBehaviour
         currentChild.SetActive(true);
         currentChild.tag = "Crop";
         
-        fullyGrown.Invoke();
         Debug.Log("Fully grown");
         
         hasCrop = true;
@@ -124,16 +124,16 @@ public class CropScript : MonoBehaviour
             deadCrop.tag = "Crop";
             growthStagesList[growthStage].SetActive(false);
             
-            fullyGrown.Invoke();
+            fullyGrownWrong.Invoke();
             Debug.Log("Fully grown");
             return;
         }
         
 
-        if (growthStage < growthStagesList.Count) 
+        if (growthStage < growthStagesList.Count - 1) 
             return;
         
-        fullyGrown.Invoke();
+        fullyGrownCorrect.Invoke();
         Debug.Log("Fully grown");
     }
     
