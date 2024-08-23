@@ -101,6 +101,7 @@ public class GridManager : MonoBehaviour
 
         // Deserialize the dictionary to ensure correct handling of data
         objsToSpawn.OnAfterDeserialize();
+        AudioNeedsToChange();
     }
 
     public GameObject SnapToGridPoint(GameObject objToSnap)
@@ -123,7 +124,7 @@ public class GridManager : MonoBehaviour
         }
 
         HideGridPointVisualIfOccupied();
-
+        AudioNeedsToChange();
         return closestGridPoint;
     }
 
@@ -174,6 +175,7 @@ public class GridManager : MonoBehaviour
         // Find the closest new grid point
         var newGridPoint = ClosestGridPoint(objToMove);
 
+        AudioNeedsToChange();
         // If a new grid point is found, snap the object to that point and update the dictionary
         if (newGridPoint != null)
         {
@@ -187,6 +189,7 @@ public class GridManager : MonoBehaviour
 
             return null;
         }
+        
 
         HideGridPointVisualIfOccupied();
     }
@@ -228,6 +231,7 @@ public class GridManager : MonoBehaviour
             //remove the object from the list of placed objects
             _placedObjects.Remove(obj);
             Destroy(obj);
+            AudioNeedsToChange();
             Debug.Log($"Object {obj.name} removed from grid point {gridPoint.name}");
         }
 

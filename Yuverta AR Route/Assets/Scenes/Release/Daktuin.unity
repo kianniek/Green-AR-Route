@@ -1351,6 +1351,7 @@ GameObject:
   - component: {fileID: 1453638262}
   - component: {fileID: 1453638263}
   - component: {fileID: 1453638264}
+  - component: {fileID: 1453638265}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1647,6 +1648,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
+--- !u!114 &1453638265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453638255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1741103464
+      Data2: 1252910644
+      Data3: -1150538613
+      Data4: 772351895
+    Path: event:/VGH Bloem/ambience
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1525250274
 GameObject:
   m_ObjectHideFlags: 0
@@ -2014,38 +2046,48 @@ MonoBehaviour:
   - image: {fileID: 0}
     spriteGameobjectUI: {fileID: 9022741955546086398, guid: a4c5bd6dc6d07b14a9f317ff77316f9b,
       type: 3}
-    animation: {fileID: 6826138182299137592, guid: a771c0278f7af40ceaeadb39f58208da,
+    animation: {fileID: 8761482873392666276, guid: 60a5b07b754237041bbb612c3ccff7fd,
       type: 3}
     collected: 0
     flowerPart: 4
+    spawnParticles: {fileID: 1951272612279905007, guid: fb09cb116e1fd4d0195058fa75764a5c,
+      type: 3}
   - image: {fileID: 0}
     spriteGameobjectUI: {fileID: 9022741955546086398, guid: 8a724fe00e0f35140b9132075ea8be13,
       type: 3}
-    animation: {fileID: 177221699795705774, guid: 38370f5ff27fe40bc9613b3103338d30,
+    animation: {fileID: 7436532407461525054, guid: 9fa9392353e80a143a0df6efb95265c1,
       type: 3}
     collected: 0
     flowerPart: 1
+    spawnParticles: {fileID: 1951272612279905007, guid: fb09cb116e1fd4d0195058fa75764a5c,
+      type: 3}
   - image: {fileID: 0}
     spriteGameobjectUI: {fileID: 9022741955546086398, guid: a591f92f50ac05a40be1f2740703a4be,
       type: 3}
-    animation: {fileID: 2185625890616319515, guid: f7dfd59a0c56d4e45bb9481e07244016,
+    animation: {fileID: 3132912932862387292, guid: 701826a23072c4e3b837b269d7cdd713,
       type: 3}
     collected: 0
     flowerPart: 2
+    spawnParticles: {fileID: 1951272612279905007, guid: fb09cb116e1fd4d0195058fa75764a5c,
+      type: 3}
   - image: {fileID: 0}
     spriteGameobjectUI: {fileID: 9022741955546086398, guid: d1b1ab3e1ea899b4d97b9cc9b4b84114,
       type: 3}
-    animation: {fileID: 5298985338598869924, guid: bab3a7d5ddad141279b24b0a6b1030f9,
+    animation: {fileID: 5584830955617379808, guid: bae9a88456bbf9d49a7c08a801dc8954,
       type: 3}
     collected: 0
     flowerPart: 0
+    spawnParticles: {fileID: 1951272612279905007, guid: fb09cb116e1fd4d0195058fa75764a5c,
+      type: 3}
   - image: {fileID: 0}
     spriteGameobjectUI: {fileID: 9022741955546086398, guid: 82c0445a9b9e6384e92c4b2bd06507d2,
       type: 3}
-    animation: {fileID: 6826138182299137592, guid: a771c0278f7af40ceaeadb39f58208da,
+    animation: {fileID: 4169197471299315874, guid: fc58d45c206c89c46b8ec9ea8e76aa0f,
       type: 3}
     collected: 0
     flowerPart: 3
+    spawnParticles: {fileID: 1951272612279905007, guid: fb09cb116e1fd4d0195058fa75764a5c,
+      type: 3}
   leafPositions:
   - {fileID: 1139736036}
   - {fileID: 1389474100}

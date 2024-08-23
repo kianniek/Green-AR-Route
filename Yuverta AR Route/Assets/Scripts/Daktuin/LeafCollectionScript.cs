@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Dynamic;
 using Events.GameEvents;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -29,6 +33,7 @@ public class LeafCollectionScript : MonoBehaviour
         public GameObject animation;
         public bool collected;
         public FlowerPart flowerPart;
+        public GameObject spawnParticles;
 
         public Leaf(Image image, GameObject spriteGameobjectUI, GameObject animation, bool collected)
         {
@@ -112,7 +117,7 @@ public class LeafCollectionScript : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
         }
 
-        PerformRaycast(leaf.animation);
+        PerformRaycast(leaf.animation, leaf.spawnParticles);
         collectedLeafCount++;
         onLeafCollected.Invoke(collectedLeafCount);
         if (collectedLeafCount == leaves.Count)
@@ -121,9 +126,11 @@ public class LeafCollectionScript : MonoBehaviour
         }
     }
 
-    private void SpawnNewAnimation(GameObject animationPrefab, Vector3 position)
+    private void SpawnNewAnimation(GameObject animationPrefab, GameObject spawnParticles, Vector3 position)
     {
         var animation = Instantiate(animationPrefab, position, Quaternion.identity, this.transform);
+
+        var particles = Instantiate(spawnParticles, position, Quaternion.identity, this.transform);
 
         if (deleteAnimationIfFinished)
         {
@@ -135,10 +142,11 @@ public class LeafCollectionScript : MonoBehaviour
     {
         // Adjust this speed value as needed
         float speed = 5.0f;
-    
+
         while (Vector3.Distance(leafUIPrefab.transform.position, targetTransform.transform.position) > 0.1f)
         {
-            leafUIPrefab.transform.position = Vector3.Lerp(leafUIPrefab.transform.position, targetTransform.transform.position, Time.deltaTime * speed);
+            leafUIPrefab.transform.position = Vector3.Lerp(leafUIPrefab.transform.position,
+                targetTransform.transform.position, Time.deltaTime * speed);
             yield return null;
         }
 
@@ -147,23 +155,27 @@ public class LeafCollectionScript : MonoBehaviour
     }
 
 
-
-    private void PerformRaycast(GameObject animationPrefab)
+    private void PerformRaycast(GameObject animationPrefab, GameObject spawnParticles)
     {
-        // Create a list to store the raycast hits
-        List<ARRaycastHit> hits = new List<ARRaycastHit>();
+        //get camera
+        Camera camera = Camera.main;
 
-        var ray = new Ray(Camera.main.transform.position, Vector3.down);
-        // Perform the raycast straight down from the device
-        if (arRaycastManager.Raycast(ray, hits, TrackableType.Planes))
-        {
-            // If we hit a plane, get the hit position
-            ARRaycastHit hit = hits[0];
-            Vector3 hitPosition = hit.pose.position;
+        //get camera forward direction on a horizontal plane
+        Vector3 cameraForward = camera.transform.forward;
+        cameraForward.y = 0;
+        cameraForward.Normalize();
 
-            // Spawn the object at the hit position
-            SpawnNewAnimation(animationPrefab, hitPosition);
-        }
+        //get camera position
+        Vector3 cameraPosition = camera.transform.position;
+
+        //remove the camera from the y position
+        cameraPosition.y = 0;
+
+        //get the postion of the camera + 1 meter in the forward direction
+        Vector3 position = cameraPosition + cameraForward * 3.0f;
+
+
+        SpawnNewAnimation(animationPrefab, spawnParticles, position);
     }
 
     public void PromptTextHandler(int amountCollected)
@@ -174,5 +186,31 @@ public class LeafCollectionScript : MonoBehaviour
             var text = promptTextTemplate.Replace("{collectedMarkers}", collectedMarkers.ToString());
             promptTextController.SetText(text);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        //get camera
+        Camera camera = Camera.main;
+
+        //get camera forward direction on a horizontal plane
+        Vector3 cameraForward = camera.transform.forward;
+        cameraForward.y = 0;
+        cameraForward.Normalize();
+
+        //get camera position
+        Vector3 cameraPosition = camera.transform.position;
+
+        //remove the camera from the y position
+        cameraPosition.y = 0;
+
+        //get the postion of the camera + 1 meter in the forward direction
+        Vector3 position = cameraPosition + cameraForward * 3.0f;
+        
+
+#if UNITY_EDITOR
+        Gizmos.color = Color.red;
+        Handles.DrawAAPolyLine();
+#endif
     }
 }

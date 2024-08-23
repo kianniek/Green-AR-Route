@@ -105,6 +105,36 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 5564
+--- !u!114 &-8588095841000381981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Shooter_music/Blokjes_geplaatst
+  m_EditorClassIdentifier: 
+  Name: Blokjes_geplaatst
+  StudioPath: 
+  Min: 0
+  Max: 5
+  Default: 0
+  ID:
+    data1: 4219067713
+    data2: 3463026392
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - 0 Blokjes
+  - 4 Blokjes
+  - 8 Blokjes
+  - 12 Blokjes
+  - 16 Blokjes
+  - 20 Blokjes
+  Exists: 1
 --- !u!114 &-8505845431705560260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +288,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-7462271697647048599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/VGH Bloem.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Audio Yuverta AR Route/Desktop/VGH Bloem.bank
+  Name: VGH Bloem
+  StudioPath: bank:/VGH Bloem
+  lastModified: 638600262055111560
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-7435437328789468745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +432,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-7195975513076030684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/oud_stel_loop
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/oud_stel_loop
+  Guid:
+    Data1: -796583083
+    Data2: 1174937901
+    Data3: 465830846
+    Data4: 1006717000
+  Banks:
+  - {fileID: -7462271697647048599}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 33035
 --- !u!114 &-6995984449069672947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,10 +582,10 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638600231278366596
+  lastModified: 638600262054004698
   FileSizes:
   - Name: 
-    Value: 3164
+    Value: 3530
   Exists: 1
 --- !u!114 &-6312832774111826835
 MonoBehaviour:
@@ -590,6 +665,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 16468
+--- !u!114 &-5876053425604988944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/man_en_hond
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/man_en_hond
+  Guid:
+    Data1: 40022383
+    Data2: 1232973173
+    Data3: -1977475404
+    Data4: -1083807089
+  Banks:
+  - {fileID: -7462271697647048599}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 5167
 --- !u!114 &-5650679776149520092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -830,6 +932,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-2945098262953153266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/hooghouden
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/hooghouden
+  Guid:
+    Data1: -730028399
+    Data2: 1257835059
+    Data3: -1448834398
+    Data4: 973451200
+  Banks:
+  - {fileID: -7462271697647048599}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 11000
 --- !u!114 &-2923697564202401862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,6 +985,34 @@ MonoBehaviour:
   - opladen_schieten
   - loslaten_schieten
   Exists: 1
+--- !u!114 &-2611759731639003267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Shooter_music
+  m_EditorClassIdentifier: 
+  Path: event:/Shooter_music
+  Guid:
+    Data1: -2108025928
+    Data2: 1124480759
+    Data3: 1255177089
+    Data4: 2032981862
+  Banks:
+  - {fileID: 8102563417079577015}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8588095841000381981}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 798212
 --- !u!114 &-2529494224767000259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1132,7 +1289,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638600231278356597
+  lastModified: 638600262053999698
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -1153,6 +1310,7 @@ MonoBehaviour:
   - {fileID: 5108756106898423132}
   - {fileID: 6015141965729299508}
   - {fileID: 8102563417079577015}
+  - {fileID: -7462271697647048599}
   EditorEvents:
   - {fileID: -1707341160869704546}
   - {fileID: 3628494729261849437}
@@ -1195,12 +1353,19 @@ MonoBehaviour:
   - {fileID: 6477250140394918169}
   - {fileID: -3857188461628788398}
   - {fileID: 8845890999346623601}
+  - {fileID: 6106115638983129084}
+  - {fileID: 8833669842168930071}
+  - {fileID: -7195975513076030684}
+  - {fileID: -5876053425604988944}
+  - {fileID: -2945098262953153266}
+  - {fileID: 2351178203728239849}
+  - {fileID: -2611759731639003267}
   EditorParameters: []
   MasterBanks:
   - {fileID: -77347921114474174}
   StringsBanks:
   - {fileID: -6395688774213805039}
-  cacheTime: 638600231306576513
+  cacheTime: 638600262055793337
   cacheVersion: 131619
 --- !u!114 &249748931207592490
 MonoBehaviour:
@@ -1474,6 +1639,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &2351178203728239849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/strand_loop
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/strand_loop
+  Guid:
+    Data1: 1671851261
+    Data2: 1117604768
+    Data3: -1735112019
+    Data4: 1618837793
+  Banks:
+  - {fileID: -7462271697647048599}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 27374
 --- !u!114 &2367969825744442115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1785,7 +1977,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Stadslandbouw.bank
   Name: Stadslandbouw
   StudioPath: bank:/Stadslandbouw
-  lastModified: 638600231290008797
+  lastModified: 638600262054719667
   FileSizes: []
   Exists: 1
 --- !u!114 &5254145662814646618
@@ -1871,6 +2063,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 16468
+--- !u!114 &5544843823340688590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/ambience/Groenheid
+  m_EditorClassIdentifier: 
+  Name: Groenheid
+  StudioPath: 
+  Min: 0
+  Max: 80
+  Default: 0
+  ID:
+    data1: 103846525
+    data2: 2126864592
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &6015141965729299508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1886,7 +2102,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Stad_Shooter.bank
   Name: Stad_Shooter
   StudioPath: bank:/Stad_Shooter
-  lastModified: 638600231287245246
+  lastModified: 638600262054467430
   FileSizes: []
   Exists: 1
 --- !u!114 &6062530068533498416
@@ -1916,6 +2132,35 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 150
   Length: 0
+--- !u!114 &6106115638983129084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/ambience
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/ambience
+  Guid:
+    Data1: 1741103464
+    Data2: 1252910644
+    Data3: -1150538613
+    Data4: 772351895
+  Banks:
+  - {fileID: 6015141965729299508}
+  - {fileID: -7462271697647048599}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 5544843823340688590}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 30500
 --- !u!114 &6279841592378458199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2343,7 +2588,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Wadi.bank
   Name: Wadi
   StudioPath: bank:/Wadi
-  lastModified: 638600231306576513
+  lastModified: 638600262055793337
   FileSizes: []
   Exists: 1
 --- !u!114 &8133674547456099233
@@ -2415,7 +2660,7 @@ MonoBehaviour:
   Name: Blokjes_geplaatst
   StudioPath: 
   Min: 0
-  Max: 4
+  Max: 5
   Default: 0
   ID:
     data1: 4219067713
@@ -2428,6 +2673,7 @@ MonoBehaviour:
   - 8 Blokjes
   - 12 Blokjes
   - 16 Blokjes
+  - 20 Blokjes
   Exists: 1
 --- !u!114 &8434768038748714954
 MonoBehaviour:
@@ -2535,6 +2781,33 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &8833669842168930071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/piano_loop
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/piano_loop
+  Guid:
+    Data1: 472608316
+    Data2: 1091273085
+    Data3: -409372520
+    Data4: 518190114
+  Banks:
+  - {fileID: -7462271697647048599}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 126000
 --- !u!114 &8845890999346623601
 MonoBehaviour:
   m_ObjectHideFlags: 0
