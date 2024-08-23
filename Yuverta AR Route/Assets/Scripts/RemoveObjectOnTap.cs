@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using TouchPhase = UnityEngine.TouchPhase;
@@ -10,6 +11,7 @@ public class RemoveObjectOnTap : MonoBehaviour
 {
     [SerializeField] private string tagToRaycast = "GridPoint";
     [SerializeField] private GameObject removeParticlesPrefab;
+    [SerializeField] private UnityEvent onDoubleTap = new();
 
     private ObjectLogic _objectLogic;
 
@@ -74,6 +76,8 @@ public class RemoveObjectOnTap : MonoBehaviour
                 
                 if (particleSystem != null)
                     particleSystem.Play();
+                
+                onDoubleTap.Invoke();
             }
         }
     }

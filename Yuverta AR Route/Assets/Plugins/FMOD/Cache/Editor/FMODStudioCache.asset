@@ -507,10 +507,10 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638600177403185923
+  lastModified: 638600231278366596
   FileSizes:
   - Name: 
-    Value: 3068
+    Value: 3164
   Exists: 1
 --- !u!114 &-6312832774111826835
 MonoBehaviour:
@@ -560,7 +560,7 @@ MonoBehaviour:
     data1: 2392888332
     data2: 4199594595
   Type: 1
-  IsGlobal: 1
+  IsGlobal: 0
   Labels: []
   Exists: 1
 --- !u!114 &-5958204118393483992
@@ -713,8 +713,8 @@ MonoBehaviour:
     Data3: 1596734873
     Data4: -554083118
   Banks:
-  - {fileID: 8102563417079577015}
   - {fileID: 5108756106898423132}
+  - {fileID: 8102563417079577015}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -855,30 +855,6 @@ MonoBehaviour:
   Labels:
   - opladen_schieten
   - loslaten_schieten
-  Exists: 1
---- !u!114 &-2547363271577711640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Groeifases
-  m_EditorClassIdentifier: 
-  Name: Groeifases
-  StudioPath: parameter:/Groeifases
-  Min: 1
-  Max: 5
-  Default: 1
-  ID:
-    data1: 2392888332
-    data2: 4199594595
-  Type: 1
-  IsGlobal: 1
-  Labels: []
   Exists: 1
 --- !u!114 &-2529494224767000259
 MonoBehaviour:
@@ -1156,7 +1132,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638600177401950859
+  lastModified: 638600231278356597
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -1218,13 +1194,13 @@ MonoBehaviour:
   - {fileID: 7247385425030682474}
   - {fileID: 6477250140394918169}
   - {fileID: -3857188461628788398}
-  EditorParameters:
-  - {fileID: -2547363271577711640}
+  - {fileID: 8845890999346623601}
+  EditorParameters: []
   MasterBanks:
   - {fileID: -77347921114474174}
   StringsBanks:
   - {fileID: -6395688774213805039}
-  cacheTime: 638600177403185923
+  cacheTime: 638600231306576513
   cacheVersion: 131619
 --- !u!114 &249748931207592490
 MonoBehaviour:
@@ -1809,7 +1785,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Stadslandbouw.bank
   Name: Stadslandbouw
   StudioPath: bank:/Stadslandbouw
-  lastModified: 638600177402016017
+  lastModified: 638600231290008797
   FileSizes: []
   Exists: 1
 --- !u!114 &5254145662814646618
@@ -1910,7 +1886,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Stad_Shooter.bank
   Name: Stad_Shooter
   StudioPath: bank:/Stad_Shooter
-  lastModified: 638600098573013387
+  lastModified: 638600231287245246
   FileSizes: []
   Exists: 1
 --- !u!114 &6062530068533498416
@@ -2367,7 +2343,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Wadi.bank
   Name: Wadi
   StudioPath: bank:/Wadi
-  lastModified: 638600098579669643
+  lastModified: 638600231306576513
   FileSizes: []
   Exists: 1
 --- !u!114 &8133674547456099233
@@ -2424,6 +2400,35 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &8364098000434614425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wadi_music/Blokjes_geplaatst
+  m_EditorClassIdentifier: 
+  Name: Blokjes_geplaatst
+  StudioPath: 
+  Min: 0
+  Max: 4
+  Default: 0
+  ID:
+    data1: 4219067713
+    data2: 3463026392
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - 0 Blokjes
+  - 4 Blokjes
+  - 8 Blokjes
+  - 12 Blokjes
+  - 16 Blokjes
+  Exists: 1
 --- !u!114 &8434768038748714954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2530,6 +2535,34 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &8845890999346623601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wadi_music
+  m_EditorClassIdentifier: 
+  Path: event:/Wadi_music
+  Guid:
+    Data1: -1444740921
+    Data2: 1209003568
+    Data3: 1534118066
+    Data4: 1115658098
+  Banks:
+  - {fileID: 8102563417079577015}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 8364098000434614425}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 686270
 --- !u!114 &9219651242366509591
 MonoBehaviour:
   m_ObjectHideFlags: 0

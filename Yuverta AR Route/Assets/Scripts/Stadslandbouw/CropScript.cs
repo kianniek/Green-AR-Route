@@ -14,6 +14,7 @@ public class CropScript : MonoBehaviour
     private int growthStage;
     [SerializeField] private UnityEvent fullyGrownCorrect = new();
     [SerializeField] private UnityEvent fullyGrownWrong = new();
+    [SerializeField] private UnityEvent<int> growthStageChanged = new();
     [FormerlySerializedAs("growthStages")] public List<GameObject> growthStagesList;
     private GameObject deadCrop;
     
@@ -112,6 +113,7 @@ public class CropScript : MonoBehaviour
         
         //Upgrading the growth stage for the next round
         growthStage++;
+        growthStageChanged.Invoke(growthStage);
         
         currentChild = growthStagesList[growthStage];
         currentChild.SetActive(true);

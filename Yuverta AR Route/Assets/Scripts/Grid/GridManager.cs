@@ -21,6 +21,7 @@ public class GridManager : MonoBehaviour
 
     [Header("Events")] [Space(10)] [SerializeField]
     private UnityEvent onWadiCompleted = new();
+    [SerializeField] private UnityEvent<int> onChangeAudioBasedOnAmountPlaced = new();
 
     [SerializeField] private UnityEvent onBlockPlaced = new();
 
@@ -237,6 +238,22 @@ public class GridManager : MonoBehaviour
     {
         return _placedObjects.Count == objsToSpawn.keys.Count;
     }
+
+    private int changeCounter = 0;
+
+    private void AudioNeedsToChange()
+    {
+        var amountOfBlocksPlaced = _placedObjects.Count;
+
+        // Check if the amount of blocks placed is a multiple of 4
+        if (amountOfBlocksPlaced % 4 == 0 && amountOfBlocksPlaced != 0)
+        {
+            changeCounter++;  // Increment the counter by 1
+        }
+
+        onChangeAudioBasedOnAmountPlaced.Invoke(changeCounter);
+    }
+
 
     public void OnWadiWrong()
     {

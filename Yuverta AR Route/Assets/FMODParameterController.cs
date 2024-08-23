@@ -11,4 +11,9 @@ public class FMODParameterController : MonoBehaviour
     {
         fmodEventInstance.SetParameter(parameterName, value);
     }
+    
+    public void SetFMODParameter(int value)
+    {
+        fmodEventInstance.SetParameter(parameterName, value);
+    }
 }

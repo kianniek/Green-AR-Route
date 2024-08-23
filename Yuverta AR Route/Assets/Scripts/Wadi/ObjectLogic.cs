@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ObjectLogic : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class ObjectLogic : MonoBehaviour
 
     private static readonly Vector3 newScale = new Vector3(0.2f, 0.2f, 0.2f);
 
+    [SerializeField] private UnityEvent onShake = new();
 
     private void Start()
     {
@@ -71,6 +73,7 @@ public class ObjectLogic : MonoBehaviour
 
     public void ShakeObject()
     {
+        onShake.Invoke();
         _dotweenAnimations.InfiniteShake(transform);
     }
     
