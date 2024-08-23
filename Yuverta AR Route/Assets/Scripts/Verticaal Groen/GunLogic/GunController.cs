@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class GunController : MonoBehaviour
@@ -27,10 +28,22 @@ public class GunController : MonoBehaviour
     private GameObject weaponInstance;
 
     public RectTransform weaponWheel;
+    public SpriteTouchNotifier spriteTouchNotifier;
+
+    [SerializeField] private UnityEvent onSingleFireShot = new();
+    private bool invokeOneShotEvent = false;
+    [SerializeField] private UnityEvent onSlingshotCharging = new();
+    [SerializeField] private UnityEvent onSlingshotShot = new();
+
+    private bool isSwitchingWeaponThisPress = false;
 
     protected virtual void Start()
     {
         mainCamera = Camera.main;
+
+        spriteTouchNotifier =
+            spriteTouchNotifier ? spriteTouchNotifier : weaponWheel.GetComponent<SpriteTouchNotifier>();
+
         ChangeWeapon(0);
     }
 
@@ -55,7 +68,10 @@ public class GunController : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began && IsTouchOverUI(touch.fingerId))
+
+            var touchBeganCoveredByUI = spriteTouchNotifier.CheckIfTouchBeganCoveredByUI(touch);
+
+            if (touch.phase == TouchPhase.Began && !touchBeganCoveredByUI)
             {
                 LoadingModelCatapult(true);
                 return;
@@ -65,7 +81,10 @@ public class GunController : MonoBehaviour
             {
                 LoadingModelCatapult(false);
                 Shoot(elapsedTime);
+
+                isSwitchingWeaponThisPress = false;
                 elapsedTime = 0;
+                invokeOneShotEvent = false;
             }
             else
             {
@@ -75,17 +94,18 @@ public class GunController : MonoBehaviour
         }
     }
 
-    private bool IsTouchOverUI(int fingerId)
-    {
-        return EventSystem.current.IsPointerOverGameObject(fingerId);
-    }
-
     public void ChangeWeapon(int weaponIndex)
     {
         if (currentWeapon == weapons[weaponIndex])
             return;
 
-        StartCoroutine(RotateWeaponWheel());
+        isSwitchingWeaponThisPress = true;
+
+        if (gameObject.activeInHierarchy) // We cant run a coroutine if the object is not active
+        {
+            StartCoroutine(RotateWeaponWheel());
+        }
+
         // Destroy the old gun
         if (transform.childCount > 0)
         {
@@ -155,7 +175,7 @@ public class GunController : MonoBehaviour
 
     public void Shoot(float elapsedTime)
     {
-        if (firing || currentWeapon.fireRateCooldownTimer > 0)
+        if (firing || currentWeapon.fireRateCooldownTimer > 0 || isSwitchingWeaponThisPress)
         {
             return;
         }
@@ -178,12 +198,14 @@ public class GunController : MonoBehaviour
 
     private IEnumerator SingleShot()
     {
+        onSingleFireShot.Invoke();
         ShootBullet();
         yield return new WaitForSeconds(currentWeapon.fireRate);
     }
 
     private IEnumerator CatapultShot(float elapsedTime)
     {
+        onSlingshotShot.Invoke();
         // Calculate the current charge based on the elapsed time
         float currentCharge = Mathf.Clamp(elapsedTime * chargeRate, 0, maxCharge);
 
@@ -197,6 +219,12 @@ public class GunController : MonoBehaviour
     {
         if (currentWeapon.weaponType != WeaponType.Slingshot)
             return;
+
+        if (!invokeOneShotEvent)
+        {
+            onSlingshotCharging.Invoke();
+            invokeOneShotEvent = true;
+        }
 
         var activeState = weaponInstance.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>();
         var unactiveState = weaponInstance.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>();

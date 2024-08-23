@@ -27,7 +27,6 @@ public class CropContainer : MonoBehaviour
 
     public UnityEvent onCropHarvested = new();
     public UnityEvent onCropFirstHarvested = new();
-    public UnityEvent onCropDead = new();
     public UnityEvent<CropScript> onCropPlanted = new();
 
     bool firstHarvest = false;
@@ -97,27 +96,4 @@ public class CropContainer : MonoBehaviour
             }
         }
     }
-
-    //unity editor only gui button
-#if UNITY_EDITOR
-
-    private void OnGUI()
-    {
-        if (GUILayout.Button("Harvest Crop"))
-        {
-            HarvestCrop();
-        }
-    }
-
-    public void HarvestCrop()
-    {
-        Debug.Log("Trying to harvest crop");
-        if (cropScript.IsFullyGrown)
-        {
-            Debug.Log("Crop harvested");
-            onCropHarvested.Invoke();
-            cropScript.HarvestCrop();
-        }
-    }
-#endif
 }

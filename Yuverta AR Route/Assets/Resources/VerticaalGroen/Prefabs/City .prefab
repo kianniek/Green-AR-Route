@@ -5309,7 +5309,7 @@ Transform:
   m_GameObject: {fileID: 1636586852081950188}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -22.09233, y: 0, z: 3.805599}
+  m_LocalPosition: {x: -96.9, y: 0, z: 3.8}
   m_LocalScale: {x: 2.102541, y: 2, z: 1.0512649}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -5394,7 +5394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5866186297877211052
 Transform:
   m_ObjectHideFlags: 0
@@ -5418,6 +5418,7 @@ Transform:
   - {fileID: 4086372425854731849}
   - {fileID: 4901388248918633317}
   - {fileID: 4212508920307499500}
+  - {fileID: 2365992989571004151}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1772276678852470539
@@ -5868,6 +5869,38 @@ Transform:
   - {fileID: 8407147438596134250}
   - {fileID: 8277555247909256501}
   - {fileID: 4075752174892624308}
+  m_Father: {fileID: 5866186297877211052}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2839683436187258739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2365992989571004151}
+  m_Layer: 0
+  m_Name: Sounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2365992989571004151
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2839683436187258739}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8565014566280547708}
   m_Father: {fileID: 5866186297877211052}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3023705062972891452
@@ -7355,6 +7388,69 @@ Transform:
   m_Children: []
   m_Father: {fileID: 315337969038567178}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5139354526982423352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8565014566280547708}
+  - component: {fileID: 977208806332342321}
+  m_Layer: 0
+  m_Name: Ambience
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8565014566280547708
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5139354526982423352}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.52563256, y: 1, z: 1.0512705}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2365992989571004151}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &977208806332342321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5139354526982423352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1015746944
+      Data2: 1226253556
+      Data3: 1088331195
+      Data4: -812534811
+    Path: event:/Stad Shooter/Ambience
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &5175811162649912611
 GameObject:
   m_ObjectHideFlags: 0
@@ -7890,7 +7986,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4106310157680093540
 Transform:
@@ -8608,7 +8704,7 @@ Transform:
   m_GameObject: {fileID: 6352110331612235867}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 37.31991, y: 0, z: 12.5101185}
+  m_LocalPosition: {x: 96.9, y: 0, z: 12.5}
   m_LocalScale: {x: 2.102541, y: 2, z: 1.0512649}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -8703,7 +8799,7 @@ Transform:
   m_GameObject: {fileID: 6381752791665450186}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: -1}
-  m_LocalPosition: {x: 8.541526, y: 0, z: -73.32612}
+  m_LocalPosition: {x: 8.541526, y: 0, z: -195.1}
   m_LocalScale: {x: 1.051265, y: 2, z: 2.102541}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8829,7 +8925,7 @@ Transform:
   m_GameObject: {fileID: 6692705720644743881}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 32.06358, y: 0, z: 70.52578}
+  m_LocalPosition: {x: 62.94449, y: 0, z: 134.65329}
   m_LocalScale: {x: 1.051265, y: 2, z: 2.102541}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -11693,7 +11789,7 @@ PrefabInstance:
     - target: {fileID: 7789869592648294570, guid: 1d8ab3e4b569d8d49aa7f5990a0dacb9,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8582683789736837503, guid: 1d8ab3e4b569d8d49aa7f5990a0dacb9,
         type: 3}
@@ -12293,6 +12389,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: lofi bush
       objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12366,6 +12467,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: lofi bush (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
@@ -12455,6 +12561,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: lofi bush (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
@@ -13349,7 +13460,7 @@ PrefabInstance:
     - target: {fileID: 3111953983932660724, guid: a703397e9167e7748a1477a7133e0c6d,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 3472026656359930401, guid: a703397e9167e7748a1477a7133e0c6d,
         type: 3}
@@ -13937,10 +14048,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 540314012230656147, guid: 31c71ba8b74ce4d478f4a10009e9165c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 5848184183753026182, guid: 31c71ba8b74ce4d478f4a10009e9165c,
         type: 3}
       propertyPath: m_Name
       value: Solarpannel-small (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848184183753026182, guid: 31c71ba8b74ce4d478f4a10009e9165c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17291,6 +17412,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: lofi bush (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18155,6 +18281,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: lofi bush (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -18487,6 +18618,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_064
       objectReference: {fileID: 0}
+    - target: {fileID: 7573023260488345276, guid: 061063f0ad4c7cb42926abbe5d51bfce,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18693,7 +18829,7 @@ PrefabInstance:
     - target: {fileID: 5382822473182630357, guid: 123260f859a0c7b4bad5eaab2d82d30b,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 5887151346005962752, guid: 123260f859a0c7b4bad5eaab2d82d30b,
         type: 3}
@@ -20842,6 +20978,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_104
       objectReference: {fileID: 0}
+    - target: {fileID: 6994667765153636656, guid: 9e447fd9526b19e4da3ae4beb00befc1,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 7663400235848956810, guid: 9e447fd9526b19e4da3ae4beb00befc1,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -22374,6 +22515,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: lofi bush (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -22462,6 +22608,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: lofi bush (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
@@ -24495,6 +24646,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_112
       objectReference: {fileID: 0}
+    - target: {fileID: 8900940653214790281, guid: d04c8d8a6818e264dbdfe1958010758b,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24683,7 +24839,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0b4826345db3e8e4c962ca671943c46f,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25829,7 +25985,7 @@ PrefabInstance:
     - target: {fileID: 1487942095034483479, guid: 330fc06d7f56e7b48a33602205983142,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 2300754328443541933, guid: 330fc06d7f56e7b48a33602205983142,
         type: 3}
@@ -26307,7 +26463,7 @@ PrefabInstance:
     - target: {fileID: 9164301805996955533, guid: 469d3c3ef80f8744aab5272bbedf99b3,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -6188272090951576590, guid: 469d3c3ef80f8744aab5272bbedf99b3, type: 3}
@@ -26673,6 +26829,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Building_104 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6994667765153636656, guid: 9e447fd9526b19e4da3ae4beb00befc1,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 7663400235848956810, guid: 9e447fd9526b19e4da3ae4beb00befc1,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -26793,8 +26954,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 3
@@ -27139,6 +27300,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: lofi bush (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
@@ -28104,6 +28270,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: lofi bush (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -28588,10 +28759,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 540314012230656147, guid: 31c71ba8b74ce4d478f4a10009e9165c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 5848184183753026182, guid: 31c71ba8b74ce4d478f4a10009e9165c,
         type: 3}
       propertyPath: m_Name
       value: Solarpannel-small (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848184183753026182, guid: 31c71ba8b74ce4d478f4a10009e9165c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31111,6 +31292,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: lofi bush (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -31199,6 +31385,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: lofi bush (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
@@ -31674,6 +31865,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: lofi bush (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
@@ -32683,6 +32879,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: lofi bush (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -32840,7 +33041,7 @@ PrefabInstance:
     - target: {fileID: 7789869592648294570, guid: 1d8ab3e4b569d8d49aa7f5990a0dacb9,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8582683789736837503, guid: 1d8ab3e4b569d8d49aa7f5990a0dacb9,
         type: 3}
@@ -34100,6 +34301,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: lofi bush (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -34197,7 +34403,7 @@ PrefabInstance:
     - target: {fileID: 2364891039810451160, guid: 71fe4c148a53a4841b9f2e7504af38f9,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 3141849470096354402, guid: 71fe4c148a53a4841b9f2e7504af38f9,
         type: 3}
@@ -35166,7 +35372,7 @@ PrefabInstance:
     - target: {fileID: 7789869592648294570, guid: 1d8ab3e4b569d8d49aa7f5990a0dacb9,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8582683789736837503, guid: 1d8ab3e4b569d8d49aa7f5990a0dacb9,
         type: 3}
@@ -35354,7 +35560,7 @@ PrefabInstance:
     - target: {fileID: 7789869592648294570, guid: 1d8ab3e4b569d8d49aa7f5990a0dacb9,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8582683789736837503, guid: 1d8ab3e4b569d8d49aa7f5990a0dacb9,
         type: 3}
@@ -35542,7 +35748,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d16d608a540574b46b00168583606fa1,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36511,7 +36717,7 @@ PrefabInstance:
     - target: {fileID: 4538925272504454392, guid: 1eeccf0c4e1ca3f4c95df10840c27097,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36740,7 +36946,7 @@ PrefabInstance:
     - target: {fileID: 2949092123212828480, guid: 5641f21c9d2d49547b9c4e26714b4cd2,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 3741853406242762389, guid: 5641f21c9d2d49547b9c4e26714b4cd2,
         type: 3}
@@ -36991,7 +37197,7 @@ PrefabInstance:
     - target: {fileID: 7536416427982316700, guid: e1b2421a07c121e44a4fdac83ac7401b,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8328922351112701257, guid: e1b2421a07c121e44a4fdac83ac7401b,
         type: 3}
@@ -37731,6 +37937,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: lofi bush (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -38211,7 +38422,7 @@ PrefabInstance:
     - target: {fileID: 4405238273307550603, guid: 25d47d426d1a0964bbaa64d1dbfb224e,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -38995,7 +39206,7 @@ PrefabInstance:
     - target: {fileID: 7789869592648294570, guid: 1d8ab3e4b569d8d49aa7f5990a0dacb9,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8582683789736837503, guid: 1d8ab3e4b569d8d49aa7f5990a0dacb9,
         type: 3}
@@ -41955,6 +42166,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: lofi bush (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -42429,6 +42645,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: lofi bush (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
@@ -43454,7 +43675,7 @@ PrefabInstance:
     - target: {fileID: 1119096823236959678, guid: d8a47247a47e2f14190e27ec753bf86f,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 1479195883359779947, guid: d8a47247a47e2f14190e27ec753bf86f,
         type: 3}
@@ -47057,7 +47278,7 @@ PrefabInstance:
     - target: {fileID: 8332241492967598614, guid: 4b4bbeffe5c94ce49abd1135373d42f9,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8712708059558506668, guid: 4b4bbeffe5c94ce49abd1135373d42f9,
         type: 3}
@@ -47252,6 +47473,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: lofi bush (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
@@ -47548,7 +47774,7 @@ PrefabInstance:
     - target: {fileID: 8352964953523772719, guid: 68de8facbd16cfe4bbbad1eabf98df1c,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 8692054973214754709, guid: 68de8facbd16cfe4bbbad1eabf98df1c,
         type: 3}
@@ -48072,10 +48298,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 540314012230656147, guid: 31c71ba8b74ce4d478f4a10009e9165c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 5848184183753026182, guid: 31c71ba8b74ce4d478f4a10009e9165c,
         type: 3}
       propertyPath: m_Name
       value: Solarpannel-small (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848184183753026182, guid: 31c71ba8b74ce4d478f4a10009e9165c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -49151,6 +49387,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: lofi bush (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 111054653087734943, guid: 4696a8737d8f041168c22b4672634eb6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 123
+      objectReference: {fileID: 0}
     - target: {fileID: 8375635108877992932, guid: 4696a8737d8f041168c22b4672634eb6,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -49436,7 +49677,7 @@ PrefabInstance:
     - target: {fileID: 2671377271449089583, guid: d0a8af9551566a84587bb0daa91b699e,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 123
       objectReference: {fileID: 0}
     - target: {fileID: 3339827957730782357, guid: d0a8af9551566a84587bb0daa91b699e,
         type: 3}
