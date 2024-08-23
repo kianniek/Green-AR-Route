@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{b865d62c-7917-4e24-a5dc-2816737e96b5}">
+		<property name="name">
+			<value>Blokjes_geplaatst</value>
+		</property>
+		<relationship name="folder">
+			<destination>{a4ad5f70-6186-4093-9c38-75638dcf9e40}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{555a24d1-291d-458d-9967-520adede5963}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{555a24d1-291d-458d-9967-520adede5963}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>5</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>0 Blokjes</value>
+			<value>4 Blokjes</value>
+			<value>8 Blokjes</value>
+			<value>12 Blokjes</value>
+			<value>16 Blokjes</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{86801c5f-d599-4854-9ee1-8795bcc6d088}</destination>
+		</relationship>
+	</object>
+	<object class="ADSRModulator" id="{86801c5f-d599-4854-9ee1-8795bcc6d088}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>cursorPosition</value>
+		</property>
+	</object>
+</objects>

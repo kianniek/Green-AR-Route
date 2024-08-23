@@ -12,9 +12,10 @@ public class PaintManager : Singleton<PaintManager>
     public Shader zoomToBounds;
 
     public int coveredTreshold;
-
+    
     [Tooltip("Event that fires when an trashold is reached for the amount of objects covered in the 2nd mask color")]
     public UnityEvent OnTresholdReached;
+    public UnityEvent<float> OnTresholdStep = new ();
 
     private Dictionary<Paintable, int> paintables = new();
 
@@ -245,5 +246,17 @@ public class PaintManager : Singleton<PaintManager>
         }
 
         return paintables;
+    }
+
+    public void CheckIfStepTresholdIsreached()
+    {
+        //map the amount of paintables to the treshold
+        var stepSize = (float) 1 / paintables.Count;
+        
+        // multiply the step size with the amount of paintables that are covered
+        var step = stepSize * paintables.Count(p => p.Value == 2);
+        
+        //Invoke the event with the step value
+        OnTresholdStep.Invoke(step);
     }
 }
