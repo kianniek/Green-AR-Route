@@ -28,21 +28,24 @@ public class GunController : MonoBehaviour
     private GameObject weaponInstance;
 
     public RectTransform weaponWheel;
-    public SpriteTouchNotifier spriteTouchNotifier;
 
     [SerializeField] private UnityEvent onSingleFireShot = new();
     private bool invokeOneShotEvent = false;
     [SerializeField] private UnityEvent onSlingshotCharging = new();
     [SerializeField] private UnityEvent onSlingshotShot = new();
 
+    [Tooltip("This variable is set to <b>True</b> in a UI element to prevent a fire event when touching UI")]
     private bool isSwitchingWeaponThisPress = false;
+
+    public bool IsSwitchingWeaponThisPress
+    {
+        get => isSwitchingWeaponThisPress;
+        set => isSwitchingWeaponThisPress = value;
+    }
 
     protected virtual void Start()
     {
         mainCamera = Camera.main;
-
-        spriteTouchNotifier =
-            spriteTouchNotifier ? spriteTouchNotifier : weaponWheel.GetComponent<SpriteTouchNotifier>();
 
         ChangeWeapon(0);
     }
@@ -69,9 +72,8 @@ public class GunController : MonoBehaviour
         {
             Touch touch = Input.GetTouch(0);
 
-            var touchBeganCoveredByUI = spriteTouchNotifier.CheckIfTouchBeganCoveredByUI(touch);
 
-            if (touch.phase == TouchPhase.Began && !touchBeganCoveredByUI)
+            if (touch.phase == TouchPhase.Began)
             {
                 LoadingModelCatapult(true);
                 return;
@@ -82,7 +84,6 @@ public class GunController : MonoBehaviour
                 LoadingModelCatapult(false);
                 Shoot(elapsedTime);
 
-                isSwitchingWeaponThisPress = false;
                 elapsedTime = 0;
                 invokeOneShotEvent = false;
             }
@@ -96,10 +97,14 @@ public class GunController : MonoBehaviour
 
     public void ChangeWeapon(int weaponIndex)
     {
+        Debug.Log("Changing weapon to " + weaponIndex);
         if (currentWeapon == weapons[weaponIndex])
+        {
+            Debug.Log("Already using this weapon");
             return;
+        }
 
-        isSwitchingWeaponThisPress = true;
+        isSwitchingWeaponThisPress = false;
 
         if (gameObject.activeInHierarchy) // We cant run a coroutine if the object is not active
         {

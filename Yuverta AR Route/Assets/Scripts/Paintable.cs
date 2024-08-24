@@ -162,7 +162,7 @@ public class Paintable : MonoBehaviour
         var meshFilter = GetComponent<MeshFilter>();
         if (meshFilter == null)
         {
-            Debug.LogError("MeshFilter component not found!");
+            Debug.LogError("MeshFilter component not found!", gameObject);
             return;
         }
 
@@ -172,7 +172,7 @@ public class Paintable : MonoBehaviour
         // Ensure the mesh has UVs
         if (mesh.uv.Length == 0)
         {
-            Debug.LogError("Mesh does not have UV coordinates!");
+            Debug.LogError("Mesh does not have UV coordinates!", gameObject);
             return;
         }
 

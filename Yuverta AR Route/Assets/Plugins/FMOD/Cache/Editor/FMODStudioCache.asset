@@ -1,5 +1,62 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9181510678890198430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/VoiceOver/VG SchoneluchtInDeStad
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/VoiceOver/VG SchoneluchtInDeStad
+  Guid:
+    Data1: -1044942179
+    Data2: 1214928679
+    Data3: -977794667
+    Data4: -638060717
+  Banks:
+  - {fileID: -4943362248349947130}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2455
+--- !u!114 &-9158703982822733859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Wadi_music/Blokjes_geplaatst
+  m_EditorClassIdentifier: 
+  Name: Blokjes_geplaatst
+  StudioPath: 
+  Min: 0
+  Max: 5
+  Default: 0
+  ID:
+    data1: 4219067713
+    data2: 3463026392
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - 0 Blokjes
+  - 4 Blokjes
+  - 8 Blokjes
+  - 12 Blokjes
+  - 16 Blokjes
+  - 20 Blokjes
+  Exists: 1
 --- !u!114 &-9095059461113847600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,6 +111,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 19729
+--- !u!114 &-8960419977843960821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/hit_ground
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/hit_ground
+  Guid:
+    Data1: 670811058
+    Data2: 1210443733
+    Data3: 1369105032
+    Data4: 809067698
+  Banks:
+  - {fileID: 282131880128708648}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 400
+  Length: 0
 --- !u!114 &-8906388482436006005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +189,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 5564
+--- !u!114 &-8737265209150204372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/ambience/Groenheid
+  m_EditorClassIdentifier: 
+  Name: Groenheid
+  StudioPath: 
+  Min: 0
+  Max: 80
+  Default: 0
+  ID:
+    data1: 103846525
+    data2: 2126864592
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-8588095841000381981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +288,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-8486198818280112551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/VoiceOver/VG Intro
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/VoiceOver/VG Intro
+  Guid:
+    Data1: -1556720380
+    Data2: 1179439931
+    Data3: 1331252375
+    Data4: -579575358
+  Banks:
+  - {fileID: -4943362248349947130}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 25443
 --- !u!114 &-8466486411677500783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +335,33 @@ MonoBehaviour:
     Data4: -2019497849
   Banks:
   - {fileID: 6015141965729299508}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 6.4
+  MaxDistance: 200
+  Length: 0
+--- !u!114 &-8158893472568665242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/solarpanel_spawn
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/solarpanel_spawn
+  Guid:
+    Data1: -1980395655
+    Data2: 1334005955
+    Data3: -1484280701
+    Data4: -2019497849
+  Banks:
+  - {fileID: 282131880128708648}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -234,6 +396,61 @@ MonoBehaviour:
   MinDistance: 5.2000003
   MaxDistance: 65
   Length: 44000
+--- !u!114 &-8063784854577566249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Shooter_music
+  m_EditorClassIdentifier: 
+  Path: event:/Shooter_music
+  Guid:
+    Data1: -2108025928
+    Data2: 1124480759
+    Data3: 1255177089
+    Data4: 2032981862
+  Banks:
+  - {fileID: -4684434949208560311}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 8790393963884688310}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 798212
+--- !u!114 &-7889248476821552151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/knop_spiekbriefje_open
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/knop_spiekbriefje_open
+  Guid:
+    Data1: 10712736
+    Data2: 1092631254
+    Data3: 1504459139
+    Data4: 1780102603
+  Banks:
+  - {fileID: 1992532989628781375}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-7689516092140350339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,6 +498,33 @@ MonoBehaviour:
     Data4: -1747475557
   Banks:
   - {fileID: -8505845431705560260}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7472422013058124742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/knop_voedsel
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/knop_voedsel
+  Guid:
+    Data1: 828745622
+    Data2: 1295287032
+    Data3: -1149984346
+    Data4: 241638404
+  Banks:
+  - {fileID: 1992532989628781375}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -353,6 +597,33 @@ MonoBehaviour:
     Data4: 1460289649
   Banks:
   - {fileID: 8102563417079577015}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-7319025585636616883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wadi/wadi_plaats_ondergrondse_blokken
+  m_EditorClassIdentifier: 
+  Path: event:/Wadi/wadi_plaats_ondergrondse_blokken
+  Guid:
+    Data1: -1823002686
+    Data2: 1285371858
+    Data3: 1807550891
+    Data4: -1594984509
+  Banks:
+  - {fileID: -4684434949208560311}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -486,6 +757,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6995679168210830805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/knop_licht
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/knop_licht
+  Guid:
+    Data1: 1520920609
+    Data2: 1087997149
+    Data3: 960797581
+    Data4: -818655518
+  Banks:
+  - {fileID: 1992532989628781375}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-6935837968551039585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,6 +811,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 200
   Length: 0
+--- !u!114 &-6842445143928793404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/man_en_hond
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/man_en_hond
+  Guid:
+    Data1: 40022383
+    Data2: 1232973173
+    Data3: -1977475404
+    Data4: -1083807089
+  Banks:
+  - {fileID: 7768557709990195704}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 50
+  Length: 5167
 --- !u!114 &-6617014762824808136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,6 +990,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 16468
+--- !u!114 &-5908587891424822559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/windmill_whooshes
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/windmill_whooshes
+  Guid:
+    Data1: 94606575
+    Data2: 1159953754
+    Data3: 50856368
+    Data4: 1688080188
+  Banks:
+  - {fileID: 282131880128708648}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 5.2000003
+  MaxDistance: 250
+  Length: 20000
 --- !u!114 &-5876053425604988944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,6 +1044,87 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 50
   Length: 5167
+--- !u!114 &-5735492819021524793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/plant_zaadjes
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/plant_zaadjes
+  Guid:
+    Data1: -1606287054
+    Data2: 1277992908
+    Data3: -121375576
+    Data4: 1100621068
+  Banks:
+  - {fileID: 1992532989628781375}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5710253515646787058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/knop_hitte
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/knop_hitte
+  Guid:
+    Data1: 1979363138
+    Data2: 1145275061
+    Data3: 1382362799
+    Data4: 35244393
+  Banks:
+  - {fileID: 1992532989628781375}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5696115949380488427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/tree_spawn
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/tree_spawn
+  Guid:
+    Data1: 1592244116
+    Data2: 1240448868
+    Data3: 1251104950
+    Data4: 1778100447
+  Banks:
+  - {fileID: 282131880128708648}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 150
+  Length: 0
 --- !u!114 &-5650679776149520092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,6 +1178,52 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 19729
+--- !u!114 &-4996245122374001358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/stadslandbouw_loop_ambience_basic
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/stadslandbouw_loop_ambience_basic
+  Guid:
+    Data1: 417257419
+    Data2: 1306416158
+    Data3: 1596734873
+    Data4: -554083118
+  Banks:
+  - {fileID: 1992532989628781375}
+  - {fileID: -4684434949208560311}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 16468
+--- !u!114 &-4943362248349947130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Audio Yuverta AR Route/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638600858307368306
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-4822559991012336083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -796,6 +1275,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 200
   Length: 0
+--- !u!114 &-4684434949208560311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Wadi.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Audio Yuverta AR Route/Desktop/Wadi.bank
+  Name: Wadi
+  StudioPath: bank:/Wadi
+  lastModified: 638600858309110612
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-4072338796006189892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -932,6 +1429,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-2999637061053081788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Groeifases/uitslag_groeifases
+  m_EditorClassIdentifier: 
+  Name: uitslag_groeifases
+  StudioPath: 
+  Min: -1
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3269543898
+    data2: 1389565294
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-2945098262953153266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,6 +1506,33 @@ MonoBehaviour:
   - opladen_schieten
   - loslaten_schieten
   Exists: 1
+--- !u!114 &-2704721268522673902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/VoiceOver/VG HoestenEnProesten
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/VoiceOver/VG HoestenEnProesten
+  Guid:
+    Data1: 416562765
+    Data2: 1287970996
+    Data3: -1839322986
+    Data4: -93963199
+  Banks:
+  - {fileID: -4943362248349947130}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5564
 --- !u!114 &-2611759731639003267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,6 +1589,80 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 13459
+--- !u!114 &-2479044676750608462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wadi/wadi_plaats_groene_blokken
+  m_EditorClassIdentifier: 
+  Path: event:/Wadi/wadi_plaats_groene_blokken
+  Guid:
+    Data1: 307133904
+    Data2: 1123486589
+    Data3: 651697084
+    Data4: 1301531660
+  Banks:
+  - {fileID: -4684434949208560311}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1961004960571396211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Audio Yuverta AR Route/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638600858307373395
+  FileSizes:
+  - Name: 
+    Value: 3530
+  Exists: 1
+--- !u!114 &-1950804775409009515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/knop_spiekbriefje_dicht
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/knop_spiekbriefje_dicht
+  Guid:
+    Data1: 471893858
+    Data2: 1097173101
+    Data3: -736457589
+    Data4: -222940953
+  Banks:
+  - {fileID: 1992532989628781375}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-1946190640371706786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1122,6 +1744,58 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-1468207668505744308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Groeifases/Groeifases
+  m_EditorClassIdentifier: 
+  Name: Groeifases
+  StudioPath: 
+  Min: 1
+  Max: 5
+  Default: 1
+  ID:
+    data1: 2392888332
+    data2: 4199594595
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-949890604890468366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/gun_shot_load
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/gun_shot_load
+  Guid:
+    Data1: -1452836578
+    Data2: 1294953734
+    Data3: -1302968937
+    Data4: 1044803391
+  Banks:
+  - {fileID: 282131880128708648}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 4331925294586442421}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 13459
 --- !u!114 &-806570366443395599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,6 +1814,33 @@ MonoBehaviour:
   lastModified: 638597740667132819
   FileSizes: []
   Exists: 1
+--- !u!114 &-801349537582502883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/oud_stel_loop
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/oud_stel_loop
+  Guid:
+    Data1: -796583083
+    Data2: 1174937901
+    Data3: 465830846
+    Data4: 1006717000
+  Banks:
+  - {fileID: 7768557709990195704}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 33035
 --- !u!114 &-788970286932993277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1250,6 +1951,114 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-487261954898041239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wadi_music
+  m_EditorClassIdentifier: 
+  Path: event:/Wadi_music
+  Guid:
+    Data1: -1444740921
+    Data2: 1209003568
+    Data3: 1534118066
+    Data4: 1115658098
+  Banks:
+  - {fileID: -4684434949208560311}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -9158703982822733859}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 686270
+--- !u!114 &-425256789551624525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/slingshot_shot/Schieten
+  m_EditorClassIdentifier: 
+  Name: Schieten
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1205517512
+    data2: 439271474
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - opladen_schieten
+  - loslaten_schieten
+  Exists: 1
+--- !u!114 &-409429188372232906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/building_flashing
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/building_flashing
+  Guid:
+    Data1: -1103780469
+    Data2: 1214744579
+    Data3: 1146113424
+    Data4: 585765741
+  Banks:
+  - {fileID: 282131880128708648}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 7
+  MaxDistance: 200
+  Length: 0
+--- !u!114 &-302838792370647772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/VoiceOver/VG VogelHuis
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/VoiceOver/VG VogelHuis
+  Guid:
+    Data1: 302245762
+    Data2: 1284280707
+    Data3: -1287302997
+    Data4: 419714235
+  Banks:
+  - {fileID: -4943362248349947130}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4832
 --- !u!114 &-241234487384578707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1274,6 +2083,33 @@ MonoBehaviour:
   IsGlobal: 1
   Labels: []
   Exists: 1
+--- !u!114 &-94928189117434578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/windmill_spawn
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/windmill_spawn
+  Guid:
+    Data1: 1616386207
+    Data2: 1182962519
+    Data3: 1403491730
+    Data4: -2074038695
+  Banks:
+  - {fileID: 282131880128708648}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 200
+  Length: 0
 --- !u!114 &-77347921114474174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1305,68 +2141,149 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -6395688774213805039}
-  - {fileID: -77347921114474174}
-  - {fileID: 5108756106898423132}
-  - {fileID: 6015141965729299508}
-  - {fileID: 8102563417079577015}
-  - {fileID: -7462271697647048599}
+  - {fileID: -1961004960571396211}
+  - {fileID: -4943362248349947130}
+  - {fileID: 1992532989628781375}
+  - {fileID: 282131880128708648}
+  - {fileID: 7768557709990195704}
+  - {fileID: -4684434949208560311}
   EditorEvents:
-  - {fileID: -1707341160869704546}
-  - {fileID: 3628494729261849437}
-  - {fileID: 7068974885236297590}
-  - {fileID: 5325000334670017892}
-  - {fileID: -1946190640371706786}
-  - {fileID: 2271424396583705651}
-  - {fileID: 427287121270227522}
-  - {fileID: -4072338796006189892}
-  - {fileID: 2676801406611694417}
-  - {fileID: -6617014762824808136}
-  - {fileID: -7288141903084653807}
-  - {fileID: 5254145662814646618}
-  - {fileID: -2529494224767000259}
-  - {fileID: -4031979852402640078}
-  - {fileID: 6279841592378458199}
-  - {fileID: -8466486411677500783}
-  - {fileID: 260590495762998038}
-  - {fileID: 7471720638969461796}
-  - {fileID: -4692992091928283236}
-  - {fileID: 6062530068533498416}
-  - {fileID: -7689516092140350339}
-  - {fileID: 4480881017609075361}
-  - {fileID: 509383816299273204}
-  - {fileID: 8133674547456099233}
-  - {fileID: 2874287713985245200}
-  - {fileID: -3538231299376128656}
-  - {fileID: 6416010492322969977}
-  - {fileID: -5555427820807360061}
-  - {fileID: -7356889185140063212}
-  - {fileID: 4445881990109957022}
-  - {fileID: 3070361199370604622}
-  - {fileID: 1900183125185191264}
-  - {fileID: 7738905785525350485}
-  - {fileID: -1896785202297779662}
-  - {fileID: -602764393655075357}
-  - {fileID: 9219651242366509591}
-  - {fileID: -8902044394474685447}
-  - {fileID: 7247385425030682474}
-  - {fileID: 6477250140394918169}
-  - {fileID: -3857188461628788398}
-  - {fileID: 8845890999346623601}
-  - {fileID: 6106115638983129084}
-  - {fileID: 8833669842168930071}
-  - {fileID: -7195975513076030684}
-  - {fileID: -5876053425604988944}
-  - {fileID: -2945098262953153266}
-  - {fileID: 2351178203728239849}
-  - {fileID: -2611759731639003267}
+  - {fileID: -8486198818280112551}
+  - {fileID: 6950989536752694439}
+  - {fileID: -2704721268522673902}
+  - {fileID: 4133626066734290863}
+  - {fileID: -302838792370647772}
+  - {fileID: -9181510678890198430}
+  - {fileID: -6995679168210830805}
+  - {fileID: 3221505390762404978}
+  - {fileID: -5735492819021524793}
+  - {fileID: -5710253515646787058}
+  - {fileID: -1950804775409009515}
+  - {fileID: -7472422013058124742}
+  - {fileID: -7889248476821552151}
+  - {fileID: -4996245122374001358}
+  - {fileID: 8624568252031818141}
+  - {fileID: 5526746444523379852}
+  - {fileID: 9212579602372277706}
+  - {fileID: 2634882178579021507}
+  - {fileID: -949890604890468366}
+  - {fileID: 248437807963664566}
+  - {fileID: 5036258126870687362}
+  - {fileID: 1943588623488256854}
+  - {fileID: -8158893472568665242}
+  - {fileID: 5825411405858152559}
+  - {fileID: -409429188372232906}
+  - {fileID: 8727576660142489098}
+  - {fileID: -5696115949380488427}
+  - {fileID: -94928189117434578}
+  - {fileID: -8960419977843960821}
+  - {fileID: -5908587891424822559}
+  - {fileID: 169075162577144056}
+  - {fileID: -801349537582502883}
+  - {fileID: -6842445143928793404}
+  - {fileID: 6911072816237347057}
+  - {fileID: 3549763851643672995}
+  - {fileID: 4279283295543388641}
+  - {fileID: 9052027220939516079}
+  - {fileID: 687914946622995668}
+  - {fileID: 1321022525972460570}
+  - {fileID: 1731203517413832815}
+  - {fileID: 3252262672076048877}
+  - {fileID: 7022717429120180076}
+  - {fileID: 428736401181797527}
+  - {fileID: -8063784854577566249}
+  - {fileID: -7319025585636616883}
+  - {fileID: -487261954898041239}
+  - {fileID: -2479044676750608462}
+  - {fileID: 138397621291940207}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -77347921114474174}
+  - {fileID: -4943362248349947130}
   StringsBanks:
-  - {fileID: -6395688774213805039}
-  cacheTime: 638600262055793337
+  - {fileID: -1961004960571396211}
+  cacheTime: 638600858309110612
   cacheVersion: 131619
+--- !u!114 &138397621291940207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wadi/wadi_ambience_sneeuw
+  m_EditorClassIdentifier: 
+  Path: event:/Wadi/wadi_ambience_sneeuw
+  Guid:
+    Data1: 376209402
+    Data2: 1325462781
+    Data3: -1876324979
+    Data4: -1483448049
+  Banks:
+  - {fileID: -4684434949208560311}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 18355
+--- !u!114 &169075162577144056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/piano_loop
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/piano_loop
+  Guid:
+    Data1: 472608316
+    Data2: 1091273085
+    Data3: -409372520
+    Data4: 518190114
+  Banks:
+  - {fileID: 7768557709990195704}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 126000
+--- !u!114 &248437807963664566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/hit_building
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/hit_building
+  Guid:
+    Data1: 1733351243
+    Data2: 1132077773
+    Data3: 534086827
+    Data4: 753846815
+  Banks:
+  - {fileID: 282131880128708648}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 350
+  Length: 6824
 --- !u!114 &249748931207592490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1422,6 +2339,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 30500
+--- !u!114 &282131880128708648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Stad_Shooter.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Audio Yuverta AR Route/Desktop/Stad_Shooter.bank
+  Name: Stad_Shooter
+  StudioPath: bank:/Stad_Shooter
+  lastModified: 638600858307608451
+  FileSizes: []
+  Exists: 1
 --- !u!114 &427287121270227522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1449,6 +2384,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &428736401181797527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wadi/wadi_loop_schudden_blokken
+  m_EditorClassIdentifier: 
+  Path: event:/Wadi/wadi_loop_schudden_blokken
+  Guid:
+    Data1: -2042337887
+    Data2: 1137528809
+    Data3: -104039002
+    Data4: -514531381
+  Banks:
+  - {fileID: -4684434949208560311}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 6839
 --- !u!114 &509383816299273204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1476,6 +2438,60 @@ MonoBehaviour:
   MinDistance: 5.2000003
   MaxDistance: 250
   Length: 20000
+--- !u!114 &687914946622995668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wadi/wadi_loop_ambience_basic
+  m_EditorClassIdentifier: 
+  Path: event:/Wadi/wadi_loop_ambience_basic
+  Guid:
+    Data1: -1616410857
+    Data2: 1074153867
+    Data3: -1259083897
+    Data4: -1201870118
+  Banks:
+  - {fileID: -4684434949208560311}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 16468
+--- !u!114 &1321022525972460570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wadi/spawn_wadi_start
+  m_EditorClassIdentifier: 
+  Path: event:/Wadi/spawn_wadi_start
+  Guid:
+    Data1: 1835669869
+    Data2: 1187890009
+    Data3: 1697637786
+    Data4: -112734644
+  Banks:
+  - {fileID: -4684434949208560311}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &1406784349318386466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1503,6 +2519,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 350
   Length: 6824
+--- !u!114 &1731203517413832815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wadi/wadi_ambience_regen
+  m_EditorClassIdentifier: 
+  Path: event:/Wadi/wadi_ambience_regen
+  Guid:
+    Data1: -1978123662
+    Data2: 1194873906
+    Data3: -306645329
+    Data4: -846093058
+  Banks:
+  - {fileID: -4684434949208560311}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 19729
 --- !u!114 &1766321868087670958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1585,6 +2628,53 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &1943588623488256854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/ambience
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/ambience
+  Guid:
+    Data1: 1741103464
+    Data2: 1252910644
+    Data3: -1150538613
+    Data4: 772351895
+  Banks:
+  - {fileID: 282131880128708648}
+  - {fileID: 7768557709990195704}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8737265209150204372}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 30500
+--- !u!114 &1992532989628781375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Stadslandbouw.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Audio Yuverta AR Route/Desktop/Stadslandbouw.bank
+  Name: Stadslandbouw
+  StudioPath: bank:/Stadslandbouw
+  lastModified: 638600858307642096
+  FileSizes: []
+  Exists: 1
 --- !u!114 &2115048818224658653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1690,6 +2780,34 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &2634882178579021507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/slingshot_shot
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/slingshot_shot
+  Guid:
+    Data1: 912718877
+    Data2: 1212837700
+    Data3: -221196360
+    Data4: -433278172
+  Banks:
+  - {fileID: 282131880128708648}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -425256789551624525}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 13459
 --- !u!114 &2676801406611694417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1800,6 +2918,87 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 150
   Length: 0
+--- !u!114 &3221505390762404978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/knop_lucht
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/knop_lucht
+  Guid:
+    Data1: -1913694417
+    Data2: 1104554413
+    Data3: -1310337866
+    Data4: 306663494
+  Banks:
+  - {fileID: 1992532989628781375}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3252262672076048877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wadi/wadi_controleer_negatief
+  m_EditorClassIdentifier: 
+  Path: event:/Wadi/wadi_controleer_negatief
+  Guid:
+    Data1: -1689819251
+    Data2: 1300959794
+    Data3: 1732061840
+    Data4: 1460289649
+  Banks:
+  - {fileID: -4684434949208560311}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3549763851643672995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/strand_loop
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/strand_loop
+  Guid:
+    Data1: 1671851261
+    Data2: 1117604768
+    Data3: -1735112019
+    Data4: 1618837793
+  Banks:
+  - {fileID: 7768557709990195704}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 27374
 --- !u!114 &3628494729261849437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1827,6 +3026,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &4133626066734290863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/VoiceOver/VG Outro
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/VoiceOver/VG Outro
+  Guid:
+    Data1: 101345361
+    Data2: 1297443905
+    Data3: -519704154
+    Data4: -325044857
+  Banks:
+  - {fileID: -4943362248349947130}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 12617
 --- !u!114 &4194740242528292442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1881,6 +3107,59 @@ MonoBehaviour:
   MinDistance: 6.4
   MaxDistance: 200
   Length: 0
+--- !u!114 &4279283295543388641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wadi/wadi_controleer_positief
+  m_EditorClassIdentifier: 
+  Path: event:/Wadi/wadi_controleer_positief
+  Guid:
+    Data1: 1558852873
+    Data2: 1331984996
+    Data3: -165910876
+    Data4: -23886400
+  Banks:
+  - {fileID: -4684434949208560311}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &4331925294586442421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/gun_shot_load/Schieten
+  m_EditorClassIdentifier: 
+  Name: Schieten
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1205517512
+    data2: 439271474
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - opladen_schieten
+  - loslaten_schieten
+  Exists: 1
 --- !u!114 &4445881990109957022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1962,6 +3241,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &5036258126870687362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/car_drive
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/car_drive
+  Guid:
+    Data1: -63777178
+    Data2: 1190608326
+    Data3: -580173675
+    Data4: -1304085568
+  Banks:
+  - {fileID: 282131880128708648}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 5.2000003
+  MaxDistance: 65
+  Length: 44000
 --- !u!114 &5108756106898423132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2035,6 +3341,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &5442828126195955304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Ambience/Groenheid
+  m_EditorClassIdentifier: 
+  Name: Groenheid
+  StudioPath: 
+  Min: 0
+  Max: 80
+  Default: 0
+  ID:
+    data1: 103846525
+    data2: 2126864592
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &5478197652855412650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2063,6 +3393,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 16468
+--- !u!114 &5526746444523379852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/knop_regen
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/knop_regen
+  Guid:
+    Data1: 594042618
+    Data2: 1161774293
+    Data3: 1981644430
+    Data4: 473777567
+  Banks:
+  - {fileID: 1992532989628781375}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &5544843823340688590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2087,6 +3444,34 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &5825411405858152559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/Ambience
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/Ambience
+  Guid:
+    Data1: -1015746944
+    Data2: 1226253556
+    Data3: 1088331195
+    Data4: -812534811
+  Banks:
+  - {fileID: 282131880128708648}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 5442828126195955304}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 30500
 --- !u!114 &6015141965729299508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2338,6 +3723,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &6911072816237347057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/hooghouden
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/hooghouden
+  Guid:
+    Data1: -730028399
+    Data2: 1257835059
+    Data3: -1448834398
+    Data4: 973451200
+  Banks:
+  - {fileID: 7768557709990195704}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 11000
+--- !u!114 &6950989536752694439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/VoiceOver/VG Temperatuur
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/VoiceOver/VG Temperatuur
+  Guid:
+    Data1: -781308411
+    Data2: 1154781718
+    Data3: 331782800
+    Data4: -2069505600
+  Banks:
+  - {fileID: -4943362248349947130}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5146
 --- !u!114 &7010283307182048040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2365,6 +3804,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &7022717429120180076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wadi/wadi_ambience_zon
+  m_EditorClassIdentifier: 
+  Path: event:/Wadi/wadi_ambience_zon
+  Guid:
+    Data1: 804699541
+    Data2: 1312424441
+    Data3: 1205691782
+    Data4: 2090248657
+  Banks:
+  - {fileID: -4684434949208560311}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 22015
 --- !u!114 &7068974885236297590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2473,6 +3939,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &7768557709990195704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/VGH Bloem.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/Audio Yuverta AR Route/Desktop/VGH Bloem.bank
+  Name: VGH Bloem
+  StudioPath: bank:/VGH Bloem
+  lastModified: 638600858307933310
+  FileSizes: []
+  Exists: 1
 --- !u!114 &7939648261716675274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2703,6 +4187,35 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 13459
+--- !u!114 &8624568252031818141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/Groeifases
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/Groeifases
+  Guid:
+    Data1: 1948860383
+    Data2: 1293032034
+    Data3: 1391411644
+    Data4: 1086879464
+  Banks:
+  - {fileID: 1992532989628781375}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -1468207668505744308}
+  - {fileID: -2999637061053081788}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &8661876658424599913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2731,6 +4244,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 30500
+--- !u!114 &8727576660142489098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/greenbalcony_spawn
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/greenbalcony_spawn
+  Guid:
+    Data1: -791975540
+    Data2: 1153854486
+    Data3: -359591749
+    Data4: -1781078423
+  Banks:
+  - {fileID: 282131880128708648}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 200
+  Length: 0
 --- !u!114 &8736749645021556048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2756,6 +4296,36 @@ MonoBehaviour:
   Labels:
   - opladen_schieten
   - loslaten_schieten
+  Exists: 1
+--- !u!114 &8790393963884688310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Shooter_music/Blokjes_geplaatst
+  m_EditorClassIdentifier: 
+  Name: Blokjes_geplaatst
+  StudioPath: 
+  Min: 0
+  Max: 5
+  Default: 0
+  ID:
+    data1: 4219067713
+    data2: 3463026392
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - 0 Blokjes
+  - 4 Blokjes
+  - 8 Blokjes
+  - 12 Blokjes
+  - 16 Blokjes
+  - 20 Blokjes
   Exists: 1
 --- !u!114 &8828870597564644790
 MonoBehaviour:
@@ -2836,6 +4406,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 686270
+--- !u!114 &9052027220939516079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wadi/wadi_reverse_oppakken_blokken
+  m_EditorClassIdentifier: 
+  Path: event:/Wadi/wadi_reverse_oppakken_blokken
+  Guid:
+    Data1: -367323118
+    Data2: 1189371704
+    Data3: -1883260007
+    Data4: -1747475557
+  Banks:
+  - {fileID: -4684434949208560311}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &9212579602372277706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/spawn_krat
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/spawn_krat
+  Guid:
+    Data1: -31111426
+    Data2: 1160353029
+    Data3: 812255405
+    Data4: -1481812916
+  Banks:
+  - {fileID: 1992532989628781375}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &9219651242366509591
 MonoBehaviour:
   m_ObjectHideFlags: 0

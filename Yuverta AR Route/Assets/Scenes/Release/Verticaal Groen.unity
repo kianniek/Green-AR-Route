@@ -9970,7 +9970,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fb7dc3ab789d2c94aa746b886546a264, type: 2}
   bulletSpawnPoint: {fileID: 3876646052444348414}
   weaponWheel: {fileID: 4686417140081073383}
-  spriteTouchNotifier: {fileID: 4686417139833723397}
   onSingleFireShot:
     m_PersistentCalls:
       m_Calls:
@@ -10860,10 +10859,34 @@ MonoBehaviour:
   fadeOutDuration: 1
   OnSliceHighlighted:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2030370207378040253}
+        m_TargetAssemblyTypeName: GunController, Assembly-CSharp
+        m_MethodName: set_IsSwitchingWeaponThisPress
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   OnSliceDehighlighted:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2030370207378040253}
+        m_TargetAssemblyTypeName: GunController, Assembly-CSharp
+        m_MethodName: set_IsSwitchingWeaponThisPress
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnSliceSelected:
     m_PersistentCalls:
       m_Calls: []
@@ -10919,7 +10942,6 @@ GameObject:
   - component: {fileID: 4686417139833723394}
   - component: {fileID: 2422007525048616324}
   - component: {fileID: 1453715093251170917}
-  - component: {fileID: 4686417139833723397}
   m_Layer: 5
   m_Name: WeaponWheel
   m_TagString: Untagged
@@ -10927,35 +10949,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &4686417139833723397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4686417139833723396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad3cc1c0d533d3444a389df33aaca5d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  raycaster: {fileID: 8006991505801360050}
-  eventSystem: {fileID: 4284101179063055938}
-  targetSprites:
-  - {fileID: 4686417140081073384}
-  - {fileID: 1224526806}
-  - {fileID: 1619740276}
-  - {fileID: 1180152703}
-  - {fileID: 761934802}
-  - {fileID: 1843963645}
-  - {fileID: 599832390}
-  - {fileID: 2080799315}
-  - {fileID: 688409555}
-  - {fileID: 360407968}
-  - {fileID: 951689122}
-  - {fileID: 1549452047}
-  - {fileID: 1291104433}
-  - {fileID: 1192383890}
 --- !u!224 &4686417140081073383
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11524,7 +11517,7 @@ PrefabInstance:
     - target: {fileID: 1679390189267313453, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1862060454429530475, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
@@ -12000,10 +11993,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8380540865280155090, guid: 5c134ea5807842c41a418f827ad5bc6e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 6521837934254405400, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       insertIndex: -1

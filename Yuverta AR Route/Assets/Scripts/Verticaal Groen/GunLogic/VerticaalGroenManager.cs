@@ -14,15 +14,22 @@ public class VerticaalGroenManager : Singleton<VerticaalGroenManager>
         var gunControllerInstance = gunController;
         
         currentWeapon = gunControllerInstance.GetComponent<GunController>();
-        currentWeapon.ChangeWeapon(currentWeaponIndex);
         
-        wheel.OnSliceSelected.AddListener(OnSliceSelected);
-        wheel.OnSliceSelected.Invoke(wheel.sliceContents[currentWeaponIndex]);
+        wheel.AddEventCallback(OnEvent);
+        ChangeCurrentWeapon(currentWeaponIndex);
     }
-
-    private void OnSliceSelected(SgSliceController slice)
+    
+    private void OnEvent(SgWeaponWheelEvent wheelEvent)
     {
-        currentWeaponIndex = slice.sliceIndex;
+        if (wheelEvent.type == SgWeaponWheelEventType.Select)
+        {
+            ChangeCurrentWeapon(wheelEvent.slice.sliceIndex);
+        }
+    }
+    
+    private void ChangeCurrentWeapon(int index)
+    {
+        currentWeaponIndex = index;
         currentWeapon.ChangeWeapon(currentWeaponIndex);
     }
 }
