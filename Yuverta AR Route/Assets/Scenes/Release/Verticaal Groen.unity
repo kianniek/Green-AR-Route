@@ -7868,43 +7868,6 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 400
---- !u!1 &1760386216 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7053415772268553738, guid: 5c134ea5807842c41a418f827ad5bc6e,
-    type: 3}
-  m_PrefabInstance: {fileID: 9183717264194731524}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1760386220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760386216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 1592244116
-      Data2: 1240448868
-      Data3: 1251104950
-      Data4: 1778100447
-    Path: event:/Stad Shooter/tree_spawn
-  Event: 
-  PlayEvent: 0
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 150
 --- !u!1 &1775607429 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5243710466064641784, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -11517,7 +11480,7 @@ PrefabInstance:
     - target: {fileID: 1679390189267313453, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1862060454429530475, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
@@ -11838,7 +11801,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OnGrownObjects.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1760386220}
+      objectReference: {fileID: 0}
     - target: {fileID: 6084069259546162683, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: OnGrownObjects.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -11989,10 +11952,15 @@ PrefabInstance:
       propertyPath: OnCovered.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 922699071}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8191278879439273001, guid: 5c134ea5807842c41a418f827ad5bc6e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8380540865280155090, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 6521837934254405400, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       insertIndex: -1
@@ -12001,6 +11969,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1873769278}
+    - targetCorrespondingSourceObject: {fileID: 4975786301719253469, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 637825964}
     - targetCorrespondingSourceObject: {fileID: 6642035411923561244, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       insertIndex: -1
@@ -12013,10 +11985,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1708433527}
-    - targetCorrespondingSourceObject: {fileID: 7053415772268553738, guid: 5c134ea5807842c41a418f827ad5bc6e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1760386220}
     - targetCorrespondingSourceObject: {fileID: 353623204978063401, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       insertIndex: -1
@@ -12057,10 +12025,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1095435713}
-    - targetCorrespondingSourceObject: {fileID: 4975786301719253469, guid: 5c134ea5807842c41a418f827ad5bc6e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 637825964}
     - targetCorrespondingSourceObject: {fileID: 8525225499585785903, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       insertIndex: -1
