@@ -11,12 +11,18 @@ public class CropObject : ScriptableObject
 {
     public enum CropType
     {
-        none,
-        Legumes,
-        Brassicas,
-        SolanaceousCrops,
-        Cucurbits,
-        GrainsOrCoverCrops
+        none, // None
+        Legumes, // Peas, beans, lentils, etc.
+        Brassicas, // Cabbage, broccoli, cauliflower, etc.
+        SolanaceousCrops, // Tomatoes, potatoes, eggplants, peppers
+        Cucurbits, // Cucumbers, pumpkins, zucchinis, melons
+        GrainsOrCoverCrops, // Wheat, barley, oats, rye, or cover crops like clover
+        RootCrops, // Carrots, beets, radishes
+        Alliums, // Onions, garlic, leeks, shallots
+        LeafyGreens, // Lettuce, spinach, kale, chard
+        Herbs, // Basil, thyme, parsley, rosemary
+        Tubers, // Potatoes, sweet potatoes
+
     }
     
     public GameObject seedPrefab;

@@ -27,6 +27,11 @@ public class CropScript : MonoBehaviour
     private const int GROWTH_STAGES = 6;
     
     public bool IsFullyGrown => growthStage == GROWTH_STAGES - 1;
+    
+    public int amountToGetCorrect = 6;
+    public UnityEvent onCorrectAmountReached = new();
+    
+    private int correctInARow;
 
     private void Start()
     {
@@ -127,6 +132,7 @@ public class CropScript : MonoBehaviour
             growthStagesList[growthStage].SetActive(false);
             
             fullyGrownWrong.Invoke();
+            correctInARow = 0;
             Debug.Log("Fully grown");
             return;
         }
@@ -136,6 +142,15 @@ public class CropScript : MonoBehaviour
             return;
         
         fullyGrownCorrect.Invoke();
+        
+        correctInARow++;
+
+        if (correctInARow == amountToGetCorrect)
+        {
+            onCorrectAmountReached.Invoke();
+            correctInARow = 0;
+        }
+        
         Debug.Log("Fully grown");
     }
     
