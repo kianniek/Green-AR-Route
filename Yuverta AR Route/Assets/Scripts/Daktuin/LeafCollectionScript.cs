@@ -65,7 +65,18 @@ public class LeafCollectionScript : MonoBehaviour
     private ARRaycastManager arRaycastManager;
 
     [SerializeField] private bool deleteAnimationIfFinished;
+    
+    [Space(10)]
+    
+    [Header("Events")]
+    
+    [SerializeField] private UnityEvent onTopLeafCollected = new();
+    [SerializeField] private UnityEvent onMiddleLeafCollected = new();
+    [SerializeField] private UnityEvent onBottomLeafCollected = new();
+    [SerializeField] private UnityEvent onLeftLeafCollected = new();
+    [SerializeField] private UnityEvent onRightLeafCollected = new();
 
+    
     void Awake()
     {
         arRaycastManager = FindObjectOfType<ARRaycastManager>();
@@ -91,27 +102,28 @@ public class LeafCollectionScript : MonoBehaviour
         {
             case FlowerPart.middel:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[0], leafObj));
-                leafObj.transform.SetSiblingIndex(0);
+                leafObj.transform.SetAsLastSibling();
+                onMiddleLeafCollected.Invoke();
                 break;
             case FlowerPart.top:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[1], leafObj));
-                leafObj.transform.SetSiblingIndex(1);
-
+                leafObj.transform.SetAsFirstSibling();
+                onTopLeafCollected.Invoke();
                 break;
             case FlowerPart.bottom:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[2], leafObj));
-                leafObj.transform.SetSiblingIndex(2);
-
+                leafObj.transform.SetAsFirstSibling();
+                onBottomLeafCollected.Invoke();
                 break;
             case FlowerPart.left:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[3], leafObj));
-                leafObj.transform.SetSiblingIndex(3);
-
+                leafObj.transform.SetAsFirstSibling();
+                onLeftLeafCollected.Invoke();
                 break;
             case FlowerPart.right:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[4], leafObj));
-                leafObj.transform.SetSiblingIndex(4);
-
+                leafObj.transform.SetAsFirstSibling();
+                onRightLeafCollected.Invoke();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();

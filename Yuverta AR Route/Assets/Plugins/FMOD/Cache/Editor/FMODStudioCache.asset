@@ -1221,9 +1221,36 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638600858307368306
+  lastModified: 638600945049406796
   FileSizes: []
   Exists: 1
+--- !u!114 &-4835301546994531579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/VO/VHGBloemIntro
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/VO/VHGBloemIntro
+  Guid:
+    Data1: 1930422906
+    Data2: 1082684684
+    Data3: 1774169248
+    Data4: -1704957196
+  Banks:
+  - {fileID: 7768557709990195704}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7000
 --- !u!114 &-4822559991012336083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1290,7 +1317,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Wadi.bank
   Name: Wadi
   StudioPath: bank:/Wadi
-  lastModified: 638600858309110612
+  lastModified: 638600945110599687
   FileSizes: []
   Exists: 1
 --- !u!114 &-4072338796006189892
@@ -1402,6 +1429,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 16468
+--- !u!114 &-3515897501470066555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/VO/StadsLandbouw-UitlegCirculairGroen
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/VO/StadsLandbouw-UitlegCirculairGroen
+  Guid:
+    Data1: -1000508592
+    Data2: 1169026539
+    Data3: 196416155
+    Data4: -999549358
+  Banks:
+  - {fileID: 1992532989628781375}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 78288
 --- !u!114 &-3063165860367182009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1506,6 +1560,60 @@ MonoBehaviour:
   - opladen_schieten
   - loslaten_schieten
   Exists: 1
+--- !u!114 &-2780921806954023414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/VO/VHG-Bodem
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/VO/VHG-Bodem
+  Guid:
+    Data1: 960634269
+    Data2: 1258557350
+    Data3: 1134542524
+    Data4: 407737777
+  Banks:
+  - {fileID: 7768557709990195704}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10031
+--- !u!114 &-2775052481700926499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/VO/VHG-Voedsel
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/VO/VHG-Voedsel
+  Guid:
+    Data1: 820378398
+    Data2: 1101034765
+    Data3: -180556389
+    Data4: -553227899
+  Banks:
+  - {fileID: 7768557709990195704}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7288
 --- !u!114 &-2704721268522673902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1631,10 +1739,10 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638600858307373395
+  lastModified: 638600945049418783
   FileSizes:
   - Name: 
-    Value: 3530
+    Value: 3856
   Exists: 1
 --- !u!114 &-1950804775409009515
 MonoBehaviour:
@@ -2196,12 +2304,19 @@ MonoBehaviour:
   - {fileID: -487261954898041239}
   - {fileID: -2479044676750608462}
   - {fileID: 138397621291940207}
+  - {fileID: -3515897501470066555}
+  - {fileID: -2775052481700926499}
+  - {fileID: 5941278514937077333}
+  - {fileID: 2639793561857554116}
+  - {fileID: -4835301546994531579}
+  - {fileID: 9069011269663707372}
+  - {fileID: -2780921806954023414}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4943362248349947130}
   StringsBanks:
   - {fileID: -1961004960571396211}
-  cacheTime: 638600858309110612
+  cacheTime: 638600945110599687
   cacheVersion: 131619
 --- !u!114 &138397621291940207
 MonoBehaviour:
@@ -2354,7 +2469,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Stad_Shooter.bank
   Name: Stad_Shooter
   StudioPath: bank:/Stad_Shooter
-  lastModified: 638600858307608451
+  lastModified: 638600945060942908
   FileSizes: []
   Exists: 1
 --- !u!114 &427287121270227522
@@ -2672,7 +2787,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Stadslandbouw.bank
   Name: Stadslandbouw
   StudioPath: bank:/Stadslandbouw
-  lastModified: 638600858307642096
+  lastModified: 638600945067521756
   FileSizes: []
   Exists: 1
 --- !u!114 &2115048818224658653
@@ -2808,6 +2923,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 13459
+--- !u!114 &2639793561857554116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/VO/VHG-Dieren
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/VO/VHG-Dieren
+  Guid:
+    Data1: -204923282
+    Data2: 1077271896
+    Data3: -1360541045
+    Data4: 1818198731
+  Banks:
+  - {fileID: 7768557709990195704}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4597
 --- !u!114 &2676801406611694417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3472,6 +3614,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 30500
+--- !u!114 &5941278514937077333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/VO/VHG-Energie
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/VO/VHG-Energie
+  Guid:
+    Data1: 1205645151
+    Data2: 1291262120
+    Data3: 657328318
+    Data4: -797948772
+  Banks:
+  - {fileID: 7768557709990195704}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 13975
 --- !u!114 &6015141965729299508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3954,7 +4123,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/VGH Bloem.bank
   Name: VGH Bloem
   StudioPath: bank:/VGH Bloem
-  lastModified: 638600858307933310
+  lastModified: 638600945084976184
   FileSizes: []
   Exists: 1
 --- !u!114 &7939648261716675274
@@ -4433,6 +4602,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &9069011269663707372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/VO/VHG-Water
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/VO/VHG-Water
+  Guid:
+    Data1: -2076695155
+    Data2: 1297926518
+    Data3: 369013678
+    Data4: 1393738329
+  Banks:
+  - {fileID: 7768557709990195704}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 14053
 --- !u!114 &9212579602372277706
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,13 +23,12 @@ public class QRCodeManager : MonoBehaviour
     public List<QRCode> qrCodes;
 
     public XRReferenceImageLibrary referenceImageLibrary;
-    
+
     private float time;
 
     private void Start()
     {
         time = Time.time;
-
     }
 
     private void Update()
@@ -67,10 +66,25 @@ public class QRCodeManager : MonoBehaviour
         }
     }
 
+
+    private bool isFMODDone = false; // The boolean to track FMOD status
+
+    public void SetFMODStatus(bool status)
+    {
+        isFMODDone = status;
+    }
+
     private void ProcessTrackedImage(ARTrackedImage trackedImage)
     {
+        // Check if FMOD event is still active
+        if (isFMODDone)
+        {
+            Debug.Log("Cannot collect leaf, FMOD event is still active.");
+            return;
+        }
+
         var qrCodeName = trackedImage.referenceImage.name;
-        
+
         foreach (var qrCode in qrCodes.Where(qrCode => qrCode.name == qrCodeName))
         {
             switch (qrCode.scanned)
