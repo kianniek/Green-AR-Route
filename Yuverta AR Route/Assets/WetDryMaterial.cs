@@ -7,8 +7,8 @@ public class WetDryMaterial : MonoBehaviour
     public float drySmoothness = 0f;
     public float transitionDuration = 1f;
 
-    private Renderer objectRenderer;
-    private Material material;
+    [SerializeField] private Renderer objectRenderer;
+    [SerializeField] private Material material;
 
     private void Start()
     {
