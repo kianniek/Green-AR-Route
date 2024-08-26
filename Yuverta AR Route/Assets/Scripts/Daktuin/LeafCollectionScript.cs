@@ -65,6 +65,8 @@ public class LeafCollectionScript : MonoBehaviour
     private ARRaycastManager arRaycastManager;
 
     [SerializeField] private bool deleteAnimationIfFinished;
+    
+    [SerializeField] private CameraHeightOffGround cameraHeightOffGround;
 
     void Awake()
     {
@@ -170,13 +172,13 @@ public class LeafCollectionScript : MonoBehaviour
         Vector3 cameraPosition = camera.transform.position;
 
         //remove the camera from the y position
-        cameraPosition.y = 0;
+        cameraPosition.y = cameraHeightOffGround.GetGroundPosition().y;
 
         //get the postion of the camera + 1 meter in the forward direction
-        Vector3 position = cameraPosition + cameraForward * 3.0f;
+        Vector3 spawnPosition = cameraPosition + cameraForward * 3.0f;
 
 
-        SpawnNewAnimation(animationPrefab, spawnParticles, position);
+        SpawnNewAnimation(animationPrefab, spawnParticles, spawnPosition);
     }
 
     public void PromptTextHandler(int amountCollected)

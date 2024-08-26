@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PromptTextController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PromptTextController : MonoBehaviour
     
     [SerializeField] private bool showOnStart = false;
     [SerializeField] private float showOnStartDelay = 5f;
+
+    [SerializeField] private UnityEvent onMovement = new();
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +30,7 @@ public class PromptTextController : MonoBehaviour
 
     public void ToMiddel()
     {
+        onMovement.Invoke();
         promptTextAnimator.SetBool("Hidden", false);
         promptTextAnimator.SetBool("Middle", true);
         promptTextAnimator.SetBool("Top", false);
@@ -34,6 +38,8 @@ public class PromptTextController : MonoBehaviour
     
     public void ToTop()
     {
+        onMovement.Invoke();
+
         promptTextAnimator.SetBool("Hidden", false);
         promptTextAnimator.SetBool("Middle", false);
         promptTextAnimator.SetBool("Top", true);
@@ -41,6 +47,8 @@ public class PromptTextController : MonoBehaviour
     
     public void Hide()
     {
+        onMovement.Invoke();
+
         promptTextAnimator.SetBool("Hidden", true);
         promptTextAnimator.SetBool("Middle", false);
         promptTextAnimator.SetBool("Top", false);

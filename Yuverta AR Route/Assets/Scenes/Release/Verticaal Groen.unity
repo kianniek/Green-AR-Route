@@ -6838,6 +6838,10 @@ MonoBehaviour:
   promptText: {fileID: 289529042}
   promptTextAnimator: {fileID: 1655565336}
   showOnStart: 1
+  showOnStartDelay: 5
+  onMovement:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1497743554 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1320273754894911088, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -10452,6 +10456,8 @@ GameObject:
   - component: {fileID: 2512387470688141394}
   - component: {fileID: 2512387470688141395}
   - component: {fileID: 2512387470688141388}
+  - component: {fileID: 2512387470688141397}
+  - component: {fileID: 2512387470688141396}
   m_Layer: 0
   m_Name: XR Origin (AR Rig)
   m_TagString: Untagged
@@ -10521,6 +10527,64 @@ MonoBehaviour:
   m_PlanePrefab: {fileID: 1585201990951412, guid: 886609fc1566e4c27b399f1095d6de18,
     type: 3}
   m_DetectionMode: 1
+--- !u!114 &2512387470688141396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2512387470688141389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
+--- !u!114 &2512387470688141397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2512387470688141389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cbc7aa881835a4ab4f1a1e65966940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onFirstPlaneDetected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2512387470688141396}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &3759633940026317873
 Transform:
   m_ObjectHideFlags: 0
@@ -10688,6 +10752,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BackToHub
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785675164361912665, guid: ab2fa1657fff4274d8f622599483201c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11961,10 +12030,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9183717264194731528}
-    - targetCorrespondingSourceObject: {fileID: 8380540865280155090, guid: 5c134ea5807842c41a418f827ad5bc6e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 6521837934254405400, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       insertIndex: -1
@@ -12790,7 +12855,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9183717264194731525}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0364de3db3f856f4485de84c9496a923, type: 3}
   m_Name: 

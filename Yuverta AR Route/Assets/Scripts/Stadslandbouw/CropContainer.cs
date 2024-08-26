@@ -74,7 +74,7 @@ public class CropContainer : MonoBehaviour
     private void HarvestCrop(Vector2 touchPosition)
     {
         // Check if the crop is fully grown
-        if (!cropScript.IsFullyGrown)
+        if (!cropScript.IsFullyGrown && currentCropIsRightCrop)
             return;
 
         // Check with a raycast if the touch actually hit the crop
