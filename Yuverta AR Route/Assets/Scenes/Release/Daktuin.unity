@@ -1094,6 +1094,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 699489653}
+    - targetCorrespondingSourceObject: {fileID: 186551128158416874, guid: 529c65b75ce01ff4e960889f4015f2f7,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 699489654}
   m_SourcePrefab: {fileID: 100100000, guid: 529c65b75ce01ff4e960889f4015f2f7, type: 3}
 --- !u!114 &699489650 stripped
 MonoBehaviour:
@@ -1135,6 +1139,52 @@ MonoBehaviour:
   promptTextAnimator: {fileID: 699489652}
   showOnStart: 1
   showOnStartDelay: 5
+  onMovement:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 699489654}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &699489654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 699489651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!1 &710510002
 GameObject:
   m_ObjectHideFlags: 0
@@ -2069,6 +2119,8 @@ GameObject:
   - component: {fileID: 1451381633}
   - component: {fileID: 1451381632}
   - component: {fileID: 1451381638}
+  - component: {fileID: 1451381640}
+  - component: {fileID: 1451381639}
   m_Layer: 0
   m_Name: XR Origin (AR Rig)
   m_TagString: Untagged
@@ -2188,6 +2240,64 @@ MonoBehaviour:
   OnImageRecognizedStarted:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1451381639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451381631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
+--- !u!114 &1451381640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451381631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78cbc7aa881835a4ab4f1a1e65966940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onFirstPlaneDetected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1451381639}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1453638255
 GameObject:
   m_ObjectHideFlags: 0
@@ -2808,6 +2918,11 @@ PrefabInstance:
     - target: {fileID: 8382891564105061147, guid: ab2fa1657fff4274d8f622599483201c,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785675164361912665, guid: ab2fa1657fff4274d8f622599483201c,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2822,7 +2937,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1823096750}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bda78567881c47dfb28bb249e2118b7e, type: 3}
   m_Name: 
@@ -2875,6 +2990,7 @@ GameObject:
   - component: {fileID: 2017752456}
   - component: {fileID: 2017752455}
   - component: {fileID: 2017752459}
+  - component: {fileID: 2017752460}
   m_Layer: 0
   m_Name: DaktuinLogic
   m_TagString: Untagged
@@ -3027,6 +3143,21 @@ MonoBehaviour:
   onImageRemoved:
     m_PersistentCalls:
       m_Calls: []
+  onImageNewScanned:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2017752460}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   qrCodes:
   - name: QR_Explode
     scanned: 0
@@ -3214,6 +3345,37 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2017752460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017752454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!1 &2027926393
 GameObject:
   m_ObjectHideFlags: 0

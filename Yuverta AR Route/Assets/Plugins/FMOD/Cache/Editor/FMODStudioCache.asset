@@ -1197,8 +1197,8 @@ MonoBehaviour:
     Data3: 1596734873
     Data4: -554083118
   Banks:
-  - {fileID: 1992532989628781375}
   - {fileID: -4684434949208560311}
+  - {fileID: 1992532989628781375}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -1221,7 +1221,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638602671862160970
+  lastModified: 638602711910925209
   FileSizes: []
   Exists: 1
 --- !u!114 &-4835301546994531579
@@ -1317,7 +1317,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Wadi.bank
   Name: Wadi
   StudioPath: bank:/Wadi
-  lastModified: 638602671863183373
+  lastModified: 638602705141860958
   FileSizes: []
   Exists: 1
 --- !u!114 &-4072338796006189892
@@ -1497,7 +1497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: uitslag_groeifases
   StudioPath: 
-  Min: -1
+  Min: 0
   Max: 1
   Default: 0
   ID:
@@ -1739,10 +1739,10 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638602671862167038
+  lastModified: 638602711910935282
   FileSizes:
   - Name: 
-    Value: 3856
+    Value: 3914
   Exists: 1
 --- !u!114 &-1950804775409009515
 MonoBehaviour:
@@ -2311,12 +2311,13 @@ MonoBehaviour:
   - {fileID: -4835301546994531579}
   - {fileID: 9069011269663707372}
   - {fileID: -2780921806954023414}
+  - {fileID: 1660696252053856991}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4943362248349947130}
   StringsBanks:
   - {fileID: -1961004960571396211}
-  cacheTime: 638602671863183373
+  cacheTime: 638602711911321246
   cacheVersion: 131619
 --- !u!114 &138397621291940207
 MonoBehaviour:
@@ -2469,7 +2470,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Stad_Shooter.bank
   Name: Stad_Shooter
   StudioPath: bank:/Stad_Shooter
-  lastModified: 638602671862276457
+  lastModified: 638602705133257468
   FileSizes: []
   Exists: 1
 --- !u!114 &427287121270227522
@@ -2634,6 +2635,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 350
   Length: 6824
+--- !u!114 &1660696252053856991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/probeerHetOpnieuw
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/probeerHetOpnieuw
+  Guid:
+    Data1: 1516795309
+    Data2: 1161828421
+    Data3: 803558833
+    Data4: -1525435290
+  Banks:
+  - {fileID: 1992532989628781375}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1436
 --- !u!114 &1731203517413832815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2787,7 +2815,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Stadslandbouw.bank
   Name: Stadslandbouw
   StudioPath: bank:/Stadslandbouw
-  lastModified: 638602671862364002
+  lastModified: 638602711911321246
   FileSizes: []
   Exists: 1
 --- !u!114 &2115048818224658653
@@ -4123,7 +4151,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/VGH Bloem.bank
   Name: VGH Bloem
   StudioPath: bank:/VGH Bloem
-  lastModified: 638602671862642255
+  lastModified: 638602705140726413
   FileSizes: []
   Exists: 1
 --- !u!114 &7939648261716675274

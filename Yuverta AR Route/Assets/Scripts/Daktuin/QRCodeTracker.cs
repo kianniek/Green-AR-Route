@@ -18,6 +18,7 @@ public class QRCodeManager : MonoBehaviour
     [Header("Events")] 
     [SerializeField] internal UnityEvent onImageTracked = new();
     [SerializeField] internal UnityEvent onImageRemoved = new();
+    [SerializeField] internal UnityEvent onImageNewScanned = new();
 
     [Serializable]
     public class QRCode
@@ -115,6 +116,7 @@ public class QRCodeManager : MonoBehaviour
                 case false:
                     qrCode.scanned = true;
                     qrCode.action.Invoke(qrCode.index);
+                    onImageNewScanned.Invoke();
                     break;
             }
         }

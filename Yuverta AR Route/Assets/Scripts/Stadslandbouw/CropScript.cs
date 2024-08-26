@@ -125,11 +125,12 @@ public class CropScript : MonoBehaviour
         currentChild.tag = "Crop";
 
         //If the crop is not the right crop, show the dead crop at the last growth stage
-        if (growthStage == GROWTH_STAGES - 1 && !cropContainer.currentCropIsRightCrop)
+        if (growthStage == 1 && !cropContainer.currentCropIsRightCrop)
         {
             deadCrop.SetActive(true);
             deadCrop.tag = "Crop";
             growthStagesList[growthStage].SetActive(false);
+            growthStage = GROWTH_STAGES - 1;
             
             fullyGrownWrong.Invoke();
             correctInARow = 0;
