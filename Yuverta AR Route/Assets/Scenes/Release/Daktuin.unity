@@ -2121,6 +2121,7 @@ GameObject:
   - component: {fileID: 1451381638}
   - component: {fileID: 1451381640}
   - component: {fileID: 1451381639}
+  - component: {fileID: 1451381641}
   m_Layer: 0
   m_Name: XR Origin (AR Rig)
   m_TagString: Untagged
@@ -2298,6 +2299,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1451381641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451381631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c77d446439f5da34d9a47181f87b55fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arCamera: {fileID: 1453638261}
 --- !u!1 &1453638255
 GameObject:
   m_ObjectHideFlags: 0
@@ -3123,6 +3137,7 @@ MonoBehaviour:
   leaveUIPrefab: {fileID: 9022741955546086398, guid: a4c5bd6dc6d07b14a9f317ff77316f9b,
     type: 3}
   deleteAnimationIfFinished: 0
+  cameraHeightOffGround: {fileID: 0}
 --- !u!114 &2017752457
 MonoBehaviour:
   m_ObjectHideFlags: 0
