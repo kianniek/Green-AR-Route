@@ -10,6 +10,14 @@ using UnityEngine.XR.ARSubsystems;
 public class QRCodeManager : MonoBehaviour
 {
     [SerializeField] private ARTrackedImageManager trackedImageManager;
+    public ImageRecognitionEvent imageRecognitionEvent;
+
+    private ARTrackedImage currentRecognizedImage = null;
+
+
+    [Header("Events")] 
+    [SerializeField] internal UnityEvent onImageTracked = new();
+    [SerializeField] internal UnityEvent onImageRemoved = new();
 
     [Serializable]
     public class QRCode
@@ -22,13 +30,31 @@ public class QRCodeManager : MonoBehaviour
 
     public List<QRCode> qrCodes;
 
-    public XRReferenceImageLibrary referenceImageLibrary;
 
-    private float time;
-
-    private void Start()
+    private void OnEnable()
     {
-        time = Time.time;
+        if (imageRecognitionEvent != null)
+        {
+            imageRecognitionEvent.OnImageRecognized.AddListener(HandleImageRecognized);
+            imageRecognitionEvent.OnImageRecognizedStarted.AddListener(HandleImageRecognizedStarted);
+            imageRecognitionEvent.OnImageRemoved.AddListener(HandleImageRemoved);
+        }else
+        {
+            Debug.LogError("ImageRecognitionEvent is null");
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (imageRecognitionEvent != null)
+        {
+            imageRecognitionEvent.OnImageRecognized.RemoveListener(HandleImageRecognized);
+            imageRecognitionEvent.OnImageRecognizedStarted.RemoveListener(HandleImageRecognizedStarted);
+            imageRecognitionEvent.OnImageRemoved.RemoveListener(HandleImageRemoved);
+        }else
+        {
+            Debug.LogError("ImageRecognitionEvent is null");
+        }
     }
 
     private void Update()
@@ -43,30 +69,25 @@ public class QRCodeManager : MonoBehaviour
         }
     }
 
-    void OnEnable()
+    private void HandleImageRecognizedStarted(ARTrackedImage trackedImage)
     {
-        trackedImageManager.trackedImagesChanged += OnTrackedImagesChanged;
+        onImageTracked.Invoke();
     }
 
-    void OnDisable()
+    private void HandleImageRecognized(ARTrackedImage trackedImage)
     {
-        trackedImageManager.trackedImagesChanged -= OnTrackedImagesChanged;
+        Debug.Log($"OnTrackedImagesChanged | {trackedImage.referenceImage.name} | {trackedImage.trackingState}");
+        ProcessTrackedImage(trackedImage);
     }
 
-    private void OnTrackedImagesChanged(ARTrackedImagesChangedEventArgs eventArgs)
+    private void HandleImageRemoved(ARTrackedImage trackedImage)
     {
-        foreach (var trackedImage in eventArgs.added)
+        if (currentRecognizedImage == trackedImage)
         {
-            ProcessTrackedImage(trackedImage);
-        }
-
-        foreach (var trackedImage in eventArgs.updated)
-        {
-            ProcessTrackedImage(trackedImage);
+            onImageRemoved.Invoke();
         }
     }
-
-
+    
     private bool isFMODDone = false; // The boolean to track FMOD status
 
     public void SetFMODStatus(bool status)
@@ -82,7 +103,7 @@ public class QRCodeManager : MonoBehaviour
             Debug.Log("Cannot collect leaf, FMOD event is still active.");
             return;
         }
-
+        
         var qrCodeName = trackedImage.referenceImage.name;
 
         foreach (var qrCode in qrCodes.Where(qrCode => qrCode.name == qrCodeName))

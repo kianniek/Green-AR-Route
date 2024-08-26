@@ -11480,7 +11480,7 @@ PrefabInstance:
     - target: {fileID: 1679390189267313453, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1862060454429530475, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
@@ -11957,6 +11957,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1679390189267313453, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9183717264194731528}
     - targetCorrespondingSourceObject: {fileID: 8380540865280155090, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       insertIndex: -1
@@ -12779,6 +12783,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   valueName: _Saturation
+--- !u!114 &9183717264194731528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9183717264194731525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0364de3db3f856f4485de84c9496a923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
