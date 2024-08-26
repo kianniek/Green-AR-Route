@@ -8,6 +8,7 @@ public class QuizManager : MonoBehaviour
 {
     [SerializeField] private UnityEvent onQuizFinished = new();
     [SerializeField] private UnityEvent onQuestionAnsweredCorrectly = new();
+    [SerializeField] private UnityEvent onQuestionAnsweredIncorrect = new();
     [SerializeField] private UnityEvent onQuizTotallyCorrect = new();
     [SerializeField] private UnityEvent onQuizPartiallyCorrect = new();
     [SerializeField] private UnityEvent onQuizTotallyWrong = new();
@@ -160,6 +161,7 @@ public class QuizManager : MonoBehaviour
         else
         {
             incorrectAnswers.Add(selectedAnswer);
+            onQuestionAnsweredIncorrect.Invoke();
         }
         
         currentQuestionIndex++;

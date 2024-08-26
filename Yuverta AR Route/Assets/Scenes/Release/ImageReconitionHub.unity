@@ -435,6 +435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1527384746}
   - component: {fileID: 1527384745}
+  - component: {fileID: 1527384747}
   m_Layer: 0
   m_Name: ImageRecognitionHandler
   m_TagString: Untagged
@@ -504,7 +505,19 @@ MonoBehaviour:
       m_Calls: []
   onTapped:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1527384747}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   promptAnimator: {fileID: 2078948396}
   sceneSwap: {fileID: 2190929029291708236}
   hideDelay: 10
@@ -523,6 +536,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1527384747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527384744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 849623179
+      Data2: 1303508745
+      Data3: 1110422174
+      Data4: 343736878
+    Path: event:/UI/Scan_gelukt
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &1608204069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,6 +794,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2078948401}
+    - targetCorrespondingSourceObject: {fileID: 5289244225045815206, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2078948402}
   m_SourcePrefab: {fileID: 100100000, guid: ed2d29e7567e8854e979a8f6eb3f7a01, type: 3}
 --- !u!224 &2078948393 stripped
 RectTransform:
@@ -812,6 +860,52 @@ MonoBehaviour:
   promptTextAnimator: {fileID: 2078948396}
   showOnStart: 0
   showOnStartDelay: 5
+  onMovement:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2078948402}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2078948402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078948395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -299240869
+      Data2: 1270493401
+      Data3: 1294498731
+      Data4: -1090376304
+    Path: event:/UI/Whoosh_pop_up_knopje
+  Event: 
+  PlayEvent: 0
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &331639556946135412
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -836,7 +836,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 50
+  MaxDistance: 5
   Length: 5167
 --- !u!114 &-6617014762824808136
 MonoBehaviour:
@@ -1197,8 +1197,8 @@ MonoBehaviour:
     Data3: 1596734873
     Data4: -554083118
   Banks:
-  - {fileID: 1992532989628781375}
   - {fileID: -4684434949208560311}
+  - {fileID: 1992532989628781375}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -1221,7 +1221,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638602711910925209
+  lastModified: 638602868829815481
   FileSizes: []
   Exists: 1
 --- !u!114 &-4835301546994531579
@@ -1317,9 +1317,36 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Wadi.bank
   Name: Wadi
   StudioPath: bank:/Wadi
-  lastModified: 638602705141860958
+  lastModified: 638602861623280592
   FileSizes: []
   Exists: 1
+--- !u!114 &-4192352614320405597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Click_start_begrepen_terugnaar scannen_etc
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Click_start_begrepen_terugnaar scannen_etc
+  Guid:
+    Data1: 1362883013
+    Data2: 1211332568
+    Data3: 336984475
+    Data4: -1625408004
+  Banks:
+  - {fileID: -4943362248349947130}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-4072338796006189892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1724,6 +1751,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-2447174636620427476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/knop_oogsten
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/knop_oogsten
+  Guid:
+    Data1: -1988526657
+    Data2: 1263617636
+    Data3: 1230572686
+    Data4: 409142296
+  Banks:
+  - {fileID: 1992532989628781375}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-1961004960571396211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1739,10 +1793,10 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638602711910935282
+  lastModified: 638602868829830533
   FileSizes:
   - Name: 
-    Value: 3914
+    Value: 4406
   Exists: 1
 --- !u!114 &-1950804775409009515
 MonoBehaviour:
@@ -1873,7 +1927,7 @@ MonoBehaviour:
     data1: 2392888332
     data2: 4199594595
   Type: 1
-  IsGlobal: 0
+  IsGlobal: 1
   Labels: []
   Exists: 1
 --- !u!114 &-949890604890468366
@@ -1947,7 +2001,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 5
   Length: 33035
 --- !u!114 &-788970286932993277
 MonoBehaviour:
@@ -2236,6 +2290,33 @@ MonoBehaviour:
   lastModified: 638600262053999698
   FileSizes: []
   Exists: 1
+--- !u!114 &-23063673060100236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Whoosh_pop_up_knopje
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Whoosh_pop_up_knopje
+  Guid:
+    Data1: -299240869
+    Data2: 1270493401
+    Data3: 1294498731
+    Data4: -1090376304
+  Banks:
+  - {fileID: -4943362248349947130}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2311,13 +2392,23 @@ MonoBehaviour:
   - {fileID: -4835301546994531579}
   - {fileID: 9069011269663707372}
   - {fileID: -2780921806954023414}
-  - {fileID: 1660696252053856991}
-  EditorParameters: []
+  - {fileID: -23063673060100236}
+  - {fileID: 1030086101941562623}
+  - {fileID: -4192352614320405597}
+  - {fileID: 8314861770374476462}
+  - {fileID: 1140823584591541160}
+  - {fileID: -2447174636620427476}
+  - {fileID: 5145614112047395508}
+  - {fileID: 4876798479595173279}
+  - {fileID: 4802604084972580787}
+  - {fileID: 8819067864327835853}
+  EditorParameters:
+  - {fileID: 3549556496666052131}
   MasterBanks:
   - {fileID: -4943362248349947130}
   StringsBanks:
   - {fileID: -1961004960571396211}
-  cacheTime: 638602711911321246
+  cacheTime: 638602868830340905
   cacheVersion: 131619
 --- !u!114 &138397621291940207
 MonoBehaviour:
@@ -2371,7 +2462,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 5
   Length: 126000
 --- !u!114 &248437807963664566
 MonoBehaviour:
@@ -2470,7 +2561,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Stad_Shooter.bank
   Name: Stad_Shooter
   StudioPath: bank:/Stad_Shooter
-  lastModified: 638602705133257468
+  lastModified: 638602861587252480
   FileSizes: []
   Exists: 1
 --- !u!114 &427287121270227522
@@ -2581,6 +2672,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 16468
+--- !u!114 &1030086101941562623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Scan_gelukt
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Scan_gelukt
+  Guid:
+    Data1: 849623179
+    Data2: 1303508745
+    Data3: 1110422174
+    Data4: 343736878
+  Banks:
+  - {fileID: -4943362248349947130}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1140823584591541160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/knop_oogsten_cirkelrond
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/knop_oogsten_cirkelrond
+  Guid:
+    Data1: -310568944
+    Data2: 1080365042
+    Data3: 54334088
+    Data4: -828533231
+  Banks:
+  - {fileID: 1992532989628781375}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &1321022525972460570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2635,33 +2780,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 350
   Length: 6824
---- !u!114 &1660696252053856991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Stadslandbouw/probeerHetOpnieuw
-  m_EditorClassIdentifier: 
-  Path: event:/Stadslandbouw/probeerHetOpnieuw
-  Guid:
-    Data1: 1516795309
-    Data2: 1161828421
-    Data3: 803558833
-    Data4: -1525435290
-  Banks:
-  - {fileID: 1992532989628781375}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1436
 --- !u!114 &1731203517413832815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2815,7 +2933,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Stadslandbouw.bank
   Name: Stadslandbouw
   StudioPath: bank:/Stadslandbouw
-  lastModified: 638602711911321246
+  lastModified: 638602868830340905
   FileSizes: []
   Exists: 1
 --- !u!114 &2115048818224658653
@@ -3142,6 +3260,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &3549556496666052131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Groeifases
+  m_EditorClassIdentifier: 
+  Name: Groeifases
+  StudioPath: parameter:/Groeifases
+  Min: 1
+  Max: 5
+  Default: 1
+  ID:
+    data1: 2392888332
+    data2: 4199594595
+  Type: 1
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &3549763851643672995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3167,7 +3309,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 5
   Length: 27374
 --- !u!114 &3628494729261849437
 MonoBehaviour:
@@ -3411,6 +3553,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &4802604084972580787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/Quiz_Click_Antwoord_Positief_einde
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/Quiz_Click_Antwoord_Positief_einde
+  Guid:
+    Data1: 946901741
+    Data2: 1076453744
+    Data3: -1405008717
+    Data4: -1978549392
+  Banks:
+  - {fileID: 7768557709990195704}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 12317
+--- !u!114 &4876798479595173279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/Quiz_Click_Antwoord_Positief
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/Quiz_Click_Antwoord_Positief
+  Guid:
+    Data1: -1893604946
+    Data2: 1281499783
+    Data3: 1494244252
+    Data4: -678563015
+  Banks:
+  - {fileID: 7768557709990195704}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10475
 --- !u!114 &5036258126870687362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3456,6 +3652,33 @@ MonoBehaviour:
   lastModified: 638600262054719667
   FileSizes: []
   Exists: 1
+--- !u!114 &5145614112047395508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VGH Bloem/Quiz_Click_Antwoord_Negatief
+  m_EditorClassIdentifier: 
+  Path: event:/VGH Bloem/Quiz_Click_Antwoord_Negatief
+  Guid:
+    Data1: 1728548188
+    Data2: 1117732929
+    Data3: 911557305
+    Data4: -1176577625
+  Banks:
+  - {fileID: 7768557709990195704}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 8227
 --- !u!114 &5254145662814646618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3945,7 +4168,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 5
   Length: 11000
 --- !u!114 &6950989536752694439
 MonoBehaviour:
@@ -4151,7 +4374,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/VGH Bloem.bank
   Name: VGH Bloem
   StudioPath: bank:/VGH Bloem
-  lastModified: 638602705140726413
+  lastModified: 638602861604316406
   FileSizes: []
   Exists: 1
 --- !u!114 &7939648261716675274
@@ -4319,6 +4542,33 @@ MonoBehaviour:
     Data4: 1460289649
   Banks:
   - {fileID: -8505845431705560260}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8314861770374476462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/Whoosh_verschijnen_grond
+  m_EditorClassIdentifier: 
+  Path: event:/UI/Whoosh_verschijnen_grond
+  Guid:
+    Data1: 798891741
+    Data2: 1079667755
+    Data3: -1632878662
+    Data4: 1182796239
+  Banks:
+  - {fileID: -4943362248349947130}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -4524,6 +4774,33 @@ MonoBehaviour:
   - 16 Blokjes
   - 20 Blokjes
   Exists: 1
+--- !u!114 &8819067864327835853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stadslandbouw/VO/ProbeerHetOpnieuw
+  m_EditorClassIdentifier: 
+  Path: event:/Stadslandbouw/VO/ProbeerHetOpnieuw
+  Guid:
+    Data1: 1822744296
+    Data2: 1162849323
+    Data3: 1023703175
+    Data4: 1185006918
+  Banks:
+  - {fileID: 1992532989628781375}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1436
 --- !u!114 &8828870597564644790
 MonoBehaviour:
   m_ObjectHideFlags: 0
