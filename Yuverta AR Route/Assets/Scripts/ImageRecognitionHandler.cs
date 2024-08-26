@@ -58,7 +58,7 @@ public class ImageRecognitionHandler : MonoBehaviour
     void Update()
     {
         // Detect user tap on screen
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
             HandleScreenTap();
             Debug.Log("Tapped Screen in ImageRecognitionHandler.cs");
