@@ -5309,7 +5309,7 @@ Transform:
   m_GameObject: {fileID: 1636586852081950188}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -96.9, y: 0, z: 3.8}
+  m_LocalPosition: {x: -96.9, y: 0, z: 38.2}
   m_LocalScale: {x: 2.102541, y: 2, z: 1.0512649}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -23079,7 +23079,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
         type: 3}
+      propertyPath: lengthInSec
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
       propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: SizeModule.enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
@@ -23089,18 +23099,163 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
         type: 3}
+      propertyPath: EmissionModule.m_BurstCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
         type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
         type: 3}
       propertyPath: InitialModule.startLifetime.minMaxState
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].cycleCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].probability
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].repeatInterval
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_PreInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_PreInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_PostInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_PostInfinity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_RotationOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_RotationOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[0].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[0].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4001247679787197031, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 4480449985536580412, guid: 44529002cdb3b0e4a9dfdd26f72f312d,
         type: 3}
@@ -44315,22 +44470,22 @@ PrefabInstance:
     - target: {fileID: 3339827957730782357, guid: d0a8af9551566a84587bb0daa91b699e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3339827957730782357, guid: d0a8af9551566a84587bb0daa91b699e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000000021855694
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3339827957730782357, guid: d0a8af9551566a84587bb0daa91b699e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000059604645
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3339827957730782357, guid: d0a8af9551566a84587bb0daa91b699e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3339827957730782357, guid: d0a8af9551566a84587bb0daa91b699e,
         type: 3}
@@ -44340,7 +44495,7 @@ PrefabInstance:
     - target: {fileID: 3339827957730782357, guid: d0a8af9551566a84587bb0daa91b699e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3339827957730782357, guid: d0a8af9551566a84587bb0daa91b699e,
         type: 3}
