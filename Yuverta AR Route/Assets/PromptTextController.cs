@@ -10,16 +10,19 @@ public class PromptTextController : MonoBehaviour
     [SerializeField] private Animator promptTextAnimator;
     
     [SerializeField] private bool showOnStart = false;
+    [SerializeField] private float showOnStartDelay = 5f;
 
     // Start is called before the first frame update
     void Start()
     {
         if (!promptTextAnimator)
             promptTextAnimator = promptText.GetComponent<Animator>();
-        
+
         if (showOnStart)
+        {
             ToMiddel();
-            ToTopAfterDelay(5f);
+            ToTopAfterDelay(showOnStartDelay);
+        }
     }
 
     public void ToMiddel()

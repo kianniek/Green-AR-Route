@@ -65,18 +65,7 @@ public class LeafCollectionScript : MonoBehaviour
     private ARRaycastManager arRaycastManager;
 
     [SerializeField] private bool deleteAnimationIfFinished;
-    
-    [Space(10)]
-    
-    [Header("Events")]
-    
-    [SerializeField] private UnityEvent onTopLeafCollected = new();
-    [SerializeField] private UnityEvent onMiddleLeafCollected = new();
-    [SerializeField] private UnityEvent onBottomLeafCollected = new();
-    [SerializeField] private UnityEvent onLeftLeafCollected = new();
-    [SerializeField] private UnityEvent onRightLeafCollected = new();
 
-    
     void Awake()
     {
         arRaycastManager = FindObjectOfType<ARRaycastManager>();
@@ -96,36 +85,36 @@ public class LeafCollectionScript : MonoBehaviour
 
         var leafObj = Instantiate(leaf.spriteGameobjectUI, leaveUIParent.transform);
         // set the position of the leaf object to the middle of the screen
-        leafObj.transform.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        leafObj.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0);
 
         switch (leaf.flowerPart)
         {
             case FlowerPart.middel:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[0], leafObj));
-                leafObj.transform.SetAsLastSibling();
-                onMiddleLeafCollected.Invoke();
+                leafObj.transform.SetSiblingIndex(0);
                 break;
             case FlowerPart.top:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[1], leafObj));
-                leafObj.transform.SetAsFirstSibling();
-                onTopLeafCollected.Invoke();
+                leafObj.transform.SetSiblingIndex(1);
+
                 break;
             case FlowerPart.bottom:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[2], leafObj));
-                leafObj.transform.SetAsFirstSibling();
-                onBottomLeafCollected.Invoke();
+                leafObj.transform.SetSiblingIndex(2);
+
                 break;
             case FlowerPart.left:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[3], leafObj));
-                leafObj.transform.SetAsFirstSibling();
-                onLeftLeafCollected.Invoke();
+                leafObj.transform.SetSiblingIndex(3);
+
                 break;
             case FlowerPart.right:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[4], leafObj));
-                leafObj.transform.SetAsFirstSibling();
-                onRightLeafCollected.Invoke();
+                leafObj.transform.SetSiblingIndex(4);
+
                 break;
             default:
+                Debug.LogError("Invalid flower part", leafObj);
                 throw new ArgumentOutOfRangeException();
         }
 

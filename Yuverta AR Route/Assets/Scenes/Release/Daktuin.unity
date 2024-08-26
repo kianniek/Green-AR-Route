@@ -1134,6 +1134,7 @@ MonoBehaviour:
   promptText: {fileID: 699489650}
   promptTextAnimator: {fileID: 699489652}
   showOnStart: 1
+  showOnStartDelay: 5
 --- !u!1 &710510002
 GameObject:
   m_ObjectHideFlags: 0
@@ -1323,6 +1324,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349152777464465350, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: lerpSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349152777464465350, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: lerpThreshold
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349152777464465350, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: distanceFromCamera
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2594488670441198555, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
@@ -2052,6 +2068,7 @@ GameObject:
   - component: {fileID: 1451381634}
   - component: {fileID: 1451381633}
   - component: {fileID: 1451381632}
+  - component: {fileID: 1451381638}
   m_Layer: 0
   m_Name: XR Origin (AR Rig)
   m_TagString: Untagged
@@ -2071,7 +2088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dea56a9eaadd1c439095de4f9a371cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SerializedLibrary: {fileID: 11400000, guid: 353cef57b25733049bdffbf3560591ee,
+  m_SerializedLibrary: {fileID: 11400000, guid: 70ed88712bfbc334f84cfd7227265c3b,
     type: 2}
   m_MaxNumberOfMovingImages: 0
   m_TrackedImagePrefab: {fileID: 0}
@@ -2102,7 +2119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlanePrefab: {fileID: 1585201990951412, guid: 886609fc1566e4c27b399f1095d6de18,
     type: 3}
-  m_DetectionMode: -1
+  m_DetectionMode: 0
 --- !u!114 &1451381635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2150,6 +2167,27 @@ Transform:
   - {fileID: 1240266774}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1451381638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451381631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 342346d53d2e6f241b5ac2880141acff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnImageRecognized:
+    m_PersistentCalls:
+      m_Calls: []
+  OnImageRemoved:
+    m_PersistentCalls:
+      m_Calls: []
+  OnImageRecognizedStarted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1453638255
 GameObject:
   m_ObjectHideFlags: 0
@@ -2767,6 +2805,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackToHub
       objectReference: {fileID: 0}
+    - target: {fileID: 8382891564105061147, guid: ab2fa1657fff4274d8f622599483201c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2964,81 +3007,6 @@ MonoBehaviour:
   leaveUIPrefab: {fileID: 9022741955546086398, guid: a4c5bd6dc6d07b14a9f317ff77316f9b,
     type: 3}
   deleteAnimationIfFinished: 0
-  onTopLeafCollected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 41777522}
-        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onMiddleLeafCollected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2027926395}
-        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onBottomLeafCollected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 710510004}
-        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onLeftLeafCollected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 378054001}
-        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onRightLeafCollected:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 508416281}
-        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &2017752457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3052,6 +3020,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackedImageManager: {fileID: 1451381632}
+  imageRecognitionEvent: {fileID: 1451381638}
+  onImageTracked:
+    m_PersistentCalls:
+      m_Calls: []
+  onImageRemoved:
+    m_PersistentCalls:
+      m_Calls: []
   qrCodes:
   - name: QR_Explode
     scanned: 0
@@ -3063,6 +3038,18 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: LeafCollectionScript, Assembly-CSharp
           m_MethodName: OnLeafCollected
           m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2027926395}
+          m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+          m_MethodName: Play
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3089,6 +3076,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 41777522}
+          m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - name: QR_Kikker
     scanned: 0
     index: 2
@@ -3099,6 +3098,18 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: LeafCollectionScript, Assembly-CSharp
           m_MethodName: OnLeafCollected
           m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 710510004}
+          m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+          m_MethodName: Play
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3125,6 +3136,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 508416281}
+          m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - name: QR_Scheikunde
     scanned: 0
     index: 4
@@ -3143,8 +3166,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  referenceImageLibrary: {fileID: 11400000, guid: 353cef57b25733049bdffbf3560591ee,
-    type: 2}
+        - m_Target: {fileID: 378054001}
+          m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &2017752458
 Transform:
   m_ObjectHideFlags: 0
@@ -3261,7 +3294,7 @@ MonoBehaviour:
   OnEventStarted:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2017752457}
+      - m_Target: {fileID: 2017752454}
         m_TargetAssemblyTypeName: QRCodeManager, Assembly-CSharp
         m_MethodName: SetFMODStatus
         m_Mode: 6
