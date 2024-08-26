@@ -172,7 +172,7 @@ public class LeafCollectionScript : MonoBehaviour
         Vector3 cameraPosition = camera.transform.position;
 
         //remove the camera from the y position
-        cameraPosition.y = cameraHeightOffGround.GetGroundPosition().y;
+        cameraPosition.y = cameraHeightOffGround.GetGroundPlanePos().y;
 
         //get the postion of the camera + 1 meter in the forward direction
         Vector3 spawnPosition = cameraPosition + cameraForward * 3.0f;
