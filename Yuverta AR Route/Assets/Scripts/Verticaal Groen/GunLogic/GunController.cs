@@ -240,7 +240,7 @@ public class GunController : MonoBehaviour
 
     private void LaunchProjectile(float currentCharge)
     {
-        GameObject projectileInstance = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+        GameObject projectileInstance = Instantiate(bulletPrefab, bulletSpawnPoint.position + bulletSpawnPoint.forward, Quaternion.identity);
         CatapultProjectile catapultProjectile = projectileInstance.GetComponent<CatapultProjectile>();
         float projectileSpeed = currentAmmo.projectileSpeed + (currentCharge * launchForce);
 

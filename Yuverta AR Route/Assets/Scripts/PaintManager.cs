@@ -45,7 +45,7 @@ public class PaintManager : Singleton<PaintManager>
             {
                 switch (item.Value)
                 {
-                    case 2:
+                    case 1:
                         id++;
                         break;
                     default:
@@ -198,6 +198,7 @@ public class PaintManager : Singleton<PaintManager>
         //calculate how close the color is to red
         var coveredPixels = new Vector4(Average.r / 255f, Average.g / 255f, Average.b / 255f, Average.a / 255f);
 
+        CheckIfStepTresholdIsreached();
         return coveredPixels;
     }
 
@@ -251,10 +252,19 @@ public class PaintManager : Singleton<PaintManager>
     public void CheckIfStepTresholdIsreached()
     {
         //map the amount of paintables to the treshold
+        if(paintables.Count == 0)
+            return;
+        
         var stepSize = (float) 1 / paintables.Count;
+        Debug.Log(stepSize);
         
         // multiply the step size with the amount of paintables that are covered
-        var step = stepSize * paintables.Count(p => p.Value == 2);
+        var step = stepSize * paintables.Count(p => p.Value == 1);
+        
+        Debug.Log(step);
+        
+        //clamp the step value between 0 and 1
+        step = Mathf.Clamp01(step);
         
         //Invoke the event with the step value
         OnTresholdStep.Invoke(step);

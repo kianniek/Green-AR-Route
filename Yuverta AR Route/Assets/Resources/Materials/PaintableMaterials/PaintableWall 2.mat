@@ -31,7 +31,8 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -75,6 +76,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _BaseMap_2:
         m_Texture: {fileID: 2800000, guid: 3adf527c914df3b449b56a7b8446f919, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap_3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap_4:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
@@ -125,12 +134,28 @@ Material:
     - Vector1_b5cc7f6f25194a778cb438f45fbbce66: 25
     - Vector1_dcd729e4cd23406784678484c17def53: 1
     - Vector1_f6677799b193415b8be7686b658a6e85: 9
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
+    - _Ambient_Occlution: 1
+    - _Blend: 0
+    - _BlendModePreserveSpecular: 0
+    - _CastShadows: 1
+    - _Cull: 2
+    - _DstBlend: 0
+    - _Emission_1: 0.1
     - _MainTexture_Hue: -1.65
     - _MainTexture_Saturation: -0.72
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _SrcBlend: 1
     - _Substraat_Hue: 0
     - _Substraat_Saturation: 0
+    - _Surface: 0
+    - _WorkflowMode: 1
+    - _ZTest: 4
+    - _ZWrite: 1
+    - _ZWriteControl: 0
     - _Zaad_Hue: 0
     - _Zaad_Saturation: 0
     m_Colors:
@@ -147,6 +172,8 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color_1: {r: 1, g: 1, b: 1, a: 1}
     - _Color_2: {r: 0.882353, g: 0.7058823, b: 0.7058823, a: 1}
+    - _Emission: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _emission: {r: 0, g: 0, b: 0, a: 0}
     - m_Scale: {r: 100, g: 100, b: 0, a: 0}
   m_BuildTextureStacks: []

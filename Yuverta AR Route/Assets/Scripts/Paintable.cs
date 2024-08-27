@@ -127,20 +127,27 @@ public class Paintable : MonoBehaviour
         if (coverage.z > coverageThreshold && previouslyFilledColorIndex != 2)
         {
             PaintManager.instance.AddToPaintablesList(this, 2);
+            OnCovered.Invoke(2);
             return 2; // Color index for z
         }
 
         if (coverage.y > coverageThreshold && previouslyFilledColorIndex != 1)
         {
             PaintManager.instance.AddToPaintablesList(this, 1);
+            OnCovered.Invoke(1);
+
             return 1; // Color index for y
         }
 
         if (coverage.x > coverageThreshold && previouslyFilledColorIndex != 0)
         {
             PaintManager.instance.AddToPaintablesList(this, 0);
+            OnCovered.Invoke(0);
+
             return 0; // Color index for x
         }
+        
+        PaintManager.instance.AddToPaintablesList(this, -1);
 
         return -1; // No color meets the threshold
     }

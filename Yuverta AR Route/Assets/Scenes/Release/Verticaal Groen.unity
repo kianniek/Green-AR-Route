@@ -5074,7 +5074,7 @@ MonoBehaviour:
       Data4: 753846815
     Path: event:/Stad Shooter/hit_building
   Event: 
-  PlayEvent: 7
+  PlayEvent: 0
   StopEvent: 12
   AllowFadeout: 1
   TriggerOnce: 0
@@ -5407,10 +5407,10 @@ MonoBehaviour:
       Data4: 753846815
     Path: event:/Stad Shooter/hit_building
   Event: 
-  PlayEvent: 7
+  PlayEvent: 0
   StopEvent: 12
   AllowFadeout: 1
-  TriggerOnce: 0
+  TriggerOnce: 1
   Preload: 0
   NonRigidbodyVelocity: 0
   Params: []
@@ -10442,7 +10442,7 @@ MonoBehaviour:
   m_FocusMode: -1
   m_LightEstimationMode: -1
   m_AutoFocus: 1
-  m_LightEstimation: 0
+  m_LightEstimation: -1
   m_FacingDirection: 1
   m_RenderMode: 0
 --- !u!4 &2512387470057136333
@@ -11126,8 +11126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 2512387469781535985}
   targetObject: {fileID: 6141505326492754562}
-  distanceFromCamera: 0.4
-  padding: 0.05
+  distanceFromCamera: 0.5
+  padding: 0.1
   presetPosition: 2
   positionLerpSpeed: 0.9618
   rotateWithCamera: 1
@@ -11631,7 +11631,7 @@ PrefabInstance:
     - target: {fileID: 1679390189267313453, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1862060454429530475, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
@@ -11785,6 +11785,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608559237952384967, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
+      propertyPath: OnGrownObjects.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608559237952384967, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
       propertyPath: OnGrownObjects.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 689520059}
@@ -11805,6 +11810,11 @@ PrefabInstance:
       objectReference: {fileID: 200663289}
     - target: {fileID: 2608559237952384967, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
+      propertyPath: OnGrownObjects.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608559237952384967, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
       propertyPath: OnGrownObjects.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -11816,6 +11826,11 @@ PrefabInstance:
     - target: {fileID: 2608559237952384967, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: OnGrownObjects.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608559237952384967, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: OnGrownObjects.m_PersistentCalls.m_Calls.Array.data[4].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2608559237952384967, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -11835,6 +11850,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608559237952384967, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
+      propertyPath: OnGrownObjects.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608559237952384967, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
       propertyPath: OnGrownObjects.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: FMODUnity.StudioEventEmitter, FMODUnity
       objectReference: {fileID: 0}
@@ -11850,6 +11870,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2608559237952384967, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
+      propertyPath: OnGrownObjects.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+      value: FMODUnity.StudioEventEmitter, FMODUnity
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608559237952384967, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
       propertyPath: OnGrownObjects.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
@@ -11861,6 +11886,11 @@ PrefabInstance:
     - target: {fileID: 2608559237952384967, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: OnGrownObjects.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2608559237952384967, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: OnGrownObjects.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2619537388052925124, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -11937,6 +11967,41 @@ PrefabInstance:
         type: 3}
       propertyPath: coverageThreshold
       value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090076233493128145, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: OnCovered.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090076233493128145, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: OnCovered.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090076233493128145, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: OnCovered.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 922699071}
+    - target: {fileID: 4090076233493128145, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: OnCovered.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090076233493128145, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: OnCovered.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090076233493128145, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: OnCovered.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: FMODUnity.StudioEventEmitter, FMODUnity
+      objectReference: {fileID: 0}
+    - target: {fileID: 4090076233493128145, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: OnCovered.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4107630300331332938, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
@@ -12318,6 +12383,11 @@ PrefabInstance:
       propertyPath: coverageThreshold
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 8794585275923741296, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: OnGrownObjects.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1815482252}
     - target: {fileID: 9014933245343876735, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: OnCovered.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -12352,6 +12422,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9183717264194731528}
+    - targetCorrespondingSourceObject: {fileID: 8380540865280155090, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 6521837934254405400, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       insertIndex: -1
