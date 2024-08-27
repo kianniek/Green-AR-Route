@@ -969,12 +969,12 @@ PrefabInstance:
     - target: {fileID: 1626876745661586412, guid: 529c65b75ce01ff4e960889f4015f2f7,
         type: 3}
       propertyPath: m_text
-      value: Scan alle 5 de markers \n om de quiz te kunnen beginnen
+      value: 'Zoek de 5 bladeren! Scan de markers om te verzamelen. '
       objectReference: {fileID: 0}
     - target: {fileID: 1626876745661586412, guid: 529c65b75ce01ff4e960889f4015f2f7,
         type: 3}
       propertyPath: m_fontSize
-      value: 54.55
+      value: 60.15
       objectReference: {fileID: 0}
     - target: {fileID: 4563161901107893304, guid: 529c65b75ce01ff4e960889f4015f2f7,
         type: 3}
@@ -1535,7 +1535,7 @@ PrefabInstance:
         type: 3}
       propertyPath: onQuizFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1823096751}
+      objectReference: {fileID: 0}
     - target: {fileID: 5165248859174774745, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: onQuizFinished.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -3172,6 +3172,21 @@ PrefabInstance:
       propertyPath: source
       value: 
       objectReference: {fileID: 1453638263}
+    - target: {fileID: 3139823888071222986, guid: ab2fa1657fff4274d8f622599483201c,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139823888071222986, guid: ab2fa1657fff4274d8f622599483201c,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3139823888071222986, guid: ab2fa1657fff4274d8f622599483201c,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6475831535256025251, guid: ab2fa1657fff4274d8f622599483201c,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3282,18 +3297,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab2fa1657fff4274d8f622599483201c, type: 3}
---- !u!114 &1823096751 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8785675164361912665, guid: ab2fa1657fff4274d8f622599483201c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1823096750}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bda78567881c47dfb28bb249e2118b7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1899427180
 GameObject:
   m_ObjectHideFlags: 0
