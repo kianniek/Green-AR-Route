@@ -18,11 +18,9 @@ public class GunController : MonoBehaviour
     private WeaponType weaponType;
     private bool firing;
 
-    [Header("Catapult Variables")] 
-    private float shootForce;
-    
-    [Header("Catapult Variables")] 
-    private float chargeRate;
+    [Header("Catapult Variables")] private float shootForce;
+
+    [Header("Catapult Variables")] private float chargeRate;
     private float maxCharge;
     private float launchForce;
     private float elapsedTime = 0;
@@ -40,7 +38,7 @@ public class GunController : MonoBehaviour
 
     [Tooltip("This variable is set to <b>True</b> in a UI element to prevent a fire event when touching UI")]
     private bool isSwitchingWeaponThisPress = false;
-    
+
     [SerializeField] private int startingWeaponIndex = 1;
 
     public bool IsSwitchingWeaponThisPress
@@ -195,8 +193,41 @@ public class GunController : MonoBehaviour
             return;
         }
 
+        // Start de zoekactie
+        FindBulletSpawnPoint(weaponInstance.transform);
+
+// Controleer of bulletSpawnPoint is gevonden
+        if (bulletSpawnPoint == null)
+        {
+            Debug.LogWarning("Geen BulletSpawnpoint gevonden in de hiërarchie.");
+            // Eventueel hier een fallback actie ondernemen
+        }
+
+        //check in all children of the weaponInstance for the bulletSpawnPoint
+
+
         StartCoroutine(Shooting(elapsedTime));
     }
+
+    void FindBulletSpawnPoint(Transform parent)
+    {
+        foreach (Transform child in parent)
+        {
+            if (child.CompareTag("BulletSpawnpoint"))
+            {
+                bulletSpawnPoint = child;
+                return; // Stop zodra het spawnpoint is gevonden
+            }
+
+            // Recursief zoeken in de kinderen van het huidige child-object
+            FindBulletSpawnPoint(child);
+
+            // Als bulletSpawnPoint gevonden is, stoppen met zoeken
+            if (bulletSpawnPoint != null)
+                return;
+        }
+    }
+
 
     private IEnumerator Shooting(float elapsedTime)
     {
@@ -251,7 +282,7 @@ public class GunController : MonoBehaviour
     private void LaunchProjectile(float currentCharge)
     {
         currentWeapon.fireRateCooldownTimer = currentWeapon.fireRate;
-        
+
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         CatapultProjectile projectile = bullet.GetComponent<CatapultProjectile>();
         float projectileSpeed = currentAmmo.projectileSpeed + (currentCharge * launchForce);

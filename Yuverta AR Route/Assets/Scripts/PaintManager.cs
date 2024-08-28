@@ -13,9 +13,10 @@ public class PaintManager : Singleton<PaintManager>
     public Shader zoomToBounds;
 
     public int coveredTreshold;
-    
+
     [Tooltip("Event that fires when a threshold is reached for the amount of objects covered in the 2nd mask color")]
     public UnityEvent OnTresholdReached;
+
     public UnityEvent<float> OnTresholdStep = new();
 
     private Dictionary<Paintable, int> paintables = new();
@@ -37,7 +38,7 @@ public class PaintManager : Singleton<PaintManager>
 
     private CommandBuffer command;
 
-    [SerializeField]private int coveredCount = 0;
+    [SerializeField] private int coveredCount = 0;
 
     public bool HasReachedTreshold => coveredCount >= coveredTreshold;
 
@@ -78,7 +79,8 @@ public class PaintManager : Singleton<PaintManager>
             return;
         }
 
-        PerformPainting(paintable, pos, radius, hardness, strength, colorIndex > -1 ? colors.GetColor(colorIndex) : colors.GetColor(0));
+        PerformPainting(paintable, pos, radius, hardness, strength,
+            colorIndex > -1 ? colors.GetColor(colorIndex) : colors.GetColor(0));
     }
 
     public void Paint(Paintable paintable, Vector3 pos, float radius = 1f, float hardness = .5f, float strength = .5f,
@@ -87,7 +89,8 @@ public class PaintManager : Singleton<PaintManager>
         PerformPainting(paintable, pos, radius, hardness, strength, color ?? Color.white);
     }
 
-    private void PerformPainting(Paintable paintable, Vector3 pos, float radius, float hardness, float strength, Color color)
+    private void PerformPainting(Paintable paintable, Vector3 pos, float radius, float hardness, float strength,
+        Color color)
     {
         var mask = paintable.getMask();
         var uvIslands = paintable.getUVIslands();
@@ -118,7 +121,8 @@ public class PaintManager : Singleton<PaintManager>
         command.Clear();
     }
 
-    public void CalculateCoverage(Paintable paintable, Vector2 uvBoundsMin, Vector2 uvBoundsMax, System.Action<Vector4> onCoverageCalculated)
+    public Vector4 CalculateCoverage(Paintable paintable, Vector2 uvBoundsMin, Vector2 uvBoundsMax,
+        System.Action<Vector4> onCoverageCalculated)
     {
         var mask = paintable.getMask();
         var islands = paintable.getIslands();
@@ -156,6 +160,7 @@ public class PaintManager : Singleton<PaintManager>
                 var coveredPixels = new Vector4(average.r / 255f, average.g / 255f, average.b / 255f, average.a / 255f);
 
                 // Call the callback with the result
+                paintable.coverage = coveredPixels;
                 onCoverageCalculated?.Invoke(coveredPixels);
             }
 
@@ -164,6 +169,8 @@ public class PaintManager : Singleton<PaintManager>
 
             CheckIfStepThresholdIsReached();
         });
+        
+        return paintable.coverage;
     }
 
 
@@ -215,7 +222,6 @@ public class PaintManager : Singleton<PaintManager>
 
     public void CheckIfStepThresholdIsReached()
     {
-
         if (paintables.Count == 0)
             return;
 
@@ -224,9 +230,10 @@ public class PaintManager : Singleton<PaintManager>
 
         OnTresholdStep.Invoke(step);
     }
-    
-    #if UNITY_EDITOR
-int step = 0;
+
+#if UNITY_EDITOR
+    int step = 0;
+
     private void OnGUI()
     {
         //button in invoke onTresholdStep
@@ -236,6 +243,6 @@ int step = 0;
             step++;
         }
     }
-    
-    #endif
+
+#endif
 }

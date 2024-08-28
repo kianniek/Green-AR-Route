@@ -47,7 +47,6 @@ public class CollisionPainter : MonoBehaviour
         
         var coverage = GetCoverage(p);
 
-        p.coverage = coverage;
 
         var coverageIndex = p.CheckCoverage();
 
@@ -66,14 +65,11 @@ public class CollisionPainter : MonoBehaviour
 
     private static Vector4 GetCoverage(Paintable p)
     {
-        var returnValue = Vector4.zero;
-        PaintManager.instance.CalculateCoverage(p, p.uvMin, p.uvMax, coveredPixels =>
+        return PaintManager.instance.CalculateCoverage(p, p.uvMin, p.uvMax, coveredPixels =>
         {
             // Handle the result here
-            returnValue = coveredPixels;
             Debug.Log($"Coverage calculated: {coveredPixels}");
         });
-        return returnValue;
     }
 
     private void OnValidate()
