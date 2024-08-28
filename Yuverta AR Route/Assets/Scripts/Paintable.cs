@@ -16,7 +16,7 @@ public class Paintable : MonoBehaviour
 
     [Range(0, 1)] public float coverageThreshold = 0.5f;
     [SerializeField] private Vector4 _coverage;
-    public int previouslyFilledColorIndex { get; private set; } = -1;
+    public int previouslyFilledColorIndex { get; set; } = -1;
 
     public Vector4 coverage
     {
@@ -31,9 +31,7 @@ public class Paintable : MonoBehaviour
     public Vector2 uvMin;
     public Vector2 uvMax;
 
-    [Space(10f)]
-
-    public UnityEvent<int> OnCovered = new();
+    [Space(10f)] public UnityEvent<int> OnCovered = new();
 
     RenderTexture extendIslandsRenderTexture;
     RenderTexture uvIslandsRenderTexture;
@@ -119,7 +117,7 @@ public class Paintable : MonoBehaviour
         }
 
 
-        PaintManager.instance.initTextures(this);
+        PaintManager.instance.InitTextures(this);
     }
 
     public int CheckCoverage()
@@ -135,7 +133,6 @@ public class Paintable : MonoBehaviour
         {
             PaintManager.instance.AddToPaintablesList(this, 1);
             OnCovered.Invoke(1);
-
             return 1; // Color index for y
         }
 
@@ -143,10 +140,9 @@ public class Paintable : MonoBehaviour
         {
             PaintManager.instance.AddToPaintablesList(this, 0);
             OnCovered.Invoke(0);
-
             return 0; // Color index for x
         }
-        
+
         PaintManager.instance.AddToPaintablesList(this, -1);
 
         return -1; // No color meets the threshold

@@ -11,6 +11,7 @@ public class CollisionPainter : MonoBehaviour
     public float strength = 1;
     public float hardness = 1;
 
+    private Paintable p;
     private void Awake()
     {
         if (paintColors == null)
@@ -23,7 +24,7 @@ public class CollisionPainter : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        Paintable p = other.collider.GetComponent<Paintable>();
+        p = other.collider.GetComponent<Paintable>();
         if (p != null)
         {
             p.OnHit(paintColors.GetColor(paintColorIndex), paintColorIndex);
@@ -32,12 +33,18 @@ public class CollisionPainter : MonoBehaviour
 
     private void OnCollisionStay(Collision other)
     {
-        var p = other.collider.GetComponent<Paintable>();
+        if (p == null)
+            return;
 
-        if (p == null) return;
         var pos = other.contacts[0].point;
-        PaintManager.instance.paint(p, pos, paintColors, radius, hardness, strength, paintColorIndex);
+        PaintManager.instance.Paint(p, pos, paintColors, radius, hardness, strength, paintColorIndex);
+    }
 
+    private void OnCollisionExit(Collision other)
+    {
+        if (p == null)
+            return;
+        
         var coverage = GetCoverage(p);
 
         p.coverage = coverage;
@@ -45,17 +52,28 @@ public class CollisionPainter : MonoBehaviour
         var coverageIndex = p.CheckCoverage();
 
         // Set the previously filled color index to allow overlay
-        if (coverageIndex == -1) 
+        if (coverageIndex == -1)
             return;
-        
+
+        Debug.Log("Coverage Index: " + coverageIndex);
+
         p.SetPreviouslyFilledColorIndex(coverageIndex);
         Paintable.SetMaskToColor(p, paintColors.GetColor(coverageIndex));
+
+        p = null;
     }
 
 
     private static Vector4 GetCoverage(Paintable p)
     {
-        return PaintManager.instance.CalculateCoverage(p, p.uvMin, p.uvMax);
+        var returnValue = Vector4.zero;
+        PaintManager.instance.CalculateCoverage(p, p.uvMin, p.uvMax, coveredPixels =>
+        {
+            // Handle the result here
+            returnValue = coveredPixels;
+            Debug.Log($"Coverage calculated: {coveredPixels}");
+        });
+        return returnValue;
     }
 
     private void OnValidate()
