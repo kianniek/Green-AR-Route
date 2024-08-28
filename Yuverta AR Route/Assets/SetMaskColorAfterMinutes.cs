@@ -25,9 +25,4 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
             p.OnCovered.Invoke(paintColorIndexToSet);
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }
