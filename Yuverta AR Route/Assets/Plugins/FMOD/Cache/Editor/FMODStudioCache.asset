@@ -444,7 +444,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 8790393963884688310}
+  - {fileID: 5954274026305397644}
   MinDistance: 1
   MaxDistance: 20
   Length: 798212
@@ -1299,7 +1299,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638604419637076133
+  lastModified: 638604442877578244
   FileSizes: []
   Exists: 1
 --- !u!114 &-4835301546994531579
@@ -1395,7 +1395,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Wadi.bank
   Name: Wadi
   StudioPath: bank:/Wadi
-  lastModified: 638604419681211550
+  lastModified: 638604442922291241
   FileSizes: []
   Exists: 1
 --- !u!114 &-4192352614320405597
@@ -1925,10 +1925,10 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638604419637086121
+  lastModified: 638604442877588262
   FileSizes:
   - Name: 
-    Value: 4628
+    Value: 4676
   Exists: 1
 --- !u!114 &-1950804775409009515
 MonoBehaviour:
@@ -2568,7 +2568,7 @@ MonoBehaviour:
   - {fileID: -4943362248349947130}
   StringsBanks:
   - {fileID: -1961004960571396211}
-  cacheTime: 638604419681211550
+  cacheTime: 638604442922291241
   cacheVersion: 131619
 --- !u!114 &138397621291940207
 MonoBehaviour:
@@ -2721,7 +2721,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Stad_Shooter.bank
   Name: Stad_Shooter
   StudioPath: bank:/Stad_Shooter
-  lastModified: 638604419645946324
+  lastModified: 638604442886281091
   FileSizes: []
   Exists: 1
 --- !u!114 &427287121270227522
@@ -3120,7 +3120,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Stadslandbouw.bank
   Name: Stadslandbouw
   StudioPath: bank:/Stadslandbouw
-  lastModified: 638604419648570709
+  lastModified: 638604442888840478
   FileSizes: []
   Exists: 1
 --- !u!114 &2115048818224658653
@@ -4133,6 +4133,36 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 13975
+--- !u!114 &5954274026305397644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Shooter_music/Parameter Shooter
+  m_EditorClassIdentifier: 
+  Name: Parameter Shooter
+  StudioPath: 
+  Min: 0
+  Max: 5
+  Default: 0
+  ID:
+    data1: 2785078951
+    data2: 4076959214
+  Type: 2
+  IsGlobal: 0
+  Labels:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  Exists: 1
 --- !u!114 &6015141965729299508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4642,7 +4672,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/VGH Bloem.bank
   Name: VGH Bloem
   StudioPath: bank:/VGH Bloem
-  lastModified: 638604419662997198
+  lastModified: 638604442903319745
   FileSizes: []
   Exists: 1
 --- !u!114 &7939648261716675274
@@ -5038,36 +5068,6 @@ MonoBehaviour:
   Labels:
   - opladen_schieten
   - loslaten_schieten
-  Exists: 1
---- !u!114 &8790393963884688310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Shooter_music/Blokjes_geplaatst
-  m_EditorClassIdentifier: 
-  Name: Blokjes_geplaatst
-  StudioPath: 
-  Min: 0
-  Max: 5
-  Default: 0
-  ID:
-    data1: 4219067713
-    data2: 3463026392
-  Type: 2
-  IsGlobal: 0
-  Labels:
-  - 0 Blokjes
-  - 4 Blokjes
-  - 8 Blokjes
-  - 12 Blokjes
-  - 16 Blokjes
-  - 20 Blokjes
   Exists: 1
 --- !u!114 &8819067864327835853
 MonoBehaviour:

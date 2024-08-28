@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -36,7 +37,7 @@ public class PaintManager : Singleton<PaintManager>
 
     private CommandBuffer command;
 
-    private int coveredCount = 0;
+    [SerializeField]private int coveredCount = 0;
 
     public bool HasReachedTreshold => coveredCount >= coveredTreshold;
 
@@ -214,6 +215,7 @@ public class PaintManager : Singleton<PaintManager>
 
     public void CheckIfStepThresholdIsReached()
     {
+
         if (paintables.Count == 0)
             return;
 
@@ -222,4 +224,18 @@ public class PaintManager : Singleton<PaintManager>
 
         OnTresholdStep.Invoke(step);
     }
+    
+    #if UNITY_EDITOR
+int step = 0;
+    private void OnGUI()
+    {
+        //button in invoke onTresholdStep
+        if (GUI.Button(new Rect(30, 30, 300, 200), "Invoke OnTresholdStep"))
+        {
+            OnTresholdStep.Invoke(step);
+            step++;
+        }
+    }
+    
+    #endif
 }
