@@ -19,7 +19,7 @@ public class ARRecenter : MonoBehaviour
     {
         ARRecenterManager.Instance.AddRecenter(this);
     }
-    
+
     private void OnDisable()
     {
         ARRecenterManager.Instance.RemoveRecenter(this);
@@ -33,14 +33,28 @@ public class ARRecenter : MonoBehaviour
         {
             bounds.Encapsulate(renderer.bounds);
         }
-        
+
         //calculate the center of the bounding box
         var center = bounds.center;
-        
+
         //calculate the relative position of the object to the center of the bounding box
         var relativePosition = transform.position - center;
-        
+
         //recenter the object
-        transform.position = new Vector3(newPosition.x + relativePosition.x, transform.position.y, newPosition.z + relativePosition.z);
+        var position = new Vector3(newPosition.x, transform.position.y, newPosition.z);
+
+        StartCoroutine(LerpPosition(position, 0.3f));
+    }
+
+    private IEnumerator LerpPosition(Vector3 targetPosition, float duration)
+    {
+        var startPosition = transform.position;
+        var time = 0f;
+        while (time < duration)
+        {
+            transform.position = Vector3.Lerp(startPosition, targetPosition, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
     }
 }

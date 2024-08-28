@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class GunController : MonoBehaviour
 {
-    [Header("Weapon Variables")] [SerializeField]
+    [Header("Weapon Variables"), NonReorderable] [SerializeField]
     private List<Weapon> weapons;
 
     [Header("Bullet Variables")] private GameObject bulletPrefab;

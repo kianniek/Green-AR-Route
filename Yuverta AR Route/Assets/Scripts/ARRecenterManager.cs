@@ -7,14 +7,23 @@ using UnityEngine.XR.ARFoundation;
 public class ARRecenterManager : MonoBehaviour
 {
     public static ARRecenterManager Instance { get; private set; }
-    
+
     [SerializeField] private List<ARRecenter> m_Recenters = new List<ARRecenter>();
-    
+
     [SerializeField, Tooltip("The AR Interactor that determines where to spawn the object.")]
     ARRaycastManager m_RaycastManager;
 
-    private bool recenter;
+    [SerializeField, Tooltip("the max distance a object can be re-centered from the camera")] 
+    private float maxDistance = 10f;
+    
+    private Camera mainCam;
+
     // Start is called before the first frame update
+    private void Awake()
+    {
+        mainCam = Camera.main;
+    }
+
     void Start()
     {
         if (Instance != null && Instance != this)
@@ -31,7 +40,7 @@ public class ARRecenterManager : MonoBehaviour
     {
         m_Recenters.Add(recenter);
     }
-    
+
     public void RemoveRecenter(ARRecenter recenter)
     {
         m_Recenters.Remove(recenter);
@@ -39,36 +48,27 @@ public class ARRecenterManager : MonoBehaviour
 
     public void Recenter()
     {
-        recenter = true;
         StartCoroutine(RecenterCoroutine());
     }
-    
+
     private IEnumerator RecenterCoroutine()
     {
-        if(m_Recenters.Count == 0)
-            yield return null;
-        
-        
-        var m_Hits = new List<ARRaycastHit>();
-        var touchPosition = new Vector2(Screen.width / 2, Screen.height / 2);
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 10, Color.red);
-
-        do
+        if (m_Recenters.Count == 0)
         {
+            yield return null;
+        }
 
-            if (m_RaycastManager.Raycast(touchPosition, m_Hits))
-            {
-                var arRaycastHit = m_Hits[0];
-                Debug.DrawRay(arRaycastHit.pose.position, arRaycastHit.pose.up * 10, Color.green, 10f);
-                var position = arRaycastHit.pose.position;
-
-                foreach (var recenter in m_Recenters)
-                {
-                    recenter.Recenter(position);
-                }
-                recenter = false;
-            }
-        } while (recenter);
+        foreach (var obj in m_Recenters)
+        {
+            var direction = mainCam.transform.forward;
+            var distance = Vector3.Distance(mainCam.transform.position, obj.transform.position);
+            
+            var clampDistance = Mathf.Clamp(distance, 0, maxDistance);
+            
+            var newPosition = mainCam.transform.position + direction * clampDistance;
+            
+            obj.Recenter(newPosition);
+        }
 
         yield return null;
     }

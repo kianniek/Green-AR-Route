@@ -38,8 +38,6 @@ public class PromptTextController : MonoBehaviour
     
     public void ToTop()
     {
-        onMovement.Invoke();
-
         promptTextAnimator.SetBool("Hidden", false);
         promptTextAnimator.SetBool("Middle", false);
         promptTextAnimator.SetBool("Top", true);
@@ -47,8 +45,6 @@ public class PromptTextController : MonoBehaviour
     
     public void Hide()
     {
-        onMovement.Invoke();
-
         promptTextAnimator.SetBool("Hidden", true);
         promptTextAnimator.SetBool("Middle", false);
         promptTextAnimator.SetBool("Top", false);
