@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{9b2bf750-8a32-46d9-82bf-cf0b8b53e324}">
+		<property name="name">
+			<value>VGH BLOEM QUIZ_VO</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{1b716420-7606-4194-b4ee-63d6ffe2a672}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{5b6d1257-e166-47d5-950f-6c28e70e392d}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{346149f5-55c6-4673-847e-1f8c29a218b4}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{1b716420-7606-4194-b4ee-63d6ffe2a672}">
+		<relationship name="effects">
+			<destination>{75eede05-4160-48e0-994f-961c2478c041}</destination>
+			<destination>{c7de78af-efea-48ac-beaf-51be02fbf286}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{5b6d1257-e166-47d5-950f-6c28e70e392d}" />
+	<object class="MixerBusFader" id="{75eede05-4160-48e0-994f-961c2478c041}" />
+	<object class="Sidechain" id="{c7de78af-efea-48ac-beaf-51be02fbf286}" />
+</objects>

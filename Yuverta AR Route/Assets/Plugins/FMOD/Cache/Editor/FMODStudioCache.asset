@@ -860,7 +860,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 5
+  MaxDistance: 8
   Length: 5167
 --- !u!114 &-6617014762824808136
 MonoBehaviour:
@@ -1039,7 +1039,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 5.2000003
-  MaxDistance: 250
+  MaxDistance: 600
   Length: 20000
 --- !u!114 &-5876053425604988944
 MonoBehaviour:
@@ -1299,7 +1299,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638602868829815481
+  lastModified: 638604419637076133
   FileSizes: []
   Exists: 1
 --- !u!114 &-4835301546994531579
@@ -1395,7 +1395,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Wadi.bank
   Name: Wadi
   StudioPath: bank:/Wadi
-  lastModified: 638602861623280592
+  lastModified: 638604419681211550
   FileSizes: []
   Exists: 1
 --- !u!114 &-4192352614320405597
@@ -1925,10 +1925,10 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638602868829830533
+  lastModified: 638604419637086121
   FileSizes:
   - Name: 
-    Value: 4406
+    Value: 4628
   Exists: 1
 --- !u!114 &-1950804775409009515
 MonoBehaviour:
@@ -2133,7 +2133,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 5
+  MaxDistance: 8
   Length: 33035
 --- !u!114 &-788970286932993277
 MonoBehaviour:
@@ -2244,7 +2244,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 250
 --- !u!114 &-552714932171180097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2561,13 +2561,14 @@ MonoBehaviour:
   - {fileID: 6238833815512303724}
   - {fileID: 4936061160593482309}
   - {fileID: -5618436502512997589}
+  - {fileID: 1954486401065494842}
   EditorParameters:
   - {fileID: -8526034405271426335}
   MasterBanks:
   - {fileID: -4943362248349947130}
   StringsBanks:
   - {fileID: -1961004960571396211}
-  cacheTime: 638602868830340905
+  cacheTime: 638604419681211550
   cacheVersion: 131619
 --- !u!114 &138397621291940207
 MonoBehaviour:
@@ -2621,7 +2622,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 5
+  MaxDistance: 8
   Length: 126000
 --- !u!114 &248437807963664566
 MonoBehaviour:
@@ -2720,7 +2721,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Stad_Shooter.bank
   Name: Stad_Shooter
   StudioPath: bank:/Stad_Shooter
-  lastModified: 638602861587252480
+  lastModified: 638604419645946324
   FileSizes: []
   Exists: 1
 --- !u!114 &427287121270227522
@@ -3077,6 +3078,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 30500
+--- !u!114 &1954486401065494842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Wadi/wadi_water
+  m_EditorClassIdentifier: 
+  Path: event:/Wadi/wadi_water
+  Guid:
+    Data1: 1534456160
+    Data2: 1090492344
+    Data3: -821600852
+    Data4: -2035460193
+  Banks:
+  - {fileID: -4684434949208560311}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &1992532989628781375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3092,7 +3120,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Stadslandbouw.bank
   Name: Stadslandbouw
   StudioPath: bank:/Stadslandbouw
-  lastModified: 638602868830340905
+  lastModified: 638604419648570709
   FileSizes: []
   Exists: 1
 --- !u!114 &2115048818224658653
@@ -3468,7 +3496,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 5
+  MaxDistance: 8.2
   Length: 27374
 --- !u!114 &3628494729261849437
 MonoBehaviour:
@@ -4408,7 +4436,7 @@ MonoBehaviour:
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
-  MaxDistance: 5
+  MaxDistance: 8
   Length: 11000
 --- !u!114 &6950989536752694439
 MonoBehaviour:
@@ -4614,7 +4642,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/VGH Bloem.bank
   Name: VGH Bloem
   StudioPath: bank:/VGH Bloem
-  lastModified: 638602861604316406
+  lastModified: 638604419662997198
   FileSizes: []
   Exists: 1
 --- !u!114 &7939648261716675274

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{273ec2fd-3eee-400d-a2ca-4bfacf4c9aea}">
+		<property name="name">
+			<value>VGH BLOEM AMBIENCE</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{681db01c-9b13-4b73-bf7b-54d8cb7eaddc}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{5193ff79-f113-4de8-a485-63b67352fa4c}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{346149f5-55c6-4673-847e-1f8c29a218b4}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{681db01c-9b13-4b73-bf7b-54d8cb7eaddc}">
+		<relationship name="effects">
+			<destination>{40121f2a-6563-4517-9a60-236395af9cda}</destination>
+			<destination>{c57e27ef-de6f-4597-8fee-f2707efe7d03}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{5193ff79-f113-4de8-a485-63b67352fa4c}" />
+	<object class="MixerBusFader" id="{40121f2a-6563-4517-9a60-236395af9cda}" />
+	<object class="CompressorEffect" id="{c57e27ef-de6f-4597-8fee-f2707efe7d03}">
+		<property name="threshold">
+			<value>-20</value>
+		</property>
+		<property name="ratio">
+			<value>3</value>
+		</property>
+		<property name="releaseTime">
+			<value>660</value>
+		</property>
+		<relationship name="sidechains">
+			<destination>{c7de78af-efea-48ac-beaf-51be02fbf286}</destination>
+		</relationship>
+	</object>
+</objects>
