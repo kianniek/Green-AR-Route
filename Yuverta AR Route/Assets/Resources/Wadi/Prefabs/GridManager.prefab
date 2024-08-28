@@ -218,7 +218,7 @@ MonoBehaviour:
     Path: event:/Wadi_music
   Event: 
   PlayEvent: 11
-  StopEvent: 0
+  StopEvent: 12
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
@@ -409,6 +409,10 @@ MonoBehaviour:
   promptText: {fileID: 3124282877663820060}
   promptTextAnimator: {fileID: 5786021479343488511}
   showOnStart: 0
+  showOnStartDelay: 5
+  onMovement:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!95 &5786021479343488511 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7891554079215738639, guid: 529c65b75ce01ff4e960889f4015f2f7,
