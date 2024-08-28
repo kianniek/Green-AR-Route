@@ -1,17 +1,14 @@
 using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody), typeof(Collider))]
 public class BulletLogic : MonoBehaviour
 {
     public Ammo ammo;
-    public UnityEvent onImpact;
-    private float spawnTimer;
-    private CollisionPainter _collisionPainter;
-    public CollisionPainter collisionPainter => _collisionPainter;
-    public delegate void BulletHitEvent(Vector3 hitPosition);
-    public static event BulletHitEvent OnBulletHit;
+    
+    private const float SEC_UNTIL_SHRIKING = 2f;
+
     
     private Rigidbody rb;
     private Collider col;
@@ -21,34 +18,54 @@ public class BulletLogic : MonoBehaviour
         //Get all components
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
-        _collisionPainter = GetComponent<CollisionPainter>();
     }
 
-    private void Start()
+    public void Launch(Vector3 velocity)
     {
-        OnSpawn();
+        rb = GetComponent<Rigidbody>();
+
+        rb.AddForce(velocity, ForceMode.Impulse);
     }
 
-    public void OnSpawn()
-    {
-        // Set the spawn time to 0
-        spawnTimer = 0f;
-        
-        // Set inpulse force to the bullet
-        rb.AddForce(transform.forward * ammo.projectileSpeed, ForceMode.Impulse);
-        
-    }
-    
-    // Update is called once per frame
+
     void Update()
     {
-        rb.AddForce(Vector3.down * ammo.bulletDrop, ForceMode.Force);
-        
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer > 5f)
+        // Rotate the projectile to face the direction of travel
+        transform.rotation = Quaternion.LookRotation(rb.velocity.normalized);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        StartCoroutine(ShrinkObject());
+    }
+    
+    private IEnumerator ShrinkObject()
+    {
+        yield return new WaitForSeconds(SEC_UNTIL_SHRIKING);
+        while(gameObject.transform.localScale.magnitude > 0.01f)
         {
-            // Destroy the bullet after 5 seconds
-            Destroy(gameObject);
+            gameObject.transform.localScale *= 0.9f;
+            yield return null;
         }
+
+        //If the object is shrunken all the way we can delete it
+        Destroy(gameObject);
+
+        yield return null;
+    }
+    
+    private IEnumerator GrowObject()
+    {
+        gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        
+        while(gameObject.transform.localScale.magnitude < 1f)
+        {
+            gameObject.transform.localScale *= 1.5f;
+            yield return null;
+        }
+        
+        gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
+
+        yield return null;
     }
 }

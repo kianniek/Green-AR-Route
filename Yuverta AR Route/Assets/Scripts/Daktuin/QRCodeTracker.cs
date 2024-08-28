@@ -15,10 +15,10 @@ public class QRCodeManager : MonoBehaviour
     private ARTrackedImage currentRecognizedImage = null;
 
 
-    [Header("Events")] 
-    [SerializeField] internal UnityEvent onImageTracked = new();
+    [Header("Events")] [SerializeField] internal UnityEvent onImageTracked = new();
     [SerializeField] internal UnityEvent onImageRemoved = new();
     [SerializeField] internal UnityEvent onImageNewScanned = new();
+    [SerializeField] internal UnityEvent onLastImageScanned = new();
 
     [Serializable]
     public class QRCode
@@ -31,6 +31,8 @@ public class QRCodeManager : MonoBehaviour
 
     public List<QRCode> qrCodes;
 
+    private bool hasScannedAll => qrCodes.All(qrCode => qrCode.scanned);
+    private bool hasInvokedLastImageScanned = false;
 
     private void OnEnable()
     {
@@ -39,7 +41,8 @@ public class QRCodeManager : MonoBehaviour
             imageRecognitionEvent.OnImageRecognized.AddListener(HandleImageRecognized);
             imageRecognitionEvent.OnImageRecognizedStarted.AddListener(HandleImageRecognizedStarted);
             imageRecognitionEvent.OnImageRemoved.AddListener(HandleImageRemoved);
-        }else
+        }
+        else
         {
             Debug.LogError("ImageRecognitionEvent is null");
         }
@@ -52,7 +55,8 @@ public class QRCodeManager : MonoBehaviour
             imageRecognitionEvent.OnImageRecognized.RemoveListener(HandleImageRecognized);
             imageRecognitionEvent.OnImageRecognizedStarted.RemoveListener(HandleImageRecognizedStarted);
             imageRecognitionEvent.OnImageRemoved.RemoveListener(HandleImageRemoved);
-        }else
+        }
+        else
         {
             Debug.LogError("ImageRecognitionEvent is null");
         }
@@ -88,7 +92,7 @@ public class QRCodeManager : MonoBehaviour
             onImageRemoved.Invoke();
         }
     }
-    
+
     private bool isFMODDone = false; // The boolean to track FMOD status
 
     public void SetFMODStatus(bool status)
@@ -104,7 +108,7 @@ public class QRCodeManager : MonoBehaviour
             Debug.Log("Cannot collect leaf, FMOD event is still active.");
             return;
         }
-        
+
         var qrCodeName = trackedImage.referenceImage.name;
 
         foreach (var qrCode in qrCodes.Where(qrCode => qrCode.name == qrCodeName))
@@ -118,6 +122,18 @@ public class QRCodeManager : MonoBehaviour
                     qrCode.action.Invoke(qrCode.index);
                     onImageNewScanned.Invoke();
                     break;
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (hasScannedAll && !hasInvokedLastImageScanned)
+        {
+            if (!isFMODDone)
+            {
+                onLastImageScanned.Invoke();
+                hasInvokedLastImageScanned = true;
             }
         }
     }

@@ -20,6 +20,8 @@ public class StopMultipleBanks : MonoBehaviour
             RuntimeManager.StudioSystem.getBank(bankName, out bank);
             banks.Add(bank);
         }
+        
+        StopAllEventsInBanks();
     }
 
     public void StopAllEventsInBanks()

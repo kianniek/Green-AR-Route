@@ -18,7 +18,11 @@ public class GunController : MonoBehaviour
     private WeaponType weaponType;
     private bool firing;
 
-    [Header("Catapult Variables")] private float chargeRate;
+    [Header("Catapult Variables")] 
+    private float shootForce;
+    
+    [Header("Catapult Variables")] 
+    private float chargeRate;
     private float maxCharge;
     private float launchForce;
     private float elapsedTime = 0;
@@ -36,6 +40,8 @@ public class GunController : MonoBehaviour
 
     [Tooltip("This variable is set to <b>True</b> in a UI element to prevent a fire event when touching UI")]
     private bool isSwitchingWeaponThisPress = false;
+    
+    [SerializeField] private int startingWeaponIndex = 1;
 
     public bool IsSwitchingWeaponThisPress
     {
@@ -47,7 +53,7 @@ public class GunController : MonoBehaviour
     {
         mainCamera = Camera.main;
 
-        ChangeWeapon(0);
+        ChangeWeapon(startingWeaponIndex);
     }
 
     void Update()
@@ -130,20 +136,24 @@ public class GunController : MonoBehaviour
         // Find the bullet spawn point
         foreach (Transform child in weaponInstance.transform)
         {
-            if (child.name == "BulletSpawnPoint")
+            if (child.CompareTag("BulletSpawnpoint"))
             {
                 bulletSpawnPoint = child;
                 break;
             }
         }
 
-        // Set catapult variables if applicable
-        if (weaponType == WeaponType.Slingshot)
+        switch (weaponType)
         {
-            maxCharge = currentWeapon.maxCharge;
-            chargeRate = currentWeapon.chargeRate;
-            launchForce = currentWeapon.launchForce;
-            bulletSpawnPoint.transform.Rotate(new Vector3(-60, 0, 0));
+            // Set catapult variables if applicable
+            case WeaponType.Slingshot:
+                maxCharge = currentWeapon.maxCharge;
+                chargeRate = currentWeapon.chargeRate;
+                launchForce = currentWeapon.launchForce;
+                break;
+            case WeaponType.Pistol:
+                shootForce = currentWeapon.shootForce;
+                break;
         }
 
         firing = false;
@@ -240,11 +250,13 @@ public class GunController : MonoBehaviour
 
     private void LaunchProjectile(float currentCharge)
     {
-        GameObject projectileInstance = Instantiate(bulletPrefab, bulletSpawnPoint.position + bulletSpawnPoint.forward, Quaternion.identity);
-        CatapultProjectile catapultProjectile = projectileInstance.GetComponent<CatapultProjectile>();
+        currentWeapon.fireRateCooldownTimer = currentWeapon.fireRate;
+        
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        CatapultProjectile projectile = bullet.GetComponent<CatapultProjectile>();
         float projectileSpeed = currentAmmo.projectileSpeed + (currentCharge * launchForce);
 
-        catapultProjectile.Launch(bulletSpawnPoint.forward * projectileSpeed);
+        projectile.Launch(bulletSpawnPoint.forward * projectileSpeed);
     }
 
     public void ShootBullet()
@@ -254,9 +266,9 @@ public class GunController : MonoBehaviour
         currentWeapon.fireRateCooldownTimer = currentWeapon.fireRate;
 
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        BulletLogic projectile = bullet.GetComponent<BulletLogic>();
+        float projectileSpeed = currentAmmo.projectileSpeed + shootForce;
 
-        BulletLogic bL = bullet.GetComponent<BulletLogic>();
-        bL.ammo = currentAmmo;
-        bL.collisionPainter.paintColorIndex = currentWeapon.paintColorIndex;
+        projectile.Launch(bulletSpawnPoint.forward * projectileSpeed);
     }
 }

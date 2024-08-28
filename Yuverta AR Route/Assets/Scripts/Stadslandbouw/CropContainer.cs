@@ -30,6 +30,13 @@ public class CropContainer : MonoBehaviour
     public UnityEvent<CropScript> onCropPlanted = new();
 
     bool firstHarvest = false;
+    
+    bool inputBlocked = false;
+    
+    public void BlockInput(bool value)
+    {
+        inputBlocked = value;
+    }
 
     private void Awake()
     {
@@ -38,7 +45,7 @@ public class CropContainer : MonoBehaviour
 
     private void Update()
     {
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && !inputBlocked)
         {
             Touch touch = Input.GetTouch(0);
 

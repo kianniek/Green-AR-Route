@@ -28,6 +28,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
     [Tooltip("Time to hold before it counts as a drag.")] [SerializeField]
     private float holdTimeThreshold = 0.5f; // Time to hold before it counts as a drag
 
+    [SerializeField] private float dragImageSize;
     private GameObject dragObject; // The temporary drag object (UI representation)
     private Canvas _canvas;
     private bool isDragging;
@@ -209,7 +210,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
         // Set the size of the drag image
         var rectTransform = image.GetComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(100, 100); // Set size, adjust as needed
+        rectTransform.sizeDelta = new Vector2(dragImageSize, dragImageSize); // Set size, adjust as needed
 
         // Move this object to the end of the children
         dragObject.transform.SetAsLastSibling();

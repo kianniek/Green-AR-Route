@@ -14,8 +14,21 @@ public class CatapultProjectile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         rb.AddForce(velocity, ForceMode.Impulse);
+        
     }
 
+
+    void Update()
+    {
+        // Rotate the projectile to face the direction of travel
+        transform.rotation = Quaternion.LookRotation(rb.velocity.normalized);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        StartCoroutine(ShrinkObject());
+    }
+    
     private IEnumerator ShrinkObject()
     {
         yield return new WaitForSeconds(SEC_UNTIL_SHRIKING);
@@ -28,17 +41,21 @@ public class CatapultProjectile : MonoBehaviour
         //If the object is shrunken all the way we can delete it
         Destroy(gameObject);
 
-        yield break;
+        yield return null;
     }
-
-    void Update()
+    
+    private IEnumerator GrowObject()
     {
-        // Rotate the projectile to face the direction of travel
-        transform.rotation = Quaternion.LookRotation(rb.velocity.normalized);
-    }
+        gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        
+        while(gameObject.transform.localScale.magnitude < 1f)
+        {
+            gameObject.transform.localScale *= 1.5f;
+            yield return null;
+        }
+        
+        gameObject.transform.localScale = new Vector3(1f, 1f, 1f);
 
-    private void OnCollisionEnter(Collision other)
-    {
-        StartCoroutine(ShrinkObject());
+        yield return null;
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 public class VerticaalGroenManager : Singleton<VerticaalGroenManager>
 {
     [SerializeField] private GameObject gunController;
+    
     private int currentWeaponIndex = 0;
     private GunController currentWeapon;
 
@@ -11,8 +12,6 @@ public class VerticaalGroenManager : Singleton<VerticaalGroenManager>
     void Start()
     {
         currentWeapon = gunController.GetComponent<GunController>();
-
-        ChangeCurrentWeapon(currentWeaponIndex);
     }
 
     public void ChangeCurrentWeapon(int index)

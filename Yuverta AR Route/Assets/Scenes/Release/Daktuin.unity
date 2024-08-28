@@ -1480,7 +1480,7 @@ PrefabInstance:
     - target: {fileID: 445693652433841015, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 295.6
+      value: 226.5
       objectReference: {fileID: 0}
     - target: {fileID: 445693652433841015, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
@@ -2085,17 +2085,37 @@ PrefabInstance:
     - target: {fileID: 7497489830726835578, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_fontSize
-      value: 79.01
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497489830726835578, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: m_margin.w
+      value: -48.05
       objectReference: {fileID: 0}
     - target: {fileID: 7497489830726835578, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_margin.x
-      value: -656.67773
+      value: -400
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497489830726835578, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: m_margin.y
+      value: -140
       objectReference: {fileID: 0}
     - target: {fileID: 7497489830726835578, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_margin.z
-      value: -714.54236
+      value: -400
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497489830726835578, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: m_fontSizeMin
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497489830726835578, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: m_spriteAsset
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7497489830726835578, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
@@ -2105,12 +2125,27 @@ PrefabInstance:
     - target: {fileID: 7497489830726835578, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497489830726835578, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: checkPaddingRequired
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497489830726835578, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: m_enableExtraPadding
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7497489830726835578, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7497489830726835578, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: m_IsTextObjectScaleStatic
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7561175271245223036, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
@@ -4147,31 +4182,7 @@ MonoBehaviour:
   - {fileID: 1525250275}
   allLeavesCollected:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1694061630}
-        m_TargetAssemblyTypeName: QuizManager, Assembly-CSharp
-        m_MethodName: StartQuiz
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 699489653}
-        m_TargetAssemblyTypeName: PromptTextController, Assembly-CSharp
-        m_MethodName: Hide
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onLeafCollected:
     m_PersistentCalls:
       m_Calls:
@@ -4221,6 +4232,33 @@ MonoBehaviour:
       - m_Target: {fileID: 2017752460}
         m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
         m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onLastImageScanned:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1694061630}
+        m_TargetAssemblyTypeName: QuizManager, Assembly-CSharp
+        m_MethodName: StartQuiz
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 699489653}
+        m_TargetAssemblyTypeName: PromptTextController, Assembly-CSharp
+        m_MethodName: Hide
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4528,7 +4566,7 @@ MonoBehaviour:
   OnEventStarted:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2017752454}
+      - m_Target: {fileID: 2017752457}
         m_TargetAssemblyTypeName: QRCodeManager, Assembly-CSharp
         m_MethodName: SetFMODStatus
         m_Mode: 6

@@ -14,7 +14,7 @@ public class Weapon : ScriptableObject
 
     // Pistol-specific attributes
     [Header("Pistol Only")]
-    public int paintColorIndex; // For painter-style pistols
+    public float shootForce;
 
     // Slingshot-specific attributes
     [Header("Slingshot Only")]

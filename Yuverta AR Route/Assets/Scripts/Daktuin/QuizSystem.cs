@@ -71,6 +71,10 @@ public class QuizManager : MonoBehaviour
         questions = new List<Question>(quizQuestions.questions);
         incorrectAnswers = new List<QuizAnswer>();
         totalQuestions = questions.Count;
+        
+        correctAnswersDisplay.SetActive(false); // Show the correct answers count display
+        questionText.gameObject.SetActive(true);
+        
         SetupChoiceButtons();
     }
 
@@ -138,13 +142,13 @@ public class QuizManager : MonoBehaviour
         {
             onQuizTotallyCorrect.Invoke();
         }
-        else if (correctQuestions == 0)
+        else if (correctQuestions >= Mathf.CeilToInt(totalQuestions * 0.5f) + 1)
         {
-            onQuizTotallyWrong.Invoke();
+            onQuizPartiallyCorrect.Invoke();
         }
         else
         {
-            onQuizPartiallyCorrect.Invoke();
+            onQuizTotallyWrong.Invoke();
         }
     }
 
