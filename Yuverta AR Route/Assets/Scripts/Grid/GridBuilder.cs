@@ -6,11 +6,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
-[RequireComponent(typeof(GridManager))]
+[RequireComponent(typeof(GridManager)), ExecuteAlways]
 public class GridBuilder : MonoBehaviour
 {
-    [Header("Grid Spawn Settings")]
-    [SerializeField] private Vector2Int gridSize = new Vector2Int(10, 10);
+    [Header("Grid Spawn Settings")] [SerializeField]
+    private Vector2Int gridSize = new Vector2Int(10, 10);
+
     [SerializeField] [Range(1, 2)] private int gridHeight = 1;
     [SerializeField] private Vector3 gridCellRotationDeg;
     [SerializeField] private Vector3 gridCellPadding = Vector3.one;
@@ -48,6 +49,7 @@ public class GridBuilder : MonoBehaviour
                 maxSize = Vector3.Max(maxSize, size);
             }
         }
+
         if (maxSize == Vector3.zero)
             maxSize = gridPointPrefab.GetComponentInChildren<Renderer>().bounds.size * blockSizeMultiplier;
 
@@ -81,26 +83,26 @@ public class GridBuilder : MonoBehaviour
                     {
                         // Set the object position of the grid point based on the indexOfGridPoint
                         gridPointScript.objectGridLocation = (GridManager.ObjectGridLocation)indexOfGridPoint;
-                    }
 
-                    if (gridPointScript.objectGridLocation == GridManager.ObjectGridLocation.UpperMiddle)
-                    {
-                        // Instantiate the slopKop
-                        if (slopKop != null)
+                        if (gridPointScript.objectGridLocation == GridManager.ObjectGridLocation.UpperMiddle)
                         {
-                            var slopKopPosition = gridPoint.transform.localPosition + slopKopOffset;
-                            var slopKopRotation = Quaternion.Euler(gridCellRotationDeg);
-                            var slopKopObject = Instantiate(slopKop, transform);
-                            slopKopObject.transform.localPosition = slopKopPosition;
-                            slopKopObject.transform.localRotation = slopKopRotation;
+                            // Instantiate the slopKop
+                            if (slopKop != null)
+                            {
+                                var slopKopPosition = gridPoint.transform.localPosition + slopKopOffset;
+                                var slopKopRotation = Quaternion.Euler(gridCellRotationDeg);
+                                var slopKopObject = Instantiate(slopKop, transform);
+                                slopKopObject.transform.localPosition = slopKopPosition;
+                                slopKopObject.transform.localRotation = slopKopRotation;
 
-                            gridPoints.Add(slopKopObject);
-                            convertedGridPositions.Add(slopKopObject, localPositionConverged + slopKopOffset);
+                                gridPoints.Add(slopKopObject);
+                                convertedGridPositions.Add(slopKopObject, localPositionConverged + slopKopOffset);
+                            }
                         }
-                    }
-
                     // Inputting rotation here later
                     gridPoint.name = $"{gridPointScript.objectGridLocation} {x} {y} {z}";
+                    }
+
 
                     // Add the grid point to the list of grid points
                     gridPoints.Add(gridPoint);
@@ -124,13 +126,14 @@ public class GridBuilder : MonoBehaviour
 
     public void ClearGrid()
     {
-        // Destroy all children of the grid in for loop
-        for (var i = 1; i < transform.childCount - 1; i++)
+        // Destroy all children of the grid in for loop except the first child
+        var childcount = transform.childCount;
+        for (var i = 1; i < childcount; i++)
         {
             if (Application.isPlaying)
-                Destroy(transform.GetChild(i).gameObject);
+                Destroy(transform.GetChild(1).gameObject);
             else
-                DestroyImmediate(transform.GetChild(i).gameObject);
+                DestroyImmediate(transform.GetChild(1).gameObject);
         }
     }
 
@@ -191,7 +194,6 @@ public class GridBuilder : MonoBehaviour
         var center = Vector3.zero;
         foreach (var gridPoint in gridPoints)
         {
-            
             center += gridPoint.transform.localPosition;
         }
 
@@ -202,7 +204,7 @@ public class GridBuilder : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (Application.isPlaying || gridPointPrefab == null) return;
+        if (gridPointPrefab == null) return;
 
         var maxSize = Vector3.zero;
 
@@ -217,6 +219,9 @@ public class GridBuilder : MonoBehaviour
 
         if (maxSize == Vector3.zero)
             maxSize = gridPointPrefab.GetComponentInChildren<Renderer>().bounds.size * blockSizeMultiplier;
+
+        //flip the x and z values
+        maxSize = new Vector3(maxSize.z, maxSize.y, maxSize.x);
 
         maxSize *= blockSizeMultiplier;
 
