@@ -24,15 +24,12 @@ public class ObjectLogic : MonoBehaviour
 
     private GridManager gridManager;
 
-    private static readonly Vector3 newScale = new Vector3(0.2f, 0.2f, 0.2f);
-
     [SerializeField] private UnityEvent onShake = new();
 
     private void Start()
     {
         gridManager = FindObjectOfType<GridManager>();
         _dotweenAnimations = FindObjectOfType<DOTweenAnimations>();
-        gameObject.transform.localScale = newScale;
         gameObject.transform.rotation = Quaternion.Euler(0, -90, 0);
 
         gameObject.name = objectGridLocation.ToString();
