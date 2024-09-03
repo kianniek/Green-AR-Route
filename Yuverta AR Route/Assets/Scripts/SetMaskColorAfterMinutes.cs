@@ -13,7 +13,16 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
     private void Start()
     {
         paintables = FindObjectsOfType<Paintable>();
+    }
+
+    private void OnEnable()
+    {
         StartCoroutine(SetMaskColor());
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(SetMaskColor());
     }
 
     private IEnumerator SetMaskColor()
@@ -21,7 +30,8 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
         yield return new WaitForSeconds(minutes * 60);
         foreach (var p in paintables)
         {
-            PaintManager.instance.SetMaskToColor(p, paintColors.colors[paintColorIndexToSet]);
+            yield return new WaitForEndOfFrame();
+            Paintable.SetMaskToColor(p, paintColors.colors[paintColorIndexToSet], paintColorIndexToSet);
             p.OnCovered.Invoke(paintColorIndexToSet);
         }
     }

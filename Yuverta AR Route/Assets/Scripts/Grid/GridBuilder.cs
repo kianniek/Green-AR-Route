@@ -73,6 +73,7 @@ public class GridBuilder : MonoBehaviour
                     var rotation = Quaternion.Euler(gridCellRotationDeg);
 
                     // Instantiate the grid point
+                    //var gridPoint = Instantiate(gridPrefabs[indexOfGridPoint], transform);
                     var gridPoint = Instantiate(gridPointPrefab, transform);
                     gridPoint.transform.localPosition = localPosition;
                     gridPoint.transform.localRotation = rotation;
@@ -126,6 +127,15 @@ public class GridBuilder : MonoBehaviour
 
     public void ClearGrid()
     {
+        //remove all objects in gridpoints
+        foreach (var gridPoint in gridPoints)
+        {
+            if (Application.isPlaying)
+                Destroy(gridPoint);
+            else
+                DestroyImmediate(gridPoint);
+        }
+        
         // Destroy all children of the grid in for loop except the first child
         var childcount = transform.childCount;
         for (var i = 1; i < childcount; i++)

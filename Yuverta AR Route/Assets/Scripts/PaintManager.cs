@@ -169,22 +169,36 @@ public class PaintManager : Singleton<PaintManager>
 
             CheckIfStepThresholdIsReached();
         });
-        
+
         return paintable.coverage;
     }
 
 
-    public void SetMaskToColor(Paintable paintable, Color color)
+    public void SetMaskToColor(Paintable paintable, Color color, int coverageID = -1)
     {
         var mask = paintable.getMask();
         var support = paintable.getSupport();
 
+        // Set the mask render target and clear it
         command.SetRenderTarget(mask);
+        command.ClearRenderTarget(true, true, color);
+        Graphics.ExecuteCommandBuffer(command);
+
+        // Set the support render target and clear it
         command.SetRenderTarget(support);
         command.ClearRenderTarget(true, true, color);
-
         Graphics.ExecuteCommandBuffer(command);
+
         command.Clear();
+
+        Debug.Log($"Set Mask and Support to {color}");
+
+        if (coverageID != -1)
+        {
+            AddToPaintablesList(paintable, coverageID);
+        }
+
+        CheckIfStepThresholdIsReached();
 
         // Reset the coverage
         paintable.coverage = Vector4.zero;

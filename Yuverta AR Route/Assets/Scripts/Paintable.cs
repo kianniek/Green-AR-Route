@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering;
 using UnityEngine.Serialization;
+using UnityEngine.TestTools;
 
 public class Paintable : MonoBehaviour
 {
@@ -154,9 +155,9 @@ public class Paintable : MonoBehaviour
     }
 
 
-    public static void SetMaskToColor(Paintable p, Color color)
+    public static void SetMaskToColor(Paintable p, Color color, int coverageID = -1)
     {
-        PaintManager.instance.SetMaskToColor(p, color);
+        PaintManager.instance.SetMaskToColor(p, color, coverageID);
     }
 
     private void CalculateUVBounds()

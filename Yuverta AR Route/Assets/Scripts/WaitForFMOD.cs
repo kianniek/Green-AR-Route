@@ -60,4 +60,10 @@ public class WaitForFMOD : MonoBehaviour
             OnEventStopped.Invoke(); // Trigger Unity event
         }
     }
+
+    public void Reset()
+    {
+        hasStartedPlaying = false;
+        hasStoppedPlaying = false;
+    }
 }
