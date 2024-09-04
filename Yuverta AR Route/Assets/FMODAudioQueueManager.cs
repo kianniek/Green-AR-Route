@@ -17,8 +17,6 @@ public class FMODStudioEventQueueManager : MonoBehaviour
             PlayNextEventInQueue();
         }
         
-        Debug.Log($"Event queue count: {eventQueue.Count}");
-        
         //print all the events in the queue
         foreach (var VARIABLE in eventQueue)
         {

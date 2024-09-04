@@ -11,20 +11,10 @@ public class FMODParameterController : MonoBehaviour
     public void SetFMODParameter(float value)
     {
         fmodEventInstance.SetParameter(parameterName, value);
-        
-        foreach (var VARIABLE in fmodEventInstance.Params)
-        {
-            Debug.Log($"{VARIABLE.Name} is now set to {VARIABLE.Value}" );
-        }
     }
 
     public void SetFMODParameter(int value)
     {
         fmodEventInstance.SetParameter(parameterName, value);
-
-        foreach (var VARIABLE in fmodEventInstance.Params)
-        {
-            Debug.Log($"{VARIABLE.Name} is now set to {VARIABLE.Value}" );
-        }
     }
 }

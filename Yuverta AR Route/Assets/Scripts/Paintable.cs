@@ -151,7 +151,10 @@ public class Paintable : MonoBehaviour
 
     public void SetPreviouslyFilledColorIndex(int index)
     {
-        previouslyFilledColorIndex = index;
+        if (index < previouslyFilledColorIndex)
+        {
+            previouslyFilledColorIndex = index;
+        }
     }
 
 

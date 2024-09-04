@@ -199,9 +199,6 @@ public class PaintManager : Singleton<PaintManager>
         }
 
         CheckIfStepThresholdIsReached();
-
-        // Reset the coverage
-        paintable.coverage = Vector4.zero;
     }
 
     public void AddToPaintablesList(Paintable paintable, int coverageID)
