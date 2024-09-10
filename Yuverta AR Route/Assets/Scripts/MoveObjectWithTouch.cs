@@ -15,6 +15,7 @@ public class MoveObjectWithTouch : MonoBehaviour
     private Camera arCamera;
     private UIMenuLogic _uiMenuLogic;
     public RenderTexture dragSprite; // The sprite to display while dragging
+    private WorldImage _dragSpriteWI;
     private LerpedObjectMovement _lerpedObjectMovement;
 
     private Canvas _canvas;
@@ -26,6 +27,7 @@ public class MoveObjectWithTouch : MonoBehaviour
 
     private Vector2 _touchStartPosition;
     public float dragSensitive = 1;
+    [SerializeField] private float dragImageSize = 450f;
 
     public UnityEvent onDragStart = new();
     public UnityEvent onDrag = new();
@@ -37,7 +39,7 @@ public class MoveObjectWithTouch : MonoBehaviour
     {
         // Find the AR Camera
         arCamera = Camera.main;
-        _ObjectVisuals = new List<MeshRenderer>();
+        _ObjectVisuals = new ();
         _ObjectVisuals.Add(GetComponent<MeshRenderer>());
         _ObjectVisuals.AddRange(GetComponentsInChildren<MeshRenderer>());
 
@@ -77,7 +79,7 @@ public class MoveObjectWithTouch : MonoBehaviour
 
     private void OnPointerDown(Vector2 touchPosition)
     {
-        if (arCamera == null)
+        if (!arCamera)
             return;
 
         CreateDragImage(touchPosition);
@@ -102,12 +104,12 @@ public class MoveObjectWithTouch : MonoBehaviour
         if (!_startDrag)
             OnPointerDown(touchPosition);
 
-        if (_dragObject == null)
+        if (!_dragObject)
             return;
 
         _dragObject.transform.position = touchPosition;
 
-        if (arCamera == null)
+        if (!arCamera)
             return;
 
         var ray = arCamera.ScreenPointToRay(touchPosition);
@@ -126,8 +128,12 @@ public class MoveObjectWithTouch : MonoBehaviour
 
     private void OnEndDrag()
     {
-        if (_dragObject != null)
+        if (_dragObject)
         {
+            if (_dragSpriteWI)
+            {
+                _dragSpriteWI.CameraFollowTransform = true;
+            }
             Destroy(_dragObject);
 
             // Show the selected object
@@ -171,16 +177,33 @@ public class MoveObjectWithTouch : MonoBehaviour
 
     private void CreateDragImage(Vector2 touchPosition)
     {
+        if(_dragObject)
+            Destroy(_dragObject);
+        
         _dragObject = new GameObject("DragImage");
         _dragObject.transform.SetParent(_canvas.transform, false); // Make it a child of the _canvas
         _dragObject.transform.position = touchPosition;
 
         var image = _dragObject.AddComponent<RawImage>();
-        image.texture = dragSprite; // Set the sprite;
+
+        if (_dragSpriteWI)
+        {
+            image.texture = _dragSpriteWI.RenderTextureOverride; // Set the sprite
+            Debug.Log(_dragSpriteWI.RenderTextureOverride.name);
+            _dragSpriteWI.CameraFollowTransform = true;
+        }
+        else
+        {
+            image.texture = dragSprite; // Set the sprite
+        }
+
+        Debug.Log(image.texture.name);
+
         image.raycastTarget = false; // Make sure it does not block any events
 
+        // Set the size of the drag image
         var rectTransform = image.GetComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(100, 100); // Set size, adjust as needed
+        rectTransform.sizeDelta = new Vector2(dragImageSize, dragImageSize); // Set size, adjust as needed
 
         // Hide the selected object
         foreach (var mr in _ObjectVisuals)
@@ -190,5 +213,10 @@ public class MoveObjectWithTouch : MonoBehaviour
 
         // Move this object to the end of the children
         _dragObject.transform.SetAsLastSibling();
+    }
+
+    public void SetDragSprite(WorldImage worldImage)
+    {
+        _dragSpriteWI = worldImage;
     }
 }

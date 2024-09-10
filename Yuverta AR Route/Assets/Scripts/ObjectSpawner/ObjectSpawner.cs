@@ -27,12 +27,10 @@ public class ObjectSpawner : MonoBehaviour
         set => m_CameraToFace = value;
     }
 
-    [Tooltip("Object Spawns with its rotation set to Quaternion.identity")]
-    [SerializeField] private bool m_SpawnWithIdentityRotation = false;
+    [Tooltip("Object Spawns with its rotation set to Quaternion.identity")] [SerializeField]
+    private bool m_SpawnWithIdentityRotation = false;
 
-    [FormerlySerializedAs("m_ObjectPrefab")]
-    [SerializeField]
-    [Tooltip("The list of prefabs available to spawn.")]
+    [FormerlySerializedAs("m_ObjectPrefab")] [SerializeField] [Tooltip("The list of prefabs available to spawn.")]
     public List<GameObject> m_ObjectPrefabs = new();
 
     /// <summary>
@@ -44,8 +42,7 @@ public class ObjectSpawner : MonoBehaviour
         set => m_ObjectPrefabs = value;
     }
 
-    [SerializeField]
-    [Tooltip("Whether to only spawn an object if the spawn point is within view of the camera.")]
+    [SerializeField] [Tooltip("Whether to only spawn an object if the spawn point is within view of the camera.")]
     bool m_OnlySpawnInView = true;
 
     /// <summary>
@@ -56,6 +53,10 @@ public class ObjectSpawner : MonoBehaviour
         get => m_OnlySpawnInView;
         set => m_OnlySpawnInView = value;
     }
+
+    [SerializeField]
+    [Tooltip("The extra distance to spawn the object from the spawn point. In the direction of the camera.")]
+    float m_SpawnDistanceOffset = 0f;
 
     [SerializeField]
     [Tooltip(
@@ -103,11 +104,11 @@ public class ObjectSpawner : MonoBehaviour
     }
 
     [SerializeField]
-    [Tooltip("Rather or not to spawn the object at a fixed lerp between the camera Y position and the spawn point Y position /n Uses the spawn height offset as the lerp value.")]
+    [Tooltip(
+        "Rather or not to spawn the object at a fixed lerp between the camera Y position and the spawn point Y position /n Uses the spawn height offset as the lerp value.")]
     private bool m_LerpToSpawnHeight = false;
 
-    [SerializeField]
-    [Tooltip("The height the object goes off the surface of the plane the raycast has hit")]
+    [SerializeField] [Tooltip("The height the object goes off the surface of the plane the raycast has hit")]
     float m_SpawnHeightOffset = 1.5f;
 
     public float spawnHeightOffset
@@ -116,8 +117,7 @@ public class ObjectSpawner : MonoBehaviour
         set => m_SpawnHeightOffset = value;
     }
 
-    [SerializeField]
-    [Tooltip("Whether to spawn each object as a child of this object.")]
+    [SerializeField] [Tooltip("Whether to spawn each object as a child of this object.")]
     private bool mSpawnAsChild;
 
     /// <summary>
@@ -166,9 +166,9 @@ public class ObjectSpawner : MonoBehaviour
     /// Otherwise, it will spawn the prefab at the index.
     /// </remarks>
     /// <seealso cref="objectSpawned"/>
-    public bool TrySpawnObject(Vector3 spawnPoint, Vector3 spawnNormal, out GameObject objectSpawned, out Vector3 spawnPosition)
+    public bool TrySpawnObject(Vector3 spawnPoint, Vector3 spawnNormal, out GameObject objectSpawned,
+        out Vector3 spawnPosition)
     {
-
         if (m_OnlySpawnInView)
         {
             var inViewMin = m_ViewportPeriphery;
@@ -192,7 +192,6 @@ public class ObjectSpawner : MonoBehaviour
 
         foreach (var objPrefab in m_ObjectPrefabs)
         {
-
             var newObject = Instantiate(objPrefab);
 
             if (mSpawnAsChild)
@@ -200,7 +199,7 @@ public class ObjectSpawner : MonoBehaviour
                 newObject.transform.parent = transform;
             }
 
-            // Set the initial position and add the GridSnapper component
+// Set the initial position and add the GridSnapper component
             newObject.transform.position = spawnPoint;
 
             EnsureFacingCamera();
@@ -208,12 +207,29 @@ public class ObjectSpawner : MonoBehaviour
             var facePosition = m_CameraToFace.transform.position;
             var forward = facePosition - spawnPoint;
 
+// Project the forward vector onto the plane defined by the spawnNormal
             BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
 
+// Normalize the projected forward vector to use it for moving the object away
+            projectedForward.Normalize();
 
-            newObject.transform.rotation = m_SpawnWithIdentityRotation ? Quaternion.identity : Quaternion.LookRotation(projectedForward, spawnNormal);
+// Check if m_SpawnDistanceOffset is not zero, and apply the movement accordingly
+            if (m_SpawnDistanceOffset != 0)
+            {
+                // Move the object in the direction of projectedForward for positive values,
+                // or towards the camera (i.e., opposite direction) for negative values
+                newObject.transform.position += Mathf.Sign(m_SpawnDistanceOffset) *
+                                                Mathf.Abs(m_SpawnDistanceOffset)* projectedForward;
+            }
 
-            newObject.transform.position += spawnNormal * (m_LerpToSpawnHeight ? Mathf.Lerp(m_CameraToFace.transform.position.y, spawnPoint.y, m_SpawnHeightOffset) : m_SpawnHeightOffset);
+            newObject.transform.rotation = m_SpawnWithIdentityRotation
+                ? Quaternion.identity
+                : Quaternion.LookRotation(projectedForward, spawnNormal);
+
+// Adjust height or other positioning based on settings
+            newObject.transform.position += spawnNormal * (m_LerpToSpawnHeight
+                ? Mathf.Lerp(m_CameraToFace.transform.position.y, spawnPoint.y, m_SpawnHeightOffset)
+                : m_SpawnHeightOffset);
 
             if (m_ApplyRandomAngleAtSpawn)
             {
@@ -229,7 +245,7 @@ public class ObjectSpawner : MonoBehaviour
 
         return true;
     }
-    
+
     public bool TryEnableObject(Vector3 spawnPoint, Vector3 spawnNormal)
     {
         foreach (var objPrefab in m_ObjectPrefabs)
@@ -239,7 +255,7 @@ public class ObjectSpawner : MonoBehaviour
                 objPrefab.transform.parent = transform;
             }
 
-            // Set the initial position and add the GridSnapper component
+// Set the initial position and add the GridSnapper component
             objPrefab.transform.position = spawnPoint;
 
             EnsureFacingCamera();
@@ -247,11 +263,26 @@ public class ObjectSpawner : MonoBehaviour
             var facePosition = m_CameraToFace.transform.position;
             var forward = facePosition - spawnPoint;
 
+// Project the forward vector onto the plane defined by the spawnNormal
             BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
 
+// Normalize the projected forward vector to use it for moving the object away
+            projectedForward.Normalize();
 
-            objPrefab.transform.rotation = m_SpawnWithIdentityRotation ? Quaternion.identity : Quaternion.LookRotation(projectedForward, spawnNormal);
+// Check if m_SpawnDistanceOffset is not zero, and apply the movement accordingly
+            if (m_SpawnDistanceOffset != 0)
+            {
+                // Move the object in the direction of projectedForward for positive values,
+                // or towards the camera (i.e., opposite direction) for negative values
+                objPrefab.transform.position += Mathf.Sign(m_SpawnDistanceOffset) *
+                                                Mathf.Abs(m_SpawnDistanceOffset) * projectedForward;
+            }
 
+            objPrefab.transform.rotation = m_SpawnWithIdentityRotation
+                ? Quaternion.identity
+                : Quaternion.LookRotation(projectedForward, spawnNormal);
+
+// Adjust height or other positioning based on m_SpawnHeightOffset
             objPrefab.transform.position += spawnNormal * m_SpawnHeightOffset;
 
             if (m_ApplyRandomAngleAtSpawn)

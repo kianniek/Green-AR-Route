@@ -77,7 +77,7 @@ public class GridBuilder : MonoBehaviour
                     var gridPoint = Instantiate(gridPointPrefab, transform);
                     gridPoint.transform.localPosition = localPosition;
                     gridPoint.transform.localRotation = rotation;
-                    gridPoint.transform.localScale = maxSize;
+                    //gridPoint.transform.localScale = maxSize;
 
                     var gridPointScript = gridPoint.GetComponent<GridPointScript>();
                     if (gridPointScript != null)
@@ -249,7 +249,7 @@ public class GridBuilder : MonoBehaviour
                     Vector3 position = CalculateGridPosition(x, y, z);
                     list.Add(position);
 
-                    Gizmos.DrawWireCube(transform.TransformPoint(position), maxSize);
+                    Gizmos.DrawWireCube(transform.TransformPoint(position), gridPointPrefab.GetComponentInChildren<Renderer>().bounds.size);
                 }
             }
         }

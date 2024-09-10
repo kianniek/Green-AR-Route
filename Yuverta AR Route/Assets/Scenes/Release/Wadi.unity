@@ -228,6 +228,7 @@ MonoBehaviour:
   m_ObjectPrefabs:
   - {fileID: 880761335829835037}
   m_OnlySpawnInView: 1
+  m_SpawnDistanceOffset: 0
   m_ViewportPeriphery: 0.15
   m_ApplyRandomAngleAtSpawn: 0
   m_SpawnAngleRange: 45
@@ -3510,6 +3511,7 @@ MonoBehaviour:
   m_ObjectPrefabs:
   - {fileID: 5468812455401227516, guid: 6b69db9ed4757c94e80eff5418e0e63c, type: 3}
   m_OnlySpawnInView: 1
+  m_SpawnDistanceOffset: -2
   m_ViewportPeriphery: 0.15
   m_ApplyRandomAngleAtSpawn: 0
   m_SpawnAngleRange: 45
@@ -7976,6 +7978,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2118605604724070053, guid: f8ee55b6cec522e46aa72875ec5b501a,
         type: 3}
+    - target: {fileID: 5102518149860003021, guid: 1581f3a0bf6133443b19a73f50d9a24b,
+        type: 3}
+      propertyPath: RenderTextureOverride
+      value: 
+      objectReference: {fileID: 8400000, guid: 63831bd24e3f0f44e961cb7dbb561ad8, type: 2}
     - target: {fileID: 5102518149860003021, guid: 1581f3a0bf6133443b19a73f50d9a24b,
         type: 3}
       propertyPath: m_worldObjects.Array.data[0]

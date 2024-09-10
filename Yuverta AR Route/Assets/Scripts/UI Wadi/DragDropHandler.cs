@@ -203,6 +203,9 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         dragObject.transform.SetParent(_canvas.transform, false); // Make it a child of the _canvas
         dragObject.transform.position = eventData.position;
 
+        //Diable the rotation of the drag sprite
+        _dragSprite.CameraFollowTransform = true;
+        
         // Add and configure the RawImage component
         var image = dragObject.AddComponent<RawImage>();
         image.texture = _dragSprite.RenderTexture; // Set the sprite
@@ -218,6 +221,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
     private void DestroyDragImage()
     {
+        _dragSprite.CameraFollowTransform = false;
         if (dragObject != null)
         {
             Destroy(dragObject);
@@ -267,8 +271,20 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
                     particleSystem.Play();
             }
 
+            var moveObjectWithTouch = spawnObject.GetComponent<MoveObjectWithTouch>();
+
+            if (moveObjectWithTouch)
+            {
+                moveObjectWithTouch.SetDragSprite(_dragSprite);
+            }
+
             gameObject.SetActive(!spawnedObject);
             return;
         }
+    }
+    
+    public WorldImage GetDragSprite()
+    {
+        return _dragSprite;
     }
 }
