@@ -5,8 +5,13 @@ using Events;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR.ARSubsystems;
 
+#if UNITY_EDITOR
+using UnityEditor;
+using GUILayout = UnityEngine.GUILayout;
+#endif
+
+[CanEditMultipleObjects]
 public class QRCodeManager : MonoBehaviour
 {
     [SerializeField] private ARTrackedImageManager trackedImageManager;
@@ -138,3 +143,28 @@ public class QRCodeManager : MonoBehaviour
         }
     }
 }
+
+
+//add a unity editor script that adds a button to the inspector to simulate the scanning of all qr codes
+#if UNITY_EDITOR
+
+[CustomEditor(typeof(QRCodeManager))]
+public class QRCodeManagerEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        var qrCodeManager = (QRCodeManager)target;
+
+        if (GUILayout.Button("Simulate Scanning All QR Codes"))
+        {
+            foreach (var qrCode in qrCodeManager.qrCodes)
+            {
+                qrCode.scanned = true;
+                qrCode.action.Invoke(qrCode.index);
+            }
+        }
+    }
+}
+#endif

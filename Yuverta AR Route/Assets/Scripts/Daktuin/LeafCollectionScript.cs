@@ -93,26 +93,26 @@ public class LeafCollectionScript : MonoBehaviour
         {
             case FlowerPart.middel:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[0], leafObj));
-                leafObj.transform.SetSiblingIndex(0);
+                leafObj.transform.SetAsLastSibling();
                 break;
             case FlowerPart.top:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[1], leafObj));
-                leafObj.transform.SetSiblingIndex(1);
+                leafObj.transform.SetAsFirstSibling();
 
                 break;
             case FlowerPart.bottom:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[2], leafObj));
-                leafObj.transform.SetSiblingIndex(2);
+                leafObj.transform.SetAsFirstSibling();
 
                 break;
             case FlowerPart.left:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[3], leafObj));
-                leafObj.transform.SetSiblingIndex(3);
+                leafObj.transform.SetAsFirstSibling();
 
                 break;
             case FlowerPart.right:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[4], leafObj));
-                leafObj.transform.SetSiblingIndex(4);
+                leafObj.transform.SetAsFirstSibling();
 
                 break;
             default:
