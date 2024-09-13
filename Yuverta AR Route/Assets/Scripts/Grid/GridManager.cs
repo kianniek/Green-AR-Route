@@ -21,6 +21,7 @@ public class GridManager : MonoBehaviour
 
     [Header("Events")] [Space(10)] [SerializeField]
     private UnityEvent onWadiCompleted = new();
+
     [SerializeField] private UnityEvent<int> onChangeAudioBasedOnAmountPlaced = new();
 
     [SerializeField] private UnityEvent onBlockPlaced = new();
@@ -189,12 +190,12 @@ public class GridManager : MonoBehaviour
 
             return null;
         }
-        
+
 
         HideGridPointVisualIfOccupied();
     }
 
-    public bool CheckPosition(out List<GameObject> wrongPlaces)
+    public bool CheckPositions(out List<GameObject> wrongPlaces)
     {
         wrongPlaces = new List<GameObject>();
         foreach (var obj in _placedObjects)
@@ -252,7 +253,7 @@ public class GridManager : MonoBehaviour
         // Check if the amount of blocks placed is a multiple of 4
         if (amountOfBlocksPlaced % 4 == 0 && amountOfBlocksPlaced != 0)
         {
-            changeCounter++;  // Increment the counter by 1
+            changeCounter++; // Increment the counter by 1
         }
 
         onChangeAudioBasedOnAmountPlaced.Invoke(changeCounter);

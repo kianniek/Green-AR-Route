@@ -142,6 +142,8 @@ public class MoveObjectWithTouch : MonoBehaviour
                 mr.enabled = true;
             }
         }
+        
+        _objectLogic.LockObjectIfRightlyPlaced();
 
         _startDrag = false;
         _canDrag = false;

@@ -3470,8 +3470,6 @@ GameObject:
   - component: {fileID: 1902923109}
   - component: {fileID: 1902923110}
   - component: {fileID: 1902923111}
-  - component: {fileID: 1902923112}
-  - component: {fileID: 1902923114}
   m_Layer: 0
   m_Name: GridSpawner
   m_TagString: Untagged
@@ -3567,18 +3565,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1902923112}
-        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2512387470231460735}
         m_TargetAssemblyTypeName: DisableDetectedPlanes, Assembly-CSharp
         m_MethodName: DisableAllPlanesAndStopDetection
@@ -3591,51 +3577,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1902923112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1902923106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 1835669869
-      Data2: 1187890009
-      Data3: 1697637786
-      Data4: -112734644
-    Path: event:/Wadi/spawn_wadi_start
-  Event: 
-  PlayEvent: 0
-  StopEvent: 12
-  AllowFadeout: 1
-  TriggerOnce: 1
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!114 &1902923114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1902923106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29b619a1faea7c9429e6b5b5f2200589, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fmodEventInstance: {fileID: 0}
-  parameterName: 
 --- !u!224 &1909827543 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2193268854911573857, guid: 47a9ffe389ef957419aaccbb58d5c4d1,

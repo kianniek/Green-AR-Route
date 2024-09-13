@@ -99,7 +99,7 @@ public class UIMenuLogic : MonoBehaviour//, IDragHandler, IEndDragHandler
         
         startAnimationsButton.gameObject.SetActive(true);
 
-        var correct = _gridManager.CheckPosition(out _);
+        var correct = _gridManager.CheckPositions(out _);
         
         Debug.Log(correct);
         _gridManager.GridBuilder.MoveGridPointsToConvergedPosition();

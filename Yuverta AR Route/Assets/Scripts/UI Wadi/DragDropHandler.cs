@@ -257,9 +257,9 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
                 return;
 
             // Try to spawn the object at the hit point
-            var spawnedObject = _objectSpawner.TrySpawnObject(hit.point, hit.normal, out var spawnObject, out var spawnPosition);
+            var hasSpawnedObject = _objectSpawner.TrySpawnObject(hit.point, hit.normal, out var spawnObject, out var spawnPosition);
 
-            if (spawnedObject)
+            if (hasSpawnedObject)
             {
                 // Add the spawned object to the UI menu logic's dictionary
                 _uiMenuLogic.UIObjectDictionary.Add(spawnObject, this);
@@ -271,15 +271,17 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
                     particleSystem.Play();
             }
 
-            var moveObjectWithTouch = spawnObject.GetComponent<MoveObjectWithTouch>();
-
-            if (moveObjectWithTouch)
+            if (spawnObject)
             {
-                moveObjectWithTouch.SetDragSprite(_dragSprite);
-            }
+                var moveObjectWithTouch = spawnObject.GetComponent<MoveObjectWithTouch>();
 
-            gameObject.SetActive(!spawnedObject);
-            return;
+                if (moveObjectWithTouch)
+                {
+                    moveObjectWithTouch.SetDragSprite(_dragSprite);
+                }
+            }
+            
+            gameObject.SetActive(!hasSpawnedObject);
         }
     }
     

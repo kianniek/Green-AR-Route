@@ -10,6 +10,7 @@ public class ObjectLogic : MonoBehaviour
     private DOTweenAnimations _dotweenAnimations;
 
     public DOTweenAnimations DotweenAnimations => _dotweenAnimations;
+
     public GameObject SnappedGridPoint
     {
         get => snappedGridPoint;
@@ -25,6 +26,7 @@ public class ObjectLogic : MonoBehaviour
     private GridManager gridManager;
 
     [SerializeField] private UnityEvent onShake = new();
+    [SerializeField] private UnityEvent onLockedIn = new();
 
     private void Start()
     {
@@ -36,6 +38,8 @@ public class ObjectLogic : MonoBehaviour
 
         if (gridManager != null)
             SnappedGridPoint = gridManager.SnapToGridPoint(gameObject);
+        
+        LockObjectIfRightlyPlaced();
     }
 
     public bool IsCorrectlyPlaced()
@@ -54,7 +58,7 @@ public class ObjectLogic : MonoBehaviour
     {
         Debug.Log("Snapping to new grid point");
         SnappedGridPoint = gridManager.MoveObjectToNewGridPoint(gameObject, SnappedGridPoint);
-        
+
         //if the object is shaking, stop the shaking
         StopShaking();
     }
@@ -63,9 +67,27 @@ public class ObjectLogic : MonoBehaviour
     {
         Debug.Log("Removing object from grid");
         gridManager.RemoveObjectFromGrid(gameObject, SnappedGridPoint);
-        
+
         //if the object is shaking, stop the shaking
         StopShaking();
+    }
+
+    public void LockObjectIfRightlyPlaced()
+    {
+        if (!IsCorrectlyPlaced())
+            return;
+        
+        Debug.Log($"Locking {gameObject}", gameObject);
+
+        var moveObjectWithTouch = GetComponent<MoveObjectWithTouch>();
+
+        if (moveObjectWithTouch != null)
+        {
+            moveObjectWithTouch.enabled = false;
+        }
+
+        StopShaking();
+        onLockedIn.Invoke();
     }
 
     public void ShakeObject()
@@ -73,7 +95,7 @@ public class ObjectLogic : MonoBehaviour
         onShake.Invoke();
         _dotweenAnimations.InfiniteShake(transform);
     }
-    
+
     public void StopShaking()
     {
         _dotweenAnimations.StopInfiniteShake(transform);
