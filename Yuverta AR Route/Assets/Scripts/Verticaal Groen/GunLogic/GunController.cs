@@ -90,6 +90,7 @@ public class GunController : MonoBehaviour
 
                 elapsedTime = 0;
                 invokeOneShotEvent = false;
+                isSwitchingWeaponThisPress = false;
             }
             else
             {
@@ -107,8 +108,8 @@ public class GunController : MonoBehaviour
             Debug.Log("Already using this weapon");
             return;
         }
-
-        isSwitchingWeaponThisPress = false;
+        
+        isSwitchingWeaponThisPress = true;
 
         if (gameObject.activeInHierarchy) // We cant run a coroutine if the object is not active
         {

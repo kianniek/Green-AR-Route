@@ -9322,6 +9322,7 @@ MonoBehaviour:
   m_ObjectPrefabs:
   - {fileID: 9183717264194731525}
   m_OnlySpawnInView: 0
+  m_SpawnDistanceOffset: 0
   m_ViewportPeriphery: 0
   m_ApplyRandomAngleAtSpawn: 0
   m_SpawnAngleRange: 0
@@ -11794,7 +11795,7 @@ MonoBehaviour:
   targetObject: {fileID: 6141505326492754562}
   distanceFromCamera: 0.5
   padding: 0.1
-  presetPosition: 2
+  presetPosition: 1
   positionLerpSpeed: 0.9618
   rotateWithCamera: 1
   rotationLerpSpeed: 0.168
@@ -12294,14 +12295,21 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Tap het scherm om te schieten!
 
+        
 
-        Gebruik de knoppen om te wissen
-        tussen het SUBSTRAATBOM en het ZAADJESPISTOOL'
+        Schiet eerst met
+        het SUBSTRAAT voordat je de ZAADJESPISTOOL gebruikt.
+
+
+        Gebruik de
+        knoppen om te wisselen tussen de SUBSTRAATBOM en het ZAADJESPISTOOL.
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 1519008178299884207, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: m_fontSize
-      value: 10
+      value: 7.45
       objectReference: {fileID: 0}
     - target: {fileID: 1679390189267313453, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
@@ -13988,7 +13996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a56858e3f9d95c4680052955bbebcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minutes: 2
+  minutes: 5
   paintColorIndexToSet: 1
   paintColors: {fileID: 11400000, guid: a7c7da171bb33614996067a3485c1dbb, type: 2}
 --- !u!1660057539 &9223372036854775807
