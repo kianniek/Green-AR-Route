@@ -42,7 +42,6 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             remainingTime -= 1f;
-            Debug.Log($"2: {remainingTime}");
 
             UpdateTimerText(remainingTime);
 
@@ -65,7 +64,5 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
 
         // Update the text to show the time in mm:ss format
         timerText.text = string.Format("{0:00}:{1:00}", minutesLeft, secondsLeft);
-
-        Debug.Log("Time left: " + timerText.text);
     }
 }

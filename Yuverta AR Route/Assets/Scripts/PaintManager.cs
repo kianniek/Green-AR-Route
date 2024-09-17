@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.Rendering;
@@ -41,6 +42,8 @@ public class PaintManager : Singleton<PaintManager>
     [SerializeField] private int coveredCount = 0;
 
     public bool HasReachedTreshold => coveredCount >= coveredTreshold;
+
+    [SerializeField] private TMP_Text scoreText;
 
     public override void Awake()
     {
@@ -236,10 +239,28 @@ public class PaintManager : Singleton<PaintManager>
         if (paintables.Count == 0)
             return;
 
+        UpdateScoreText();
+
         var stepSize = 1f / paintables.Count;
         var step = Mathf.Clamp01(stepSize * coveredCount);
 
         OnTresholdStep.Invoke(step);
+    }
+
+    private void UpdateScoreText()
+    {
+        if (!scoreText)
+            return;
+
+        if (paintables == null) 
+            return;
+        
+        if(paintables.Count == 0 || coveredCount == 0)
+            return;
+        
+        var scorePercentage = Mathf.CeilToInt((paintables.Count / coveredCount) * 10f);
+        Debug.Log($"Score: {scorePercentage}");
+        scoreText.text = scorePercentage.ToString("D4");
     }
 
 #if UNITY_EDITOR
