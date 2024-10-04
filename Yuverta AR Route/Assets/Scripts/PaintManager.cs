@@ -53,6 +53,8 @@ public class PaintManager : Singleton<PaintManager>
         extendMaterial = new Material(extendIslands);
         zoomMaterial = new Material(zoomToBounds);
         command = new CommandBuffer { name = "CommandBuffer - " + gameObject.name };
+
+        UpdateScoreText();
     }
 
     public void InitTextures(Paintable paintable)
