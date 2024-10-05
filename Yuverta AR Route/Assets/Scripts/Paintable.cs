@@ -16,8 +16,22 @@ public class Paintable : MonoBehaviour
     private int hitCount = 0;
 
     [Range(0, 1)] public float coverageThreshold = 0.5f;
-    [SerializeField] private Vector4 _coverage;
-    public int previouslyFilledColorIndex { get; set; } = -1;
+    [SerializeField] private Vector4 _coverage = new (0,0,0,-1);
+
+    private int _previousCoverageIndexIndex = -1;
+    
+    private int _CoverageIndex = -1;
+    
+    public int CoverageIndex
+    {
+        get => _CoverageIndex;
+        private set => _CoverageIndex = value;
+    }
+    public int PreviousCoverageIndex
+    {
+        get => _previousCoverageIndexIndex;
+        private set => _previousCoverageIndexIndex = value;
+    }
 
     public Vector4 coverage
     {
@@ -25,7 +39,8 @@ public class Paintable : MonoBehaviour
         set
         {
             _coverage = value;
-            CheckCoverage();
+            
+            CoverageIndex = (int)value.w;
         }
     }
 
@@ -123,40 +138,44 @@ public class Paintable : MonoBehaviour
 
     public int CheckCoverage()
     {
-        if (coverage.z > coverageThreshold && previouslyFilledColorIndex != 2)
+        if (coverage.z > coverageThreshold  && CoverageIndex < 2)
         {
             PaintManager.instance.AddToPaintablesList(this, 2);
             OnCovered.Invoke(2);
+            PreviousCoverageIndex = 1;
+            CoverageIndex = 2;
+            SetMaskToColor(this, Color.blue);
+
             return 2; // Color index for z
         }
 
-        if (coverage.y > coverageThreshold && previouslyFilledColorIndex != 1)
+        if (coverage.y > coverageThreshold && CoverageIndex < 1)
         {
             PaintManager.instance.AddToPaintablesList(this, 1);
             OnCovered.Invoke(1);
+            PreviousCoverageIndex = 0;
+            CoverageIndex = 1;
+            SetMaskToColor(this, Color.green);
+
             return 1; // Color index for y
         }
 
-        if (coverage.x > coverageThreshold && previouslyFilledColorIndex != 0)
+        if (coverage.x > coverageThreshold && CoverageIndex < 0)
         {
             PaintManager.instance.AddToPaintablesList(this, 0);
             OnCovered.Invoke(0);
+            PreviousCoverageIndex = -1;
+            CoverageIndex = 0;
+            SetMaskToColor(this, Color.red);
             return 0; // Color index for x
         }
 
         PaintManager.instance.AddToPaintablesList(this, -1);
-
+        PreviousCoverageIndex = -1;
+        CoverageIndex = -1;
+        Debug.Log("No color meets the threshold");
         return -1; // No color meets the threshold
     }
-
-    public void SetPreviouslyFilledColorIndex(int index)
-    {
-        if (index < previouslyFilledColorIndex)
-        {
-            previouslyFilledColorIndex = index;
-        }
-    }
-
 
     public static void SetMaskToColor(Paintable p, Color color, int coverageID = -1)
     {
@@ -206,7 +225,7 @@ public class Paintable : MonoBehaviour
 
     public void OnHit(Color color, int index)
     {
-        if (!useHitTreshold || previouslyFilledColorIndex >= index)
+        if (!useHitTreshold || _coverage.w >= index)
             return;
 
         hitCount++;

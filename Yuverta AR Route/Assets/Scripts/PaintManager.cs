@@ -79,7 +79,7 @@ public class PaintManager : Singleton<PaintManager>
         float strength = .5f, int colorIndex = -1)
     {
         // Early exit if colorIndex is lower than previously filled color
-        if (paintable.previouslyFilledColorIndex != -1 && paintable.previouslyFilledColorIndex > colorIndex)
+        if (!Mathf.Approximately(paintable.coverage.w, -1) && paintable.coverage.w > colorIndex)
         {
             return;
         }
@@ -162,10 +162,11 @@ public class PaintManager : Singleton<PaintManager>
                 var average = request.GetData<Color32>()[0];
 
                 // Calculate how close the color is to red
-                var coveredPixels = new Vector4(average.r / 255f, average.g / 255f, average.b / 255f, average.a / 255f);
+                var coveredPixels = new Vector4(average.r / 255f, average.g / 255f, average.b / 255f, paintable.CheckCoverage());
 
                 // Call the callback with the result
                 paintable.coverage = coveredPixels;
+                
                 onCoverageCalculated?.Invoke(coveredPixels);
             }
 
@@ -230,10 +231,7 @@ public class PaintManager : Singleton<PaintManager>
             }
         }
 
-        if (HasReachedTreshold)
-        {
-            OnTresholdReached.Invoke();
-        }
+        
     }
 
     public void CheckIfStepThresholdIsReached()
@@ -247,6 +245,11 @@ public class PaintManager : Singleton<PaintManager>
         var step = Mathf.Clamp01(stepSize * coveredCount);
 
         OnTresholdStep.Invoke(step);
+        
+        if (HasReachedTreshold)
+        {
+            OnTresholdReached.Invoke();
+        }
     }
 
     private void UpdateScoreText()
@@ -264,19 +267,4 @@ public class PaintManager : Singleton<PaintManager>
         Debug.Log($"Score: {scorePercentage}");
         scoreText.text = scorePercentage.ToString("D4");
     }
-
-#if UNITY_EDITOR
-    int step = 0;
-
-    private void OnGUI()
-    {
-        //button in invoke onTresholdStep
-        if (GUI.Button(new Rect(30, 30, 300, 200), "Invoke OnTresholdStep"))
-        {
-            OnTresholdStep.Invoke(step);
-            step++;
-        }
-    }
-
-#endif
 }

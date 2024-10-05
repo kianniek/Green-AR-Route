@@ -19,6 +19,7 @@ public class KeepInView : MonoBehaviour
     public enum Position
     {
         BottomLeft,
+        BottomMiddleRight,
         BottomMiddle,
         BottomRight,
         Left,
@@ -58,6 +59,7 @@ public class KeepInView : MonoBehaviour
             case Position.BottomLeft: return new Vector3(0, 0, distanceFromCamera);
             case Position.BottomMiddle: return new Vector3(0.5f, 0, distanceFromCamera);
             case Position.BottomRight: return new Vector3(1, 0, distanceFromCamera);
+            case Position.BottomMiddleRight: return new Vector3(0.75f, 0, distanceFromCamera);
             case Position.Left: return new Vector3(0, 0.5f, distanceFromCamera);
             case Position.Middle: return new Vector3(0.5f, 0.5f, distanceFromCamera);
             case Position.Right: return new Vector3(1, 0.5f, distanceFromCamera);

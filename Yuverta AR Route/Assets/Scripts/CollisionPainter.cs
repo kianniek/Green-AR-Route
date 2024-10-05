@@ -45,30 +45,32 @@ public class CollisionPainter : MonoBehaviour
         if (p == null)
             return;
         
-        var coverage = GetCoverage(p);
+        // Only evaluate the coverage of the paintable if we exit the collider
+        GetCoverage(p);
 
-
-        var coverageIndex = p.CheckCoverage();
+        var coverageIndex = p.CoverageIndex;
+        var previousCoverage = p.PreviousCoverageIndex;
 
         // Set the previously filled color index to allow overlay
-        if (coverageIndex == -1)
+        if (coverageIndex <= previousCoverage || coverageIndex == -1)
             return;
-
+    
         Debug.Log("Coverage Index: " + coverageIndex);
+        Debug.Log("Previus Coverage Index: " + previousCoverage);
 
-        p.SetPreviouslyFilledColorIndex(coverageIndex);
         Paintable.SetMaskToColor(p, paintColors.GetColor(coverageIndex));
 
+        GetCoverage(p);
         p = null;
     }
 
 
-    private static Vector4 GetCoverage(Paintable p)
+    private Vector4 GetCoverage(Paintable p)
     {
         return PaintManager.instance.CalculateCoverage(p, p.uvMin, p.uvMax, coveredPixels =>
         {
             // Handle the result here
-            Debug.Log($"Coverage calculated: {coveredPixels}");
+            Debug.Log($"Coverage calculated: {coveredPixels}", gameObject);
         });
     }
 

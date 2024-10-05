@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class GunController : MonoBehaviour
 {
@@ -41,6 +42,10 @@ public class GunController : MonoBehaviour
 
     [SerializeField] private int startingWeaponIndex = 1;
 
+    [SerializeField] bool useTouchInput = true;
+
+    [SerializeField] private Button fireButton;
+
     public bool IsSwitchingWeaponThisPress
     {
         get => isSwitchingWeaponThisPress;
@@ -67,7 +72,12 @@ public class GunController : MonoBehaviour
             firing = false;
         }
 
-        HandleInput();
+        if (useTouchInput)
+        {
+            HandleInput();
+        }
+        
+        UpdateFireButtonFill();
     }
 
     private void HandleInput()
@@ -100,6 +110,31 @@ public class GunController : MonoBehaviour
         }
     }
 
+    public void OnFireButtonPressed(PointerEventData eventData)
+    {
+        if (useTouchInput)
+            return;
+
+        // Start the firing process
+        LoadingModelCatapult(true);
+        elapsedTime = 0; // Reset elapsed time
+        invokeOneShotEvent = false; // Reset event flag
+    }
+
+    public void OnFireButtonReleased(PointerEventData eventData)
+    {
+        if (useTouchInput)
+            return;
+
+        // Handle the fire button release
+        LoadingModelCatapult(false);
+        Shoot(elapsedTime); // Trigger shooting with the current elapsed time
+
+        elapsedTime = 0; // Reset elapsed time
+        invokeOneShotEvent = false; // Reset event flag
+        isSwitchingWeaponThisPress = false; // Reset weapon switch flag
+    }
+
     public void ChangeWeapon(int weaponIndex)
     {
         Debug.Log("Changing weapon to " + weaponIndex);
@@ -108,7 +143,7 @@ public class GunController : MonoBehaviour
             Debug.Log("Already using this weapon");
             return;
         }
-        
+
         isSwitchingWeaponThisPress = true;
 
         if (gameObject.activeInHierarchy) // We cant run a coroutine if the object is not active
@@ -302,5 +337,41 @@ public class GunController : MonoBehaviour
         float projectileSpeed = currentAmmo.projectileSpeed + shootForce;
 
         projectile.Launch(bulletSpawnPoint.forward * projectileSpeed);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void UpdateFireButtonFill()
+    {
+        if (fireButton)
+        {
+            if (fireButton.image.type == Image.Type.Filled)
+            {
+                fireButton.image.fillAmount = Mathf.Lerp(fireButton.image.fillAmount, 1 - (currentWeapon.fireRateCooldownTimer / currentWeapon.fireRate), 0.9f);
+            }
+        }
     }
 }
