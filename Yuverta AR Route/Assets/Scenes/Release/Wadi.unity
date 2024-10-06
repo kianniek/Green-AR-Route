@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!198 &34301136 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8896781546809504974, guid: a3998404cca9c2e4ca9cd575d9f90046,
+    type: 3}
+  m_PrefabInstance: {fileID: 1099098854}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &54524605 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 817631682985692172, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
@@ -2974,12 +2980,12 @@ PrefabInstance:
         type: 3}
       propertyPath: onSunButtonClicked.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 34301136}
     - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
         type: 3}
       propertyPath: onRainButtonClicked.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 34301136}
     - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
         type: 3}
       propertyPath: onRainButtonClicked.m_PersistentCalls.m_Calls.Array.data[3].m_Target
@@ -2989,7 +2995,7 @@ PrefabInstance:
         type: 3}
       propertyPath: onSnowButtonClicked.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 34301136}
     - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
         type: 3}
       propertyPath: onSnowButtonClicked.m_PersistentCalls.m_Calls.Array.data[3].m_Target
@@ -3045,10 +3051,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8070395920650050710, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8070395920650050710, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8070395920650050710, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8177896446006364448, guid: a3998404cca9c2e4ca9cd575d9f90046,
         type: 3}
       propertyPath: m_Name
       value: WeatherSimulation
+      objectReference: {fileID: 0}
+    - target: {fileID: 8896781546809504974, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8896781546809504974, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8896781546809504974, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

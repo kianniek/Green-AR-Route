@@ -67,18 +67,6 @@ public class QRCodeManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Debug.Log("Invoke");
-            qrCodes[0].action.Invoke(0);
-            qrCodes[0].action.Invoke(1);
-            qrCodes[0].action.Invoke(2);
-            qrCodes[0].action.Invoke(3);
-        }
-    }
-
     private void HandleImageRecognizedStarted(ARTrackedImage trackedImage)
     {
         onImageTracked.Invoke();

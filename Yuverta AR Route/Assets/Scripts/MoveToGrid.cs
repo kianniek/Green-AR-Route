@@ -10,7 +10,7 @@ public class MoveToGrid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        grid = FindObjectOfType<GridManager>().gameObject;
+        grid = Camera.main.gameObject;
     }
 
     // Update is called once per frame
@@ -18,7 +18,7 @@ public class MoveToGrid : MonoBehaviour
     {
         if (!grid)
         {
-            grid = FindObjectOfType<GridManager>().gameObject;
+            grid = Camera.main.gameObject;
         }
     }
 

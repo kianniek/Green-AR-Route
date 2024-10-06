@@ -219,7 +219,7 @@ public class ObjectSpawner : MonoBehaviour
                 // Move the object in the direction of projectedForward for positive values,
                 // or towards the camera (i.e., opposite direction) for negative values
                 newObject.transform.position += Mathf.Sign(m_SpawnDistanceOffset) *
-                                                Mathf.Abs(m_SpawnDistanceOffset)* projectedForward;
+                                                Mathf.Abs(m_SpawnDistanceOffset) * projectedForward;
             }
 
             newObject.transform.rotation = m_SpawnWithIdentityRotation
@@ -255,40 +255,43 @@ public class ObjectSpawner : MonoBehaviour
                 objPrefab.transform.parent = transform;
             }
 
+            if (objPrefab.layer != LayerMask.NameToLayer("UI"))
+            {
 // Set the initial position and add the GridSnapper component
-            objPrefab.transform.position = spawnPoint;
+                objPrefab.transform.position = spawnPoint;
 
-            EnsureFacingCamera();
+                EnsureFacingCamera();
 
-            var facePosition = m_CameraToFace.transform.position;
-            var forward = facePosition - spawnPoint;
+                var facePosition = m_CameraToFace.transform.position;
+                var forward = facePosition - spawnPoint;
 
 // Project the forward vector onto the plane defined by the spawnNormal
-            BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
+                BurstMathUtility.ProjectOnPlane(forward, spawnNormal, out var projectedForward);
 
 // Normalize the projected forward vector to use it for moving the object away
-            projectedForward.Normalize();
+                projectedForward.Normalize();
 
 // Check if m_SpawnDistanceOffset is not zero, and apply the movement accordingly
-            if (m_SpawnDistanceOffset != 0)
-            {
-                // Move the object in the direction of projectedForward for positive values,
-                // or towards the camera (i.e., opposite direction) for negative values
-                objPrefab.transform.position += Mathf.Sign(m_SpawnDistanceOffset) *
-                                                Mathf.Abs(m_SpawnDistanceOffset) * projectedForward;
-            }
+                if (m_SpawnDistanceOffset != 0)
+                {
+                    // Move the object in the direction of projectedForward for positive values,
+                    // or towards the camera (i.e., opposite direction) for negative values
+                    objPrefab.transform.position += Mathf.Sign(m_SpawnDistanceOffset) *
+                                                    Mathf.Abs(m_SpawnDistanceOffset) * projectedForward;
+                }
 
-            objPrefab.transform.rotation = m_SpawnWithIdentityRotation
-                ? Quaternion.identity
-                : Quaternion.LookRotation(projectedForward, spawnNormal);
+                objPrefab.transform.rotation = m_SpawnWithIdentityRotation
+                    ? Quaternion.identity
+                    : Quaternion.LookRotation(projectedForward, spawnNormal);
 
 // Adjust height or other positioning based on m_SpawnHeightOffset
-            objPrefab.transform.position += spawnNormal * m_SpawnHeightOffset;
+                objPrefab.transform.position += spawnNormal * m_SpawnHeightOffset;
 
-            if (m_ApplyRandomAngleAtSpawn)
-            {
-                var randomRotation = Random.Range(-m_SpawnAngleRange, m_SpawnAngleRange);
-                objPrefab.transform.Rotate(Vector3.up, randomRotation);
+                if (m_ApplyRandomAngleAtSpawn)
+                {
+                    var randomRotation = Random.Range(-m_SpawnAngleRange, m_SpawnAngleRange);
+                    objPrefab.transform.Rotate(Vector3.up, randomRotation);
+                }
             }
 
             objPrefab.SetActive(true);

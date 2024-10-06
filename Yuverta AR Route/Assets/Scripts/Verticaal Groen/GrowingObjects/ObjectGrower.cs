@@ -7,15 +7,12 @@ public class ObjectGrower : MonoBehaviour
 {
     private Dictionary<GameObject, Vector3> childrenObjects = new();
 
-    [SerializeField]
-    private GameObject[] individualObjectsToGrow;
+    [SerializeField] private GameObject[] individualObjectsToGrow;
 
-    [SerializeField]
-    private UnityEvent OnGrownObjects;
+    [SerializeField] private UnityEvent OnGrownObjects;
     public float growthDuration = 2f; // Duration for the flower to fully grow
 
     private bool hasGrownObjects;
-
 
 
     void Awake()
@@ -36,7 +33,6 @@ public class ObjectGrower : MonoBehaviour
 
     public IEnumerator Grow(GameObject Key, Vector3 Value)
     {
-
         var elapsedTime = 0f;
 
         while (elapsedTime < growthDuration)
@@ -55,29 +51,22 @@ public class ObjectGrower : MonoBehaviour
     /// <param name="covagageID">Is used to determine which paint index was used to complete the covarage</param>
     public void GrowChildObjects(int covagageID)
     {
-        switch (covagageID)
+        if (covagageID > 0)
         {
-            case 1:
+            if (hasGrownObjects)
+            {
+                return;
+            }
 
-                if (hasGrownObjects)
-                {
-                    break;
-                }
+            foreach (var item in childrenObjects)
+            {
+                StartCoroutine(Grow(item.Key, item.Value));
+            }
 
-                foreach (var item in childrenObjects)
-                {
-                    StartCoroutine(Grow(item.Key, item.Value));
-                }
+            OnGrownObjects.Invoke();
 
-                OnGrownObjects.Invoke();
-
-                hasGrownObjects = true;
-                break;
-
-            default:
-                break;
+            hasGrownObjects = true;
         }
-        
     }
 
     public void ResetSize()
