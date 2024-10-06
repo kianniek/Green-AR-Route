@@ -58,12 +58,11 @@ public class CollisionPainter : MonoBehaviour
         Debug.Log("Coverage Index: " + coverageIndex);
         Debug.Log("Previus Coverage Index: " + previousCoverage);
 
-        Paintable.SetMaskToColor(p, paintColors.GetColor(coverageIndex));
+        //Paintable.SetMaskToColor(p, paintColors.GetColor(coverageIndex));
 
         GetCoverage(p);
         p = null;
     }
-
 
     private Vector4 GetCoverage(Paintable p)
     {

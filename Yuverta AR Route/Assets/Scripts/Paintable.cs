@@ -72,6 +72,8 @@ public class Paintable : MonoBehaviour
     private void Awake()
     {
         rend = GetComponent<Renderer>();
+        
+        
     }
 
     private void Start()
@@ -134,6 +136,8 @@ public class Paintable : MonoBehaviour
 
 
         PaintManager.instance.InitTextures(this);
+        PaintManager.instance.AddToPaintablesList(this, -1);
+        
     }
 
     public int CheckCoverage()
@@ -144,7 +148,7 @@ public class Paintable : MonoBehaviour
             OnCovered.Invoke(2);
             PreviousCoverageIndex = 1;
             CoverageIndex = 2;
-            SetMaskToColor(this, Color.blue);
+            SetMaskToColor(this, Color.blue, 2);
 
             return 2; // Color index for z
         }
@@ -155,7 +159,7 @@ public class Paintable : MonoBehaviour
             OnCovered.Invoke(1);
             PreviousCoverageIndex = 0;
             CoverageIndex = 1;
-            SetMaskToColor(this, Color.green);
+            SetMaskToColor(this, Color.green, 1);
 
             return 1; // Color index for y
         }
@@ -166,16 +170,25 @@ public class Paintable : MonoBehaviour
             OnCovered.Invoke(0);
             PreviousCoverageIndex = -1;
             CoverageIndex = 0;
-            SetMaskToColor(this, Color.red);
+            SetMaskToColor(this, Color.red, 0);
             return 0; // Color index for x
         }
 
+        // If no color meets the threshold and the coverage is not -1 then simply return the coverage index
+        if (CoverageIndex != -1)
+        {
+            Debug.Log("No new color meets the threshold");
+            return CoverageIndex;
+        }
+        
+        
         PaintManager.instance.AddToPaintablesList(this, -1);
         PreviousCoverageIndex = -1;
         CoverageIndex = -1;
         Debug.Log("No color meets the threshold");
         return -1; // No color meets the threshold
     }
+    
 
     public static void SetMaskToColor(Paintable p, Color color, int coverageID = -1)
     {
