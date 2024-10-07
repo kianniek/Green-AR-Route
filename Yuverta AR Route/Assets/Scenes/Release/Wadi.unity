@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,79 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &5092276
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5293289043638406960, guid: 6b69db9ed4757c94e80eff5418e0e63c,
+        type: 3}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 1608204069}
+    - target: {fileID: 5468812455401227516, guid: 6b69db9ed4757c94e80eff5418e0e63c,
+        type: 3}
+      propertyPath: m_Name
+      value: GridManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630102468465647725, guid: 6b69db9ed4757c94e80eff5418e0e63c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630102468465647725, guid: 6b69db9ed4757c94e80eff5418e0e63c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630102468465647725, guid: 6b69db9ed4757c94e80eff5418e0e63c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630102468465647725, guid: 6b69db9ed4757c94e80eff5418e0e63c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630102468465647725, guid: 6b69db9ed4757c94e80eff5418e0e63c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630102468465647725, guid: 6b69db9ed4757c94e80eff5418e0e63c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630102468465647725, guid: 6b69db9ed4757c94e80eff5418e0e63c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630102468465647725, guid: 6b69db9ed4757c94e80eff5418e0e63c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630102468465647725, guid: 6b69db9ed4757c94e80eff5418e0e63c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7630102468465647725, guid: 6b69db9ed4757c94e80eff5418e0e63c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6b69db9ed4757c94e80eff5418e0e63c, type: 3}
 --- !u!198 &34301136 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8896781546809504974, guid: a3998404cca9c2e4ca9cd575d9f90046,
@@ -2966,6 +3039,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1244121861620782197, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: StopEvent
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1571719308529616435, guid: a3998404cca9c2e4ca9cd575d9f90046,
         type: 3}
       propertyPath: CollisionModule.m_Planes.Array.data[0]
@@ -3000,6 +3078,11 @@ PrefabInstance:
         type: 3}
       propertyPath: onSnowButtonClicked.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3256245243878230982, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: StopEvent
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6226551593106964154, guid: a3998404cca9c2e4ca9cd575d9f90046,
         type: 3}
@@ -3550,7 +3633,7 @@ MonoBehaviour:
   m_ApplyRandomAngleAtSpawn: 0
   m_SpawnAngleRange: 45
   m_LerpToSpawnHeight: 0
-  m_SpawnHeightOffset: 0.6
+  m_SpawnHeightOffset: 0.4
   mSpawnAsChild: 0
   ObjectSpawned:
     m_PersistentCalls:
@@ -9061,7 +9144,7 @@ MonoBehaviour:
     Path: event:/Wadi/wadi_controleer_negatief
   Event: 
   PlayEvent: 0
-  StopEvent: 0
+  StopEvent: 2
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
@@ -9248,3 +9331,4 @@ SceneRoots:
   - {fileID: 638981509}
   - {fileID: 592967620}
   - {fileID: 1099098854}
+  - {fileID: 5092276}

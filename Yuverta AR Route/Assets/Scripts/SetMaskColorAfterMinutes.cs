@@ -12,6 +12,8 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
     public ObjectGrower[] objectGrower;
     private Paintable[] paintables;
     private float remainingTime;
+    
+    private bool isTimerRunning;
 
     private void Start()
     {
@@ -23,9 +25,15 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
             UpdateTimerText(remainingTime); // Initial display of the timer
         }
     }
-
-    private void OnEnable()
+    
+    public void StartTimer()
     {
+        //check if the timer is already running
+        if (isTimerRunning)
+        {
+            return;
+        }
+        
         StartCoroutine(SetMaskColor());
     }
 
@@ -40,6 +48,7 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
         Debug.Log($"1: {remainingTime}");
         while (remainingTime > 0f)
         {
+            isTimerRunning = true;
             yield return new WaitForSeconds(1f);
 
             remainingTime -= 1f;
@@ -48,6 +57,8 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
 
             yield return null;
         }
+        
+        isTimerRunning = false;
 
         foreach (var p in paintables)
         {
