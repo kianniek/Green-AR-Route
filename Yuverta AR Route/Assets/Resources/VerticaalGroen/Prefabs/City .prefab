@@ -5388,6 +5388,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5866186297877211052}
+  - component: {fileID: 6459501214802845967}
+  - component: {fileID: 1820758919790048572}
   m_Layer: 0
   m_Name: 'City '
   m_TagString: Untagged
@@ -5421,6 +5423,52 @@ Transform:
   - {fileID: 2365992989571004151}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6459501214802845967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679390189267313453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0364de3db3f856f4485de84c9496a923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableOnAwake: 1
+--- !u!114 &1820758919790048572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679390189267313453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a56858e3f9d95c4680052955bbebcae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minutes: 0.1
+  paintColorIndexToSet: 1
+  paintColors: {fileID: 11400000, guid: a7c7da171bb33614996067a3485c1dbb, type: 2}
+  timerText: {fileID: 0}
+  objectGrower:
+  - {fileID: 6639577478093618766}
+  - {fileID: 3618127605733123493}
+  - {fileID: 4884500818761941644}
+  - {fileID: 1867885865638173855}
+  - {fileID: 7940234148259380062}
+  - {fileID: 268333188179768190}
+  - {fileID: 1795212776697121826}
+  - {fileID: 4379174269206896429}
+  - {fileID: 5408796329637079841}
+  - {fileID: 6622371153425671748}
+  - {fileID: 3165665735742864905}
+  - {fileID: 209404420393989654}
+  - {fileID: 5680217572011813443}
+  - {fileID: 9195233559657203224}
+  - {fileID: 4149426963863727253}
+  - {fileID: 1092542403223640626}
 --- !u!1 &1772276678852470539
 GameObject:
   m_ObjectHideFlags: 0

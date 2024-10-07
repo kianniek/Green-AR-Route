@@ -9,6 +9,7 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
     public PaintColors paintColors;
     [SerializeField] private TMP_Text timerText;
 
+    public ObjectGrower[] objectGrower;
     private Paintable[] paintables;
     private float remainingTime;
 
@@ -53,6 +54,12 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
             yield return new WaitForEndOfFrame();
             Paintable.SetMaskToColor(p, paintColors.colors[paintColorIndexToSet], paintColorIndexToSet);
             p.OnCovered.Invoke(paintColorIndexToSet);
+        }
+        
+        foreach (var obj in objectGrower)
+        {
+            yield return new WaitForEndOfFrame();
+            obj.GrowChildObjects(paintColorIndexToSet);
         }
     }
 

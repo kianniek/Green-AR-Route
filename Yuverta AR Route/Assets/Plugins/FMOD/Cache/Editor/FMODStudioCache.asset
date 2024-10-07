@@ -286,6 +286,36 @@ MonoBehaviour:
   lastModified: 638636459232679250
   FileSizes: []
   Exists: 1
+--- !u!114 &-8632434123681448895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/shooter_music/Parameter Shooter
+  m_EditorClassIdentifier: 
+  Name: Parameter Shooter
+  StudioPath: 
+  Min: 0
+  Max: 6
+  Default: 0
+  ID:
+    data1: 2785078951
+    data2: 4076959214
+  Type: 1
+  IsGlobal: 1
+  Labels:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  Exists: 1
 --- !u!114 &-8617476959924317217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,8 +335,8 @@ MonoBehaviour:
     Data3: -519704154
     Data4: -325044857
   Banks:
-  - {fileID: 1542706140173102883}
   - {fileID: -8676135039584828127}
+  - {fileID: 1542706140173102883}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -1263,7 +1293,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Wadi.bank
   Name: Wadi
   StudioPath: bank:/Wadi
-  lastModified: 638636459234373456
+  lastModified: 638639359828531774
   FileSizes: []
   Exists: 1
 --- !u!114 &-6503745219093250454
@@ -1654,8 +1684,8 @@ MonoBehaviour:
     Data3: 1331252375
     Data4: -579575358
   Banks:
-  - {fileID: 1542706140173102883}
   - {fileID: -8676135039584828127}
+  - {fileID: 1542706140173102883}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -2472,36 +2502,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 5564
---- !u!114 &-2683374863557652950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/Shooter_music/Parameter Shooter
-  m_EditorClassIdentifier: 
-  Name: Parameter Shooter
-  StudioPath: 
-  Min: 0
-  Max: 5
-  Default: 0
-  ID:
-    data1: 2785078951
-    data2: 4076959214
-  Type: 2
-  IsGlobal: 0
-  Labels:
-  - 0
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
-  Exists: 1
 --- !u!114 &-2611759731639003267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2831,8 +2831,8 @@ MonoBehaviour:
     Data3: -1839322986
     Data4: -93963199
   Banks:
-  - {fileID: 1542706140173102883}
   - {fileID: -8676135039584828127}
+  - {fileID: 1542706140173102883}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -3137,10 +3137,10 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638636459229057071
+  lastModified: 638639359827789377
   FileSizes:
   - Name: 
-    Value: 4720
+    Value: 4708
   Exists: 1
 --- !u!114 &-675272637369549994
 MonoBehaviour:
@@ -3190,8 +3190,8 @@ MonoBehaviour:
     Data3: -977794667
     Data4: -638060717
   Banks:
-  - {fileID: 1542706140173102883}
   - {fileID: -8676135039584828127}
+  - {fileID: 1542706140173102883}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -3567,18 +3567,19 @@ MonoBehaviour:
   - {fileID: 3691575744554435471}
   - {fileID: -5828963191865476290}
   - {fileID: -2317644969204048494}
-  - {fileID: 6195153867754276637}
   - {fileID: -2926586836813718754}
   - {fileID: 5508481188314918468}
   - {fileID: 6082644486387705164}
   - {fileID: 3624295061977061313}
+  - {fileID: 4850006678343482432}
   EditorParameters:
   - {fileID: 6802606787207428743}
+  - {fileID: 1276838207909663103}
   MasterBanks:
   - {fileID: 1542706140173102883}
   StringsBanks:
   - {fileID: -736295394234485126}
-  cacheTime: 638636459234373456
+  cacheTime: 638639359828531774
   cacheVersion: 131619
 --- !u!114 &8026812661437207
 MonoBehaviour:
@@ -4129,8 +4130,8 @@ MonoBehaviour:
     Data3: -1287302997
     Data4: 419714235
   Banks:
-  - {fileID: 1542706140173102883}
   - {fileID: -8676135039584828127}
+  - {fileID: 1542706140173102883}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -4166,6 +4167,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 7000
+--- !u!114 &1276838207909663103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Parameter Shooter
+  m_EditorClassIdentifier: 
+  Name: Parameter Shooter
+  StudioPath: parameter:/Parameter Shooter
+  Min: 0
+  Max: 6
+  Default: 0
+  ID:
+    data1: 2785078951
+    data2: 4076959214
+  Type: 1
+  IsGlobal: 1
+  Labels: []
+  Exists: 1
 --- !u!114 &1315846744880347633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4185,8 +4210,8 @@ MonoBehaviour:
     Data3: 331782800
     Data4: -2069505600
   Banks:
-  - {fileID: 1542706140173102883}
   - {fileID: -8676135039584828127}
+  - {fileID: 1542706140173102883}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -4263,7 +4288,7 @@ MonoBehaviour:
   Path: FMOD/Audio Yuverta AR Route/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638636459229021934
+  lastModified: 638639359827779283
   FileSizes: []
   Exists: 1
 --- !u!114 &1578701190556066714
@@ -5388,6 +5413,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 12317
+--- !u!114 &4850006678343482432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Stad Shooter/shooter_music
+  m_EditorClassIdentifier: 
+  Path: event:/Stad Shooter/shooter_music
+  Guid:
+    Data1: -2108025928
+    Data2: 1124480759
+    Data3: 1255177089
+    Data4: 2032981862
+  Banks:
+  - {fileID: -6542369839695260345}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8632434123681448895}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 798212
 --- !u!114 &4876798479595173279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6078,34 +6131,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 30500
---- !u!114 &6195153867754276637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Shooter_music
-  m_EditorClassIdentifier: 
-  Path: event:/Shooter_music
-  Guid:
-    Data1: -2108025928
-    Data2: 1124480759
-    Data3: 1255177089
-    Data4: 2032981862
-  Banks:
-  - {fileID: -6542369839695260345}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters:
-  - {fileID: -2683374863557652950}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 798212
 --- !u!114 &6238833815512303724
 MonoBehaviour:
   m_ObjectHideFlags: 0

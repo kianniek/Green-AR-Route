@@ -8,7 +8,7 @@
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{0508fe37-fdd7-4532-b822-a05cd59cbeb6}</destination>
+			<destination>{4bb50a39-0b73-4188-8713-ecdb72dba2e4}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{cc182444-0b59-45a8-bab9-923097d7ad62}</destination>
@@ -1890,6 +1890,9 @@
 		<property name="length">
 			<value>85</value>
 		</property>
+		<property name="triggerConditionMode">
+			<value>1</value>
+		</property>
 		<property name="transitionOffset">
 			<value>1</value>
 		</property>
@@ -1907,6 +1910,10 @@
 		</relationship>
 		<relationship name="triggerConditions">
 			<destination>{961513a1-49c1-4e28-8f8f-c4b8aaa5c2fb}</destination>
+			<destination>{e06db083-6bc6-4d4e-9413-dae260b50198}</destination>
+			<destination>{6b2d686f-ff4f-4b02-8ddd-b376d10d9ac0}</destination>
+			<destination>{e51d4982-9755-458d-a51a-2658e67f85dd}</destination>
+			<destination>{f4ca3368-b151-4622-9465-970038ad60ce}</destination>
 		</relationship>
 	</object>
 	<object class="NamedMarker" id="{0968a723-3bc9-42fe-b0bb-817312111110}">
@@ -1930,6 +1937,9 @@
 		<property name="length">
 			<value>85.322103213242485</value>
 		</property>
+		<property name="triggerConditionMode">
+			<value>1</value>
+		</property>
 		<property name="transitionOffset">
 			<value>1</value>
 		</property>
@@ -1947,6 +1957,9 @@
 		</relationship>
 		<relationship name="triggerConditions">
 			<destination>{346b059e-4818-40fd-8e40-7bbcff8b9ca5}</destination>
+			<destination>{83409dcb-e052-4e96-b3fa-ddc5103e8485}</destination>
+			<destination>{9c38cd19-a62a-4fc1-9525-8980a19ac97e}</destination>
+			<destination>{ea6acf80-f504-4aa9-adc5-f391c15e2778}</destination>
 		</relationship>
 	</object>
 	<object class="LoopRegion" id="{e6fa7208-874e-4c1a-937d-e9b2a1a1e7bd}">
@@ -1987,6 +2000,9 @@
 		<property name="length">
 			<value>85</value>
 		</property>
+		<property name="triggerConditionMode">
+			<value>1</value>
+		</property>
 		<property name="transitionOffset">
 			<value>1</value>
 		</property>
@@ -2004,6 +2020,8 @@
 		</relationship>
 		<relationship name="triggerConditions">
 			<destination>{d5186246-8105-4a59-9a8e-22ac5cadec41}</destination>
+			<destination>{d712004b-e94f-4222-babe-836db61277de}</destination>
+			<destination>{ebcc47ce-5b5a-4eb1-8a51-c892867b0114}</destination>
 		</relationship>
 	</object>
 	<object class="TransitionRegion" id="{24adeaa6-a8e5-47f8-926b-a92df7e1587b}">
@@ -2012,6 +2030,9 @@
 		</property>
 		<property name="length">
 			<value>84.58325219084719</value>
+		</property>
+		<property name="triggerConditionMode">
+			<value>1</value>
 		</property>
 		<property name="transitionOffset">
 			<value>1</value>
@@ -2030,6 +2051,7 @@
 		</relationship>
 		<relationship name="triggerConditions">
 			<destination>{40b95860-8a5c-494b-810c-f5ed788032a3}</destination>
+			<destination>{479bd764-d471-4484-b99e-3fd065a56c8f}</destination>
 		</relationship>
 	</object>
 	<object class="LoopRegion" id="{840b1144-be6d-496c-a6a5-47f0fe8efe47}">
@@ -2286,6 +2308,9 @@
 		<property name="length">
 			<value>84.556962025316579</value>
 		</property>
+		<property name="triggerConditionMode">
+			<value>1</value>
+		</property>
 		<property name="transitionOffset">
 			<value>1</value>
 		</property>
@@ -2311,6 +2336,9 @@
 		</property>
 		<property name="length">
 			<value>84.58325219084719</value>
+		</property>
+		<property name="triggerConditionMode">
+			<value>1</value>
 		</property>
 		<property name="transitionOffset">
 			<value>1</value>
@@ -2696,6 +2724,50 @@
 			<destination>{d810ccd2-8fb5-45f8-8082-afe292b5637e}</destination>
 		</relationship>
 	</object>
+	<object class="ParameterCondition" id="{e06db083-6bc6-4d4e-9413-dae260b50198}">
+		<property name="minimum">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{d810ccd2-8fb5-45f8-8082-afe292b5637e}</destination>
+		</relationship>
+	</object>
+	<object class="ParameterCondition" id="{6b2d686f-ff4f-4b02-8ddd-b376d10d9ac0}">
+		<property name="minimum">
+			<value>3</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{d810ccd2-8fb5-45f8-8082-afe292b5637e}</destination>
+		</relationship>
+	</object>
+	<object class="ParameterCondition" id="{e51d4982-9755-458d-a51a-2658e67f85dd}">
+		<property name="minimum">
+			<value>4</value>
+		</property>
+		<property name="maximum">
+			<value>4</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{d810ccd2-8fb5-45f8-8082-afe292b5637e}</destination>
+		</relationship>
+	</object>
+	<object class="ParameterCondition" id="{f4ca3368-b151-4622-9465-970038ad60ce}">
+		<property name="minimum">
+			<value>5</value>
+		</property>
+		<property name="maximum">
+			<value>5</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{d810ccd2-8fb5-45f8-8082-afe292b5637e}</destination>
+		</relationship>
+	</object>
 	<object class="TransitionTimeline" id="{305bfa1d-fe8d-4fb2-833b-755db99f7fe1}">
 		<property name="length">
 			<value>10</value>
@@ -2723,6 +2795,39 @@
 		</property>
 		<property name="maximum">
 			<value>2</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{d810ccd2-8fb5-45f8-8082-afe292b5637e}</destination>
+		</relationship>
+	</object>
+	<object class="ParameterCondition" id="{83409dcb-e052-4e96-b3fa-ddc5103e8485}">
+		<property name="minimum">
+			<value>3</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{d810ccd2-8fb5-45f8-8082-afe292b5637e}</destination>
+		</relationship>
+	</object>
+	<object class="ParameterCondition" id="{9c38cd19-a62a-4fc1-9525-8980a19ac97e}">
+		<property name="minimum">
+			<value>4</value>
+		</property>
+		<property name="maximum">
+			<value>4</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{d810ccd2-8fb5-45f8-8082-afe292b5637e}</destination>
+		</relationship>
+	</object>
+	<object class="ParameterCondition" id="{ea6acf80-f504-4aa9-adc5-f391c15e2778}">
+		<property name="minimum">
+			<value>5</value>
+		</property>
+		<property name="maximum">
+			<value>5</value>
 		</property>
 		<relationship name="parameter">
 			<destination>{d810ccd2-8fb5-45f8-8082-afe292b5637e}</destination>
@@ -2781,6 +2886,28 @@
 			<destination>{d810ccd2-8fb5-45f8-8082-afe292b5637e}</destination>
 		</relationship>
 	</object>
+	<object class="ParameterCondition" id="{d712004b-e94f-4222-babe-836db61277de}">
+		<property name="minimum">
+			<value>4</value>
+		</property>
+		<property name="maximum">
+			<value>4</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{d810ccd2-8fb5-45f8-8082-afe292b5637e}</destination>
+		</relationship>
+	</object>
+	<object class="ParameterCondition" id="{ebcc47ce-5b5a-4eb1-8a51-c892867b0114}">
+		<property name="minimum">
+			<value>5</value>
+		</property>
+		<property name="maximum">
+			<value>5</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{d810ccd2-8fb5-45f8-8082-afe292b5637e}</destination>
+		</relationship>
+	</object>
 	<object class="TransitionTimeline" id="{9b0d5ca8-4115-4b22-b03b-7ee4d58330b0}">
 		<property name="length">
 			<value>10</value>
@@ -2808,6 +2935,17 @@
 		</property>
 		<property name="maximum">
 			<value>4</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{d810ccd2-8fb5-45f8-8082-afe292b5637e}</destination>
+		</relationship>
+	</object>
+	<object class="ParameterCondition" id="{479bd764-d471-4484-b99e-3fd065a56c8f}">
+		<property name="minimum">
+			<value>5</value>
+		</property>
+		<property name="maximum">
+			<value>5</value>
 		</property>
 		<relationship name="parameter">
 			<destination>{d810ccd2-8fb5-45f8-8082-afe292b5637e}</destination>
