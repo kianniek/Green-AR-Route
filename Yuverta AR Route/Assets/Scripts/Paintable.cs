@@ -18,30 +18,14 @@ public class Paintable : MonoBehaviour
     [Range(0, 1)] public float coverageThreshold = 0.5f;
     [SerializeField] private Vector4 _coverage = new (0,0,0,-1);
 
-    private int _previousCoverageIndexIndex = -1;
-    
-    private int _CoverageIndex = -1;
-    
-    public int CoverageIndex
-    {
-        get => _CoverageIndex;
-        private set => _CoverageIndex = value;
-    }
-    public int PreviousCoverageIndex
-    {
-        get => _previousCoverageIndexIndex;
-        private set => _previousCoverageIndexIndex = value;
-    }
+    public int CoverageIndex { get; internal set; } = -1;
+
+    public int PreviousCoverageIndex { get; private set; } = -1;
 
     public Vector4 coverage
     {
         get => _coverage;
-        set
-        {
-            _coverage = value;
-            
-            CoverageIndex = (int)value.w;
-        }
+        set => _coverage = value;
     }
 
     public Vector2 uvMin;
@@ -73,7 +57,10 @@ public class Paintable : MonoBehaviour
     {
         rend = GetComponent<Renderer>();
         
+        _coverage = new Vector4(0,0,0,-1);
         
+        CoverageIndex = -1;
+        PreviousCoverageIndex = -1;
     }
 
     private void Start()

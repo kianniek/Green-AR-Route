@@ -162,10 +162,12 @@ public class PaintManager : Singleton<PaintManager>
                 var average = request.GetData<Color32>()[0];
 
                 // Calculate how close the color is to red
-                var coveredPixels = new Vector4(average.r / 255f, average.g / 255f, average.b / 255f, paintable.CheckCoverage());
+                var coveredPixels = new Vector4(average.r / 255f, average.g / 255f, average.b / 255f, -1);
 
                 // Call the callback with the result
                 paintable.coverage = coveredPixels;
+
+                paintable.CheckCoverage();
                 
                 onCoverageCalculated?.Invoke(coveredPixels);
             }
@@ -230,8 +232,6 @@ public class PaintManager : Singleton<PaintManager>
                 coveredCount++;
             }
         }
-
-        
     }
 
     public void CheckIfStepThresholdIsReached()

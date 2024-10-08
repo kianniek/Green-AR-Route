@@ -224,7 +224,7 @@ public class GunController : MonoBehaviour
 
     public void Shoot(float elapsedTime)
     {
-        if (firing || currentWeapon.fireRateCooldownTimer > 0 || isSwitchingWeaponThisPress)
+        if (firing || currentWeapon.fireRateCooldownTimer > 0 || (useTouchInput && isSwitchingWeaponThisPress))
         {
             return;
         }
