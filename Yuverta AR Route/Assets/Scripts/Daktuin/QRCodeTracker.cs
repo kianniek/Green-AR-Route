@@ -9,9 +9,10 @@ using UnityEngine.XR.ARFoundation;
 #if UNITY_EDITOR
 using UnityEditor;
 using GUILayout = UnityEngine.GUILayout;
-#endif
+
 
 [CanEditMultipleObjects]
+#endif
 public class QRCodeManager : MonoBehaviour
 {
     [SerializeField] private ARTrackedImageManager trackedImageManager;

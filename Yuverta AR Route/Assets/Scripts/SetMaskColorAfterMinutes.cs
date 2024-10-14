@@ -16,6 +16,8 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
 
     public float RemainingTime { private set; get; }
 
+    public float timeBetweenObjectToSetMask = 1f;
+
     private void Start()
     {
         paintables = FindObjectsOfType<Paintable>();
@@ -63,14 +65,14 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
 
         foreach (var p in paintables)
         {
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(timeBetweenObjectToSetMask);
             Paintable.SetMaskToColor(p, paintColors.colors[paintColorIndexToSet], paintColorIndexToSet);
             p.OnCovered.Invoke(paintColorIndexToSet);
         }
         
         foreach (var obj in objectGrower)
         {
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(timeBetweenObjectToSetMask);
             obj.GrowChildObjects(paintColorIndexToSet);
         }
     }
