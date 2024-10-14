@@ -11,18 +11,19 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
 
     public ObjectGrower[] objectGrower;
     private Paintable[] paintables;
-    private float remainingTime;
-    
+
     private bool isTimerRunning;
+
+    public float RemainingTime { private set; get; }
 
     private void Start()
     {
         paintables = FindObjectsOfType<Paintable>();
-        remainingTime = minutes * 60; // Convert minutes to seconds
+        RemainingTime = minutes * 60; // Convert minutes to seconds
 
         if (timerText != null)
         {
-            UpdateTimerText(remainingTime); // Initial display of the timer
+            UpdateTimerText(RemainingTime); // Initial display of the timer
         }
     }
     
@@ -44,16 +45,16 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
 
     private IEnumerator SetMaskColor()
     {
-        remainingTime = minutes * 60; // Convert minutes to seconds
-        Debug.Log($"1: {remainingTime}");
-        while (remainingTime > 0f)
+        RemainingTime = minutes * 60; // Convert minutes to seconds
+        Debug.Log($"1: {RemainingTime}");
+        while (RemainingTime > 0f)
         {
             isTimerRunning = true;
             yield return new WaitForSeconds(1f);
 
-            remainingTime -= 1f;
+            RemainingTime -= 1f;
 
-            UpdateTimerText(remainingTime);
+            UpdateTimerText(RemainingTime);
 
             yield return null;
         }
@@ -83,4 +84,10 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
         // Update the text to show the time in mm:ss format
         timerText.text = string.Format("{0:00}:{1:00}", minutesLeft, secondsLeft);
     }
+    
+    public float GetTimeLeft01()
+    {
+        return RemainingTime / (minutes * 60);
+    }
+    
 }

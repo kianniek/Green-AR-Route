@@ -8404,6 +8404,7 @@ MonoBehaviour:
         m_CallState: 2
   coveredCount: 1
   scoreText: {fileID: 808982079}
+  timer: {fileID: 9183717264194731530}
 --- !u!4 &1474374150
 Transform:
   m_ObjectHideFlags: 0
@@ -8464,6 +8465,8 @@ MonoBehaviour:
   NonRigidbodyVelocity: 0
   Params:
   - Name: Parameter Shooter
+    Value: 0
+  - Name: ShooterA
     Value: 0
   OverrideAttenuation: 0
   OverrideMinDistance: 1
@@ -14350,7 +14353,7 @@ PrefabInstance:
     - target: {fileID: 1820758919790048572, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: minutes
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1820758919790048572, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
