@@ -28,7 +28,7 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
             UpdateTimerText(RemainingTime); // Initial display of the timer
         }
     }
-    
+
     public void StartTimer()
     {
         //check if the timer is already running
@@ -36,7 +36,7 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
         {
             return;
         }
-        
+
         StartCoroutine(SetMaskColor());
     }
 
@@ -60,19 +60,26 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
 
             yield return null;
         }
-        
+
         isTimerRunning = false;
 
         foreach (var p in paintables)
         {
-            yield return new WaitForSeconds(timeBetweenObjectToSetMask);
+            if (timeBetweenObjectToSetMask > 0)
+            {
+                yield return new WaitForSeconds(timeBetweenObjectToSetMask);
+            }
+
             Paintable.SetMaskToColor(p, paintColors.colors[paintColorIndexToSet], paintColorIndexToSet);
             p.OnCovered.Invoke(paintColorIndexToSet);
         }
-        
+
         foreach (var obj in objectGrower)
         {
-            yield return new WaitForSeconds(timeBetweenObjectToSetMask);
+            if (timeBetweenObjectToSetMask > 0)
+            {
+                yield return new WaitForSeconds(timeBetweenObjectToSetMask);
+            }
             obj.GrowChildObjects(paintColorIndexToSet);
         }
     }
@@ -86,10 +93,9 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
         // Update the text to show the time in mm:ss format
         timerText.text = string.Format("{0:00}:{1:00}", minutesLeft, secondsLeft);
     }
-    
+
     public float GetTimeLeft01()
     {
         return RemainingTime / (minutes * 60);
     }
-    
 }

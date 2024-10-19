@@ -23,6 +23,8 @@ public class BulletLogic : MonoBehaviour
     public void Launch(Vector3 velocity)
     {
         rb = GetComponent<Rigidbody>();
+        
+        rb.useGravity = false;
 
         rb.AddForce(velocity, ForceMode.Impulse);
     }
@@ -32,6 +34,9 @@ public class BulletLogic : MonoBehaviour
     {
         // Rotate the projectile to face the direction of travel
         transform.rotation = Quaternion.LookRotation(rb.velocity.normalized);
+        
+        // Add a downward force to the projectile to simulate gravity using the ammo's gravity value
+        rb.AddForce(Vector3.down * ammo.bulletDrop, ForceMode.Acceleration);
     }
 
     private void OnCollisionEnter(Collision other)

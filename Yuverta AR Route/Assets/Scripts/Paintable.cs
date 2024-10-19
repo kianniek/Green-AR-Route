@@ -16,7 +16,7 @@ public class Paintable : MonoBehaviour
     private int hitCount = 0;
 
     [Range(0, 1)] public float coverageThreshold = 0.5f;
-    [SerializeField] private Vector4 _coverage = new (0,0,0,-1);
+    [SerializeField] private Vector4 _coverage = new(0, 0, 0, -1);
 
     public int CoverageIndex { get; internal set; } = -1;
 
@@ -56,9 +56,9 @@ public class Paintable : MonoBehaviour
     private void Awake()
     {
         rend = GetComponent<Renderer>();
-        
-        _coverage = new Vector4(0,0,0,-1);
-        
+
+        _coverage = new Vector4(0, 0, 0, -1);
+
         CoverageIndex = -1;
         PreviousCoverageIndex = -1;
     }
@@ -124,58 +124,85 @@ public class Paintable : MonoBehaviour
 
         PaintManager.instance.InitTextures(this);
         PaintManager.instance.AddToPaintablesList(this, -1);
-        
     }
 
     public int CheckCoverage()
     {
-        if (coverage.z > coverageThreshold  && CoverageIndex < 2)
-        {
-            PaintManager.instance.AddToPaintablesList(this, 2);
-            OnCovered.Invoke(2);
-            PreviousCoverageIndex = 1;
-            CoverageIndex = 2;
-            SetMaskToColor(this, Color.blue, 2);
+        // Store the current coverage index before evaluation
+        int currentCoverageIndex = CoverageIndex;
 
-            return 2; // Color index for z
+        // Check the highest index (z-axis)
+        if (coverage.z > coverageThreshold && CoverageIndex < 2)
+        {
+            // Only allow upward progression, prevent downgrading
+            if (currentCoverageIndex < 2)
+            {
+                PaintManager.instance.AddToPaintablesList(this, 2);
+                OnCovered.Invoke(2);
+                PreviousCoverageIndex = 1;
+                CoverageIndex = 2;
+                SetMaskToColor(this, Color.blue, 2);
+                return 2; // Color index for z
+            }
+        }
+        // Check if z is 1/3 of the threshold
+        else if (coverage.y > coverageThreshold / 1.3f && coverage.z > coverageThreshold / 2 && CoverageIndex < 1)
+        {
+            // If z exceeds 1/3 threshold, set mask for the next upper index (z-index)
+            SetMaskToColor(this, Color.blue, 2);
         }
 
+        // Check the middle index (y-axis)
         if (coverage.y > coverageThreshold && CoverageIndex < 1)
         {
-            PaintManager.instance.AddToPaintablesList(this, 1);
-            OnCovered.Invoke(1);
-            PreviousCoverageIndex = 0;
-            CoverageIndex = 1;
+            // Only allow upward progression, prevent downgrading
+            if (currentCoverageIndex < 1)
+            {
+                PaintManager.instance.AddToPaintablesList(this, 1);
+                OnCovered.Invoke(1);
+                PreviousCoverageIndex = 0;
+                CoverageIndex = 1;
+                SetMaskToColor(this, Color.green, 1);
+                return 1; // Color index for y
+            }
+        }
+        // Check if y is 1/3 of the threshold
+        else if (coverage.x > coverageThreshold / 1.3f && coverage.y > coverageThreshold / 2 && CoverageIndex < 0)
+        {
+            // If y exceeds 1/3 threshold, set mask for the next upper index (y-index)
             SetMaskToColor(this, Color.green, 1);
-
-            return 1; // Color index for y
         }
 
+        // Check the lowest index (x-axis)
         if (coverage.x > coverageThreshold && CoverageIndex < 0)
         {
-            PaintManager.instance.AddToPaintablesList(this, 0);
-            OnCovered.Invoke(0);
-            PreviousCoverageIndex = -1;
-            CoverageIndex = 0;
-            SetMaskToColor(this, Color.red, 0);
-            return 0; // Color index for x
+            // Only allow upward progression, prevent downgrading
+            if (currentCoverageIndex < 0)
+            {
+                PaintManager.instance.AddToPaintablesList(this, 0);
+                OnCovered.Invoke(0);
+                PreviousCoverageIndex = -1;
+                CoverageIndex = 0;
+                SetMaskToColor(this, Color.red, 0);
+                return 0; // Color index for x
+            }
         }
 
-        // If no color meets the threshold and the coverage is not -1 then simply return the coverage index
+        // No new color meets the threshold, return the current index if not already -1
         if (CoverageIndex != -1)
         {
             Debug.Log("No new color meets the threshold");
             return CoverageIndex;
         }
-        
-        
+
+        // Default case: reset if nothing meets the threshold
         PaintManager.instance.AddToPaintablesList(this, -1);
         PreviousCoverageIndex = -1;
         CoverageIndex = -1;
         Debug.Log("No color meets the threshold");
         return -1; // No color meets the threshold
     }
-    
+
 
     public static void SetMaskToColor(Paintable p, Color color, int coverageID = -1)
     {
@@ -231,8 +258,19 @@ public class Paintable : MonoBehaviour
         hitCount++;
         if (hitCount >= hitTreshold)
         {
-            SetMaskToColor(this, color);
+            // Store the current coverage index before evaluation
+            int currentCoverageIndex = CoverageIndex;
+
+            // Only allow upward progression by one, prevent downgrading
+
+            if (currentCoverageIndex + 1 != index)
+                return;
+
+            PaintManager.instance.AddToPaintablesList(this, index);
+            PreviousCoverageIndex = index - 1;
+            CoverageIndex = index;
             OnCovered.Invoke(index);
+            SetMaskToColor(this, color, index);
         }
     }
 
