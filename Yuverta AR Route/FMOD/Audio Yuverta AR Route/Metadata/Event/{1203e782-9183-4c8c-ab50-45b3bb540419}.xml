@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{1203e782-9183-4c8c-ab50-45b3bb540419}">
+		<property name="color">
+			<value>Red</value>
+		</property>
 		<property name="name">
 			<value>VG VogelHuis</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>0</value>
 		</property>
 		<relationship name="folder">
 			<destination>{c804bf03-0c13-4842-84a1-5c6c88009b95}</destination>
@@ -114,7 +117,6 @@
 	<object class="MixerBusEffectChain" id="{70cd6c31-f6b6-42c7-a244-0ecad3cc4c21}">
 		<relationship name="effects">
 			<destination>{271c3063-b736-4586-9924-360c60b9655c}</destination>
-			<destination>{c9ff74fc-1d41-45e0-a381-121e9dbf78f3}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{6fda9d06-01d9-463f-bf62-efba25d3ef22}" />
@@ -126,6 +128,5 @@
 	</object>
 	<object class="MixerBusPanner" id="{865f3175-d19e-4bd3-a501-864c1ca6d11c}" />
 	<object class="MixerBusFader" id="{271c3063-b736-4586-9924-360c60b9655c}" />
-	<object class="SpatialiserEffect" id="{c9ff74fc-1d41-45e0-a381-121e9dbf78f3}" />
 	<object class="MixerBusFader" id="{a97341c1-82c0-4c40-90f0-3ab7d58f3daf}" />
 </objects>
