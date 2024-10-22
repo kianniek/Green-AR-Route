@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 1527384746}
   - component: {fileID: 1527384745}
   - component: {fileID: 1527384747}
+  - component: {fileID: 1527384748}
   m_Layer: 0
   m_Name: ImageRecognitionHandler
   m_TagString: Untagged
@@ -455,6 +456,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661335eaead221542a612d2465e196aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onScannedAll:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1527384748}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  recognitionData: {fileID: 11400000, guid: 8aa1b3d9056103743837c9671ce2581d, type: 2}
   imageRecognitionEvent: {fileID: 331639556946135412}
   imageEvents:
   - nameOfImage: wadi
@@ -561,6 +578,37 @@ MonoBehaviour:
   StopEvent: 0
   AllowFadeout: 1
   TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &1527384748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527384744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1800574044
+      Data2: 1158604896
+      Data3: 776775310
+      Data4: 6682163
+    Path: event:/VGH Bloem/VO/QuizOutro
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 1
   Preload: 0
   NonRigidbodyVelocity: 0
   Params: []
@@ -1245,6 +1293,8 @@ GameObject:
   - component: {fileID: 1608204069}
   - component: {fileID: 7672481964853810480}
   - component: {fileID: 7672481964853810479}
+  - component: {fileID: 7672481964853810481}
+  - component: {fileID: 7672481964853810482}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1974,6 +2024,65 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
+--- !u!114 &7672481964853810481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2512387469332387800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -753834214
+      Data2: 1129918722
+      Data3: 1822682536
+      Data4: 1830067904
+    Path: event:/UI/VO/IntroStart
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 1
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &7672481964853810482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2512387469332387800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 219350743eef69b41bb8f75e11f58cf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oneTimeEvent: {fileID: 11400000, guid: 1d8ab3d77f998544abf0f3842223635f, type: 2}
+  onEventTriggered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7672481964853810481}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7891166337612765806
 GameObject:
   m_ObjectHideFlags: 0

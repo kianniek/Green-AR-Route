@@ -46,6 +46,9 @@ public class GunController : MonoBehaviour
 
     [SerializeField] private Button fireButton;
 
+    private bool firstShotIsPistol = false;
+
+    [SerializeField] private UnityEvent onFirstShotPistol = new();
     public bool IsSwitchingWeaponThisPress
     {
         get => isSwitchingWeaponThisPress;
@@ -133,6 +136,12 @@ public class GunController : MonoBehaviour
         elapsedTime = 0; // Reset elapsed time
         invokeOneShotEvent = false; // Reset event flag
         isSwitchingWeaponThisPress = false; // Reset weapon switch flag
+        
+        if(!firstShotIsPistol && currentWeapon.weaponType == WeaponType.Pistol)
+        {
+            onFirstShotPistol.Invoke();
+            firstShotIsPistol = true;
+        }
     }
 
     public void ChangeWeapon(int weaponIndex)

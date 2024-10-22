@@ -15,6 +15,8 @@ public struct ImageEvent
 
 public class ImageRecognitionHandler : MonoBehaviour
 {
+    public UnityEvent onScannedAll = new();
+    public ImageRecognitionData recognitionData; // Reference to the Scriptable Object
     public ImageRecognitionEvent imageRecognitionEvent;
 
     public ImageEvent[] imageEvents;
@@ -55,6 +57,17 @@ public class ImageRecognitionHandler : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (recognitionData != null)
+        {
+            if (recognitionData.CheckThreshold())
+            {
+                onScannedAll.Invoke();
+            }
+        }
+    }
+
     void Update()
     {
         // Detect user tap on screen
@@ -92,6 +105,7 @@ public class ImageRecognitionHandler : MonoBehaviour
         else if (currentRecognizedImage != trackedImage)
         {
             currentRecognizedImage = trackedImage;
+
             foreach (var imageEvent in imageEvents)
             {
                 if (imageEvent.nameOfImage != trackedImage.referenceImage.name)
@@ -128,6 +142,12 @@ public class ImageRecognitionHandler : MonoBehaviour
             if (imageEvent.nameOfImage == currentRecognizedImage.referenceImage.name)
             {
                 onTapped.Invoke();
+                
+                if (recognitionData != null)
+                {
+                    recognitionData.IncrementCount(); // Increment the count for recognized images
+                }
+                
                 Debug.Log("Invoking action for image: " + currentRecognizedImage);
                 sceneSwap.SwitchToScene(imageEvent.imageSceneIndex);
                 //break out of the loop
