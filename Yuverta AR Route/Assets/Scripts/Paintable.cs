@@ -8,6 +8,8 @@ using UnityEngine.TestTools;
 public class Paintable : MonoBehaviour
 {
     const int TEXTURE_SIZE = 1024;
+    
+    public bool isBuilding = false;
 
     public float extendsIslandOffset = 1;
 

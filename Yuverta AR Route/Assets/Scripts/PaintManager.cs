@@ -19,6 +19,8 @@ public class PaintManager : Singleton<PaintManager>
     public UnityEvent OnTresholdReached;
 
     public UnityEvent<float> OnTresholdStep = new();
+    [Tooltip("This weigted event will add more value when a building is painted")]
+    public UnityEvent<float> OnTresholdStepWeigted = new();
 
     private Dictionary<Paintable, int> paintables = new();
 
@@ -241,13 +243,31 @@ public class PaintManager : Singleton<PaintManager>
     {
         if (paintables.Count == 0)
             return;
+        
+        
 
+        // Get amount of buildings painted
+        var paintedBuildings = paintables.Count(p => p.Key.isBuilding);
+        
+        //get amount of buildings painted
+        var paintedBuildingsN = paintables.Count(p => p.Key.isBuilding && p.Value >= 1);
 
-        var stepSize = 1f / paintables.Count;
-        var step = Mathf.Clamp01(stepSize * coveredCount);
+        // Get amount of non-buildings painted
+        var paintedWithoutBuildings = paintables.Count - paintedBuildings;
 
-        OnTresholdStep.Invoke(step);
-        UpdateScoreText(step);
+        var stepSizeB = 1f / paintedBuildings;
+        var stepB = Mathf.Clamp01(stepSizeB * paintedBuildingsN);
+        
+        var stepSizeP = 1f / paintedWithoutBuildings;
+        var stepP = Mathf.Clamp01(stepSizeP * coveredCount);
+        
+        var buildingWeight = 0.7f;
+        var paintedWeight = 0.3f;
+        
+        var weightedStep = (stepB * buildingWeight) + (stepP * paintedWeight);
+Debug.Log($"Weighted Step: {weightedStep}");
+        OnTresholdStep.Invoke(weightedStep);
+        UpdateScoreText(weightedStep);
         
         if (HasReachedTreshold)
         {

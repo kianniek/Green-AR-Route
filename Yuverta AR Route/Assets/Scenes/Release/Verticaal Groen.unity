@@ -8355,7 +8355,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  coveredCount: 1
+  OnTresholdStepWeigted:
+    m_PersistentCalls:
+      m_Calls: []
+  coveredCount: 0
   scoreText: {fileID: 808982079}
   timer: {fileID: 9183717264194731530}
 --- !u!4 &1474374150
@@ -14114,6 +14117,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 96427331850534271, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
+      propertyPath: isBuilding
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 96427331850534271, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
       propertyPath: useHitTreshold
       value: 0
       objectReference: {fileID: 0}
@@ -14206,6 +14214,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 373631164898331868, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: isBuilding
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 373631164898331868, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
@@ -14345,6 +14358,11 @@ PrefabInstance:
     - target: {fileID: 1338907007135299479, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: hitTreshold
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1402617122223877208, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: isBuilding
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1402617122223877208, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -14540,6 +14558,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1982653764829749049, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
+      propertyPath: isBuilding
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1982653764829749049, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
       propertyPath: useHitTreshold
       value: 0
       objectReference: {fileID: 0}
@@ -14561,6 +14584,11 @@ PrefabInstance:
     - target: {fileID: 2009152424701969394, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: hitTreshold
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2010381290203523844, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: isBuilding
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2010381290203523844, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -14651,6 +14679,11 @@ PrefabInstance:
     - target: {fileID: 2216382887875275036, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: hitTreshold
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2225607344604581420, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: isBuilding
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2225607344604581420, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -14875,6 +14908,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2619537388052925124, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
+      propertyPath: isBuilding
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2619537388052925124, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
       propertyPath: useHitTreshold
       value: 0
       objectReference: {fileID: 0}
@@ -15030,6 +15068,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3528802637615069438, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
+      propertyPath: isBuilding
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3528802637615069438, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
       propertyPath: useHitTreshold
       value: 0
       objectReference: {fileID: 0}
@@ -15135,6 +15178,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4107630300331332938, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
+      propertyPath: isBuilding
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107630300331332938, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
       propertyPath: useHitTreshold
       value: 0
       objectReference: {fileID: 0}
@@ -15220,6 +15268,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4830433204436318107, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
+      propertyPath: isBuilding
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4830433204436318107, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
       propertyPath: useHitTreshold
       value: 0
       objectReference: {fileID: 0}
@@ -15301,6 +15354,11 @@ PrefabInstance:
     - target: {fileID: 5428350676007946315, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: hitTreshold
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5478770821825774546, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: isBuilding
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5478770821825774546, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -15416,6 +15474,11 @@ PrefabInstance:
     - target: {fileID: 5887123292233087955, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: m_FadeMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5898840619979686087, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: isBuilding
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5898840619979686087, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -15765,6 +15828,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7498271860163645488, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
+      propertyPath: isBuilding
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7498271860163645488, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
       propertyPath: useHitTreshold
       value: 0
       objectReference: {fileID: 0}
@@ -15795,8 +15863,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7591911385680844321, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
+      propertyPath: isBuilding
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591911385680844321, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
       propertyPath: coverageThreshold
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7603347349561071858, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: isBuilding
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7603347349561071858, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
@@ -15851,6 +15929,11 @@ PrefabInstance:
     - target: {fileID: 7963152086299643994, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: hitTreshold
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8004059593553997081, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: isBuilding
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8004059593553997081, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -15955,6 +16038,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8751474688633460731, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
+      propertyPath: isBuilding
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8751474688633460731, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
       propertyPath: useHitTreshold
       value: 0
       objectReference: {fileID: 0}
@@ -16000,6 +16088,11 @@ PrefabInstance:
       objectReference: {fileID: 922699071}
     - target: {fileID: 9030700379380561145, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
+      propertyPath: isBuilding
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9030700379380561145, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
       propertyPath: useHitTreshold
       value: 0
       objectReference: {fileID: 0}
@@ -16032,6 +16125,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122504653027855411, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
+      propertyPath: isBuilding
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9122504653027855411, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
