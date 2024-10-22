@@ -2574,6 +2574,69 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 461354298001657587}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &856775438
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 856775439}
+  - component: {fileID: 856775440}
+  m_Layer: 0
+  m_Name: VO_Regen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &856775439
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856775438}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2512387469332387801}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &856775440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856775438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 2134994656
+      Data2: 1102068344
+      Data3: 1909073577
+      Data4: 1309426498
+    Path: event:/Wadi/VO/WadiRegen
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &868899152 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1365704712746583345, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
@@ -2816,6 +2879,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1057111714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1057111715}
+  - component: {fileID: 1057111716}
+  m_Layer: 0
+  m_Name: VO_Zon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1057111715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057111714}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2512387469332387801}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1057111716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057111714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1171753491
+      Data2: 1287857150
+      Data3: 2035200917
+      Data4: 1171220258
+    Path: event:/Wadi/VO/WadiZon
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1075000274
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,9 +3209,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
         type: 3}
+      propertyPath: onSunButtonClicked.m_PersistentCalls.m_Calls.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onRainButtonClicked.m_PersistentCalls.m_Calls.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onSnowButtonClicked.m_PersistentCalls.m_Calls.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onSunButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onRainButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onSnowButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
       propertyPath: onSunButtonClicked.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 34301136}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onSunButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_Target
+      value: 
+      objectReference: {fileID: 1057111716}
     - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
         type: 3}
       propertyPath: onRainButtonClicked.m_PersistentCalls.m_Calls.Array.data[2].m_Target
@@ -3098,6 +3259,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
         type: 3}
+      propertyPath: onRainButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_Target
+      value: 
+      objectReference: {fileID: 856775440}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
       propertyPath: onSnowButtonClicked.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 34301136}
@@ -3105,6 +3271,71 @@ PrefabInstance:
         type: 3}
       propertyPath: onSnowButtonClicked.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onSnowButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_Target
+      value: 
+      objectReference: {fileID: 1718935816}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onSunButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onRainButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onSnowButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onSunButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onRainButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onSnowButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onSunButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_TargetAssemblyTypeName
+      value: FMODUnity.StudioEventEmitter, FMODUnity
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onRainButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_TargetAssemblyTypeName
+      value: FMODUnity.StudioEventEmitter, FMODUnity
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onSnowButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_TargetAssemblyTypeName
+      value: FMODUnity.StudioEventEmitter, FMODUnity
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onSunButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onRainButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556013053714035417, guid: a3998404cca9c2e4ca9cd575d9f90046,
+        type: 3}
+      propertyPath: onSnowButtonClicked.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3035300171140570317, guid: a3998404cca9c2e4ca9cd575d9f90046,
         type: 3}
@@ -3345,6 +3576,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1232390120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1232390121}
+  - component: {fileID: 1232390122}
+  m_Layer: 0
+  m_Name: IntroVO
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1232390121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232390120}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2512387469332387801}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1232390122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232390120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1057665431
+      Data2: 1326928471
+      Data3: -625821565
+      Data4: 891089337
+    Path: event:/Wadi/VO/WadiIntro
+  Event: 
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1272599910 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8035589268637561255, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
@@ -3671,6 +3965,69 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2763626812711054016}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1718935814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1718935815}
+  - component: {fileID: 1718935816}
+  m_Layer: 0
+  m_Name: VO_Sneeuw
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1718935815
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718935814}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2512387469332387801}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1718935816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718935814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -181273904
+      Data2: 1133021164
+      Data3: 2141855911
+      Data4: 1447499752
+    Path: event:/Wadi/VO/WadiSneeuw
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1776649900 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5289244225045815206, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
@@ -5698,7 +6055,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1232390121}
+  - {fileID: 856775439}
+  - {fileID: 1718935815}
+  - {fileID: 1057111715}
   m_Father: {fileID: 2512387470665874426}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2512387469332387802

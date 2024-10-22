@@ -21,6 +21,8 @@ public class GridManager : MonoBehaviour
 
     [Header("Events")] [Space(10)] [SerializeField]
     private UnityEvent onWadiCompleted = new();
+    [SerializeField]
+    private UnityEvent onWadiHalfWay = new();
 
     [SerializeField] private UnityEvent<int> onChangeAudioBasedOnAmountPlaced = new();
 
@@ -254,6 +256,11 @@ public class GridManager : MonoBehaviour
         if (amountOfBlocksPlaced % 4 == 0 && amountOfBlocksPlaced != 0)
         {
             changeCounter++; // Increment the counter by 1
+        }
+        
+        if(amountOfBlocksPlaced == gridBuilder.GridPrefabCount / 2)
+        {
+            onWadiHalfWay.Invoke();
         }
 
         onChangeAudioBasedOnAmountPlaced.Invoke(changeCounter);

@@ -27,6 +27,9 @@ public class GridBuilder : MonoBehaviour
     private Dictionary<GameObject, Vector3> currentGridPositions = new();
     private Dictionary<GameObject, Vector3> convertedGridPositions = new();
 
+    //get gridprefab count
+    public int GridPrefabCount => gridPrefabs.Length;
+    
     public List<GameObject> BuildGrid()
     {
         if (gridPointPrefab == null)
