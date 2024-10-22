@@ -54,6 +54,7 @@ public class LeafCollectionScript : MonoBehaviour
     public RectTransform[] leafPositions = new RectTransform[5];
 
     public UnityEvent allLeavesCollected;
+    public UnityEvent onThreeLeavesCollected;
     public UnityEvent<int> onLeafCollected = new();
     public string promptTextTemplate = "Scan nog {collectedMarkers} markers <br> om de quiz te kunnen beginnen";
     public PromptTextController promptTextController;
@@ -123,6 +124,12 @@ public class LeafCollectionScript : MonoBehaviour
         PerformRaycast(leaf.animation, leaf.spawnParticles);
         collectedLeafCount++;
         onLeafCollected.Invoke(collectedLeafCount);
+        
+        if (collectedLeafCount == 3)
+        {
+            onThreeLeavesCollected.Invoke();
+        }
+        
         if (collectedLeafCount == leaves.Count)
         {
             allLeavesCollected.Invoke();

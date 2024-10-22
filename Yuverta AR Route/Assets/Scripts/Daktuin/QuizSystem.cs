@@ -1,12 +1,14 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using FMODUnity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class QuizManager : MonoBehaviour
 {
+    public bool startQuizOnStart = false;
     [SerializeField] private UnityEvent onQuizFinished = new();
     [SerializeField] private UnityEvent onQuestionAnsweredCorrectly = new();
     [SerializeField] private UnityEvent onQuestionAnsweredIncorrect = new();
@@ -14,24 +16,28 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private UnityEvent onQuizPartiallyCorrect = new();
     [SerializeField] private UnityEvent onQuizTotallyWrong = new();
 
-    [Header("Quiz UI Elements")] [Tooltip("The text element that will display the quiz question")] [SerializeField]
-    private TMP_Text questionText;
+    private FMOD.Studio.EventInstance eventInstance;
 
-    [Tooltip(
-        "The text element that will display the number of correct answers. Use {correctQuestions} as a placeholder for the actual number of correct answers")]
-    [SerializeField]
-    private TMP_Text correctAnswersText; // Add TMP_Text field for displaying correct answers count
+    [SerializeField] private EventReference[] eventReference;
 
-    [SerializeField]
-    private GameObject correctAnswersDisplay; // Add GameObject field for displaying correct answers count
+    [Header("Quiz UI Elements")]
+    [Tooltip("The text element that will display the quiz question")]
+    [SerializeField] private TMP_Text questionText;
 
-    [Tooltip("All the buttons that will be used to answer the quiz questions")] [SerializeField]
-    private QuizButton[] choiceButtons;
+    [Tooltip("The text element that will display the number of correct answers. Use {correctQuestions} as a placeholder for the actual number of correct answers")]
+    [SerializeField] private TMP_Text correctAnswersText; // Display correct answers count
+
+    [SerializeField] private GameObject correctAnswersDisplay; // Display correct answers count
+    [SerializeField] private GameObject nextButton; // The button to proceed to the next question
+    [SerializeField] private GameObject submitButton; // The button to submit answers for multiple-choice questions
+
+    [Tooltip("All the buttons that will be used to answer the quiz questions")]
+    [SerializeField] private QuizButton[] choiceButtons;
 
     [SerializeField] private string buttonTag = "QuizButton";
 
-    [Tooltip("The scriptable object containing the quiz questions")] [SerializeField]
-    private QuizQuestions quizQuestions;
+    [Tooltip("The scriptable object containing the quiz questions")]
+    [SerializeField] private QuizQuestions quizQuestions;
 
     [SerializeField] private bool restartQuizWithoutIncorrectAnswers = true;
 
@@ -46,13 +52,12 @@ public class QuizManager : MonoBehaviour
 
     private bool isWaitingForAnimation;
 
-    [SerializeField] private GameObject nextButton;
     [SerializeField] private GameObject prevButton;
     private int currentReviewIndex = 0;
-    
-    private List<int> selectedAnswers;  // To store the index of selected answers
 
-
+    private List<List<int>> selectedAnswers;  // To store indices of selected answers for each question
+    private int requiredCorrectAnswerCount; // Required number of correct answers for multiple choice
+    private bool isMultipleChoiceQuestion; // Flag to indicate if the current question is multiple choice
 
     private void Awake()
     {
@@ -61,13 +66,17 @@ public class QuizManager : MonoBehaviour
 
     private void Start()
     {
-        // Hide all children of this object
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(false);
         }
 
         quizEndText = correctAnswersText.text;
+        
+        if (startQuizOnStart)
+        {
+            StartQuiz();
+        }
     }
 
     public void StartQuiz()
@@ -79,7 +88,6 @@ public class QuizManager : MonoBehaviour
 
     private void InitializeQuiz()
     {
-        // Unhide all children of this object
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(true);
@@ -92,13 +100,14 @@ public class QuizManager : MonoBehaviour
         correctAnswersDisplay.SetActive(false); // Show the correct answers count display
         prevButton.SetActive(false);
         nextButton.SetActive(false);
+        submitButton.SetActive(false); // Initially hide the submit button
         currentReviewIndex = questions.Count;
         questionText.gameObject.SetActive(true);
         
-        selectedAnswers = new List<int>(new int[questions.Count]);  // Initialize with default values
-        for (int i = 0; i < selectedAnswers.Count; i++)
+        selectedAnswers = new List<List<int>>();
+        for (int i = 0; i < questions.Count; i++)
         {
-            selectedAnswers[i] = -1;  // Set all initially to -1 indicating no answer selected
+            selectedAnswers.Add(new List<int>());  // Initialize empty list for each question
         }
 
         SetupChoiceButtons();
@@ -108,7 +117,7 @@ public class QuizManager : MonoBehaviour
     {
         if (choiceButtons == null || choiceButtons.Length == 0)
         {
-            const int quizButtonAmount = 4;
+            const int quizButtonAmount = 7;
             choiceButtons = new QuizButton[quizButtonAmount];
             var buttons = GetComponentsInChildren<QuizButton>();
             foreach (var button in buttons)
@@ -128,11 +137,10 @@ public class QuizManager : MonoBehaviour
         correctAnswersDisplay.SetActive(false); // Hide the correct answers count display
         prevButton.SetActive(false);
         nextButton.SetActive(false);
+        submitButton.SetActive(false); // Hide the submit button for each new question
 
-        // Check if there are still questions left
         if (currentQuestionIndex < questions.Count)
         {
-            // Disable all buttons
             foreach (var choiceButton in choiceButtons)
             {
                 choiceButton.gameObject.SetActive(false);
@@ -141,6 +149,31 @@ public class QuizManager : MonoBehaviour
             var question = questions[currentQuestionIndex];
             questionText.text = question.questionText;
 
+            if (eventInstance.isValid())
+            {
+                eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                eventInstance.release();
+            }
+
+            if (eventReference[currentQuestionIndex].Path != "")
+            {
+                eventInstance = FMODUnity.RuntimeManager.CreateInstance(eventReference[currentQuestionIndex]);
+                eventInstance.start();
+            }
+
+            // Determine if the current question is multiple choice
+            isMultipleChoiceQuestion = question.options.Count(answer => answer.isCorrect) > 1;
+            requiredCorrectAnswerCount = 0; // Reset for the current question
+
+            for (var i = 0; i < question.options.Count; i++)
+            {
+                if (question.options[i].isCorrect)
+                {
+                    requiredCorrectAnswerCount++; // Count how many correct answers are needed
+                }
+            }
+
+            // Show choice buttons and set their text
             for (var i = 0; i < choiceButtons.Length; i++)
             {
                 if (i < question.options.Count)
@@ -148,6 +181,12 @@ public class QuizManager : MonoBehaviour
                     choiceButtons[i].gameObject.SetActive(true);
                     choiceButtons[i].ButtonText = question.options[i].answer;
                 }
+            }
+
+            // If it's a multiple choice question, show the submit button
+            if (isMultipleChoiceQuestion)
+            {
+                submitButton.SetActive(true);
             }
         }
         else
@@ -181,55 +220,126 @@ public class QuizManager : MonoBehaviour
             onQuizTotallyWrong.Invoke();
         }
 
-        // Start review mode after the quiz finishes
-        StartReviewMode();
+        StartReviewMode(); // Start review mode after the quiz finishes
     }
 
     private void StartReviewMode()
     {
-        // Start the review mode from the last question + 1
-        currentQuestionIndex = questions.Count;
-
+        currentQuestionIndex = questions.Count; // Start from the last question + 1
         DisplayReviewQuestion();
     }
-
 
     public void OnOptionSelected(QuizButton button)
     {
         if (!isWaitingForAnimation)
         {
             StartCoroutine(OnOptionSelectedCoroutine(button));
-            selectedAnswers[currentQuestionIndex] = button.buttonIndex;  // Store the selected button index
         }
     }
-
 
     IEnumerator OnOptionSelectedCoroutine(QuizButton button)
     {
         isWaitingForAnimation = true;
         var index = button.buttonIndex;
-        var selectedAnswer = questions[currentQuestionIndex].options[index];
+        var selectedForThisQuestion = selectedAnswers[currentQuestionIndex];
         const float flashDuration = 1f;
 
-        if (selectedAnswer.isCorrect)
+        if (selectedForThisQuestion.Contains(index))
         {
-            button.FlashButton(Color.green, flashDuration);
-            correctQuestions++;
-            onQuestionAnsweredCorrectly.Invoke();
-            UpdateCorrectAnswersText(); // Update the correct answers count whenever a correct answer is selected
+            // Deselect the answer
+            selectedForThisQuestion.Remove(index);
+            button.ResetVisualsColor();  // Reset to default visuals
         }
         else
         {
-            button.FlashButton(Color.red, flashDuration);
-            incorrectAnswers.Add(selectedAnswer);
+            // Select the answer
+            selectedForThisQuestion.Add(index);
+            button.SetButtonColor(Color.yellow);  // Indicate selection with a color
+        }
+
+        // Check if the number of selected answers matches the required correct answers
+        if (isMultipleChoiceQuestion)
+        {
+            // Enable the submit button if enough answers have been selected
+            Debug.Log($"Selected answers: {selectedForThisQuestion.Count}/{requiredCorrectAnswerCount}");
+            submitButton.SetActive(selectedForThisQuestion.Count >= 1);
+        }
+        else
+        {
+            if (questions[currentQuestionIndex].options[selectedForThisQuestion[0]].isCorrect)
+            {
+                button.FlashButton(Color.green, flashDuration);
+                correctQuestions++;
+                onQuestionAnsweredCorrectly.Invoke();
+                UpdateCorrectAnswersText(); // Update the correct answers count whenever a correct answer is selected
+            }
+            else
+            {
+                button.FlashButton(Color.red, flashDuration);
+                incorrectAnswers.Add(questions[currentQuestionIndex].options[selectedForThisQuestion[0]]);
+                onQuestionAnsweredIncorrect.Invoke();
+            }
+
+            yield return new WaitForSeconds(flashDuration);
+
+            currentQuestionIndex++;
+            DisplayQuestion();
+            isWaitingForAnimation = false;
+            
+            if (eventInstance.isValid())
+            {
+                eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                eventInstance.release();
+            }
+        }
+
+        yield return new WaitForSeconds(0.1f); // Wait briefly for visual feedback
+
+        isWaitingForAnimation = false;
+    }
+
+    public void OnSubmitButtonPressed()
+    {
+        // Validate answers and move to the next question
+        ValidateCurrentQuestionAnswers();
+        currentQuestionIndex++;
+        DisplayQuestion();
+    }
+
+    private void ValidateCurrentQuestionAnswers()
+    {
+        var question = questions[currentQuestionIndex];
+        var selectedForThisQuestion = selectedAnswers[currentQuestionIndex];
+
+        // Validate the selected answers
+        if (ValidateMultipleChoiceAnswers(question, selectedForThisQuestion))
+        {
+            correctQuestions++;
+            onQuestionAnsweredCorrectly.Invoke();
+            UpdateCorrectAnswersText();
+        }
+        else
+        {
             onQuestionAnsweredIncorrect.Invoke();
         }
 
-        yield return new WaitForSeconds(flashDuration);
+        // Reset next button state
+        submitButton.SetActive(false);
+    }
 
-        currentQuestionIndex++;
-        DisplayQuestion();
-        isWaitingForAnimation = false;
+    private bool ValidateMultipleChoiceAnswers(Question question, List<int> selectedIndices)
+    {
+        var correctIndices = new List<int>();
+        for (int i = 0; i < question.options.Count; i++)
+        {
+            if (question.options[i].isCorrect)
+            {
+                correctIndices.Add(i);
+            }
+        }
+
+        // Check if the selected answers match the correct ones (ignoring order)
+        return !selectedIndices.Except(correctIndices).Any() && !correctIndices.Except(selectedIndices).Any();
     }
 
     public void ResetQuiz()
@@ -237,18 +347,10 @@ public class QuizManager : MonoBehaviour
         currentQuestionIndex = 0;
         correctQuestions = 0;
         totalQuestions = 0;
-        UpdateCorrectAnswersText(); // Reset the correct answers text display
+        UpdateCorrectAnswersText();
         prevButton.SetActive(false);
         nextButton.SetActive(false);
-
-        if (restartQuizWithoutIncorrectAnswers)
-        {
-            // Remove previously incorrect answers from the questions
-            foreach (var question in questions)
-            {
-                question.options.RemoveAll(option => incorrectAnswers.Contains(option));
-            }
-        }
+        submitButton.SetActive(false); // Reset the submit button
     }
 
     public void RestartQuiz()
@@ -259,15 +361,11 @@ public class QuizManager : MonoBehaviour
 
     private void UpdateCorrectAnswersText()
     {
-        // Replace the placeholder {correctQuestions} with the current correctQuestions value
         Debug.Log($"Quiz finished. Correct answers: {correctQuestions}/{totalQuestions}");
         var str = quizEndText;
 
-        // Update the correct answers text display
         str = str.Replace("{correctQuestions}", correctQuestions.ToString());
-        // Update the total questions text display
         str = str.Replace("{totalQuestions}", totalQuestions.ToString());
-        // Update the correct answers text display
         correctAnswersText.text = str;
     }
 
@@ -306,16 +404,13 @@ public class QuizManager : MonoBehaviour
 
     public void SelectedObject(GameObject obj)
     {
-        // Check if the quiz manager is waiting for an animation to finish
-        if (isWaitingForAnimation)
-            return;
+        if (isWaitingForAnimation) return;
 
         obj.GetComponent<QuizButton>().OnClick();
     }
 
     private void DisplayReviewQuestion()
     {
-        // Hide all buttons initially
         foreach (var choiceButton in choiceButtons)
         {
             choiceButton.gameObject.SetActive(false);
@@ -331,7 +426,6 @@ public class QuizManager : MonoBehaviour
         }
 
         correctAnswersDisplay.SetActive(false);
-
         var question = questions[currentReviewIndex];
         questionText.text = question.questionText;
         questionText.gameObject.SetActive(true);
@@ -344,7 +438,7 @@ public class QuizManager : MonoBehaviour
                 choiceButtons[i].ButtonText = question.options[i].answer;
 
                 // Highlight the selected answer
-                if (i == selectedAnswers[currentReviewIndex])
+                if (selectedAnswers[currentReviewIndex].Contains(i))
                 {
                     if (question.options[i].isCorrect)
                     {
@@ -365,7 +459,6 @@ public class QuizManager : MonoBehaviour
         UpdateNavigationButtons();
     }
 
-    
     private void UpdateNavigationButtons()
     {
         prevButton.SetActive(currentReviewIndex > 0); // Hide if at first question

@@ -42,12 +42,10 @@ public class WaitForFMOD : MonoBehaviour
                 hasStartedPlaying = true;
                 hasStoppedPlaying = false;
 
-                Debug.Log("Event started playing.");
                 OnEventStarted.Invoke(); // Trigger Unity event
             }
             else
             {
-                Debug.Log("Event is playing.");
                 OnEventPlaying.Invoke(); // Trigger Unity event
             }
         }
@@ -56,7 +54,6 @@ public class WaitForFMOD : MonoBehaviour
             hasStartedPlaying = false;
             hasStoppedPlaying = true;
 
-            Debug.Log("Event has stopped playing.");
             OnEventStopped.Invoke(); // Trigger Unity event
         }
     }

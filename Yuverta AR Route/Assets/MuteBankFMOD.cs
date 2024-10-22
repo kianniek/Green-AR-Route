@@ -25,7 +25,6 @@ public class MuteBankFMOD : MonoBehaviour
             bank.getEventList(out var eventDescriptions);
             foreach(var eventDesc in eventDescriptions) {
                 eventDesc.getPath(out var eventPath);
-                Debug.Log(eventPath);
             }
         }
         }

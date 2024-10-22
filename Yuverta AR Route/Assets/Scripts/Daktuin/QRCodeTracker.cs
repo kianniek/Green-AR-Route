@@ -24,6 +24,7 @@ public class QRCodeManager : MonoBehaviour
     [Header("Events")] [SerializeField] internal UnityEvent onImageTracked = new();
     [SerializeField] internal UnityEvent onImageRemoved = new();
     [SerializeField] internal UnityEvent onImageNewScanned = new();
+    [SerializeField] internal UnityEvent on3thScanned = new();
     [SerializeField] internal UnityEvent onLastImageScanned = new();
 
     [Serializable]
@@ -38,6 +39,7 @@ public class QRCodeManager : MonoBehaviour
     public List<QRCode> qrCodes;
 
     private bool hasScannedAll => qrCodes.All(qrCode => qrCode.scanned);
+    private bool hasScanned3th => qrCodes.Count(qrCode => qrCode.scanned) == 3;
     private bool hasInvokedLastImageScanned = false;
 
     private void OnEnable()
@@ -128,6 +130,14 @@ public class QRCodeManager : MonoBehaviour
             {
                 onLastImageScanned.Invoke();
                 hasInvokedLastImageScanned = true;
+            }
+        }
+
+        if (hasScanned3th)
+        {
+            if (!isFMODDone)
+            {
+                on3thScanned.Invoke();
             }
         }
     }

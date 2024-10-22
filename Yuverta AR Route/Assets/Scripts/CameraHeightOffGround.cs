@@ -38,11 +38,6 @@ public class CameraHeightOffGround : MonoBehaviour
             float cameraHeight = cameraPosition.y - groundHeight;
 
             // Output the camera height to the console or use it in your logic
-            Debug.Log("Camera Height Off the Ground: " + cameraHeight);
-        }
-        else
-        {
-            Debug.Log("No ground plane detected.");
         }
     }
     

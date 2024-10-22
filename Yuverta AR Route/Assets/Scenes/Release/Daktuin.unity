@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 41777521}
   - component: {fileID: 41777522}
   - component: {fileID: 41777523}
+  - component: {fileID: 41777524}
   m_Layer: 0
   m_Name: VHG-V
   m_TagString: Untagged
@@ -386,6 +387,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &41777524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41777520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94aed1810e79cb34e9fd32a4e2fee6ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &46772712
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,6 +505,141 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 482724380}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &139123500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 139123501}
+  - component: {fileID: 139123503}
+  - component: {fileID: 139123502}
+  - component: {fileID: 139123504}
+  m_Layer: 0
+  m_Name: VHGAlleScansVoltooid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &139123501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139123500}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2017752458}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &139123502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139123500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f61e60e31616a6d4bbf8e275dfa06d4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventInstance: {fileID: 139123503}
+  OnEventStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2017752457}
+        m_TargetAssemblyTypeName: QRCodeManager, Assembly-CSharp
+        m_MethodName: SetFMODStatus
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnEventStopped:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1694061630}
+        m_TargetAssemblyTypeName: QuizManager, Assembly-CSharp
+        m_MethodName: StartQuiz
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnEventPlaying:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2017752457}
+        m_TargetAssemblyTypeName: QRCodeManager, Assembly-CSharp
+        m_MethodName: SetFMODStatus
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &139123503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139123500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1190501367
+      Data2: 1136949785
+      Data3: 1940719037
+      Data4: -1120072158
+    Path: event:/VGH Bloem/VO/VHGAlleScansVoltooid
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 1
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &139123504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139123500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94aed1810e79cb34e9fd32a4e2fee6ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &293659627
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,6 +651,7 @@ GameObject:
   - component: {fileID: 293659628}
   - component: {fileID: 293659629}
   - component: {fileID: 293659630}
+  - component: {fileID: 293659631}
   m_Layer: 0
   m_Name: VO
   m_TagString: Untagged
@@ -614,6 +763,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &293659631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293659627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94aed1810e79cb34e9fd32a4e2fee6ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &312971346
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,6 +1102,7 @@ GameObject:
   - component: {fileID: 378054000}
   - component: {fileID: 378054001}
   - component: {fileID: 378054002}
+  - component: {fileID: 378054003}
   m_Layer: 0
   m_Name: VHG-W
   m_TagString: Untagged
@@ -1052,6 +1214,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &378054003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378053999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94aed1810e79cb34e9fd32a4e2fee6ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &391412890 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6001123304648953847, guid: 7b8f5485fc29f0842bf8399fb43c933f,
@@ -1348,6 +1522,7 @@ GameObject:
   - component: {fileID: 508416280}
   - component: {fileID: 508416281}
   - component: {fileID: 508416282}
+  - component: {fileID: 508416283}
   m_Layer: 0
   m_Name: VHG-D
   m_TagString: Untagged
@@ -1459,6 +1634,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &508416283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508416279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94aed1810e79cb34e9fd32a4e2fee6ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &574792109
 GameObject:
   m_ObjectHideFlags: 0
@@ -1519,6 +1706,129 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &654028125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 654028128}
+  - component: {fileID: 654028127}
+  - component: {fileID: 654028126}
+  - component: {fileID: 654028129}
+  m_Layer: 0
+  m_Name: VHGDrieScansVoltooid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &654028126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654028125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f61e60e31616a6d4bbf8e275dfa06d4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventInstance: {fileID: 654028127}
+  OnEventStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2017752457}
+        m_TargetAssemblyTypeName: QRCodeManager, Assembly-CSharp
+        m_MethodName: SetFMODStatus
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnEventStopped:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEventPlaying:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2017752457}
+        m_TargetAssemblyTypeName: QRCodeManager, Assembly-CSharp
+        m_MethodName: SetFMODStatus
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &654028127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654028125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 187763909
+      Data2: 1118039634
+      Data3: 759221182
+      Data4: 388674374
+    Path: event:/VGH Bloem/VO/VHGDrieScansVoltooid
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 1
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!4 &654028128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654028125}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2017752458}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &654028129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654028125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94aed1810e79cb34e9fd32a4e2fee6ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &699489649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1757,6 +2067,7 @@ GameObject:
   - component: {fileID: 710510003}
   - component: {fileID: 710510004}
   - component: {fileID: 710510005}
+  - component: {fileID: 710510006}
   m_Layer: 0
   m_Name: VHG-E
   m_TagString: Untagged
@@ -1868,6 +2179,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &710510006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710510002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94aed1810e79cb34e9fd32a4e2fee6ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &914897798
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1881,6 +2204,16 @@ PrefabInstance:
       propertyPath: source
       value: 
       objectReference: {fileID: 1453638263}
+    - target: {fileID: 974233631176524336, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 1453638263}
+    - target: {fileID: 1110053639786884024, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: buttonIndex
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2945578604990923069, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_Name
@@ -1891,21 +2224,26 @@ PrefabInstance:
       propertyPath: source
       value: 
       objectReference: {fileID: 1453638263}
-    - target: {fileID: 3923724516744485743, guid: b6e21a326abec1f4a8c89bff5c227217,
+    - target: {fileID: 4059018750411627163, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
-      propertyPath: m_margin.w
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3923724516744485743, guid: b6e21a326abec1f4a8c89bff5c227217,
-        type: 3}
-      propertyPath: m_margin.y
-      value: 20
+      propertyPath: buttonIndex
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4352912801020074791, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2100536799}
+    - target: {fileID: 4382491305638212809, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 1453638263}
+    - target: {fileID: 4780511744563760341, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 1453638263}
     - target: {fileID: 4825432267066045053, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_Camera
@@ -1916,81 +2254,46 @@ PrefabInstance:
       propertyPath: source
       value: 
       objectReference: {fileID: 1453638263}
-    - target: {fileID: 5140391495286320416, guid: b6e21a326abec1f4a8c89bff5c227217,
+    - target: {fileID: 5165248859174774745, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
-      propertyPath: m_spriteBlending
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277779501345681878, guid: b6e21a326abec1f4a8c89bff5c227217,
-        type: 3}
-      propertyPath: m_margin.w
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5277779501345681878, guid: b6e21a326abec1f4a8c89bff5c227217,
-        type: 3}
-      propertyPath: m_margin.y
-      value: 20
+      propertyPath: startQuizOnStart
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5446122778996414936, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: source
       value: 
       objectReference: {fileID: 1453638263}
-    - target: {fileID: 5446122778996414936, guid: b6e21a326abec1f4a8c89bff5c227217,
-        type: 3}
-      propertyPath: m_spriteBlending
-      value: 0.9
-      objectReference: {fileID: 0}
     - target: {fileID: 6022106132500738609, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: source
       value: 
       objectReference: {fileID: 1453638263}
-    - target: {fileID: 6084966699585413128, guid: b6e21a326abec1f4a8c89bff5c227217,
-        type: 3}
-      propertyPath: m_margin.w
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6084966699585413128, guid: b6e21a326abec1f4a8c89bff5c227217,
-        type: 3}
-      propertyPath: m_margin.y
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 6554680404192098837, guid: b6e21a326abec1f4a8c89bff5c227217,
-        type: 3}
-      propertyPath: source
-      value: 
-      objectReference: {fileID: 1453638263}
-    - target: {fileID: 6554680404192098837, guid: b6e21a326abec1f4a8c89bff5c227217,
-        type: 3}
-      propertyPath: m_spriteBlending
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6786709959881901298, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: source
       value: 
       objectReference: {fileID: 1453638263}
     - target: {fileID: 6786709959881901298, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
-      propertyPath: m_spriteBlending
-      value: 0.9
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 1453638263}
+    - target: {fileID: 7139296233768162401, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: buttonIndex
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7318059664110810407, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: source
       value: 
       objectReference: {fileID: 1453638263}
-    - target: {fileID: 7561175271245223036, guid: b6e21a326abec1f4a8c89bff5c227217,
+    - target: {fileID: 8004561262643002607, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
-      propertyPath: m_margin.w
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7561175271245223036, guid: b6e21a326abec1f4a8c89bff5c227217,
-        type: 3}
-      propertyPath: m_margin.y
-      value: 20
-      objectReference: {fileID: 0}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 1453638263}
     - target: {fileID: 8602659611205564086, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3715,6 +4018,7 @@ GameObject:
   - component: {fileID: 2017752455}
   - component: {fileID: 2017752459}
   - component: {fileID: 2017752460}
+  - component: {fileID: 2017752461}
   m_Layer: 0
   m_Name: DaktuinLogic
   m_TagString: Untagged
@@ -3825,6 +4129,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onThreeLeavesCollected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 654028125}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onLeafCollected:
     m_PersistentCalls:
       m_Calls:
@@ -3883,12 +4202,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  on3thScanned:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 654028129}
+        m_TargetAssemblyTypeName: FMODEmitterController, Assembly-CSharp
+        m_MethodName: PlayEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onLastImageScanned:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1694061630}
-        m_TargetAssemblyTypeName: QuizManager, Assembly-CSharp
-        m_MethodName: StartQuiz
+      - m_Target: {fileID: 139123504}
+        m_TargetAssemblyTypeName: FMODEmitterController, Assembly-CSharp
+        m_MethodName: PlayEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3929,9 +4263,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 2027926395}
-          m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-          m_MethodName: Play
+        - m_Target: {fileID: 508416283}
+          m_TargetAssemblyTypeName: FMODEmitterController, Assembly-CSharp
+          m_MethodName: PlayEvent
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3959,9 +4293,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 41777522}
-          m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-          m_MethodName: Play
+        - m_Target: {fileID: 41777524}
+          m_TargetAssemblyTypeName: FMODEmitterController, Assembly-CSharp
+          m_MethodName: PlayEvent
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -3989,9 +4323,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 710510004}
-          m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-          m_MethodName: Play
+        - m_Target: {fileID: 710510006}
+          m_TargetAssemblyTypeName: FMODEmitterController, Assembly-CSharp
+          m_MethodName: PlayEvent
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4019,9 +4353,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 508416281}
-          m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-          m_MethodName: Play
+        - m_Target: {fileID: 2027926397}
+          m_TargetAssemblyTypeName: FMODEmitterController, Assembly-CSharp
+          m_MethodName: PlayEvent
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4049,9 +4383,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 378054001}
-          m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-          m_MethodName: Play
+        - m_Target: {fileID: 378054003}
+          m_TargetAssemblyTypeName: FMODEmitterController, Assembly-CSharp
+          m_MethodName: PlayEvent
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -4073,7 +4407,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 654028128}
+  - {fileID: 139123501}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2017752459
@@ -4128,6 +4464,18 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &2017752461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2017752454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ad268c38c3f668489dc3ead35744bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2027926393
 GameObject:
   m_ObjectHideFlags: 0
@@ -4139,6 +4487,7 @@ GameObject:
   - component: {fileID: 2027926394}
   - component: {fileID: 2027926395}
   - component: {fileID: 2027926396}
+  - component: {fileID: 2027926397}
   m_Layer: 0
   m_Name: VHG-B
   m_TagString: Untagged
@@ -4250,6 +4599,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &2027926397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2027926393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94aed1810e79cb34e9fd32a4e2fee6ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2100536799 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2190929030095967583, guid: a11cf337139446f4c993d7dfea160b68,
