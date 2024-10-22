@@ -5396,7 +5396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5866186297877211052
 Transform:
   m_ObjectHideFlags: 0
@@ -5469,6 +5469,7 @@ MonoBehaviour:
   - {fileID: 9195233559657203224}
   - {fileID: 4149426963863727253}
   - {fileID: 1092542403223640626}
+  timeBetweenObjectToSetMask: 1
 --- !u!1 &1772276678852470539
 GameObject:
   m_ObjectHideFlags: 0
@@ -5907,13 +5908,6 @@ Transform:
   - {fileID: 960714069330232713}
   - {fileID: 1959054359056222067}
   - {fileID: 1956651255122362941}
-  - {fileID: 5177541619682917387}
-  - {fileID: 2276287570117600425}
-  - {fileID: 8063983490279327530}
-  - {fileID: 6952881816134144831}
-  - {fileID: 7075981105072405720}
-  - {fileID: 6798886862841695898}
-  - {fileID: 4912079919871836658}
   - {fileID: 8407147438596134250}
   - {fileID: 8277555247909256501}
   - {fileID: 4075752174892624308}
@@ -16763,7 +16757,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4086372425854731849}
+    m_TransformParent: {fileID: 4902930489170355298}
     m_Modifications:
     - target: {fileID: 96583481960810420, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
@@ -16773,27 +16767,32 @@ PrefabInstance:
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.52563244
+      value: 0.33333322
+      objectReference: {fileID: 0}
+    - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.0512705
+      value: 0.33333325
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.90629
+      value: -1.9828818
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 53.50144
+      value: 17.833813
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 50.881485
+      value: -5.0677977
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
@@ -16838,10 +16837,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4379174269206896429}
-    - targetCorrespondingSourceObject: {fileID: 96583481960810420, guid: d15bc520e5f614591a52bffb38f01e8e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5526540583977819362}
   m_SourcePrefab: {fileID: 100100000, guid: d15bc520e5f614591a52bffb38f01e8e, type: 3}
 --- !u!1 &1969798954288626880 stripped
 GameObject:
@@ -16866,48 +16861,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
---- !u!114 &5526540583977819362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1969798954288626880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnCollisionEnterEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4379174269206896429}
-        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
-        m_MethodName: GrowChildObjects
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnCollisionStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCollisionExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &2276287570117600425 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
@@ -23594,7 +23547,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8128345256661035059, guid: d04c8d8a6818e264dbdfe1958010758b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5177541619682917387}
+    - targetCorrespondingSourceObject: {fileID: 8128345256661035059, guid: d04c8d8a6818e264dbdfe1958010758b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2276287570117600425}
+    - targetCorrespondingSourceObject: {fileID: 8128345256661035059, guid: d04c8d8a6818e264dbdfe1958010758b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8063983490279327530}
+    - targetCorrespondingSourceObject: {fileID: 8128345256661035059, guid: d04c8d8a6818e264dbdfe1958010758b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6798886862841695898}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d04c8d8a6818e264dbdfe1958010758b, type: 3}
 --- !u!4 &4902930489170355298 stripped
@@ -25552,22 +25521,22 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4086372425854731849}
+    m_TransformParent: {fileID: 4426086386609120837}
     m_Modifications:
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.0512705
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.52563244
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.554825
+      value: -9.801977
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
@@ -25577,27 +25546,27 @@ PrefabInstance:
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.385624
+      value: 2.8532357
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.9238795
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.000000034875487
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7071068
+      value: -0.3826834
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.000000014445898
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
@@ -25627,10 +25596,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6622371153425671748}
-    - targetCorrespondingSourceObject: {fileID: 6939848228120968966, guid: 7f770a00466f34af7b3cddb7b10ce77e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2823745890906469009}
   m_SourcePrefab: {fileID: 100100000, guid: 7f770a00466f34af7b3cddb7b10ce77e, type: 3}
 --- !u!1 &2372991394508035709 stripped
 GameObject:
@@ -25655,48 +25620,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
---- !u!114 &2823745890906469009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2372991394508035709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnCollisionEnterEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6622371153425671748}
-        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
-        m_MethodName: GrowChildObjects
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnCollisionStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCollisionExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &6952881816134144831 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
@@ -25794,7 +25717,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4086372425854731849}
+    m_TransformParent: {fileID: 4902930489170355298}
     m_Modifications:
     - target: {fileID: 96583481960810420, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
@@ -25804,27 +25727,32 @@ PrefabInstance:
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.52563244
+      value: 0.33333322
+      objectReference: {fileID: 0}
+    - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.0512705
+      value: 0.33333325
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.768139
+      value: 1.7344496
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 63.954475
+      value: 21.31816
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 51.08452
+      value: -5.003421
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
@@ -25869,10 +25797,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1795212776697121826}
-    - targetCorrespondingSourceObject: {fileID: 96583481960810420, guid: d15bc520e5f614591a52bffb38f01e8e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1613388656779715526}
   m_SourcePrefab: {fileID: 100100000, guid: d15bc520e5f614591a52bffb38f01e8e, type: 3}
 --- !u!1 &4835331501013869666 stripped
 GameObject:
@@ -25897,48 +25821,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
---- !u!114 &1613388656779715526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4835331501013869666}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnCollisionEnterEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1795212776697121826}
-        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
-        m_MethodName: GrowChildObjects
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnCollisionStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCollisionExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &5177541619682917387 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
@@ -26337,22 +26219,22 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4086372425854731849}
+    m_TransformParent: {fileID: 4426086386609120837}
     m_Modifications:
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.52563244
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.0512705
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.049767
+      value: -9.980387
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
@@ -26362,27 +26244,27 @@ PrefabInstance:
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 21.130537
+      value: 9.414709
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9238795
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.000000034875487
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.38268346
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.000000014445902
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
@@ -26412,10 +26294,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3165665735742864905}
-    - targetCorrespondingSourceObject: {fileID: 6939848228120968966, guid: 7f770a00466f34af7b3cddb7b10ce77e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 57482931168781465}
   m_SourcePrefab: {fileID: 100100000, guid: 7f770a00466f34af7b3cddb7b10ce77e, type: 3}
 --- !u!1 &2495549887545899418 stripped
 GameObject:
@@ -26440,48 +26318,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
---- !u!114 &57482931168781465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2495549887545899418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnCollisionEnterEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3165665735742864905}
-        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
-        m_MethodName: GrowChildObjects
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnCollisionStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCollisionExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &7075981105072405720 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
@@ -32646,7 +32482,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4086372425854731849}
+    m_TransformParent: {fileID: 4902930489170355298}
     m_Modifications:
     - target: {fileID: 96583481960810420, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
@@ -32656,27 +32492,32 @@ PrefabInstance:
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.52563244
+      value: 0.33333322
+      objectReference: {fileID: 0}
+    - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.0512705
+      value: 0.33333325
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.669041
+      value: -2.1333337
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 31.463257
+      value: 10.487753
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 50.881485
+      value: -5.0677977
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
@@ -32721,10 +32562,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 209404420393989654}
-    - targetCorrespondingSourceObject: {fileID: 96583481960810420, guid: d15bc520e5f614591a52bffb38f01e8e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1915303501084175301}
   m_SourcePrefab: {fileID: 100100000, guid: d15bc520e5f614591a52bffb38f01e8e, type: 3}
 --- !u!1 &6528708035287701235 stripped
 GameObject:
@@ -32749,48 +32586,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
---- !u!114 &1915303501084175301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6528708035287701235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnCollisionEnterEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 209404420393989654}
-        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
-        m_MethodName: GrowChildObjects
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnCollisionStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCollisionExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &6798886862841695898 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
@@ -33396,7 +33191,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7196024754652692006, guid: e1b2421a07c121e44a4fdac83ac7401b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6952881816134144831}
+    - targetCorrespondingSourceObject: {fileID: 7196024754652692006, guid: e1b2421a07c121e44a4fdac83ac7401b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7075981105072405720}
+    - targetCorrespondingSourceObject: {fileID: 7196024754652692006, guid: e1b2421a07c121e44a4fdac83ac7401b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4912079919871836658}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1b2421a07c121e44a4fdac83ac7401b, type: 3}
 --- !u!4 &4426086386609120837 stripped
@@ -35388,22 +35195,22 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4086372425854731849}
+    m_TransformParent: {fileID: 4426086386609120837}
     m_Modifications:
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.52563244
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.0512705
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.98431
+      value: -9.856309
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
@@ -35413,27 +35220,27 @@ PrefabInstance:
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 21.445917
+      value: 9.714893
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9238795
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.000000034875487
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.38268346
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.000000014445902
       objectReference: {fileID: 0}
     - target: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
         type: 3}
@@ -35463,10 +35270,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5680217572011813443}
-    - targetCorrespondingSourceObject: {fileID: 6939848228120968966, guid: 7f770a00466f34af7b3cddb7b10ce77e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6641428334226992802}
   m_SourcePrefab: {fileID: 100100000, guid: 7f770a00466f34af7b3cddb7b10ce77e, type: 3}
 --- !u!1 &340057629861430448 stripped
 GameObject:
@@ -35491,48 +35294,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
---- !u!114 &6641428334226992802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340057629861430448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnCollisionEnterEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5680217572011813443}
-        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
-        m_MethodName: GrowChildObjects
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnCollisionStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCollisionExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &4912079919871836658 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
@@ -37124,7 +36885,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 4086372425854731849}
+    m_TransformParent: {fileID: 4902930489170355298}
     m_Modifications:
     - target: {fileID: 96583481960810420, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
@@ -37134,27 +36895,32 @@ PrefabInstance:
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.52563244
+      value: 0.33333322
+      objectReference: {fileID: 0}
+    - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.33333334
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.0512705
+      value: 0.33333325
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.339247
+      value: 1.4624642
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 42.77534
+      value: 14.258448
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 50.881485
+      value: -5.0677977
       objectReference: {fileID: 0}
     - target: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
         type: 3}
@@ -37199,10 +36965,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5408796329637079841}
-    - targetCorrespondingSourceObject: {fileID: 96583481960810420, guid: d15bc520e5f614591a52bffb38f01e8e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1089949389618707003}
   m_SourcePrefab: {fileID: 100100000, guid: d15bc520e5f614591a52bffb38f01e8e, type: 3}
 --- !u!1 &7721941114840080195 stripped
 GameObject:
@@ -37227,48 +36989,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
---- !u!114 &1089949389618707003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7721941114840080195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29d6da311fb59554f9461a652cac178d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnCollisionEnterEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5408796329637079841}
-        m_TargetAssemblyTypeName: ObjectGrower, Assembly-CSharp
-        m_MethodName: GrowChildObjects
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnCollisionStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCollisionExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTriggerExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &8063983490279327530 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
