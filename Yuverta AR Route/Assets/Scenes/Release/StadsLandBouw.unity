@@ -143,6 +143,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableOnAwake: 1
+--- !u!1 &157933535 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6062479335120127943, guid: 75441b2aeee57534bad37bc95691abea,
+    type: 3}
+  m_PrefabInstance: {fileID: 1914493966250453934}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &157933537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157933535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1711665697
+      Data2: 1323570482
+      Data3: 1778260892
+      Data4: 1823218625
+    Path: event:/Stadslandbouw/VO/StadsLandbouwOutro
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &172732719 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 909816712495704130, guid: e1a83869068902243a9b24c59c34577c,
@@ -1759,6 +1796,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1740221646154902497, guid: 75441b2aeee57534bad37bc95691abea,
         type: 3}
+      propertyPath: onCorrectAmountReached.m_PersistentCalls.m_Calls.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740221646154902497, guid: 75441b2aeee57534bad37bc95691abea,
+        type: 3}
       propertyPath: fullyGrownWrong.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1990864503}
@@ -1784,6 +1826,11 @@ PrefabInstance:
       objectReference: {fileID: 1990864503}
     - target: {fileID: 1740221646154902497, guid: 75441b2aeee57534bad37bc95691abea,
         type: 3}
+      propertyPath: onCorrectAmountReached.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740221646154902497, guid: 75441b2aeee57534bad37bc95691abea,
+        type: 3}
       propertyPath: onCorrectAmountReached.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 196183336}
@@ -1802,6 +1849,46 @@ PrefabInstance:
       propertyPath: onCorrectAmountReached.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
       objectReference: {fileID: 1990864503}
+    - target: {fileID: 1740221646154902497, guid: 75441b2aeee57534bad37bc95691abea,
+        type: 3}
+      propertyPath: onCorrectAmountReached.m_PersistentCalls.m_Calls.Array.data[5].m_Target
+      value: 
+      objectReference: {fileID: 157933537}
+    - target: {fileID: 1740221646154902497, guid: 75441b2aeee57534bad37bc95691abea,
+        type: 3}
+      propertyPath: onCorrectAmountReached.m_PersistentCalls.m_Calls.Array.data[5].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740221646154902497, guid: 75441b2aeee57534bad37bc95691abea,
+        type: 3}
+      propertyPath: onCorrectAmountReached.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740221646154902497, guid: 75441b2aeee57534bad37bc95691abea,
+        type: 3}
+      propertyPath: onCorrectAmountReached.m_PersistentCalls.m_Calls.Array.data[5].m_TargetAssemblyTypeName
+      value: FMODUnity.StudioEventEmitter, FMODUnity
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740221646154902497, guid: 75441b2aeee57534bad37bc95691abea,
+        type: 3}
+      propertyPath: onCorrectAmountReached.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740221646154902497, guid: 75441b2aeee57534bad37bc95691abea,
+        type: 3}
+      propertyPath: onCorrectAmountReached.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_FloatArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740221646154902497, guid: 75441b2aeee57534bad37bc95691abea,
+        type: 3}
+      propertyPath: onCorrectAmountReached.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_StringArgument
+      value: Je bent nu klaar met de module
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740221646154902497, guid: 75441b2aeee57534bad37bc95691abea,
+        type: 3}
+      propertyPath: onCorrectAmountReached.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2914692596215134448, guid: 75441b2aeee57534bad37bc95691abea,
         type: 3}
       propertyPath: buttons.Array.data[0]
@@ -1985,6 +2072,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 24746714}
+    - targetCorrespondingSourceObject: {fileID: 6062479335120127943, guid: 75441b2aeee57534bad37bc95691abea,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 157933537}
     - targetCorrespondingSourceObject: {fileID: 5411560377330492357, guid: 75441b2aeee57534bad37bc95691abea,
         type: 3}
       insertIndex: -1
@@ -2263,6 +2354,7 @@ GameObject:
   - component: {fileID: 2512387470832126968}
   - component: {fileID: 2512387470832126967}
   - component: {fileID: 2512387470832126969}
+  - component: {fileID: 2512387470832126970}
   m_Layer: 0
   m_Name: XR Origin (AR Rig)
   m_TagString: Untagged
@@ -2431,6 +2523,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffde11e2060cf4c40bb4a638e056fb81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2512387470832126970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2512387470832126958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2126430878
+      Data2: 1188268134
+      Data3: 761187509
+      Data4: 1592492006
+    Path: event:/Stadslandbouw/VO/StadsLandbouwScan
+  Event: 
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &3863447586937942760
 PrefabInstance:
   m_ObjectHideFlags: 0

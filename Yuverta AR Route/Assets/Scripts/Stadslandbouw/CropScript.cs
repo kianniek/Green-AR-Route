@@ -113,6 +113,7 @@ public class CropScript : MonoBehaviour
     
     public void GrowCrop()
     {
+        Debug.Log("Growing crop");
         if (currentChild) 
             currentChild.SetActive(false);
         

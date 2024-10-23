@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-// ReSharper disable CollectionNeverUpdated.Global
-// ReSharper disable UnassignedField.Global
-// ReSharper disable InconsistentNaming
 
 public class CropGrowthSystem : MonoBehaviour
 {
@@ -13,34 +10,40 @@ public class CropGrowthSystem : MonoBehaviour
 
     private Animator growthAnimator;
 
+    // Store the listener to allow both Add and Remove
+    private List<UnityEngine.Events.UnityAction> buttonListeners = new List<UnityEngine.Events.UnityAction>();
+
     private void Awake()
     {
         growthAnimator = GetComponent<Animator>();
-
         DisableButtons();
     }
 
     private void OnEnable()
     {
-        foreach (var button in cropGrowButtons)
+        for (int i = 0; i < cropGrowButtons.Count; i++)
         {
-            button.onClick.AddListener(() => GrowCrop(button));
+            int index = i; // Avoid closure issue
+            UnityEngine.Events.UnityAction listener = () => GrowCrop(cropGrowButtons[index]);
+            buttonListeners.Add(listener);
+            cropGrowButtons[i].onClick.AddListener(listener);
         }
+        
         cropContainer.onCropPlanted.AddListener(EnableButtons);
         cropContainer.onCropPlanted.AddListener(NewCrop);
-
         cropContainer.onCropHarvested.AddListener(DisableButtons);
     }
 
     private void OnDisable()
     {
-        foreach (var button in cropGrowButtons)
+        for (int i = 0; i < cropGrowButtons.Count; i++)
         {
-            button.onClick.RemoveListener(() => GrowCrop(button));
+            cropGrowButtons[i].onClick.RemoveListener(buttonListeners[i]);
         }
+        buttonListeners.Clear();
+        
         cropContainer.onCropPlanted.RemoveListener(EnableButtons);
         cropContainer.onCropPlanted.RemoveListener(NewCrop);
-
         cropContainer.onCropHarvested.RemoveListener(DisableButtons);
     }
 
@@ -48,8 +51,7 @@ public class CropGrowthSystem : MonoBehaviour
     {
         currentCrop.GrowCrop();
         button.interactable = false;
-        //Temporarily use the name of the button as the animation name
-        growthAnimator.Play(button.name);
+        growthAnimator.Play(button.name);  // Temporarily use the name of the button as the animation name
     }
 
     private void EnableButtons(CropScript cropScript)
