@@ -159,6 +159,9 @@ public class QuizManager : MonoBehaviour
             {
                 eventInstance = FMODUnity.RuntimeManager.CreateInstance(eventReference[currentQuestionIndex]);
                 eventInstance.start();
+                Debug.Log("FMOD event started");
+                Debug.Log(eventReference[currentQuestionIndex].Path);
+                Debug.Log(eventInstance.isValid());
             }
 
             // Determine if the current question is multiple choice
@@ -206,6 +209,12 @@ public class QuizManager : MonoBehaviour
     {
         correctAnswersDisplay.SetActive(true); // Show the correct answers count display
         questionText.gameObject.SetActive(false);
+        
+        if (eventInstance.isValid())
+        {
+            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            eventInstance.release();
+        }
 
         if (correctQuestions == totalQuestions)
         {
@@ -286,11 +295,7 @@ public class QuizManager : MonoBehaviour
             DisplayQuestion();
             isWaitingForAnimation = false;
             
-            if (eventInstance.isValid())
-            {
-                eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-                eventInstance.release();
-            }
+            
         }
 
         yield return new WaitForSeconds(0.1f); // Wait briefly for visual feedback
