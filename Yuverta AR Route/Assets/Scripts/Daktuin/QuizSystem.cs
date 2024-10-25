@@ -155,12 +155,12 @@ public class QuizManager : MonoBehaviour
                 eventInstance.release();
             }
 
-            if (eventReference[currentQuestionIndex].Path != "")
+            if (eventReference[currentQuestionIndex].ToString() != "")
             {
                 eventInstance = FMODUnity.RuntimeManager.CreateInstance(eventReference[currentQuestionIndex]);
                 eventInstance.start();
                 Debug.Log("FMOD event started");
-                Debug.Log(eventReference[currentQuestionIndex].Path);
+                Debug.Log(eventReference[currentQuestionIndex].ToString());
                 Debug.Log(eventInstance.isValid());
             }
 
