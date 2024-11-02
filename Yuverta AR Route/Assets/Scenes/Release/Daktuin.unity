@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2505,6 +2505,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 768
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385474394040566965, guid: b6e21a326abec1f4a8c89bff5c227217,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1280
       objectReference: {fileID: 0}
     - target: {fileID: 4385474394040566965, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
@@ -5026,7 +5031,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 508416283}
+        - m_Target: {fileID: 2027926397}
           m_TargetAssemblyTypeName: FMODEmitterController, Assembly-CSharp
           m_MethodName: PlayEvent
           m_Mode: 1
@@ -5116,7 +5121,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 2027926397}
+        - m_Target: {fileID: 508416283}
           m_TargetAssemblyTypeName: FMODEmitterController, Assembly-CSharp
           m_MethodName: PlayEvent
           m_Mode: 1
