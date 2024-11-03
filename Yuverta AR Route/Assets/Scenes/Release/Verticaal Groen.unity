@@ -8331,9 +8331,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2041863086}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-        m_MethodName: set_fillAmount
+      - m_Target: {fileID: 2041863088}
+        m_TargetAssemblyTypeName: ImageFunctions.SmoothImageFill, Assembly-CSharp
+        m_MethodName: SetFillAmount
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8367,9 +8367,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnTresholdStepWeigted:
-    m_PersistentCalls:
-      m_Calls: []
   coveredCount: 0
   scoreText: {fileID: 808982079}
   timer: {fileID: 9183717264194731530}
@@ -11709,6 +11706,7 @@ GameObject:
   - component: {fileID: 2041863085}
   - component: {fileID: 2041863087}
   - component: {fileID: 2041863086}
+  - component: {fileID: 2041863088}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -11773,6 +11771,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2041863084}
   m_CullTransparentMesh: 1
+--- !u!114 &2041863088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041863084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b6de9e95c150f542a9753c170440b69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillSpeed: 0.1
 --- !u!1 &2044884636 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4327931153017559696, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -14503,7 +14514,7 @@ PrefabInstance:
     - target: {fileID: 1820758919790048572, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: minutes
-      value: 3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1820758919790048572, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}

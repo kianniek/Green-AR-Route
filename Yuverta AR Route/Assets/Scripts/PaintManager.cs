@@ -19,8 +19,6 @@ public class PaintManager : Singleton<PaintManager>
     public UnityEvent OnTresholdReached;
 
     public UnityEvent<float> OnTresholdStep = new();
-    [Tooltip("This weigted event will add more value when a building is painted")]
-    public UnityEvent<float> OnTresholdStepWeigted = new();
 
     private Dictionary<Paintable, int> paintables = new();
 
@@ -244,8 +242,6 @@ public class PaintManager : Singleton<PaintManager>
         if (paintables.Count == 0)
             return;
         
-        
-
         // Get amount of buildings painted
         var paintedBuildings = paintables.Count(p => p.Key.isBuilding);
         
