@@ -12,11 +12,11 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 using TouchPhase = UnityEngine.TouchPhase;
 
-public class UIMenuLogic : MonoBehaviour//, IDragHandler, IEndDragHandler
+public class UIMenuLogic : MonoBehaviour //, IDragHandler, IEndDragHandler
 {
     [Header("General")] [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject swipeCanvas;
-    
+
     // private Vector2 dragStartPos;
     // private Vector2 dragEndPos;
     // [SerializeField] private RectTransform scrollView;
@@ -29,20 +29,23 @@ public class UIMenuLogic : MonoBehaviour//, IDragHandler, IEndDragHandler
     [SerializeField] private GameObject uiButtonPrefab;
 
     [SerializeField] private Button startAnimationsButton;
-    [Tooltip("Time the wadi is held in position before checking if it is correct")]
-    [SerializeField] private float timeToHoldPosition = 0.5f;
+
+    [Tooltip("Time the wadi is held in position before checking if it is correct")] [SerializeField]
+    private float timeToHoldPosition = 0.5f;
+
     private Dictionary<GameObject, DragDropHandler> _UIObjectDictionary = new();
-    
+
     public Dictionary<GameObject, DragDropHandler> UIObjectDictionary => _UIObjectDictionary;
 
     [Header("Moving Objects To Scroll Area")] [SerializeField]
     private float speedModifier;
 
-    [SerializeField] private UnityEvent onWadiCorrect;
+    public UnityEvent onWadiCorrect;
     [SerializeField] private UnityEvent onWadiIncorrect;
 
+
     private GridManager _gridManager;
-    
+
     public Canvas Canvas => canvas;
 
     private void Start()
@@ -62,23 +65,24 @@ public class UIMenuLogic : MonoBehaviour//, IDragHandler, IEndDragHandler
 
         //find object in dictionary
         var obj = _UIObjectDictionary.ContainsKey(go) ? go : null;
-        
+
         //if the object is found, enable the object
         if (!obj)
         {
             Debug.LogWarning("Object not found in dictionary");
             return false;
         }
+
         Debug.Log(obj);
-        
+
         var uiObject = _UIObjectDictionary[obj].gameObject;
-        
+
         //Remove object from dictionary
         _UIObjectDictionary.Remove(obj);
-        
+
         //move object to scroll area
         uiObject.SetActive(true);
-        
+
         return true;
     }
 
@@ -86,7 +90,7 @@ public class UIMenuLogic : MonoBehaviour//, IDragHandler, IEndDragHandler
     {
         StartCoroutine(CheckAnimationCoroutine());
     }
-    
+
     private IEnumerator CheckAnimationCoroutine()
     {
         _gridManager = FindObjectOfType<GridManager>();
@@ -96,17 +100,17 @@ public class UIMenuLogic : MonoBehaviour//, IDragHandler, IEndDragHandler
             startAnimationsButton.gameObject.SetActive(false);
             yield return null;
         }
-        
+
         startAnimationsButton.gameObject.SetActive(true);
 
         var correct = _gridManager.CheckPositions(out _);
-        
+
         Debug.Log(correct);
         _gridManager.GridBuilder.MoveGridPointsToConvergedPosition();
         Debug.Log("Checking animation");
 
         yield return new WaitForSeconds(timeToHoldPosition);
-        
+
         if (correct)
         {
             onWadiCorrect.Invoke();
@@ -120,7 +124,7 @@ public class UIMenuLogic : MonoBehaviour//, IDragHandler, IEndDragHandler
             _gridManager.GridBuilder.MoveGridPointsToOriginalPosition();
             Debug.Log("Wadi Incorrect");
         }
-        
+
         yield return null;
     }
 
@@ -189,14 +193,14 @@ public class UIMenuLogic : MonoBehaviour//, IDragHandler, IEndDragHandler
     {
         // Implement any additional behavior you want when the drag ends
     }
-    
+
     /// <summary>
     /// Enables the canvas. used for the start of the game when grid is spawned
     /// </summary>
     public void EnableCanvas(bool enable)
     {
         swipeCanvas.gameObject.SetActive(enable);
-        
+
         startAnimationsButton.gameObject.SetActive(enable);
     }
 }

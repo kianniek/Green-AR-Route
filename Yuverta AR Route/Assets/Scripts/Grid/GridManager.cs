@@ -21,8 +21,8 @@ public class GridManager : MonoBehaviour
 
     [Header("Events")] [Space(10)] [SerializeField]
     private UnityEvent onWadiCompleted = new();
-    [SerializeField]
-    private UnityEvent onWadiHalfWay = new();
+
+    [SerializeField] private UnityEvent onWadiHalfWay = new();
 
     [SerializeField] private UnityEvent<int> onChangeAudioBasedOnAmountPlaced = new();
 
@@ -257,8 +257,8 @@ public class GridManager : MonoBehaviour
         {
             changeCounter++; // Increment the counter by 1
         }
-        
-        if(amountOfBlocksPlaced == gridBuilder.GridPrefabCount / 2)
+
+        if (amountOfBlocksPlaced == gridBuilder.GridPrefabCount / 2)
         {
             onWadiHalfWay.Invoke();
         }
@@ -296,7 +296,15 @@ public class GridManager : MonoBehaviour
         //Instantiate the top and bottom layers of the wadi
         _wadiTopLayer = Instantiate(wadiTopLayerPrefab);
         _wadiBottomLayer = Instantiate(wadiBottomLayerPrefab);
-        _wadiWeatherUI = Instantiate(wadiWeatherUIPrefab);
+
+        _wadiWeatherUI = FindObjectOfType<MaterialController>().gameObject;
+        
+        if (!_wadiWeatherUI)
+        {
+            _wadiWeatherUI = Instantiate(wadiWeatherUIPrefab);
+            _uiMenuLogic.onWadiCorrect.AddListener(() => _wadiWeatherUI.gameObject.SetActive(true));
+        }
+
         _wadiwater = Instantiate(wadiWaterPrefab, _wadiBottomLayer.transform);
         var anim = _wadiwater.GetComponent<Animator>();
         var centerPoint = gridBuilder.GetCenterPoint();
