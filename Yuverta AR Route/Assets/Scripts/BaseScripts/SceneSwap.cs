@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class SceneSwap : MonoBehaviour
     // UI Slider to display loading progress
     public Slider loadingSlider;
 
+    [SerializeField] private UnityEvent onSceneSwitchStart;
     // Function to switch to the next scene
     public void SwitchToNextScene()
     {
@@ -54,6 +56,8 @@ public class SceneSwap : MonoBehaviour
         {
             loadingSlider = GetComponentInChildren<Slider>();
         }
+        
+        onSceneSwitchStart.Invoke();
 
         while (!asyncLoad.isDone)
         {
