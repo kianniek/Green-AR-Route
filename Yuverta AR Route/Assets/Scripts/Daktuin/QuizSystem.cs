@@ -20,24 +20,28 @@ public class QuizManager : MonoBehaviour
 
     [SerializeField] private EventReference[] eventReference;
 
-    [Header("Quiz UI Elements")]
-    [Tooltip("The text element that will display the quiz question")]
-    [SerializeField] private TMP_Text questionText;
+    [Header("Quiz UI Elements")] [Tooltip("The text element that will display the quiz question")] [SerializeField]
+    private TMP_Text questionText;
 
-    [Tooltip("The text element that will display the number of correct answers. Use {correctQuestions} as a placeholder for the actual number of correct answers")]
-    [SerializeField] private TMP_Text correctAnswersText; // Display correct answers count
+    [Tooltip(
+        "The text element that will display the number of correct answers. Use {correctQuestions} as a placeholder for the actual number of correct answers")]
+    [SerializeField]
+    private TMP_Text correctAnswersText; // Display correct answers count
 
     [SerializeField] private GameObject correctAnswersDisplay; // Display correct answers count
     [SerializeField] private GameObject nextButton; // The button to proceed to the next question
     [SerializeField] private GameObject submitButton; // The button to submit answers for multiple-choice questions
 
-    [Tooltip("All the buttons that will be used to answer the quiz questions")]
-    [SerializeField] private QuizButton[] choiceButtons;
+    [Tooltip("All the buttons that will be used to answer the quiz questions")] [SerializeField]
+    private QuizButton[] choiceButtons;
 
+    [SerializeField] private Color correctAnswerColor = Color.green;
+    [SerializeField] private Color incorrectAnswerColor = Color.red;
+    [SerializeField] private Color multipleChoiceAnswerColor = Color.yellow;
     [SerializeField] private string buttonTag = "QuizButton";
 
-    [Tooltip("The scriptable object containing the quiz questions")]
-    [SerializeField] private QuizQuestions quizQuestions;
+    [Tooltip("The scriptable object containing the quiz questions")] [SerializeField]
+    private QuizQuestions quizQuestions;
 
     [SerializeField] private bool restartQuizWithoutIncorrectAnswers = true;
 
@@ -55,7 +59,7 @@ public class QuizManager : MonoBehaviour
     [SerializeField] private GameObject prevButton;
     private int currentReviewIndex = 0;
 
-    private List<List<int>> selectedAnswers;  // To store indices of selected answers for each question
+    private List<List<int>> selectedAnswers; // To store indices of selected answers for each question
     private int requiredCorrectAnswerCount; // Required number of correct answers for multiple choice
     private bool isMultipleChoiceQuestion; // Flag to indicate if the current question is multiple choice
 
@@ -72,7 +76,7 @@ public class QuizManager : MonoBehaviour
         }
 
         quizEndText = correctAnswersText.text;
-        
+
         if (startQuizOnStart)
         {
             StartQuiz();
@@ -103,11 +107,11 @@ public class QuizManager : MonoBehaviour
         submitButton.SetActive(false); // Initially hide the submit button
         currentReviewIndex = questions.Count;
         questionText.gameObject.SetActive(true);
-        
+
         selectedAnswers = new List<List<int>>();
         for (int i = 0; i < questions.Count; i++)
         {
-            selectedAnswers.Add(new List<int>());  // Initialize empty list for each question
+            selectedAnswers.Add(new List<int>()); // Initialize empty list for each question
         }
 
         SetupChoiceButtons();
@@ -209,7 +213,7 @@ public class QuizManager : MonoBehaviour
     {
         correctAnswersDisplay.SetActive(true); // Show the correct answers count display
         questionText.gameObject.SetActive(false);
-        
+
         if (eventInstance.isValid())
         {
             eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
@@ -257,13 +261,13 @@ public class QuizManager : MonoBehaviour
         {
             // Deselect the answer
             selectedForThisQuestion.Remove(index);
-            button.ResetVisualsColor();  // Reset to default visuals
+            button.ResetVisualsColor(); // Reset to default visuals
         }
         else
         {
             // Select the answer
             selectedForThisQuestion.Add(index);
-            button.SetButtonColor(Color.yellow);  // Indicate selection with a color
+            button.SetButtonColor(multipleChoiceAnswerColor); // Indicate selection with a color
         }
 
         // Check if the number of selected answers matches the required correct answers
@@ -277,14 +281,14 @@ public class QuizManager : MonoBehaviour
         {
             if (questions[currentQuestionIndex].options[selectedForThisQuestion[0]].isCorrect)
             {
-                button.FlashButton(Color.green, flashDuration);
+                button.FlashButton(correctAnswerColor, flashDuration);
                 correctQuestions++;
                 onQuestionAnsweredCorrectly.Invoke();
                 UpdateCorrectAnswersText(); // Update the correct answers count whenever a correct answer is selected
             }
             else
             {
-                button.FlashButton(Color.red, flashDuration);
+                button.FlashButton(incorrectAnswerColor, flashDuration);
                 incorrectAnswers.Add(questions[currentQuestionIndex].options[selectedForThisQuestion[0]]);
                 onQuestionAnsweredIncorrect.Invoke();
             }
@@ -294,8 +298,6 @@ public class QuizManager : MonoBehaviour
             currentQuestionIndex++;
             DisplayQuestion();
             isWaitingForAnimation = false;
-            
-            
         }
 
         yield return new WaitForSeconds(0.1f); // Wait briefly for visual feedback
@@ -447,16 +449,16 @@ public class QuizManager : MonoBehaviour
                 {
                     if (question.options[i].isCorrect)
                     {
-                        choiceButtons[i].SetButtonColor(Color.green);  // User selected the correct answer
+                        choiceButtons[i].SetButtonColor(correctAnswerColor); // User selected the correct answer
                     }
                     else
                     {
-                        choiceButtons[i].SetButtonColor(Color.red);  // User selected the wrong answer
+                        choiceButtons[i].SetButtonColor(incorrectAnswerColor); // User selected the wrong answer
                     }
                 }
                 else
                 {
-                    choiceButtons[i].ResetVisualsColor();  // Reset to default color
+                    choiceButtons[i].ResetVisualsColor(); // Reset to default color
                 }
             }
         }

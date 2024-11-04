@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6229239118276168012}
   - component: {fileID: 2407882584781139853}
   - component: {fileID: 5499874156117375009}
+  - component: {fileID: 6281861938389099779}
   m_Layer: 0
   m_Name: BottomLeft
   m_TagString: Untagged
@@ -57,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec0e9d816769504697d3e737238ae87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: e178014ca78b5334a8668b18062f9213, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -92,6 +93,20 @@ MonoBehaviour:
   CameraOverride: {fileID: 0}
   RenderTextureOverride: {fileID: 8400000, guid: ea821b111a2a0d34ab4bb6030b53cd0e,
     type: 2}
+--- !u!114 &6281861938389099779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876706658616352562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bfc75552bd76b54e8bd4697e2f02e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 1, b: 1, a: 1}
+  outlineSize: 3
 --- !u!1 &4847377309545457851
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 96c5704d0681e35408630c488fc0c234, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.011764706}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 10, y: 10, z: 10, w: 10}
   m_Maskable: 1
@@ -172,7 +187,7 @@ MonoBehaviour:
   vibrancy: 1
   brightness: 0
   flatten: 1
-  m_spriteBlending: 0
+  m_spriteBlending: 1
 --- !u!1 &7571306843499817787
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,7 +298,9 @@ MonoBehaviour:
   itemPrefab: {fileID: 5859861886021885041, guid: 90a14dd5ee3d767409818a49fe7c1308,
     type: 3}
   visuals: {fileID: 4847377309545457851}
+  spawnParticlesPrefab: {fileID: 0}
   holdTimeThreshold: 0.5
+  dragImageSize: 0
 --- !u!114 &7536030901588336050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,6 +317,7 @@ MonoBehaviour:
   m_SpawnWithIdentityRotation: 0
   m_ObjectPrefabs: []
   m_OnlySpawnInView: 1
+  m_SpawnDistanceOffset: 0
   m_ViewportPeriphery: 0.15
   m_ApplyRandomAngleAtSpawn: 1
   m_SpawnAngleRange: 45
