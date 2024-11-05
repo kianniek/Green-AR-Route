@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using UnityEngine;
 using FMODUnity;
 
@@ -28,7 +29,7 @@ public class StopMultipleBanks : MonoBehaviour
     {
         foreach (var bank in banks)
         {
-            FMOD.Studio.EventDescription[] eventDescriptions;
+            EventDescription[] eventDescriptions;
             int eventCount;
 
             // Get all events in the bank
@@ -37,7 +38,7 @@ public class StopMultipleBanks : MonoBehaviour
 
             foreach (var eventDescription in eventDescriptions)
             {
-                FMOD.Studio.EventInstance eventInstance;
+                EventInstance eventInstance;
                 eventDescription.createInstance(out eventInstance);
                 eventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 eventInstance.release(); // Ensure you release the instance after stopping it

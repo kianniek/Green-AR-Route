@@ -85,4 +85,9 @@ public class SceneSwap : MonoBehaviour
         // Activate the loaded scene
         asyncLoad.allowSceneActivation = true;
     }
+    
+    public void LoadSameScene()
+    {
+        LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

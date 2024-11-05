@@ -87,6 +87,13 @@ public class LeafCollectionScript : MonoBehaviour
         leaf.collected = true;
 
         var leafObj = Instantiate(leaf.spriteGameobjectUI, leaveUIParent.transform);
+        //get the image component of the leaf object
+        var leafImage = leafObj.GetComponent<Image>();
+        //set the size of the leaf to the size of the image
+        var imageInitialSize = leafObj.GetComponent<RectTransform>().sizeDelta;
+        leafImage.rectTransform.sizeDelta = leaf.image.rectTransform.sizeDelta;
+        var scaleSize = 
+        
         // set the position of the leaf object to the middle of the screen
         leafObj.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0);
 

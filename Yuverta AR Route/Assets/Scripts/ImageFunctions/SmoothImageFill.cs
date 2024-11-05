@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace ImageFunctions
@@ -11,6 +12,8 @@ namespace ImageFunctions
     {
         [Header("Settings")]
         [SerializeField] private float fillSpeed = 0.1f;
+        
+        [SerializeField] private UnityEvent onFillComplete;
         
         private Image _image;
         private float _targetFillAmount;
@@ -36,6 +39,11 @@ namespace ImageFunctions
                 yield return null;
             }
             _image.fillAmount = _targetFillAmount;
+            
+            if (Math.Abs(_targetFillAmount - 1) < 0.01f)
+            {
+                onFillComplete.Invoke();
+            }
         }
 
         public void SetFillAmount(float fillAmount)

@@ -18,6 +18,8 @@ public class PaintManager : Singleton<PaintManager>
     [Tooltip("Event that fires when a threshold is reached for the amount of objects covered in the 2nd mask color")]
     public UnityEvent OnTresholdReached;
 
+    public UnityEvent OnTresholdHalfReached;
+
     public UnityEvent<float> OnTresholdStep = new();
 
     private Dictionary<Paintable, int> paintables = new();
@@ -42,10 +44,11 @@ public class PaintManager : Singleton<PaintManager>
     [SerializeField] private int coveredCount = 0;
 
     public bool HasReachedTreshold => coveredCount >= coveredTreshold;
+    public bool HasReachedHalfwayTreshold => coveredCount >= coveredTreshold * 0.5f;
 
-    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text[] scoreText;
     [SerializeField] private SetMaskColorAfterMinutes timer;
-    
+
     private int score;
 
     public override void Awake()
@@ -171,7 +174,7 @@ public class PaintManager : Singleton<PaintManager>
                 paintable.coverage = coveredPixels;
 
                 paintable.CheckCoverage();
-                
+
                 onCoverageCalculated?.Invoke(coveredPixels);
             }
 
@@ -241,10 +244,10 @@ public class PaintManager : Singleton<PaintManager>
     {
         if (paintables.Count == 0)
             return;
-        
+
         // Get amount of buildings painted
         var paintedBuildings = paintables.Count(p => p.Key.isBuilding);
-        
+
         //get amount of buildings painted
         var paintedBuildingsN = paintables.Count(p => p.Key.isBuilding && p.Value >= 1);
 
@@ -253,38 +256,45 @@ public class PaintManager : Singleton<PaintManager>
 
         var stepSizeB = 1f / paintedBuildings;
         var stepB = Mathf.Clamp01(stepSizeB * paintedBuildingsN);
-        
+
         var stepSizeP = 1f / paintedWithoutBuildings;
         var stepP = Mathf.Clamp01(stepSizeP * coveredCount);
-        
+
         var buildingWeight = 0.7f;
         var paintedWeight = 0.3f;
-        
+
         var weightedStep = (stepB * buildingWeight) + (stepP * paintedWeight);
-Debug.Log($"Weighted Step: {weightedStep}");
+        Debug.Log($"Weighted Step: {weightedStep}");
         OnTresholdStep.Invoke(weightedStep);
         UpdateScoreText(weightedStep);
-        
+
         if (HasReachedTreshold)
         {
             OnTresholdReached.Invoke();
+        }
+        else if (HasReachedHalfwayTreshold)
+        {
+            OnTresholdHalfReached.Invoke();
         }
     }
 
     private void UpdateScoreText(float amount)
     {
-        if (!scoreText)
+        if (scoreText.Length == 0)
             return;
 
-        if (paintables == null) 
+        if (paintables == null)
             return;
-        
-        if(paintables.Count == 0 || coveredCount == 0)
+
+        if (paintables.Count == 0 || coveredCount == 0)
             return;
-        
-        score += (int) (amount * 1000) * (int) (timer.GetTimeLeft01() * 10);
-        
+
+        score += (int)(amount * 1000) * (int)(timer.GetTimeLeft01() * 10);
+
         Debug.Log($"Score: {score}");
-        scoreText.text = score.ToString("D4");
+        foreach (var tmpText in scoreText)
+        {
+            tmpText.text = score.ToString("D4");
+        }
     }
 }
