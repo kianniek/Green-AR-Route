@@ -16,12 +16,13 @@ public class FMODStudioEventQueueManager : MonoBehaviour
             isPlaying = false;
             PlayNextEventInQueue();
         }
-        
+#if UNITY_EDITOR
         //print all the events in the queue
         foreach (var VARIABLE in eventQueue)
         {
             Debug.Log(VARIABLE.name);
         }
+#endif
     }
 
     public void QueueEvent(StudioEventEmitter eventEmitter)

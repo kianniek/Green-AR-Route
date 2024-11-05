@@ -55,6 +55,8 @@ public class LeafCollectionScript : MonoBehaviour
 
     public UnityEvent allLeavesCollected;
     public UnityEvent onThreeLeavesCollected;
+    public bool threeLeavesCollectedTriggered;
+    public bool allLeavesCollectedTiggered;
     public UnityEvent<int> onLeafCollected = new();
     public string promptTextTemplate = "Scan nog {collectedMarkers} markers <br> om de quiz te kunnen beginnen";
     public PromptTextController promptTextController;
@@ -126,14 +128,16 @@ public class LeafCollectionScript : MonoBehaviour
         collectedLeafCount++;
         onLeafCollected.Invoke(collectedLeafCount);
         
-        if (collectedLeafCount == 3)
+        if (collectedLeafCount == 3 && threeLeavesCollectedTriggered == false)
         {
             onThreeLeavesCollected.Invoke();
+            threeLeavesCollectedTriggered = true;
         }
         
-        if (collectedLeafCount == leaves.Count)
+        if (collectedLeafCount == leaves.Count && allLeavesCollectedTiggered == false)
         {
             allLeavesCollected.Invoke();
+            allLeavesCollectedTiggered = true;
         }
     }
 
