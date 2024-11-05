@@ -7,6 +7,7 @@ using LeTai.Asset.TranslucentImage;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 /// <summary>
 /// Add this script to a button that will be used to answer a quiz question
@@ -18,10 +19,9 @@ public class QuizButton : MonoBehaviour
     public IntEvent onRaycastHit;
 
     private TMP_Text buttonText;
-    private TranslucentImage buttonVisual;
+    private Image buttonVisual;
 
     private Color originalColor;
-    private Color originalTextColor;
 
     public string ButtonText
     {
@@ -36,11 +36,10 @@ public class QuizButton : MonoBehaviour
 
     private void Awake()
     {
+        buttonVisual = GetComponent<Image>();
         buttonText = GetComponentInChildren<TMP_Text>();
-        buttonVisual = GetComponent<TranslucentImage>();
 
         originalColor = buttonVisual.color;
-        originalTextColor = buttonText.color;
     }
 
     public void OnClick()
@@ -56,22 +55,18 @@ public class QuizButton : MonoBehaviour
     public void SetButtonColor(Color color)
     {
         buttonVisual.color = color;
-        buttonText.color = InvertColor(originalTextColor);
     }
     
     public void ResetVisualsColor()
     {
         buttonVisual.color = originalColor;
-        buttonText.color = originalTextColor;
     }
 
     private IEnumerator FlashButtonCoroutine(Color color, float duration)
     {
         buttonVisual.color = color;
-        buttonText.color = InvertColor(originalTextColor);
         yield return new WaitForSeconds(duration);
         buttonVisual.color = originalColor;
-        buttonText.color = originalTextColor;
         yield return null;
     }
 

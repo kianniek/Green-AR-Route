@@ -106,7 +106,7 @@ public class QuizManager : MonoBehaviour
         nextButton.SetActive(false);
         submitButton.SetActive(false); // Initially hide the submit button
         currentReviewIndex = questions.Count;
-        questionText.gameObject.SetActive(true);
+        questionText.transform.parent.gameObject.SetActive(true);
 
         selectedAnswers = new List<List<int>>();
         for (int i = 0; i < questions.Count; i++)
@@ -212,7 +212,7 @@ public class QuizManager : MonoBehaviour
     private void HandleQuizResult()
     {
         correctAnswersDisplay.SetActive(true); // Show the correct answers count display
-        questionText.gameObject.SetActive(false);
+        questionText.transform.parent.gameObject.SetActive(false);
 
         if (eventInstance.isValid())
         {
@@ -423,7 +423,7 @@ public class QuizManager : MonoBehaviour
             choiceButton.gameObject.SetActive(false);
         }
 
-        questionText.gameObject.SetActive(false);
+        questionText.transform.parent.gameObject.SetActive(false);
 
         if (currentReviewIndex >= totalQuestions)
         {
@@ -435,7 +435,7 @@ public class QuizManager : MonoBehaviour
         correctAnswersDisplay.SetActive(false);
         var question = questions[currentReviewIndex];
         questionText.text = question.questionText;
-        questionText.gameObject.SetActive(true);
+        questionText.transform.parent.gameObject.SetActive(true);
 
         for (var i = 0; i < choiceButtons.Length; i++)
         {
