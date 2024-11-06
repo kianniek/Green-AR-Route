@@ -32,28 +32,51 @@ public class CropScript : MonoBehaviour
     public UnityEvent onCorrectAmountReached = new();
     
     private int correctInARow;
+    
+    [SerializeField] private UnityEvent OnChildUpdate = new();
 
+    
+    private void OnEnable()
+    {
+        cropContainer.onCropHarvested.AddListener(() => OnChildUpdate.Invoke());
+        cropContainer.onCropFirstHarvested.AddListener(() => OnChildUpdate.Invoke());
+        cropContainer.onCropPlanted.AddListener((context) => OnChildUpdate.Invoke());
+        cropTracker.onNewRound.AddListener(() => OnChildUpdate.Invoke());
+        cropTracker.onInitializeFirstCrop.AddListener(() => OnChildUpdate.Invoke());
+        cropTracker.onPickedSeed.AddListener(() => OnChildUpdate.Invoke());
+    }
+    private void OnDisable()
+    {
+        cropContainer.onCropHarvested.RemoveListener(() => OnChildUpdate.Invoke());
+        cropContainer.onCropFirstHarvested.RemoveListener(() => OnChildUpdate.Invoke());
+        cropContainer.onCropPlanted.RemoveListener((context) => OnChildUpdate.Invoke());
+        cropTracker.onNewRound.RemoveListener(() => OnChildUpdate.Invoke());
+        cropTracker.onInitializeFirstCrop.RemoveListener(() => OnChildUpdate.Invoke());
+        cropTracker.onPickedSeed.RemoveListener(() => OnChildUpdate.Invoke());
+    }
     private void Start()
     {
         if(cropTracker == null) 
             cropTracker = FindObjectOfType<CropTracker>();
+        
+        OnChildUpdate.Invoke();
     }
 
     public void NewCrop(CropObject newCrop)
     {
         //If there is already a crop return
-        if (hasCrop) 
+        if (hasCrop)
+        {
             return;
+        }
         
         //Setting the new crop object
         cropObject = newCrop;
         
         //Creating the new crop
         var prefab = Instantiate(cropObject.cropPrefab, transform);
-        
         //Setting the new crop as the first child
         prefab.transform.SetSiblingIndex(0);
-        
         //Adding the growth stages to the list and setting them to inactive
         for (int i = 0; i < GROWTH_STAGES; i++)
         {
@@ -78,6 +101,7 @@ public class CropScript : MonoBehaviour
         GrowCrop();
         
         hasCrop = true;
+        OnChildUpdate.Invoke();
     }
 
     public void FullyGrowCrop(CropObject newCrop)
@@ -109,6 +133,7 @@ public class CropScript : MonoBehaviour
         Debug.Log("Fully grown");
         
         hasCrop = true;
+        OnChildUpdate.Invoke();
     }
     
     public void GrowCrop()
@@ -136,6 +161,7 @@ public class CropScript : MonoBehaviour
             fullyGrownWrong.Invoke();
             correctInARow = 0;
             Debug.Log("Fully grown");
+            OnChildUpdate.Invoke();
             return;
         }
         
@@ -154,6 +180,7 @@ public class CropScript : MonoBehaviour
         }
         
         Debug.Log("Fully grown");
+        OnChildUpdate.Invoke();
     }
     
     public void HarvestCrop()
@@ -163,5 +190,6 @@ public class CropScript : MonoBehaviour
         growthStagesList.Clear();
         hasCrop = false;
         cropTracker.NewRound();
+        OnChildUpdate.Invoke();
     }
 }

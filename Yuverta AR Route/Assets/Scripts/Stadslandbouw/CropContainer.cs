@@ -52,6 +52,7 @@ public class CropContainer : MonoBehaviour
             if (touch.phase == TouchPhase.Began)
             {
                 HarvestCrop(touch.position);
+                Debug.Log("Touch position: " + touch.position);
             }
         }
     }
@@ -80,9 +81,12 @@ public class CropContainer : MonoBehaviour
 
     private void HarvestCrop(Vector2 touchPosition)
     {
+        Debug.Log("Harvesting crop");
         // Check if the crop is fully grown
         if (!cropScript.IsFullyGrown && currentCropIsRightCrop)
             return;
+        
+        Debug.Log("Crop is fully grown");
 
         // Check with a raycast if the touch actually hit the crop
         var ray = _camera!.ScreenPointToRay(touchPosition);
@@ -101,6 +105,8 @@ public class CropContainer : MonoBehaviour
                 onCropHarvested.Invoke();
                 cropScript.HarvestCrop();
             }
+            
+            Debug.Log(hit.collider.gameObject.name);
         }
     }
 }

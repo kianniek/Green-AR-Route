@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -35,6 +36,11 @@ public class CropTracker : MonoBehaviour
     [SerializeField] private CropScript cropScript;
 
     [SerializeField] private CropGrowthSystem cropGrowthSystem;
+    
+    public UnityEvent onInitializeFirstCrop = new();
+    public UnityEvent onPickedSeed = new();
+    public UnityEvent onNewRound = new();
+    
 
     private void Start()
     {
@@ -86,6 +92,8 @@ public class CropTracker : MonoBehaviour
         nextCorrectCropType = randomCrop.nextCrop;
 
         cropGrowthSystem.DisableButtons();
+        
+        onInitializeFirstCrop.Invoke();
     }
 
 
@@ -111,6 +119,8 @@ public class CropTracker : MonoBehaviour
 
         lastPlacedCrop = crop;
         nextCorrectCropType = crop.nextCrop;
+        
+        onPickedSeed.Invoke();
     }
 
     public void NewRound()
@@ -126,6 +136,8 @@ public class CropTracker : MonoBehaviour
             seed.name = seedList[i].cropName;
             seed.tag = "Seed";
         }
+        
+        onNewRound.Invoke();
     }
 
     private List<CropObject> NewSeedList()
