@@ -5,6 +5,7 @@ using FMODUnity;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour
 {
@@ -468,8 +469,10 @@ public class QuizManager : MonoBehaviour
 
     private void UpdateNavigationButtons()
     {
-        prevButton.SetActive(currentReviewIndex > 0); // Hide if at first question
-        nextButton.SetActive(currentReviewIndex < totalQuestions); // Hide if at last question
+        prevButton.SetActive(true);
+        nextButton.SetActive(true);
+        prevButton.GetComponent<Button>().interactable = (currentReviewIndex > 0); // Hide if at first question
+        nextButton.GetComponent<Button>().interactable = (currentReviewIndex < totalQuestions); // Hide if at last question
     }
 
     public void OnNextButtonPressed()
