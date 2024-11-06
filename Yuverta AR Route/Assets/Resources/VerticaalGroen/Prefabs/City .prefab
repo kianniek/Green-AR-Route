@@ -7334,6 +7334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 1
@@ -8043,6 +8044,7 @@ Transform:
   m_LocalScale: {x: 1.0512705, y: 1, z: 0.52563244}
   m_ConstrainProportionsScale: 1
   m_Children:
+  - {fileID: 929303271610331193}
   - {fileID: 5893498463266991522}
   - {fileID: 3075299738870157029}
   - {fileID: 5640296651601693543}
@@ -10532,6 +10534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 0
   hitTreshold: 1
@@ -10934,6 +10937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 0
   hitTreshold: 1
@@ -11121,6 +11125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -11314,6 +11319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -11496,6 +11502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 0
   hitTreshold: 1
@@ -11740,6 +11747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -11927,6 +11935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -12220,6 +12229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -12570,6 +12580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -12757,6 +12768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -12950,6 +12962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -13217,6 +13230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -13232,6 +13246,80 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5939601246694810162, guid: d402a145300365e42bb82d41c8ecc40e,
     type: 3}
   m_PrefabInstance: {fileID: 780600798214113213}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &823935649568282578
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4106310157680093540}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: beaf2c44dd2ee4ca4adaad8a1655aba9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -62.05
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: beaf2c44dd2ee4ca4adaad8a1655aba9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.11
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: beaf2c44dd2ee4ca4adaad8a1655aba9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -77.61
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: beaf2c44dd2ee4ca4adaad8a1655aba9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: beaf2c44dd2ee4ca4adaad8a1655aba9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: beaf2c44dd2ee4ca4adaad8a1655aba9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: beaf2c44dd2ee4ca4adaad8a1655aba9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: beaf2c44dd2ee4ca4adaad8a1655aba9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: beaf2c44dd2ee4ca4adaad8a1655aba9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: beaf2c44dd2ee4ca4adaad8a1655aba9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: beaf2c44dd2ee4ca4adaad8a1655aba9,
+        type: 3}
+      propertyPath: m_Name
+      value: yuverta logo
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beaf2c44dd2ee4ca4adaad8a1655aba9, type: 3}
+--- !u!4 &929303271610331193 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: beaf2c44dd2ee4ca4adaad8a1655aba9,
+    type: 3}
+  m_PrefabInstance: {fileID: 823935649568282578}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &884607544871587372
 PrefabInstance:
@@ -13416,6 +13504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -13598,6 +13687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 1
@@ -13797,6 +13887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -13990,6 +14081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -14177,6 +14269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -14370,6 +14463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -14653,6 +14747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -14846,6 +14941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -15039,6 +15135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -15227,6 +15324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 1
@@ -15420,6 +15518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -15613,6 +15712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -15812,6 +15912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -15999,6 +16100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -16349,6 +16451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -16542,6 +16645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -16741,6 +16845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -17050,6 +17155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -17243,6 +17349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -17677,6 +17784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -18024,6 +18132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 1
@@ -18175,6 +18284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 1
@@ -18368,6 +18478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -18567,6 +18678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -18760,6 +18872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -18947,6 +19060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -19129,6 +19243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 0
   hitTreshold: 1
@@ -19367,6 +19482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -19566,6 +19682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -19754,6 +19871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 1
@@ -20120,6 +20238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 0
   hitTreshold: 1
@@ -20340,6 +20459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -20527,6 +20647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -20726,6 +20847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -20908,6 +21030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -21107,6 +21230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -21300,6 +21424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -21493,6 +21618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -21681,6 +21807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -21874,6 +22001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -22253,6 +22381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -22609,6 +22738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -22766,6 +22896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 1
@@ -22963,6 +23094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -23466,6 +23598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -23864,6 +23997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -24057,6 +24191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -24245,6 +24380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -24528,6 +24664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -24790,6 +24927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 1
@@ -25057,6 +25195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -25319,6 +25458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -26004,6 +26144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -26203,6 +26344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -26486,6 +26628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 0
   hitTreshold: 1
@@ -26694,6 +26837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -26876,6 +27020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 0
   hitTreshold: 1
@@ -27117,6 +27262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -27287,6 +27433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 0
   hitTreshold: 1
@@ -27940,6 +28087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -28139,6 +28287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -28422,6 +28571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -28615,6 +28765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -28808,6 +28959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -29001,6 +29153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -29194,6 +29347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -29387,6 +29541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -29574,6 +29729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -29762,6 +29918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -29956,6 +30113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -30217,6 +30375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -30573,6 +30732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -30739,6 +30899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -30935,6 +31096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -31128,6 +31290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -31327,6 +31490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -31514,6 +31678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -31791,6 +31956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -31984,6 +32150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -32273,6 +32440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -32466,6 +32634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -32764,6 +32933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -32963,6 +33133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -33390,6 +33561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 1
@@ -33577,6 +33749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -33776,6 +33949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -34053,6 +34227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -34326,6 +34501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -34513,6 +34689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -34706,6 +34883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -34983,6 +35161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -35629,6 +35808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -35822,6 +36002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -36200,6 +36381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -36387,6 +36569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -36676,6 +36859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -36869,6 +37053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -37167,6 +37352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 1
@@ -37339,6 +37525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 0
   hitTreshold: 1
@@ -37559,6 +37746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -37752,6 +37940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -37945,6 +38134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -38222,6 +38412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 1
@@ -38415,6 +38606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -38608,6 +38800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -38801,6 +38994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -39178,6 +39372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -39371,6 +39566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -39549,6 +39745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 0
   hitTreshold: 1
@@ -39757,6 +39954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -39951,6 +40149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -40138,6 +40337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -40331,6 +40531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -40524,6 +40725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -40694,6 +40896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 0
   hitTreshold: 1
@@ -40938,6 +41141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -41131,6 +41335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -41313,6 +41518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 0
   hitTreshold: 1
@@ -41552,6 +41758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -41745,6 +41952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -41938,6 +42146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -42131,6 +42340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -42324,6 +42534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -42597,6 +42808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -42954,6 +43166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -43147,6 +43360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -43430,6 +43644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -43618,6 +43833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 1
@@ -43784,6 +44000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 0
   hitTreshold: 1
@@ -44004,6 +44221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -44197,6 +44415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
@@ -44458,6 +44677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3ea44eef20b0b4396ebe666c9a6eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBuilding: 0
   extendsIslandOffset: 1
   useHitTreshold: 1
   hitTreshold: 3
