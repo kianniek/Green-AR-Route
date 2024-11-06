@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Events;
@@ -40,7 +41,9 @@ public class QRCodeManager : MonoBehaviour
 
     private bool hasScannedAll => qrCodes.All(qrCode => qrCode.scanned);
     private bool hasScanned3th => qrCodes.Count(qrCode => qrCode.scanned) == 3;
+    
     private bool hasInvokedLastImageScanned = false;
+    private bool hasInvoked3thImageScanned = false;
 
     private void OnEnable()
     {
@@ -122,7 +125,7 @@ public class QRCodeManager : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if (hasScannedAll && !hasInvokedLastImageScanned)
         {
@@ -132,12 +135,13 @@ public class QRCodeManager : MonoBehaviour
                 hasInvokedLastImageScanned = true;
             }
         }
-
-        if (hasScanned3th)
+        
+        if (hasScanned3th && !hasInvoked3thImageScanned)
         {
-            if (!isFMODDone)
+            if (isFMODDone)
             {
                 on3thScanned.Invoke();
+                hasInvoked3thImageScanned = true;
             }
         }
     }

@@ -63,4 +63,14 @@ public class WaitForFMOD : MonoBehaviour
         hasStartedPlaying = false;
         hasStoppedPlaying = false;
     }
+    
+    public void PlayEvent()
+    {
+        eventInstance.Play();
+    }
+    
+    public void StopEvent()
+    {
+        eventInstance.Stop();
+    }
 }

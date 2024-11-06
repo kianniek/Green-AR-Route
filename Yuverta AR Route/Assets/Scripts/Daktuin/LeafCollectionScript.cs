@@ -127,8 +127,11 @@ public class LeafCollectionScript : MonoBehaviour
         PerformRaycast(leaf.animation, leaf.spawnParticles);
         collectedLeafCount++;
         onLeafCollected.Invoke(collectedLeafCount);
-        
-        if (collectedLeafCount == 3 && threeLeavesCollectedTriggered == false)
+    }
+
+    private void LateUpdate()
+    {
+        if (collectedLeafCount >= 3 && threeLeavesCollectedTriggered == false)
         {
             onThreeLeavesCollected.Invoke();
             threeLeavesCollectedTriggered = true;

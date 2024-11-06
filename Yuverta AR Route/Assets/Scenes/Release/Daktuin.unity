@@ -3566,22 +3566,22 @@ PrefabInstance:
     - target: {fileID: 2465113387617479225, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2465113387617479225, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2465113387617479225, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1462.5
       objectReference: {fileID: 0}
     - target: {fileID: 2465113387617479225, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -112.5
       objectReference: {fileID: 0}
     - target: {fileID: 2594488670441198555, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
@@ -3731,7 +3731,7 @@ PrefabInstance:
     - target: {fileID: 4179953844971780806, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 2400
       objectReference: {fileID: 0}
     - target: {fileID: 4179953844971780806, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
@@ -3741,7 +3741,7 @@ PrefabInstance:
     - target: {fileID: 4179953844971780806, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1280
       objectReference: {fileID: 0}
     - target: {fileID: 4179953844971780806, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
@@ -3796,7 +3796,7 @@ PrefabInstance:
     - target: {fileID: 5165248859174774745, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: startQuizOnStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5165248859174774745, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
@@ -4136,22 +4136,22 @@ PrefabInstance:
     - target: {fileID: 7991616849422813115, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7991616849422813115, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7991616849422813115, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 937.5
       objectReference: {fileID: 0}
     - target: {fileID: 7991616849422813115, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -112.5
       objectReference: {fileID: 0}
     - target: {fileID: 8026510499630841216, guid: b6e21a326abec1f4a8c89bff5c227217,
         type: 3}
@@ -14930,6 +14930,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 139123504}
+        m_TargetAssemblyTypeName: FMODEmitterController, Assembly-CSharp
+        m_MethodName: PlayEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onThreeLeavesCollected:
     m_PersistentCalls:
       m_Calls:
@@ -15006,34 +15018,10 @@ MonoBehaviour:
         m_CallState: 2
   on3thScanned:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 654028129}
-        m_TargetAssemblyTypeName: FMODEmitterController, Assembly-CSharp
-        m_MethodName: PlayEvent
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onLastImageScanned:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 139123504}
-        m_TargetAssemblyTypeName: FMODEmitterController, Assembly-CSharp
-        m_MethodName: PlayEvent
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 699489653}
         m_TargetAssemblyTypeName: PromptTextController, Assembly-CSharp
         m_MethodName: Hide
@@ -15048,7 +15036,7 @@ MonoBehaviour:
         m_CallState: 2
   qrCodes:
   - name: QR_Explode
-    scanned: 0
+    scanned: 1
     index: 0
     action:
       m_PersistentCalls:
@@ -15065,7 +15053,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 508416283}
+        - m_Target: {fileID: 2027926397}
           m_TargetAssemblyTypeName: FMODEmitterController, Assembly-CSharp
           m_MethodName: PlayEvent
           m_Mode: 1
@@ -15078,7 +15066,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - name: QR_Kat
-    scanned: 0
+    scanned: 1
     index: 1
     action:
       m_PersistentCalls:
@@ -15108,7 +15096,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - name: QR_Kikker
-    scanned: 0
+    scanned: 1
     index: 2
     action:
       m_PersistentCalls:
@@ -15138,7 +15126,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - name: QR_Menselijk
-    scanned: 0
+    scanned: 1
     index: 3
     action:
       m_PersistentCalls:
@@ -15155,7 +15143,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 2027926397}
+        - m_Target: {fileID: 508416283}
           m_TargetAssemblyTypeName: FMODEmitterController, Assembly-CSharp
           m_MethodName: PlayEvent
           m_Mode: 1
@@ -15168,7 +15156,7 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - name: QR_Scheikunde
-    scanned: 0
+    scanned: 1
     index: 4
     action:
       m_PersistentCalls:
