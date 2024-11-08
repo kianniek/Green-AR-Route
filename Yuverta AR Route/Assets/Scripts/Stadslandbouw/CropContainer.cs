@@ -30,9 +30,11 @@ public class CropContainer : MonoBehaviour
     public UnityEvent<CropScript> onCropPlanted = new();
 
     bool firstHarvest = false;
-    
+
     bool inputBlocked = false;
-    
+
+    private CropObject cropObjectBeforeWrongCrop;
+
     public void BlockInput(bool value)
     {
         inputBlocked = value;
@@ -60,16 +62,21 @@ public class CropContainer : MonoBehaviour
     public void NewCrop(CropScript newCropObject, CropObject.CropType nextCorrectCropType)
     {
         // Update the current crop script
+        var currentCropObject = cropScript;
         cropScript = newCropObject;
 
         // Determine if the new crop is the correct one
         rightCrop = nextCorrectCropType == cropScript.cropObject.currentCropType ||
                     nextCorrectCropType == CropObject.CropType.none;
-        Debug.Log("Correct crop: " + cropScript.cropObject.currentCropType);
+        Debug.Log("Correct crop: " +
+                  cropScript.cropObject.currentCropType); // Update the display with the new crop's name
+        
+        if (rightCrop)
+        {
+            cropObjectBeforeWrongCrop = currentCropObject.cropObject;
+        }
 
-        // Update the display with the new crop's name
         cropDisplayName.text = cropScript.cropObject.cropName;
-
         // Invoke the crop planted event
         if (firstHarvest == false)
         {
@@ -85,7 +92,7 @@ public class CropContainer : MonoBehaviour
         // Check if the crop is fully grown
         if (!cropScript.IsFullyGrown && currentCropIsRightCrop)
             return;
-        
+
         Debug.Log("Crop is fully grown");
 
         // Check with a raycast if the touch actually hit the crop
@@ -102,10 +109,15 @@ public class CropContainer : MonoBehaviour
                     onCropFirstHarvested.Invoke();
                 }
 
+                if (!rightCrop)
+                {
+                    cropDisplayName.text = cropObjectBeforeWrongCrop.cropName;
+                }
+
                 onCropHarvested.Invoke();
                 cropScript.HarvestCrop();
             }
-            
+
             Debug.Log(hit.collider.gameObject.name);
         }
     }

@@ -117,8 +117,16 @@ public class CropTracker : MonoBehaviour
             }
         }
 
+        var correctlyLastPlacedCrop = lastPlacedCrop;
         lastPlacedCrop = crop;
         nextCorrectCropType = crop.nextCrop;
+        
+        //If we want the cycle to always be on a right crop, we can use this line
+        if (correctlyLastPlacedCrop.nextCrop != lastPlacedCrop.currentCropType)
+        {
+            lastPlacedCrop = correctlyLastPlacedCrop;
+            nextCorrectCropType = lastPlacedCrop.nextCrop;
+        }
         
         onPickedSeed.Invoke();
     }

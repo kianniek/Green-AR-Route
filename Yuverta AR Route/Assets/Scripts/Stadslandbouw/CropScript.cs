@@ -159,7 +159,6 @@ public class CropScript : MonoBehaviour
             growthStage = GROWTH_STAGES - 1;
             
             fullyGrownWrong.Invoke();
-            correctInARow = 0;
             Debug.Log("Fully grown");
             OnChildUpdate.Invoke();
             return;
