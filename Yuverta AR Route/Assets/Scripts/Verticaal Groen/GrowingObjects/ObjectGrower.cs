@@ -13,6 +13,8 @@ public class ObjectGrower : MonoBehaviour
     public float growthDuration = 2f; // Duration for the flower to fully grow
 
     private bool hasGrownObjects;
+    
+    [SerializeField] private int coverageIndexToGrow = 1;
 
 
     void Awake()
@@ -51,22 +53,22 @@ public class ObjectGrower : MonoBehaviour
     /// <param name="covagageID">Is used to determine which paint index was used to complete the covarage</param>
     public void GrowChildObjects(int covagageID)
     {
-        if (covagageID > 0)
+        if (coverageIndexToGrow > covagageID) 
+            return;
+        
+        if (hasGrownObjects)
         {
-            if (hasGrownObjects)
-            {
-                return;
-            }
-
-            foreach (var item in childrenObjects)
-            {
-                StartCoroutine(Grow(item.Key, item.Value));
-            }
-
-            OnGrownObjects.Invoke();
-
-            hasGrownObjects = true;
+            return;
         }
+
+        foreach (var item in childrenObjects)
+        {
+            StartCoroutine(Grow(item.Key, item.Value));
+        }
+
+        OnGrownObjects.Invoke();
+
+        hasGrownObjects = true;
     }
 
     public void ResetSize()
