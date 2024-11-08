@@ -167,8 +167,8 @@ public class PaintManager : Singleton<PaintManager>
                 // Extract average color at a lower mip level if possible
                 var average = request.GetData<Color32>()[0];
 
-                // Calculate how close the color is to red
-                var coveredPixels = new Vector4(average.r / 255f, average.g / 255f, average.b / 255f, -1);
+                // Calculate how close the color is from 0 to 1
+                var coveredPixels = new Vector4(average.r / 255f, average.g / 255f, average.b / 255f, paintable.CoverageIndex);
 
                 // Call the callback with the result
                 paintable.coverage = coveredPixels;

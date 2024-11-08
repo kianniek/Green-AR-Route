@@ -20,9 +20,20 @@ public class Paintable : MonoBehaviour
     [Range(0, 1)] public float coverageThreshold = 0.5f;
     [SerializeField] private Vector4 _coverage = new(0, 0, 0, -1);
 
-    public int CoverageIndex { get; internal set; } = -1;
+    private int coverageIndex = -1;
+    private int previousCoverageIndex = -1;
 
-    public int PreviousCoverageIndex { get; private set; } = -1;
+    public int CoverageIndex
+    {
+        get => coverageIndex;
+        private set => coverageIndex = value;
+    }
+
+    public int PreviousCoverageIndex {
+        get => previousCoverageIndex;
+        private set => previousCoverageIndex = value;
+    }
+
 
     public Vector4 coverage
     {
@@ -130,14 +141,12 @@ public class Paintable : MonoBehaviour
 
     public int CheckCoverage()
     {
-        // Store the current coverage index before evaluation
-        int currentCoverageIndex = CoverageIndex;
-
         // Check the highest index (z-axis)
-        if (coverage.z > coverageThreshold && CoverageIndex < 2)
+        if ((coverage.z > coverageThreshold && CoverageIndex < 2) || 
+            (coverage.y > coverageThreshold / 1.3f && coverage.z > coverageThreshold / 2 && CoverageIndex < 1))
         {
             // Only allow upward progression, prevent downgrading
-            if (currentCoverageIndex < 2)
+            if (CoverageIndex < 2)
             {
                 PaintManager.instance.AddToPaintablesList(this, 2);
                 OnCovered.Invoke(2);
@@ -147,18 +156,13 @@ public class Paintable : MonoBehaviour
                 return 2; // Color index for z
             }
         }
-        // Check if z is 1/3 of the threshold
-        else if (coverage.y > coverageThreshold / 1.3f && coverage.z > coverageThreshold / 2 && CoverageIndex < 1)
-        {
-            // If z exceeds 1/3 threshold, set mask for the next upper index (z-index)
-            SetMaskToColor(this, Color.blue, 2);
-        }
 
         // Check the middle index (y-axis)
-        if (coverage.y > coverageThreshold && CoverageIndex < 1)
+        if ((coverage.y > coverageThreshold && CoverageIndex < 1) || 
+            (coverage.x > coverageThreshold / 1.3f && coverage.y > coverageThreshold / 2 && CoverageIndex < 0))
         {
             // Only allow upward progression, prevent downgrading
-            if (currentCoverageIndex < 1)
+            if (CoverageIndex < 1)
             {
                 PaintManager.instance.AddToPaintablesList(this, 1);
                 OnCovered.Invoke(1);
@@ -168,23 +172,18 @@ public class Paintable : MonoBehaviour
                 return 1; // Color index for y
             }
         }
-        // Check if y is 1/3 of the threshold
-        else if (coverage.x > coverageThreshold / 1.3f && coverage.y > coverageThreshold / 2 && CoverageIndex < 0)
-        {
-            // If y exceeds 1/3 threshold, set mask for the next upper index (y-index)
-            SetMaskToColor(this, Color.green, 1);
-        }
 
         // Check the lowest index (x-axis)
         if (coverage.x > coverageThreshold && CoverageIndex < 0)
         {
             // Only allow upward progression, prevent downgrading
-            if (currentCoverageIndex < 0)
+            if (CoverageIndex < 0)
             {
                 PaintManager.instance.AddToPaintablesList(this, 0);
                 OnCovered.Invoke(0);
                 PreviousCoverageIndex = -1;
                 CoverageIndex = 0;
+                coverage = new Vector4(coverage.x, coverage.y, coverage.z, CoverageIndex);
                 SetMaskToColor(this, Color.red, 0);
                 return 0; // Color index for x
             }
@@ -198,11 +197,9 @@ public class Paintable : MonoBehaviour
         }
 
         // Default case: reset if nothing meets the threshold
-        PaintManager.instance.AddToPaintablesList(this, -1);
-        PreviousCoverageIndex = -1;
-        CoverageIndex = -1;
+        PaintManager.instance.AddToPaintablesList(this, CoverageIndex);
         Debug.Log("No color meets the threshold");
-        return -1; // No color meets the threshold
+        return CoverageIndex; // No color meets the threshold
     }
 
 
