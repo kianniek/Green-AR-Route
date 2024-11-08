@@ -99,7 +99,6 @@ public class GridBuilder : MonoBehaviour
                                 slopKopObject.transform.localPosition = slopKopPosition;
                                 slopKopObject.transform.localRotation = slopKopRotation;
 
-                                gridPoints.Add(slopKopObject);
                                 convertedGridPositions.Add(slopKopObject, localPositionConverged + slopKopOffset);
                             }
                         }

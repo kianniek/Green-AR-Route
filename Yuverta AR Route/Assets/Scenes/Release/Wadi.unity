@@ -147,6 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!1 &144537355
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,6 +351,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!224 &273776610 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1960851764138764791, guid: 238b325cdf367ae41899a0f904cbe291,
@@ -1078,6 +1082,31 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4965405025728605940, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965405025728605940, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965405025728605940, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965405025728605940, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965405025728605940, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 5052215713277824838, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
         type: 3}
       propertyPath: m_Enabled
@@ -1523,6 +1552,31 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8650449502821681745, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8650449502821681745, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8650449502821681745, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8650449502821681745, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8650449502821681745, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 8721427040731837945, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
         type: 3}
       propertyPath: m_Enabled
@@ -1740,6 +1794,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!224 &478851258 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7201734894217404078, guid: 54f25a57084f5fc4abbd226705ec6cb4,
@@ -1776,6 +1832,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!1001 &592967620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2069,6 +2127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!1001 &745363361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2646,6 +2706,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!1 &874768718 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8210707155972473140, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
@@ -2670,6 +2732,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!224 &875243882 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8847281200572715254, guid: 7822402e38587f94da272a012c9fa6c0,
@@ -2700,6 +2764,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!224 &934674757 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5468218063066149018, guid: 08feaf150f4f1c14e9b2423b2f62f886,
@@ -3149,6 +3215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!1 &1057111714
 GameObject:
   m_ObjectHideFlags: 0
@@ -3418,6 +3486,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!1001 &1099098854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4746,6 +4816,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!1 &1232390120
 GameObject:
   m_ObjectHideFlags: 0
@@ -4764,7 +4836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1232390121
 Transform:
   m_ObjectHideFlags: 0
@@ -4921,6 +4993,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!1 &1323550131
 GameObject:
   m_ObjectHideFlags: 0
@@ -5039,6 +5113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!1 &1372041153 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 601128999497013659, guid: 89c8bee4c61e2eb4ba9e75c9c59cfd31,
@@ -5063,6 +5139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!224 &1410834505 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8164559775666943639, guid: 27aa3bfa1a1b2a94ab14ab7f2853dd21,
@@ -5093,6 +5171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!114 &1608204069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5142,6 +5222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!224 &1681080254 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5412134438511191926, guid: c35ccfe76e623c04387917db23020b13,
@@ -5311,6 +5393,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!1 &1902923106
 GameObject:
   m_ObjectHideFlags: 0
@@ -5491,6 +5575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369dfdbef717ebc4b8bf0f77d2c71535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  gridManager: {fileID: 0}
 --- !u!328 &84894324341154168
 VideoPlayer:
   m_ObjectHideFlags: 0

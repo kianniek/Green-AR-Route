@@ -40,6 +40,7 @@ public class GridManager : MonoBehaviour
     private UIMenuLogic _uiMenuLogic;
     private bool _wadiCompleted;
     private bool riseAndDrainWaterAnimationCompleted = false;
+    private List<GameObject> _topLayerObjects = new();
 
 
     public enum ObjectGridLocation
@@ -93,6 +94,12 @@ public class GridManager : MonoBehaviour
         foreach (var obj in gameObjectList)
         {
             _occupiedPositions.Add(obj, false);
+            var gridPointScript = obj.GetComponent<GridPointScript>();
+            if (gridPointScript != null)
+            {
+                if(gridPointScript.objectGridLocation > (ObjectGridLocation)8)
+                    _topLayerObjects.Add(obj);
+            }
         }
 
         // Ensure ARInteractorSpawnTrigger is destroyed if found
@@ -105,6 +112,8 @@ public class GridManager : MonoBehaviour
         // Deserialize the dictionary to ensure correct handling of data
         objsToSpawn.OnAfterDeserialize();
         AudioNeedsToChange();
+        
+        SetTopLayerActive(false);
     }
 
     public GameObject SnapToGridPoint(GameObject objToSnap)
@@ -128,6 +137,12 @@ public class GridManager : MonoBehaviour
 
         HideGridPointVisualIfOccupied();
         AudioNeedsToChange();
+
+        if (IsBottomLayerFilled())
+        {
+            SetTopLayerActive(true);
+        }
+        
         return closestGridPoint;
     }
 
@@ -135,7 +150,13 @@ public class GridManager : MonoBehaviour
     {
         var availablePositions = new Dictionary<GameObject, bool>();
 
-        foreach (var occupiedPosition in _occupiedPositions)
+        var bottomLayerOccupiedPositions = _occupiedPositions
+            .Where(x => !_topLayerObjects.Contains(x.Key))
+            .ToDictionary(x => x.Key, x => x.Value);
+            
+        var availableOccupiedPositions = !IsBottomLayerFilled() ? bottomLayerOccupiedPositions : _occupiedPositions;
+        
+        foreach (var occupiedPosition in availableOccupiedPositions)
         {
             if (occupiedPosition.Value == false)
             {
@@ -298,7 +319,7 @@ public class GridManager : MonoBehaviour
         _wadiBottomLayer = Instantiate(wadiBottomLayerPrefab);
 
         _wadiWeatherUI = FindObjectOfType<MaterialController>().gameObject;
-        
+
         if (!_wadiWeatherUI)
         {
             _wadiWeatherUI = Instantiate(wadiWeatherUIPrefab);
@@ -378,4 +399,33 @@ public class GridManager : MonoBehaviour
             occupiedPosition.Key.transform.GetChild(0).gameObject.SetActive(!occupiedPosition.Value);
         }
     }
+
+    public void SetTopLayerActive(bool active)
+    {
+        //foreach _occupiedPositions key, set the top layer to false
+        foreach (var topLayerBlock in _topLayerObjects)
+        {
+            topLayerBlock.SetActive(active);
+        }
+    }
+
+    public bool IsBottomLayerFilled()
+    {
+        if (_occupiedPositions == null || _topLayerObjects == null)
+        {
+            throw new InvalidOperationException("Occupied positions or top layer objects cannot be null.");
+        }
+
+        // Convert _topLayerObjects to a HashSet for faster lookups
+        var topLayerSet = new HashSet<GameObject>(_topLayerObjects);
+
+        // Get the bottom layer occupied positions by excluding top layer objects
+        var bottomLayerOccupiedPositions = _occupiedPositions
+            .Where(x => !topLayerSet.Contains(x.Key))
+            .ToDictionary(x => x.Key, x => x.Value);
+    
+        // Check if all bottom layer positions are occupied
+        return bottomLayerOccupiedPositions.All(x => x.Value);
+    }
+
 }
