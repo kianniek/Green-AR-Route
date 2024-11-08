@@ -53,7 +53,7 @@ public class WaitForFMOD : MonoBehaviour
         {
             hasStartedPlaying = false;
             hasStoppedPlaying = true;
-
+Debug.Log("Event stopped");
             OnEventStopped.Invoke(); // Trigger Unity event
         }
     }

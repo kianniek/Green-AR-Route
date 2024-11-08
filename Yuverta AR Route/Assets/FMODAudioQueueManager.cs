@@ -7,6 +7,9 @@ public class FMODStudioEventQueueManager : MonoBehaviour
     private Queue<StudioEventEmitter> eventQueue = new Queue<StudioEventEmitter>();
     private StudioEventEmitter currentEventEmitter;
     private bool isPlaying = false;
+    
+    public bool QueueEmpty => eventQueue.Count == 0;
+    public bool IsPlaying => isPlaying;
 
     void Update()
     {
@@ -24,13 +27,17 @@ public class FMODStudioEventQueueManager : MonoBehaviour
             queueString += eventEmitter.name + ", ";
         }
         Debug.Log("Queue: " + queueString);
-        
 #endif
     }
 
     public void QueueEvent(StudioEventEmitter eventEmitter)
     {
-        eventQueue.Enqueue(eventEmitter);
+        //check if event is already in the queue
+        if (!eventQueue.Contains(eventEmitter) || currentEventEmitter != eventEmitter)
+        {
+            eventQueue.Enqueue(eventEmitter);
+        }
+        
 
         if (!isPlaying)
         {

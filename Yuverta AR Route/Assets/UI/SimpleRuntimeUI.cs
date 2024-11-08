@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -17,7 +19,7 @@ public class SimpleRuntimeUI : MonoBehaviour
     private bool sunButtonClicked;
     
     [SerializeField] private UnityEvent onAllButtonsClicked;
-    
+    [SerializeField] private FMODStudioEventQueueManager queueManager;
 
     //Add logic that interacts with the UI controls in the `OnEnable` methods
     private void OnEnable()
@@ -36,18 +38,31 @@ public class SimpleRuntimeUI : MonoBehaviour
 
     private void OnSnowButtonClicked()
     {
+        if (snowButtonClicked)
+        {
+            return;
+        }
         onSnowButtonClicked.Invoke();
         snowButtonClicked = true;
         CheckIfAllButtonsClicked();
     }
     private void OnRainButtonClicked()
     {
+        if (rainButtonClicked)
+        {
+            return;
+        }
+        Debug.Log("Rain button clicked");
         onRainButtonClicked.Invoke();
         rainButtonClicked = true;
         CheckIfAllButtonsClicked();
     }
     private void OnSunButtonClicked()
     {
+        if (sunButtonClicked)
+        {
+            return;
+        }
         onSunButtonClicked.Invoke();
         sunButtonClicked = true;
         CheckIfAllButtonsClicked();
@@ -58,7 +73,28 @@ public class SimpleRuntimeUI : MonoBehaviour
         if (snowButtonClicked && rainButtonClicked && sunButtonClicked)
         {
             Debug.Log("All buttons clicked");
-            onAllButtonsClicked.Invoke();
+            StartCoroutine(WaitForQueue());
         }
+    }
+    
+    private IEnumerator WaitForQueue()
+    {
+        yield return new WaitUntil(() => queueManager.QueueEmpty && !queueManager.IsPlaying);
+        Debug.Log("Queue is empty");
+        onAllButtonsClicked.Invoke();
+    }
+
+    public void TurnOffAllButtons()
+    {
+        _snowButton.interactable = false;
+        _rainButton.interactable = false;
+        _sunButton.interactable = false;
+    }
+    
+    public void TurnOnAllButtons()
+    {
+        _snowButton.interactable = true;
+        _rainButton.interactable = true;
+        _sunButton.interactable = true;
     }
 }

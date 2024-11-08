@@ -16,7 +16,8 @@ public class MoveToGrid : MonoBehaviour
         if (gridIsCamera)
         {
             grid = Camera.main.gameObject;
-        }else if (!grid)
+        }
+        else if (!grid)
         {
             grid = FindObjectOfType(typeof(GridManager)) as GameObject;
         }
@@ -28,9 +29,12 @@ public class MoveToGrid : MonoBehaviour
         if (!grid && gridIsCamera)
         {
             grid = Camera.main.gameObject;
-        }else if (!grid)
+        }
+        else if (!grid)
         {
-            grid = FindObjectOfType<GridManager>().gameObject;
+            var gridManager = FindObjectOfType<GridManager>();
+            if (gridManager)
+                grid = gridManager.gameObject;
         }
     }
 
@@ -43,7 +47,7 @@ public class MoveToGrid : MonoBehaviour
             gameObject.transform.position += localOffset;
             return;
         }
-        
+
         gameObject.transform.position = grid.transform.position;
 
         gameObject.transform.position += localOffset;
