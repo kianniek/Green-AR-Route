@@ -29,6 +29,9 @@ public class QuizManager : MonoBehaviour
     [SerializeField]
     private TMP_Text correctAnswersText; // Display correct answers count
 
+    [SerializeField] private float answerFeedbackDelay = 2f; // Delay time in seconds
+
+
     [SerializeField] private GameObject correctAnswersDisplay; // Display correct answers count
     [SerializeField] private GameObject nextButton; // The button to proceed to the next question
     [SerializeField] private GameObject submitButton; // The button to submit answers for multiple-choice questions
@@ -66,6 +69,10 @@ public class QuizManager : MonoBehaviour
 
     private void Awake()
     {
+        //if we are not in the editor diable the start quiz on start
+        #if !UNITY_EDITOR
+            startQuizOnStart = false;
+        #endif
         _camera = Camera.main;
     }
 
@@ -93,6 +100,12 @@ public class QuizManager : MonoBehaviour
 
     private void InitializeQuiz()
     {
+        if (quizQuestions == null || quizQuestions.questions == null || quizQuestions.questions.Count == 0)
+        {
+            Debug.LogError("No quiz questions available!");
+            return;
+        }
+
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(true);
@@ -110,7 +123,7 @@ public class QuizManager : MonoBehaviour
         questionText.transform.parent.gameObject.SetActive(true);
 
         selectedAnswers = new List<List<int>>();
-        for (int i = 0; i < questions.Count; i++)
+        for (var i = 0; i < questions.Count; i++)
         {
             selectedAnswers.Add(new List<int>()); // Initialize empty list for each question
         }
@@ -256,7 +269,6 @@ public class QuizManager : MonoBehaviour
         isWaitingForAnimation = true;
         var index = button.buttonIndex;
         var selectedForThisQuestion = selectedAnswers[currentQuestionIndex];
-        const float flashDuration = 1f;
 
         if (selectedForThisQuestion.Contains(index))
         {
@@ -280,41 +292,68 @@ public class QuizManager : MonoBehaviour
         }
         else
         {
-            if (questions[currentQuestionIndex].options[selectedForThisQuestion[0]].isCorrect)
+            // Validate the user's selection for single choice
+            bool isCorrect = questions[currentQuestionIndex].options[selectedForThisQuestion[0]].isCorrect;
+
+            if (isCorrect)
             {
-                button.FlashButton(correctAnswerColor, flashDuration);
+                button.FlashButton(correctAnswerColor, answerFeedbackDelay);
                 correctQuestions++;
                 onQuestionAnsweredCorrectly.Invoke();
-                UpdateCorrectAnswersText(); // Update the correct answers count whenever a correct answer is selected
+                UpdateCorrectAnswersText();
             }
             else
             {
-                button.FlashButton(incorrectAnswerColor, flashDuration);
+                button.FlashButton(incorrectAnswerColor, answerFeedbackDelay);
                 incorrectAnswers.Add(questions[currentQuestionIndex].options[selectedForThisQuestion[0]]);
                 onQuestionAnsweredIncorrect.Invoke();
             }
 
-            yield return new WaitForSeconds(flashDuration);
-
+            // Wait for the feedback duration before revealing correct answers
+            ShowCorrectAnswers(selectedForThisQuestion); // Call to show correct answers;
+            yield return new WaitForSeconds(answerFeedbackDelay);
             currentQuestionIndex++;
             DisplayQuestion();
             isWaitingForAnimation = false;
         }
 
         yield return new WaitForSeconds(0.1f); // Wait briefly for visual feedback
-
         isWaitingForAnimation = false;
+    }
+
+    private void ShowCorrectAnswers(List<int> selectedForThisQuestion, bool reviewMode = false)
+    {
+        var question = reviewMode ? questions[currentReviewIndex] : questions[currentQuestionIndex];
+
+        for (int i = 0; i < question.options.Count; i++)
+        {
+            if (question.options[i].isCorrect && !selectedForThisQuestion.Contains(i))
+            {
+                // Highlight the correct answer that was not selected
+                choiceButtons[i].SetButtonColor(Color.Lerp(correctAnswerColor, multipleChoiceAnswerColor, 0.75f));
+            }
+            
+            if (!question.options[i].isCorrect && selectedForThisQuestion.Contains(i))
+            {
+                // Highlight the incorrect answer that was selected
+                choiceButtons[i].SetButtonColor(incorrectAnswerColor);
+            }
+            
+            if (question.options[i].isCorrect && selectedForThisQuestion.Contains(i))
+            {
+                // Highlight the correct answer that was selected
+                choiceButtons[i].SetButtonColor(correctAnswerColor);
+            }
+        }
     }
 
     public void OnSubmitButtonPressed()
     {
         // Validate answers and move to the next question
-        ValidateCurrentQuestionAnswers();
-        currentQuestionIndex++;
-        DisplayQuestion();
+        StartCoroutine(ValidateCurrentQuestionAnswers());
     }
 
-    private void ValidateCurrentQuestionAnswers()
+    IEnumerator ValidateCurrentQuestionAnswers()
     {
         var question = questions[currentQuestionIndex];
         var selectedForThisQuestion = selectedAnswers[currentQuestionIndex];
@@ -322,33 +361,40 @@ public class QuizManager : MonoBehaviour
         // Validate the selected answers
         if (ValidateMultipleChoiceAnswers(question, selectedForThisQuestion))
         {
+            // Wait for the feedback duration before revealing correct answers
+            ShowCorrectAnswers(selectedForThisQuestion); // Call to show correct answers;
+            yield return new WaitForSeconds(answerFeedbackDelay);
             correctQuestions++;
             onQuestionAnsweredCorrectly.Invoke();
             UpdateCorrectAnswersText();
         }
         else
         {
+            // Wait for the feedback duration before revealing correct answers
+            ShowCorrectAnswers(selectedForThisQuestion); // Call to show correct answers;
+            yield return new WaitForSeconds(answerFeedbackDelay);
             onQuestionAnsweredIncorrect.Invoke();
         }
 
         // Reset next button state
         submitButton.SetActive(false);
+        
+        currentQuestionIndex++;
+        DisplayQuestion();
+
+        yield return null;
     }
 
     private bool ValidateMultipleChoiceAnswers(Question question, List<int> selectedIndices)
     {
-        var correctIndices = new List<int>();
-        for (int i = 0; i < question.options.Count; i++)
-        {
-            if (question.options[i].isCorrect)
-            {
-                correctIndices.Add(i);
-            }
-        }
+        var correctIndices = question.options
+            .Select((option, index) => option.isCorrect ? index : -1)
+            .Where(index => index != -1)
+            .ToList();
 
-        // Check if the selected answers match the correct ones (ignoring order)
-        return !selectedIndices.Except(correctIndices).Any() && !correctIndices.Except(selectedIndices).Any();
+        return selectedIndices.Count == correctIndices.Count && !selectedIndices.Except(correctIndices).Any();
     }
+
 
     public void ResetQuiz()
     {
@@ -379,36 +425,44 @@ public class QuizManager : MonoBehaviour
 
     private void Update()
     {
+        HandleInput();
+    }
+
+    private void HandleInput()
+    {
         if (Input.touchCount > 0)
         {
-            var touch = Input.GetTouch(0);
-
-            if (touch.phase == TouchPhase.Began)
-            {
-                var ray = Camera.main.ScreenPointToRay(touch.position);
-
-                if (Physics.Raycast(ray, out var hit))
-                {
-                    if (hit.collider.CompareTag(buttonTag))
-                    {
-                        SelectedObject(hit.collider.gameObject);
-                    }
-                }
-            }
+            HandleTouchInput(Input.GetTouch(0));
         }
         else if (Input.GetMouseButtonDown(0))
         {
-            var ray = _camera.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out var hit))
-            {
-                if (hit.collider.CompareTag(buttonTag))
-                {
-                    SelectedObject(hit.collider.gameObject);
-                }
-            }
+            HandleMouseInput();
         }
     }
+
+    private void HandleTouchInput(Touch touch)
+    {
+        if (touch.phase == TouchPhase.Began)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(touch.position);
+            CheckForQuizButtonHit(ray);
+        }
+    }
+
+    private void HandleMouseInput()
+    {
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        CheckForQuizButtonHit(ray);
+    }
+
+    private void CheckForQuizButtonHit(Ray ray)
+    {
+        if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.CompareTag(buttonTag))
+        {
+            SelectedObject(hit.collider.gameObject);
+        }
+    }
+
 
     public void SelectedObject(GameObject obj)
     {
@@ -446,21 +500,24 @@ public class QuizManager : MonoBehaviour
                 choiceButtons[i].ButtonText = question.options[i].answer;
 
                 // Highlight the selected answer
-                if (selectedAnswers[currentReviewIndex].Contains(i))
-                {
-                    if (question.options[i].isCorrect)
-                    {
-                        choiceButtons[i].SetButtonColor(correctAnswerColor); // User selected the correct answer
-                    }
-                    else
-                    {
-                        choiceButtons[i].SetButtonColor(incorrectAnswerColor); // User selected the wrong answer
-                    }
-                }
-                else
-                {
-                    choiceButtons[i].ResetVisualsColor(); // Reset to default color
-                }
+                // if (selectedAnswers[currentReviewIndex].Contains(i))
+                // {
+                //     // if (question.options[i].isCorrect)
+                //     // {
+                //     //     choiceButtons[i].SetButtonColor(correctAnswerColor); // User selected the correct answer
+                //     // }
+                //     // else
+                //     // {
+                //     //     choiceButtons[i].SetButtonColor(incorrectAnswerColor); // User selected the wrong answer
+                //     // }
+                //     
+                // }
+                // else
+                // {
+                //     choiceButtons[i].ResetVisualsColor(); // Reset to default color
+                // }
+                
+                ShowCorrectAnswers(selectedAnswers[currentReviewIndex], true);
             }
         }
 
@@ -472,7 +529,8 @@ public class QuizManager : MonoBehaviour
         prevButton.SetActive(true);
         nextButton.SetActive(true);
         prevButton.GetComponent<Button>().interactable = (currentReviewIndex > 0); // Hide if at first question
-        nextButton.GetComponent<Button>().interactable = (currentReviewIndex < totalQuestions); // Hide if at last question
+        nextButton.GetComponent<Button>().interactable =
+            (currentReviewIndex < totalQuestions); // Hide if at last question
     }
 
     public void OnNextButtonPressed()

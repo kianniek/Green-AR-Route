@@ -156,12 +156,17 @@ public class QRCodeManagerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        
         DrawDefaultInspector();
 
         var qrCodeManager = (QRCodeManager)target;
 
+        
         if (GUILayout.Button("Simulate Scanning All QR Codes"))
         {
+            if (!Application.isPlaying)
+                return;
+
             foreach (var qrCode in qrCodeManager.qrCodes)
             {
                 qrCode.scanned = true;
