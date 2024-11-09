@@ -7440,7 +7440,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8565014566280547708}
-  - component: {fileID: 977208806332342321}
   m_Layer: 0
   m_Name: Ambience
   m_TagString: Untagged
@@ -7463,37 +7462,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2365992989571004151}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &977208806332342321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5139354526982423352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -1015746944
-      Data2: 1226253556
-      Data3: 1088331195
-      Data4: -812534811
-    Path: event:/Stad Shooter/Ambience
-  Event: 
-  PlayEvent: 11
-  StopEvent: 12
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  NonRigidbodyVelocity: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!1 &5175811162649912611
 GameObject:
   m_ObjectHideFlags: 0
@@ -11564,6 +11532,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!1001 &173156202877764952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12349,6 +12318,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!114 &3008906954328784736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16226,6 +16196,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!114 &6088115342323678975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16966,6 +16937,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!4 &2276287570117600425 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
@@ -17565,6 +17537,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!114 &9054285858456430921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19305,6 +19278,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!1001 &2854698432606542943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22161,6 +22135,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!114 &5206606523315508332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22513,6 +22488,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!114 &5626964316418096165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23137,6 +23113,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!1001 &3667443712239287745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25760,6 +25737,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!4 &6952881816134144831 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
@@ -25961,6 +25939,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!4 &5177541619682917387 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
@@ -26460,6 +26439,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!4 &7075981105072405720 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
@@ -27085,6 +27065,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!1001 &5028786565547794323
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27495,6 +27476,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!4 &4374357426168462245 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8737160488285165247, guid: 5d4d535eb116abe45b82f263c02bc811,
@@ -27610,6 +27592,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!114 &7482543796553875597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27767,6 +27750,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!114 &4758588008488902090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30501,6 +30485,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!114 &1944160500047047723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30940,6 +30925,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!4 &5983247774346857494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 508900572660177652, guid: ebe960f0f73ab374f8b5356f025e5f8b,
@@ -32755,6 +32741,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!4 &6798886862841695898 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
@@ -35473,6 +35460,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!4 &4912079919871836658 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2367869777646533188, guid: 7f770a00466f34af7b3cddb7b10ce77e,
@@ -35588,6 +35576,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!114 &1129424842957883181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37174,6 +37163,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!4 &8063983490279327530 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 403068731602886621, guid: d15bc520e5f614591a52bffb38f01e8e,
@@ -40958,6 +40948,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!4 &900488138697329169 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8737160488285165247, guid: 5d4d535eb116abe45b82f263c02bc811,
@@ -41581,6 +41572,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   growthDuration: 2
+  coverageIndexToGrow: 1
 --- !u!1001 &8484858884633165469
 PrefabInstance:
   m_ObjectHideFlags: 0

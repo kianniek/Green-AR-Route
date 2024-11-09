@@ -5,45 +5,51 @@ using UnityEngine;
 public class MuteBankFMOD : MonoBehaviour
 {
     // Reference to the FMOD Bank
-    [FMODUnity.BankRef]
-    public string[] bankPaths;
-    
-    private void Start() {
+    [FMODUnity.BankRef] public string[] bankPaths;
+
+    private void Start()
+    {
         FMODUnity.RuntimeManager.StudioSystem.getBankList(out var loadedBanks);
         foreach (var bankPath in bankPaths)
         {
-            
-        foreach(var bank in loadedBanks) {
-            bank.getPath(out var path);
-            Debug.Log(path);
-            
-            var splitPath = path.Split('/');
-            
-            if(splitPath[1] != bankPath) {
-                continue;
-            }
-            bank.getEventList(out var eventDescriptions);
-            foreach(var eventDesc in eventDescriptions) {
-                eventDesc.getPath(out var eventPath);
-            }
-        }
-        }
+            foreach (var bank in loadedBanks)
+            {
+                bank.getPath(out var path);
+                Debug.Log(path);
 
+                var splitPath = path.Split('/');
+
+                if (splitPath[1] != bankPath)
+                {
+                    continue;
+                }
+
+                bank.getEventList(out var eventDescriptions);
+                foreach (var eventDesc in eventDescriptions)
+                {
+                    eventDesc.getPath(out var eventPath);
+                }
+            }
+        }
     }
-    
-    public void ToggleMuteBank(bool mute) {
-        if(mute) {
+
+    public void ToggleMuteBank(bool mute)
+    {
+        if (mute)
+        {
             MuteBank();
-        } else {
+        }
+        else
+        {
             UnmuteBank();
         }
     }
-    
-    public void MuteBank() {
+
+    public void MuteBank()
+    {
         FMODUnity.RuntimeManager.StudioSystem.getBankList(out var loadedBanks);
         foreach (var bankPath in bankPaths)
         {
-
             foreach (var bank in loadedBanks)
             {
                 bank.getPath(out var path);
@@ -77,8 +83,9 @@ public class MuteBankFMOD : MonoBehaviour
             }
         }
     }
-    
-    public void UnmuteBank() {
+
+    public void UnmuteBank()
+    {
         FMODUnity.RuntimeManager.StudioSystem.getBankList(out var loadedBanks);
         foreach (var bankPath in bankPaths)
         {
