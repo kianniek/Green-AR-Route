@@ -71,4 +71,10 @@ public class VideoPlayerScript : MonoBehaviour
             OnClick();
         }
     }
+    
+    public void SkipVideo()
+    {
+        videoPlayer.Stop();
+        onVideoEnd.Invoke();
+    }
 }
