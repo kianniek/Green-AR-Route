@@ -102,22 +102,18 @@ public class LeafCollectionScript : MonoBehaviour
             case FlowerPart.top:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[1], leafObj));
                 leafObj.transform.SetAsFirstSibling();
-
                 break;
             case FlowerPart.bottom:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[2], leafObj));
                 leafObj.transform.SetAsFirstSibling();
-
                 break;
             case FlowerPart.left:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[3], leafObj));
                 leafObj.transform.SetAsFirstSibling();
-
                 break;
             case FlowerPart.right:
                 StartCoroutine(LeafCollectedAnimation(leafPositions[4], leafObj));
                 leafObj.transform.SetAsFirstSibling();
-
                 break;
             default:
                 Debug.LogError("Invalid flower part", leafObj);
