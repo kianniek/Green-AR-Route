@@ -88,6 +88,6 @@ public class SceneSwap : MonoBehaviour
     
     public void LoadSameScene()
     {
-        LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

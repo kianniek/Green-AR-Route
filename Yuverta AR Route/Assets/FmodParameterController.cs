@@ -155,4 +155,9 @@ public class FmodParameterController : MonoBehaviour
         eventState.getParameterByID(parameterID, out float postValue);
         Debug.Log($"PostValue {parameterDescription.name.ToString()}: " + postValue);
     }
+
+    public void SetParameterValueFloatToInt(float value)
+    {
+        SetParameterValue((int)value);
+    }
 }

@@ -53,6 +53,7 @@ public class PaintManager : Singleton<PaintManager>
 
     public override void Awake()
     {
+        keepAlive = false;
         base.Awake();
 
         paintMaterial = new Material(texturePaint);

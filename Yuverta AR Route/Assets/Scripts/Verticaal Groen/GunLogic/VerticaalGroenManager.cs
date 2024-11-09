@@ -8,6 +8,12 @@ public class VerticaalGroenManager : Singleton<VerticaalGroenManager>
     private int currentWeaponIndex = 0;
     private GunController currentWeapon;
 
+    public override void Awake()
+    {
+        keepAlive = false;
+        base.Awake();
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
