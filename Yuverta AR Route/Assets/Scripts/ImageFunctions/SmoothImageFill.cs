@@ -55,5 +55,10 @@ namespace ImageFunctions
             _targetFillAmount = fillAmount;
             StartCoroutine(FillImage());
         }
+
+        private void Update()
+        {
+            _targetFillAmount = PaintManager.instance.GetCurrentStep();
+        }
     }
 }

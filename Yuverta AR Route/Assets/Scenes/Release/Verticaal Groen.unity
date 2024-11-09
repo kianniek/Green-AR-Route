@@ -1194,7 +1194,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 583.185, y: 0}
+  m_AnchoredPosition: {x: 1095.185, y: 0}
   m_SizeDelta: {x: 0, y: 130}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &230635900
@@ -2639,6 +2639,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94aed1810e79cb34e9fd32a4e2fee6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playOnAwake: 0
+  playOnStart: 0
+  playOnEnable: 0
+  playOnDisable: 0
 --- !u!114 &518286179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4155,6 +4159,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94aed1810e79cb34e9fd32a4e2fee6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playOnAwake: 0
+  playOnStart: 0
+  playOnEnable: 0
+  playOnDisable: 0
 --- !u!1 &698150848
 GameObject:
   m_ObjectHideFlags: 0
@@ -4710,7 +4718,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 251.57501, y: 0}
+  m_AnchoredPosition: {x: 763.575, y: 0}
   m_SizeDelta: {x: 0, y: 130}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &789993036
@@ -5528,6 +5536,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94aed1810e79cb34e9fd32a4e2fee6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playOnAwake: 0
+  playOnStart: 0
+  playOnEnable: 0
+  playOnDisable: 0
 --- !u!1 &938972841 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7456861467098957124, guid: 5c134ea5807842c41a418f827ad5bc6e,
@@ -7160,6 +7172,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5289244225045815206, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1419687095}
+    - targetCorrespondingSourceObject: {fileID: 5289244225045815206, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1419687097}
+    - targetCorrespondingSourceObject: {fileID: 5289244225045815206, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1419687096}
+    - targetCorrespondingSourceObject: {fileID: 5289244225045815206, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1419687088}
     - targetCorrespondingSourceObject: {fileID: 5289244225045815206, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
         type: 3}
@@ -7172,19 +7196,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5289244225045815206, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1419687095}
-    - targetCorrespondingSourceObject: {fileID: 5289244225045815206, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1419687094}
-    - targetCorrespondingSourceObject: {fileID: 5289244225045815206, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1419687097}
-    - targetCorrespondingSourceObject: {fileID: 5289244225045815206, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1419687096}
     - targetCorrespondingSourceObject: {fileID: 1236762499133833801, guid: ed2d29e7567e8854e979a8f6eb3f7a01,
         type: 3}
       insertIndex: -1
@@ -8734,6 +8746,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94aed1810e79cb34e9fd32a4e2fee6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playOnAwake: 0
+  playOnStart: 0
+  playOnEnable: 0
+  playOnDisable: 0
 --- !u!1 &1407955400
 GameObject:
   m_ObjectHideFlags: 0
@@ -9490,18 +9506,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1419687087}
-        m_TargetAssemblyTypeName: PromptTextController, Assembly-CSharp
-        m_MethodName: SetText
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Goed Gedaan! <br>Je hebt deze module succesvol afgerond!
-          m_BoolArgument: 1
-        m_CallState: 2
   OnTresholdHalfReached:
     m_PersistentCalls:
       m_Calls:
@@ -9592,7 +9596,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  coveredCount: 0
   scoreText:
   - {fileID: 808982079}
   - {fileID: 230635901}
@@ -11487,6 +11490,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94aed1810e79cb34e9fd32a4e2fee6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playOnAwake: 0
+  playOnStart: 0
+  playOnEnable: 0
+  playOnDisable: 0
 --- !u!1 &1843963645
 GameObject:
   m_ObjectHideFlags: 0
@@ -12686,7 +12693,7 @@ GameObject:
   - component: {fileID: 1983311310}
   - component: {fileID: 1983311312}
   m_Layer: 5
-  m_Name: Translucent Image
+  m_Name: End Screen Popup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13273,6 +13280,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1419687087}
+        m_TargetAssemblyTypeName: PromptTextController, Assembly-CSharp
+        m_MethodName: SetText
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Goed Gedaan! <br>Je hebt deze module succesvol afgerond!
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &2041863089
@@ -16484,19 +16503,24 @@ PrefabInstance:
       objectReference: {fileID: 226407046}
     - target: {fileID: 1820758919790048572, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
+      propertyPath: objectGrower.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820758919790048572, guid: 5c134ea5807842c41a418f827ad5bc6e,
+        type: 3}
       propertyPath: objectGrower.Array.data[6]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1906750880}
     - target: {fileID: 1820758919790048572, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: objectGrower.Array.data[7]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1095529387}
     - target: {fileID: 1820758919790048572, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: objectGrower.Array.data[8]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 389353670}
     - target: {fileID: 1820758919790048572, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: objectGrower.Array.data[9]
@@ -16505,7 +16529,7 @@ PrefabInstance:
     - target: {fileID: 1820758919790048572, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}
       propertyPath: timeBetweenObjectToSetMask
-      value: 0.2
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1820758919790048572, guid: 5c134ea5807842c41a418f827ad5bc6e,
         type: 3}

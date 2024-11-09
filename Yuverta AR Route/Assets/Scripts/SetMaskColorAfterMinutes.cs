@@ -1,5 +1,7 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SetMaskColorAfterMinutes : MonoBehaviour
@@ -9,7 +11,7 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
     public PaintColors paintColors;
     [SerializeField] private TMP_Text timerText;
 
-    public ObjectGrower[] objectGrower;
+    public List<ObjectGrower> objectGrower;
     private Paintable[] paintables;
 
     private bool isTimerRunning;
@@ -26,6 +28,17 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
         if (timerText != null)
         {
             UpdateTimerText(RemainingTime); // Initial display of the timer
+        }
+
+        //get all object grower scripts
+        var objectGrowers = FindObjectsOfType<ObjectGrower>();
+
+        foreach (var objGrower in objectGrowers)
+        {
+            if (!objectGrower.Contains(objGrower))
+            {
+                objectGrower.Add(objGrower);
+            }
         }
     }
 
@@ -76,10 +89,6 @@ public class SetMaskColorAfterMinutes : MonoBehaviour
 
         foreach (var obj in objectGrower)
         {
-            if (timeBetweenObjectToSetMask > 0)
-            {
-                yield return new WaitForSeconds(timeBetweenObjectToSetMask);
-            }
             obj.GrowChildObjects(paintColorIndexToSet);
         }
     }

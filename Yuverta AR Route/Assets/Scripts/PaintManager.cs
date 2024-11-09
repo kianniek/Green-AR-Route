@@ -13,7 +13,7 @@ public class PaintManager : Singleton<PaintManager>
     public Shader extendIslands;
     public Shader zoomToBounds;
 
-    public int coveredTreshold;
+    [SerializeField] private int coveredTreshold;
 
     [Tooltip("Event that fires when a threshold is reached for the amount of objects covered in the 2nd mask color")]
     public UnityEvent OnTresholdReached;
@@ -41,7 +41,7 @@ public class PaintManager : Singleton<PaintManager>
 
     private CommandBuffer command;
 
-    [SerializeField] private int coveredCount = 0;
+    private int coveredCount = 0;
 
     public bool HasReachedTreshold => coveredCount >= coveredTreshold;
     public bool HasReachedHalfwayTreshold => coveredCount >= coveredTreshold * 0.5f;
@@ -61,6 +61,16 @@ public class PaintManager : Singleton<PaintManager>
         command = new CommandBuffer { name = "CommandBuffer - " + gameObject.name };
 
         UpdateScoreText(0);
+    }
+
+    private void Start()
+    {
+        var paintables = FindObjectsOfType<Paintable>();
+        
+        if (paintables.Length == 0)
+            return;
+        
+        coveredTreshold = paintables.Length;
     }
 
     public void InitTextures(Paintable paintable)
@@ -168,7 +178,8 @@ public class PaintManager : Singleton<PaintManager>
                 var average = request.GetData<Color32>()[0];
 
                 // Calculate how close the color is from 0 to 1
-                var coveredPixels = new Vector4(average.r / 255f, average.g / 255f, average.b / 255f, paintable.CoverageIndex);
+                var coveredPixels = new Vector4(average.r / 255f, average.g / 255f, average.b / 255f,
+                    paintable.CoverageIndex);
 
                 // Call the callback with the result
                 paintable.coverage = coveredPixels;
@@ -242,30 +253,11 @@ public class PaintManager : Singleton<PaintManager>
 
     public void CheckIfStepThresholdIsReached()
     {
-        if (paintables.Count == 0)
-            return;
-
-        // Get amount of buildings painted
-        var paintedBuildings = paintables.Count(p => p.Key.isBuilding);
-
-        //get amount of buildings painted
-        var paintedBuildingsN = paintables.Count(p => p.Key.isBuilding && p.Value >= 1);
-
-        // Get amount of non-buildings painted
-        var paintedWithoutBuildings = paintables.Count - paintedBuildings;
-
-        var stepSizeB = 1f / paintedBuildings;
-        var stepB = Mathf.Clamp01(stepSizeB * paintedBuildingsN);
-
-        var stepSizeP = 1f / paintedWithoutBuildings;
-        var stepP = Mathf.Clamp01(stepSizeP * coveredCount);
-
-        var buildingWeight = 0.7f;
-        var paintedWeight = 0.3f;
-
-        var weightedStep = (stepB * buildingWeight) + (stepP * paintedWeight);
-        Debug.Log($"Weighted Step: {weightedStep}");
+        // Calculate the weighted step
+        var weightedStep = GetCurrentStep();
+        
         OnTresholdStep.Invoke(weightedStep);
+        
         UpdateScoreText(weightedStep);
 
         if (HasReachedTreshold)
@@ -276,6 +268,35 @@ public class PaintManager : Singleton<PaintManager>
         {
             OnTresholdHalfReached.Invoke();
         }
+    }
+    
+    public float GetCurrentStep()
+    {
+        if (paintables.Count == 0)
+            return 0;
+
+        // Get amount of buildings painted
+        var paintedBuildings = paintables.Count(p => p.Key.isBuilding);
+
+        //get amount of buildings painted
+        var paintedBuildingsN = paintables.Count(p => p.Key.isBuilding && p.Value >= 1);
+
+        // Get amount of non-buildings painted
+        var paintedWithoutBuildings = paintables.Count - paintedBuildings;
+
+        // Calculate the step size for each category
+        var stepSizeB = 1f / paintedBuildings;
+        var stepB = Mathf.Clamp01(stepSizeB * paintedBuildingsN);
+
+        // Calculate the step size for each category
+        var stepSizeP = 1f / paintedWithoutBuildings;
+        var stepP = Mathf.Clamp01(stepSizeP * coveredCount);
+
+        // Calculate the weighted step
+        var buildingWeight = 0.7f;
+        var paintedWeight = 0.3f;
+        
+        return (stepB * buildingWeight) + (stepP * paintedWeight);
     }
 
     private void UpdateScoreText(float amount)
