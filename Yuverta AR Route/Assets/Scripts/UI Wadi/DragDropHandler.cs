@@ -10,6 +10,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 [RequireComponent(typeof(ObjectSpawner))]
 public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
+    [SerializeField] private GameObject targetUiGameObject;
+
     [Header("AR Settings")] [Tooltip("Tag used to identify objects for raycasting.")] [SerializeField]
     private string tagToRaycast;
 
@@ -21,7 +23,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
     [Tooltip("Visuals of the item.")] [SerializeField]
     private GameObject visuals;
-    
+
     [FormerlySerializedAs("spawnParticles")] [Tooltip("Particles of the item.")] [SerializeField]
     private GameObject spawnParticlesPrefab;
 
@@ -107,7 +109,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
         if (_scrollDelta != Vector2.zero && !isDraggingUI)
         {
             _scrollDelta = Vector2.Lerp(_scrollDelta, Vector2.zero, _scroll.decelerationRate);
-            
+
             //update scroll position
             ScrollContent(_scrollDelta);
         }
@@ -127,15 +129,34 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
     public void OnDrag(PointerEventData eventData)
     {
+        var gameObjectSelected = eventData.pointerCurrentRaycast.gameObject;
+        
         // Check if the pointer is over a UI element
         isPointerOverUI = EventSystem.current.IsPointerOverGameObject(eventData.pointerId);
+        var isPointerOverTarget = gameObjectSelected == targetUiGameObject;
+
+        foreach (Transform child in targetUiGameObject.transform)
+        {
+            if(gameObjectSelected == child.gameObject)
+            {
+                isPointerOverTarget = true;
+            }
+        }
+
+        if (gameObjectSelected != null)
+        {
+            Debug.Log(gameObjectSelected.name);
+        }else
+        {
+            Debug.Log("No object selected");
+        }
 
         // Determine if dragging an AR object or UI element
-        isDragging = !isPointerOverUI && isDraggableObjectSelected;
+        isDragging = isDraggableObjectSelected;
         isDraggingUI = isPointerOverUI;
 
         // Create drag image if dragging an AR object
-        if (dragObject == null && isDragging)
+        if (dragObject == null && isDragging && !isPointerOverTarget)
         {
             CreateDragImage(eventData);
         }
@@ -205,7 +226,7 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
         //Diable the rotation of the drag sprite
         _dragSprite.CameraFollowTransform = true;
-        
+
         // Add and configure the RawImage component
         var image = dragObject.AddComponent<RawImage>();
         image.texture = _dragSprite.RenderTexture; // Set the sprite
@@ -257,16 +278,17 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
                 return;
 
             // Try to spawn the object at the hit point
-            var hasSpawnedObject = _objectSpawner.TrySpawnObject(hit.point, hit.normal, out var spawnObject, out var spawnPosition);
+            var hasSpawnedObject =
+                _objectSpawner.TrySpawnObject(hit.point, hit.normal, out var spawnObject, out var spawnPosition);
 
             if (hasSpawnedObject)
             {
                 // Add the spawned object to the UI menu logic's dictionary
                 _uiMenuLogic.UIObjectDictionary.Add(spawnObject, this);
-                
+
                 var particles = Instantiate(spawnParticlesPrefab, spawnPosition, Quaternion.identity);
                 var particleSystem = particles.GetComponent<ParticleSystem>();
-                
+
                 if (particleSystem != null)
                     particleSystem.Play();
             }
@@ -280,11 +302,11 @@ public class DragDropHandler : MonoBehaviour, IPointerDownHandler, IDragHandler,
                     moveObjectWithTouch.SetDragSprite(_dragSprite);
                 }
             }
-            
+
             gameObject.SetActive(!hasSpawnedObject);
         }
     }
-    
+
     public WorldImage GetDragSprite()
     {
         return _dragSprite;
