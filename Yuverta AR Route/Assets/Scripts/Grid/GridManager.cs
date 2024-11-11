@@ -27,6 +27,8 @@ public class GridManager : MonoBehaviour
     [SerializeField] private UnityEvent<int> onChangeAudioBasedOnAmountPlaced = new();
 
     [SerializeField] private UnityEvent onBlockPlaced = new();
+    
+    public UnityEvent<bool> onBottomLayerFilled = new();
 
     private GameObject _wadiTopLayer;
     private GameObject _wadiBottomLayer;
@@ -41,6 +43,8 @@ public class GridManager : MonoBehaviour
     private bool _wadiCompleted;
     private bool riseAndDrainWaterAnimationCompleted = false;
     private List<GameObject> _topLayerObjects = new();
+    
+    
 
 
     public enum ObjectGridLocation
@@ -425,7 +429,9 @@ public class GridManager : MonoBehaviour
             .ToDictionary(x => x.Key, x => x.Value);
     
         // Check if all bottom layer positions are occupied
-        return bottomLayerOccupiedPositions.All(x => x.Value);
+        var bottomLayerPopulated = bottomLayerOccupiedPositions.All(x => x.Value);
+        onBottomLayerFilled.Invoke(bottomLayerPopulated);
+        return bottomLayerPopulated;
     }
 
 }
