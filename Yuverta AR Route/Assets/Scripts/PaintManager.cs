@@ -223,6 +223,8 @@ public class PaintManager : Singleton<PaintManager>
         {
             AddToPaintablesList(paintable, coverageID);
         }
+        
+        CalculateCoverage(paintable, paintable.uvMin, paintable.uvMin, null);
 
         CheckIfStepThresholdIsReached();
     }
