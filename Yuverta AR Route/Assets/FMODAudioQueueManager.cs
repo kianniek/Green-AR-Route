@@ -19,7 +19,7 @@ public class FMODStudioEventQueueManager : MonoBehaviour
             isPlaying = false;
             PlayNextEventInQueue();
         }
-#if UNITY_EDITOR
+#if DEBUG
         //print the queue in one long string
         string queueString = "";
         foreach (StudioEventEmitter eventEmitter in eventQueue)

@@ -66,7 +66,6 @@ public class FmodParameterController : MonoBehaviour
                 foreach (var eventDesc in eventDescriptions)
                 {
                     eventDesc.getPath(out var eventPath);
-                    Debug.Log(eventPath);
 
                     // Mute the event
                     FMODUnity.RuntimeManager.StudioSystem.getEvent(eventPath, out var eventInstance);
