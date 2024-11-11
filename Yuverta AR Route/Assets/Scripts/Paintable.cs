@@ -141,9 +141,12 @@ public class Paintable : MonoBehaviour
 
     public int CheckCoverage()
     {
+        const float PrevColorCoverageFactor = 1.3f;
+        const float PrevColorComboCoverageFactor = 2f;
+
         // Check the highest index (z-axis)
         if ((coverage.z > coverageThreshold && CoverageIndex < 2) || 
-            (coverage.y > coverageThreshold / 1.3f && coverage.z > coverageThreshold / 2 && CoverageIndex < 1))
+            (coverage.y > coverageThreshold / PrevColorCoverageFactor && coverage.z > coverageThreshold / PrevColorComboCoverageFactor && CoverageIndex < 1))
         {
             // Only allow upward progression, prevent downgrading
             if (CoverageIndex < 2)
@@ -159,7 +162,7 @@ public class Paintable : MonoBehaviour
 
         // Check the middle index (y-axis)
         if ((coverage.y > coverageThreshold && CoverageIndex < 1) || 
-            (coverage.x > coverageThreshold / 1.3f && coverage.y > coverageThreshold / 2 && CoverageIndex < 0))
+            (coverage.x > coverageThreshold / PrevColorCoverageFactor && coverage.y > coverageThreshold / PrevColorComboCoverageFactor && CoverageIndex < 0))
         {
             // Only allow upward progression, prevent downgrading
             if (CoverageIndex < 1)
@@ -210,44 +213,24 @@ public class Paintable : MonoBehaviour
 
     private void CalculateUVBounds()
     {
-        // Get the mesh filter component
         var meshFilter = GetComponent<MeshFilter>();
-        if (meshFilter == null)
+        if (meshFilter == null || meshFilter.mesh.uv.Length == 0)
         {
-            Debug.LogError("MeshFilter component not found!", gameObject);
+            Debug.LogError("MeshFilter or UV data is missing", gameObject);
             return;
         }
 
-        // Get the mesh from the mesh filter
-        var mesh = meshFilter.mesh;
+        var uvs = meshFilter.mesh.uv;
+        uvMin = new Vector2(float.MaxValue, float.MaxValue);
+        uvMax = new Vector2(float.MinValue, float.MinValue);
 
-        // Ensure the mesh has UVs
-        if (mesh.uv.Length == 0)
-        {
-            Debug.LogError("Mesh does not have UV coordinates!", gameObject);
-            return;
-        }
-
-        // Extract UV coordinates
-        var uvs = mesh.uv;
-
-        // Initialize min and max bounds
-        var uvMin = new Vector2(float.MaxValue, float.MaxValue);
-        var uvMax = new Vector2(float.MinValue, float.MinValue);
-
-        // Iterate through UVs to find the bounds
         foreach (var uv in uvs)
         {
-            if (uv.x < uvMin.x) uvMin.x = uv.x;
-            if (uv.y < uvMin.y) uvMin.y = uv.y;
-            if (uv.x > uvMax.x) uvMax.x = uv.x;
-            if (uv.y > uvMax.y) uvMax.y = uv.y;
+            uvMin = new Vector2(Mathf.Min(uvMin.x, uv.x), Mathf.Min(uvMin.y, uv.y));
+            uvMax = new Vector2(Mathf.Max(uvMax.x, uv.x), Mathf.Max(uvMax.y, uv.y));
         }
-
-        // Store the bounds
-        this.uvMin = uvMin;
-        this.uvMax = uvMax;
     }
+
 
     public void OnHit(Color color, int index)
     {
@@ -255,22 +238,22 @@ public class Paintable : MonoBehaviour
             return;
 
         hitCount++;
-        if (hitCount >= hitTreshold)
-        {
-            // Store the current coverage index before evaluation
-            int currentCoverageIndex = CoverageIndex;
+        
+        if (hitCount < hitTreshold) 
+            return;
+        // Store the current coverage index before evaluation
+        int currentCoverageIndex = CoverageIndex;
 
-            // Only allow upward progression by one, prevent downgrading
+        // Only allow upward progression by one, prevent downgrading
 
-            if (currentCoverageIndex + 1 != index)
-                return;
+        if (currentCoverageIndex + 1 != index)
+            return;
 
-            PaintManager.instance.AddToPaintablesList(this, index);
-            PreviousCoverageIndex = index - 1;
-            CoverageIndex = index;
-            OnCovered.Invoke(index);
-            SetMaskToColor(this, color, index);
-        }
+        PaintManager.instance.AddToPaintablesList(this, index);
+        PreviousCoverageIndex = index - 1;
+        CoverageIndex = index;
+        OnCovered.Invoke(index);
+        SetMaskToColor(this, color, index);
     }
 
     private void OnDisable()
@@ -280,5 +263,12 @@ public class Paintable : MonoBehaviour
         uvIslandsRenderTexture?.Release();
         extendIslandsRenderTexture?.Release();
         supportTexture?.Release();
+
+        maskRenderTexture = null;
+        islandsRenderTexture = null;
+        uvIslandsRenderTexture = null;
+        extendIslandsRenderTexture = null;
+        supportTexture = null;
     }
+
 }
