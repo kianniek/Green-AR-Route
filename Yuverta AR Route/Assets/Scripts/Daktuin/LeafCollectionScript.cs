@@ -68,7 +68,7 @@ public class LeafCollectionScript : MonoBehaviour
     private ARRaycastManager arRaycastManager;
 
     [SerializeField] private bool deleteAnimationIfFinished;
-    
+
     [SerializeField] private CameraHeightOffGround cameraHeightOffGround;
 
     void Awake()
@@ -88,36 +88,40 @@ public class LeafCollectionScript : MonoBehaviour
 
         leaf.collected = true;
 
-        var leafObj = Instantiate(leaf.spriteGameobjectUI, leaveUIParent.transform);
-        
-        // set the position of the leaf object to the middle of the screen
-        leafObj.transform.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0);
+        var leafObj = Instantiate(leaf.spriteGameobjectUI);
 
-        switch (leaf.flowerPart)
+        //foreach child in the leaf object
+        foreach (Transform child in leafObj.transform)
         {
-            case FlowerPart.middel:
-                StartCoroutine(LeafCollectedAnimation(leafPositions[0], leafObj));
-                leafObj.transform.SetAsLastSibling();
-                break;
-            case FlowerPart.top:
-                StartCoroutine(LeafCollectedAnimation(leafPositions[1], leafObj));
-                leafObj.transform.SetAsFirstSibling();
-                break;
-            case FlowerPart.bottom:
-                StartCoroutine(LeafCollectedAnimation(leafPositions[2], leafObj));
-                leafObj.transform.SetAsFirstSibling();
-                break;
-            case FlowerPart.left:
-                StartCoroutine(LeafCollectedAnimation(leafPositions[3], leafObj));
-                leafObj.transform.SetAsFirstSibling();
-                break;
-            case FlowerPart.right:
-                StartCoroutine(LeafCollectedAnimation(leafPositions[4], leafObj));
-                leafObj.transform.SetAsFirstSibling();
-                break;
-            default:
-                Debug.LogError("Invalid flower part", leafObj);
-                throw new ArgumentOutOfRangeException();
+            // set the position of the leaf object to the middle of the screen
+            child.position = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0);
+
+            switch (leaf.flowerPart)
+            {
+                case FlowerPart.middel:
+                    StartCoroutine(LeafCollectedAnimation(leafPositions[0], child.gameObject));
+                    leafObj.transform.SetAsLastSibling();
+                    break;
+                case FlowerPart.top:
+                    StartCoroutine(LeafCollectedAnimation(leafPositions[1], child.gameObject));
+                    leafObj.transform.SetAsFirstSibling();
+                    break;
+                case FlowerPart.bottom:
+                    StartCoroutine(LeafCollectedAnimation(leafPositions[2], child.gameObject));
+                    leafObj.transform.SetAsFirstSibling();
+                    break;
+                case FlowerPart.left:
+                    StartCoroutine(LeafCollectedAnimation(leafPositions[3], child.gameObject));
+                    leafObj.transform.SetAsFirstSibling();
+                    break;
+                case FlowerPart.right:
+                    StartCoroutine(LeafCollectedAnimation(leafPositions[4], child.gameObject));
+                    leafObj.transform.SetAsFirstSibling();
+                    break;
+                default:
+                    Debug.LogError("Invalid flower part", child.gameObject);
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         PerformRaycast(leaf.animation, leaf.spawnParticles);
@@ -132,7 +136,7 @@ public class LeafCollectionScript : MonoBehaviour
             onThreeLeavesCollected.Invoke();
             threeLeavesCollectedTriggered = true;
         }
-        
+
         if (collectedLeafCount == leaves.Count && allLeavesCollectedTiggered == false)
         {
             allLeavesCollected.Invoke();
@@ -220,7 +224,7 @@ public class LeafCollectionScript : MonoBehaviour
 
         //get the postion of the camera + 1 meter in the forward direction
         Vector3 position = cameraPosition + cameraForward * 3.0f;
-        
+
 
 #if UNITY_EDITOR
         Gizmos.color = Color.red;
