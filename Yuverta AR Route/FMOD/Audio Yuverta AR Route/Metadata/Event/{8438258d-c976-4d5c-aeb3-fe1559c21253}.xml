@@ -54,14 +54,14 @@
 			<destination>{965dc0c6-a0d6-4ed3-98b0-7833cf32893a}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{346149f5-55c6-4673-847e-1f8c29a218b4}</destination>
+			<destination>{9b2bf750-8a32-46d9-82bf-cf0b8b53e324}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{c86eb5cc-1292-44a7-bc95-df1ab39baac1}" />
 	<object class="MarkerTrack" id="{bef8d05b-00d0-46a6-b14f-f1881eee3d33}" />
 	<object class="GroupTrack" id="{a24e2ae8-294d-4ab3-9991-a8bd2352ac71}">
 		<relationship name="modules">
-			<destination>{acba1ab0-70a7-4b45-b9ea-62dc0558f141}</destination>
+			<destination>{b6dc4e64-6974-43de-9e00-cd07c898f507}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{8855f0ba-3a52-4487-a76c-6420cb98ba09}</destination>
@@ -69,10 +69,13 @@
 	</object>
 	<object class="Timeline" id="{326e09d8-ad91-462a-9811-ded57b5c5e7c}">
 		<relationship name="modules">
-			<destination>{acba1ab0-70a7-4b45-b9ea-62dc0558f141}</destination>
+			<destination>{b6dc4e64-6974-43de-9e00-cd07c898f507}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{89740f4c-fa1d-4c0b-ad62-2f16d474f5c1}">
+		<property name="volume">
+			<value>6</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{4b1fa326-4957-49ab-9450-b6a15f7412e9}</destination>
 		</relationship>
@@ -89,12 +92,12 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{965dc0c6-a0d6-4ed3-98b0-7833cf32893a}" />
-	<object class="SingleSound" id="{acba1ab0-70a7-4b45-b9ea-62dc0558f141}">
+	<object class="SingleSound" id="{b6dc4e64-6974-43de-9e00-cd07c898f507}">
 		<property name="length">
 			<value>42.417895833333333</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{d33ab1e5-3e7d-43aa-8ae4-41b156e133dc}</destination>
+			<destination>{7f0411dd-e21c-4cd1-9023-562e06262508}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{8855f0ba-3a52-4487-a76c-6420cb98ba09}">

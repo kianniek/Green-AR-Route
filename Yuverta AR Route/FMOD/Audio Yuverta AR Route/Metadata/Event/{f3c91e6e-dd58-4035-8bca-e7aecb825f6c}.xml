@@ -54,14 +54,14 @@
 			<destination>{8302842b-41ed-464f-8787-2936e53cf09b}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{346149f5-55c6-4673-847e-1f8c29a218b4}</destination>
+			<destination>{9b2bf750-8a32-46d9-82bf-cf0b8b53e324}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{3c7fdbfe-3cf8-4286-bf5f-7e922a426a2b}" />
 	<object class="MarkerTrack" id="{02a3aea7-edd8-403d-91e0-6d364b168cfe}" />
 	<object class="GroupTrack" id="{57911fd3-6bc8-4ebd-9354-3c7318ef2212}">
 		<relationship name="modules">
-			<destination>{e15135fb-e62b-4fc7-b076-7d31c85e39b6}</destination>
+			<destination>{6ba3c7dd-a96a-47b5-88ee-2fb831a66293}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{7209db05-a6ec-4aeb-ad11-67494825fdf6}</destination>
@@ -69,10 +69,13 @@
 	</object>
 	<object class="Timeline" id="{3157ae05-925f-434d-98fb-34cd2fb06076}">
 		<relationship name="modules">
-			<destination>{e15135fb-e62b-4fc7-b076-7d31c85e39b6}</destination>
+			<destination>{6ba3c7dd-a96a-47b5-88ee-2fb831a66293}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{2c5f5190-f910-4a7a-a541-46cf06d63006}">
+		<property name="volume">
+			<value>5.5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{a92629b9-c44e-46a8-a9b5-8197180d6508}</destination>
 		</relationship>
@@ -89,12 +92,12 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{8302842b-41ed-464f-8787-2936e53cf09b}" />
-	<object class="SingleSound" id="{e15135fb-e62b-4fc7-b076-7d31c85e39b6}">
+	<object class="SingleSound" id="{6ba3c7dd-a96a-47b5-88ee-2fb831a66293}">
 		<property name="length">
 			<value>28.621645833333332</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{f9ecec08-5200-4aff-97a9-373bea17e36c}</destination>
+			<destination>{d208835d-69c8-41a9-b0e1-0dfb77b9b788}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{7209db05-a6ec-4aeb-ad11-67494825fdf6}">
