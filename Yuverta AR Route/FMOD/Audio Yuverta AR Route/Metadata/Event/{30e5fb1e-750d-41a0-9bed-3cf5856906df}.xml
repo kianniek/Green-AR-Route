@@ -54,14 +54,14 @@
 			<destination>{b1f54d69-acb1-44a4-a008-2525ec5d834e}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{346149f5-55c6-4673-847e-1f8c29a218b4}</destination>
+			<destination>{9b2bf750-8a32-46d9-82bf-cf0b8b53e324}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{1c62e78f-adbe-4599-bc64-2b7f50c31865}" />
 	<object class="MarkerTrack" id="{c07ada32-f3a0-4b13-937e-214ff189b3a0}" />
 	<object class="GroupTrack" id="{28dbfb41-3d5a-4b70-bf09-1fe0a0d9ae6b}">
 		<relationship name="modules">
-			<destination>{8a5f80ea-9093-4ecc-9f8e-62fa0d42c678}</destination>
+			<destination>{2ed7664e-03ea-45b0-a545-f477047be468}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{afff1245-54ad-4191-950a-9fc2be1f40c6}</destination>
@@ -69,10 +69,13 @@
 	</object>
 	<object class="Timeline" id="{b391685d-f0ef-4879-a874-aa6df269b22a}">
 		<relationship name="modules">
-			<destination>{8a5f80ea-9093-4ecc-9f8e-62fa0d42c678}</destination>
+			<destination>{2ed7664e-03ea-45b0-a545-f477047be468}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{9107be75-df63-4f5d-8fb0-c20dbb950e74}">
+		<property name="volume">
+			<value>5.5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{2cdcdfd5-378a-492c-9593-73ace3726f8a}</destination>
 		</relationship>
@@ -89,12 +92,12 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{b1f54d69-acb1-44a4-a008-2525ec5d834e}" />
-	<object class="SingleSound" id="{8a5f80ea-9093-4ecc-9f8e-62fa0d42c678}">
+	<object class="SingleSound" id="{2ed7664e-03ea-45b0-a545-f477047be468}">
 		<property name="length">
 			<value>14.598104166666667</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{c26dfa2f-a821-4abc-9d7b-7eb30267eb34}</destination>
+			<destination>{f36337df-86f8-4ea4-b399-25d80acc36bc}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{afff1245-54ad-4191-950a-9fc2be1f40c6}">

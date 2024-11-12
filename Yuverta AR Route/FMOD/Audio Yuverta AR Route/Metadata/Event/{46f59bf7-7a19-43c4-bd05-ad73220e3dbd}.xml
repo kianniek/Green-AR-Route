@@ -45,7 +45,7 @@
 	</object>
 	<object class="MasterTrack" id="{a8f2876b-3dcc-43ea-b736-de91745c8e4e}">
 		<relationship name="modules">
-			<destination>{99906949-0aec-4c42-9242-0c731de32a33}</destination>
+			<destination>{2d7ca3b5-0718-4218-9304-afce302a14fb}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{74de8192-cb47-4b81-8af9-9c32ec01f2f2}</destination>
@@ -59,17 +59,20 @@
 			<destination>{cb934627-0e29-4dd5-8122-8e33e99e4bbe}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{346149f5-55c6-4673-847e-1f8c29a218b4}</destination>
+			<destination>{9b2bf750-8a32-46d9-82bf-cf0b8b53e324}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{0293e528-a86f-4eff-b828-706e48bfeec3}" />
 	<object class="MarkerTrack" id="{3e998ba1-6769-49db-accc-c799973387f6}" />
 	<object class="Timeline" id="{6d4a0316-fdd0-4674-aa0c-e9e1fef58781}">
 		<relationship name="modules">
-			<destination>{99906949-0aec-4c42-9242-0c731de32a33}</destination>
+			<destination>{2d7ca3b5-0718-4218-9304-afce302a14fb}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{74de8192-cb47-4b81-8af9-9c32ec01f2f2}">
+		<property name="volume">
+			<value>5.5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{0d444952-78e2-4dce-8f96-95fea573fa25}</destination>
 		</relationship>
@@ -80,12 +83,12 @@
 			<destination>{53a2f8f1-36fc-4caa-84e3-f434de7f6207}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{99906949-0aec-4c42-9242-0c731de32a33}">
+	<object class="SingleSound" id="{2d7ca3b5-0718-4218-9304-afce302a14fb}">
 		<property name="length">
 			<value>9.5636458333333341</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{0c52608f-0301-46de-ab63-9ff38357df2a}</destination>
+			<destination>{b623d0c3-ec5b-437e-92cc-88d7a87f5fc8}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{e2561c03-b675-4392-a793-28c5a830e0b0}">

@@ -54,14 +54,14 @@
 			<destination>{e8555dbd-f00c-4c85-b5d8-acaafda76bca}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{346149f5-55c6-4673-847e-1f8c29a218b4}</destination>
+			<destination>{9b2bf750-8a32-46d9-82bf-cf0b8b53e324}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{45663d2b-7e35-4ff3-a8ad-862088fef14e}" />
 	<object class="MarkerTrack" id="{ba4e372a-e6d3-42cd-9b1c-521eede4a2ae}" />
 	<object class="GroupTrack" id="{b738d25f-a969-44a3-a1a4-89440d24babe}">
 		<relationship name="modules">
-			<destination>{9cf8e4a0-e260-4ad3-b970-f600095ccbae}</destination>
+			<destination>{edab6214-38f9-467a-968d-c73cd71d7103}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{03e44bf8-c6db-4931-9e89-38040bf27414}</destination>
@@ -69,10 +69,13 @@
 	</object>
 	<object class="Timeline" id="{f18f3376-bf8a-40fa-995a-1f4b81216dc1}">
 		<relationship name="modules">
-			<destination>{9cf8e4a0-e260-4ad3-b970-f600095ccbae}</destination>
+			<destination>{edab6214-38f9-467a-968d-c73cd71d7103}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{7098edc1-0c62-4ffd-a3d3-357274ce9291}">
+		<property name="volume">
+			<value>5.5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{53138cdb-a131-4567-b330-8bb59b853ba6}</destination>
 		</relationship>
@@ -89,12 +92,12 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{e8555dbd-f00c-4c85-b5d8-acaafda76bca}" />
-	<object class="SingleSound" id="{9cf8e4a0-e260-4ad3-b970-f600095ccbae}">
+	<object class="SingleSound" id="{edab6214-38f9-467a-968d-c73cd71d7103}">
 		<property name="length">
 			<value>15.175625</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{4450b60b-c005-4627-9b03-1e8c75afea2b}</destination>
+			<destination>{b1733918-8c9d-478f-98f5-aee5496e4731}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{03e44bf8-c6db-4931-9e89-38040bf27414}">

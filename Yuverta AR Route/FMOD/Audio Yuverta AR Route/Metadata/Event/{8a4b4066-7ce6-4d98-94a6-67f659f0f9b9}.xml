@@ -42,7 +42,7 @@
 	</object>
 	<object class="MasterTrack" id="{daa1d958-cce8-40fa-b7e7-82a555d4aefd}">
 		<relationship name="modules">
-			<destination>{d2e5b931-83cb-4557-87cd-7b6f27eb7043}</destination>
+			<destination>{81633489-fe37-4750-875a-a57387c56222}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{2fe3a13b-d88e-4f4d-a481-966c4fb1f344}</destination>
@@ -56,17 +56,20 @@
 			<destination>{ad9b418e-ec36-48ac-874c-b2c9f30366fb}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{346149f5-55c6-4673-847e-1f8c29a218b4}</destination>
+			<destination>{9b2bf750-8a32-46d9-82bf-cf0b8b53e324}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{b1ef304e-4553-4176-81dc-033f16fb65fd}" />
 	<object class="MarkerTrack" id="{4d075148-6971-4694-8d07-dc0a3be75dad}" />
 	<object class="Timeline" id="{434e3dae-3350-492e-863c-0e85621b4488}">
 		<relationship name="modules">
-			<destination>{d2e5b931-83cb-4557-87cd-7b6f27eb7043}</destination>
+			<destination>{81633489-fe37-4750-875a-a57387c56222}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{2fe3a13b-d88e-4f4d-a481-966c4fb1f344}">
+		<property name="volume">
+			<value>6</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{a9c8afdc-5d49-42c1-876d-4d10818ca3ea}</destination>
 		</relationship>
@@ -77,12 +80,12 @@
 			<destination>{aeb671e7-e1c8-4a38-8597-aadbc6b6c4bd}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{d2e5b931-83cb-4557-87cd-7b6f27eb7043}">
+	<object class="SingleSound" id="{81633489-fe37-4750-875a-a57387c56222}">
 		<property name="length">
 			<value>11.784104166666667</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{12bc26f3-3357-425f-bd94-b163b0f14492}</destination>
+			<destination>{fcadfc41-c8bf-4263-9781-020f1618129e}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{147f3bb6-6c79-4492-adb2-0f75d4212881}">

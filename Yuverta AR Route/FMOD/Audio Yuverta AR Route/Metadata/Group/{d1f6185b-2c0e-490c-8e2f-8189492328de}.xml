@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{d1f6185b-2c0e-490c-8e2f-8189492328de}">
+		<property name="name">
+			<value>Stad Shooter VO</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{ea0348a6-f5f1-4d91-b1f9-2e27aabaf297}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{10899b5e-1aed-45da-86f0-e4a8298c2182}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{346149f5-55c6-4673-847e-1f8c29a218b4}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{ea0348a6-f5f1-4d91-b1f9-2e27aabaf297}">
+		<relationship name="effects">
+			<destination>{c7dcd27f-59e9-4cac-a054-1b7b8ea63ece}</destination>
+			<destination>{800cb1dc-609b-49e4-88b0-9430b7623958}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{10899b5e-1aed-45da-86f0-e4a8298c2182}" />
+	<object class="MixerBusFader" id="{c7dcd27f-59e9-4cac-a054-1b7b8ea63ece}" />
+	<object class="Sidechain" id="{800cb1dc-609b-49e4-88b0-9430b7623958}" />
+</objects>

@@ -54,14 +54,14 @@
 			<destination>{ccd836b5-df19-4f99-a0a4-2aafb54fe5d7}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{346149f5-55c6-4673-847e-1f8c29a218b4}</destination>
+			<destination>{9b2bf750-8a32-46d9-82bf-cf0b8b53e324}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{6e1dc300-e8e1-4dea-837c-ae059e422ae3}" />
 	<object class="MarkerTrack" id="{a64d1d8c-8b93-44ca-9fe0-8511882d79a4}" />
 	<object class="GroupTrack" id="{68c9423b-77ef-4c62-87e0-0d605199c493}">
 		<relationship name="modules">
-			<destination>{0f9cda42-888d-450f-9741-1ff678aead98}</destination>
+			<destination>{c311cc44-b3bf-4627-a5eb-5c8708b654dd}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{6457d839-4ef9-4747-aecc-6757200e7d38}</destination>
@@ -69,10 +69,13 @@
 	</object>
 	<object class="Timeline" id="{7bc7da8d-afd8-4a76-a8a9-735220cd5edc}">
 		<relationship name="modules">
-			<destination>{0f9cda42-888d-450f-9741-1ff678aead98}</destination>
+			<destination>{c311cc44-b3bf-4627-a5eb-5c8708b654dd}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{2e48291a-c99e-49aa-baad-64aac5e429df}">
+		<property name="volume">
+			<value>6</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{01589f48-4c8d-4f2c-a79b-e2f270e10fc9}</destination>
 		</relationship>
@@ -89,12 +92,12 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{ccd836b5-df19-4f99-a0a4-2aafb54fe5d7}" />
-	<object class="SingleSound" id="{0f9cda42-888d-450f-9741-1ff678aead98}">
+	<object class="SingleSound" id="{c311cc44-b3bf-4627-a5eb-5c8708b654dd}">
 		<property name="length">
 			<value>16.357208333333332</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{065f813e-4e29-46d0-bead-9d510d0733ac}</destination>
+			<destination>{d6379f25-7571-4648-83f2-68db519e46f4}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{6457d839-4ef9-4747-aecc-6757200e7d38}">
