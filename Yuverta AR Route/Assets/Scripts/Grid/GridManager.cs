@@ -141,11 +141,6 @@ public class GridManager : MonoBehaviour
 
         HideGridPointVisualIfOccupied();
         AudioNeedsToChange();
-
-        if (IsBottomLayerFilled())
-        {
-            SetTopLayerActive(true);
-        }
         
         return closestGridPoint;
     }
@@ -430,8 +425,46 @@ public class GridManager : MonoBehaviour
     
         // Check if all bottom layer positions are occupied
         var bottomLayerPopulated = bottomLayerOccupiedPositions.All(x => x.Value);
-        onBottomLayerFilled.Invoke(bottomLayerPopulated);
+
+        var isBottomLayerCorrect = false;
+        if (bottomLayerPopulated)
+        {
+            Debug.Log("Bottom layer is filled");
+            isBottomLayerCorrect = CheckPositionsMidi();
+        }
+        
+        onBottomLayerFilled.Invoke(bottomLayerPopulated && isBottomLayerCorrect);
+        
+        if (bottomLayerPopulated && isBottomLayerCorrect)
+        {
+            Debug.Log("Bottom layer is filled and correct");
+            
+            SetTopLayerActive(true);
+        }
+        
         return bottomLayerPopulated;
+    }
+    
+    public bool CheckPositionsMidi()
+    {
+        var wrongPlaces = new List<GameObject>();
+        foreach (var obj in _placedObjects)
+        {
+            var script = obj.GetComponent<ObjectLogic>();
+
+            if (script != null && script.IsCorrectlyPlaced())
+                continue;
+            
+            wrongPlaces.Add(obj);
+            Debug.Log($"Object {obj.name} is not correctly placed.");
+
+            //make the wrong objects shake
+            script.ShakeObject();
+        }
+
+        HideGridPointVisualIfOccupied();
+        
+        return wrongPlaces.Count == 0;
     }
 
 }

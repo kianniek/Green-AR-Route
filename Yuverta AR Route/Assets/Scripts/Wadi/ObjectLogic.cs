@@ -37,7 +37,10 @@ public class ObjectLogic : MonoBehaviour
         gameObject.name = objectGridLocation.ToString();
 
         if (gridManager != null)
+        {
             SnappedGridPoint = gridManager.SnapToGridPoint(gameObject);
+            gridManager.IsBottomLayerFilled();
+        }
         
         LockObjectIfRightlyPlaced();
     }
