@@ -67,10 +67,10 @@ public class PaintManager : Singleton<PaintManager>
     private void Start()
     {
         var paintables = FindObjectsOfType<Paintable>();
-        
+
         if (paintables.Length == 0)
             return;
-        
+
         coveredTreshold = paintables.Length;
     }
 
@@ -166,14 +166,18 @@ public class PaintManager : Singleton<PaintManager>
         var previousActiveRT = RenderTexture.active;
         RenderTexture.active = islands;
 
-        // Initiate the asynchronous GPU readback
+#if UNITY_IOS
+    // For iOS, we can handle async GPU readback in a slightly more controlled way
+    // Ensuring that the readback completes before proceeding further
+    // Initiate the asynchronous GPU readback
         AsyncGPUReadback.Request(islands, islands.mipmapCount - 1, request =>
         {
             if (request.hasError)
             {
                 Debug.LogError("GPU readback error");
             }
-            else
+
+            if (request.done)
             {
                 // Extract average color at a lower mip level if possible
                 var average = request.GetData<Color32>()[0];
@@ -196,6 +200,38 @@ public class PaintManager : Singleton<PaintManager>
 
             CheckIfStepThresholdIsReached();
         });
+#else
+        // Initiate the asynchronous GPU readback
+        AsyncGPUReadback.Request(islands, islands.mipmapCount - 1, request =>
+        {
+            if (request.hasError)
+            {
+                Debug.LogError("GPU readback error");
+            }
+            if (request.done)
+            {
+                // Extract average color at a lower mip level if possible
+                var average = request.GetData<Color32>()[0];
+
+                // Calculate how close the color is from 0 to 1
+                var coveredPixels = new Vector4(average.r / 255f, average.g / 255f, average.b / 255f,
+                    paintable.CoverageIndex);
+
+                // Call the callback with the result
+                paintable.coverage = coveredPixels;
+
+                paintable.CheckCoverage();
+
+                onCoverageCalculated?.Invoke(coveredPixels);
+            }
+
+            // Restore the previous render texture
+            RenderTexture.active = previousActiveRT;
+
+            CheckIfStepThresholdIsReached();
+        });
+
+#endif
 
         return paintable.coverage;
     }
@@ -225,7 +261,7 @@ public class PaintManager : Singleton<PaintManager>
         {
             AddToPaintablesList(paintable, coverageID);
         }
-        
+
         CalculateCoverage(paintable, paintable.uvMin, paintable.uvMin, null);
 
         CheckIfStepThresholdIsReached();
@@ -260,9 +296,9 @@ public class PaintManager : Singleton<PaintManager>
     {
         // Calculate the weighted step
         var weightedStep = GetCurrentStep();
-        
+
         OnTresholdStep.Invoke(weightedStep);
-        
+
         UpdateScoreText(weightedStep);
 
         if (HasReachedTreshold)
@@ -274,7 +310,7 @@ public class PaintManager : Singleton<PaintManager>
             OnTresholdHalfReached.Invoke();
         }
     }
-    
+
     public float GetCurrentStep()
     {
         if (paintables.Count == 0)
@@ -300,7 +336,7 @@ public class PaintManager : Singleton<PaintManager>
         // Calculate the weighted step
         var buildingWeight = 0.7f;
         var paintedWeight = 0.3f;
-        
+
         return (stepB * buildingWeight) + (stepP * paintedWeight);
     }
 
