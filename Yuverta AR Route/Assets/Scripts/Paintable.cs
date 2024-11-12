@@ -144,21 +144,21 @@ public class Paintable : MonoBehaviour
         const float PrevColorCoverageFactor = 1.3f;
         const float PrevColorComboCoverageFactor = 2f;
 
-        // Check the highest index (z-axis)
-        if ((coverage.z > coverageThreshold && CoverageIndex < 2) || 
-            (coverage.y > coverageThreshold / PrevColorCoverageFactor && coverage.z > coverageThreshold / PrevColorComboCoverageFactor && CoverageIndex < 1))
-        {
-            // Only allow upward progression, prevent downgrading
-            if (CoverageIndex < 2)
-            {
-                PaintManager.instance.AddToPaintablesList(this, 2);
-                OnCovered.Invoke(2);
-                PreviousCoverageIndex = 1;
-                CoverageIndex = 2;
-                SetMaskToColor(this, Color.blue, 2);
-                return 2; // Color index for z
-            }
-        }
+        //// Check the highest index (z-axis)
+        //if ((coverage.z > coverageThreshold && CoverageIndex < 2) || 
+        //    (coverage.y > coverageThreshold / PrevColorCoverageFactor && coverage.z > coverageThreshold / PrevColorComboCoverageFactor && CoverageIndex < 1))
+        //{
+        //    // Only allow upward progression, prevent downgrading
+        //    if (CoverageIndex < 2)
+        //    {
+        //        PaintManager.instance.AddToPaintablesList(this, 2);
+        //        OnCovered.Invoke(2);
+        //        PreviousCoverageIndex = 1;
+        //        CoverageIndex = 2;
+        //        SetMaskToColor(this, Color.blue, 2);
+        //        return 2; // Color index for z
+        //    }
+        //}
 
         // Check the middle index (y-axis)
         if ((coverage.y > coverageThreshold && CoverageIndex < 1) || 

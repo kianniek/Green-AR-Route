@@ -26,7 +26,6 @@ public class FMODStudioEventQueueManager : MonoBehaviour
         {
             queueString += eventEmitter.name + ", ";
         }
-        Debug.Log("Queue: " + queueString);
 #endif
     }
 

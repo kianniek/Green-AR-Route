@@ -185,6 +185,7 @@ public class PaintManager : Singleton<PaintManager>
                 // Call the callback with the result
                 paintable.coverage = coveredPixels;
 
+
                 paintable.CheckCoverage();
 
                 onCoverageCalculated?.Invoke(coveredPixels);
@@ -202,6 +203,7 @@ public class PaintManager : Singleton<PaintManager>
 
     public void SetMaskToColor(Paintable paintable, Color color, int coverageID = -1)
     {
+        Debug.Log($"Color of SetMaskToColor: {color} | ID: {coverageID}");
         var mask = paintable.getMask();
         var support = paintable.getSupport();
 
