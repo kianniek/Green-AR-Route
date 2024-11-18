@@ -61,4 +61,4 @@ Dit project wordt **AS IS** geleverd en wordt niet ondersteund. De maker(s) zijn
 
 ## More projects I worked on
 
-- **Rootop Immersive Studio**: [rooftopimmersivestudio.com](https://www.rooftopimmersivestudio.com/))
+- **Rootop Immersive Studio**: [rooftopimmersivestudio.com](https://www.rooftopimmersivestudio.com/)
